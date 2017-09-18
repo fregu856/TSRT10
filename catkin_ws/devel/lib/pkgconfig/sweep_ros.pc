@@ -1,0 +1,8 @@
+prefix=/home/fregu856/TSRT10/catkin_ws/devel
+
+Name: sweep_ros
+Description: Description of sweep_ros
+Version: 0.2.0
+Cflags: 
+Libs: -L/home/fregu856/TSRT10/catkin_ws/devel/lib 
+Requires: sensor_msgs
