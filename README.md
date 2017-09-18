@@ -49,6 +49,37 @@ Setup of LIDAR (scanse sweep, https://github.com/scanse/sweep-ros):
 - - $ roslaunch sweep_ros view_sweep_laser_scan.launch (this should launch rviz where you can see a visualization of the scans)
 
 
+****
+
+Run Hector SLAM (only using the LiDAR scans, no odometry):
+- Useful links: http://wiki.ros.org/hector_slam/Tutorials/SettingUpForYourRobot, https://github.com/tu-darmstadt-ros-pkg/hector_slam/blob/catkin/hector_slam_launch/rviz_cfg/mapping_demo.rviz, https://github.com/tu-darmstadt-ros-pkg/hector_slam/blob/catkin/hector_slam_launch/launch/mapping_box.launch
+- $ cd ~/TSRT10/catkin_ws/src
+- $ git clone https://github.com/tu-darmstadt-ros-pkg/hector_slam.git
+- $ cd ~/TSRT10/catkin_ws
+- $ catkin_make
+- Create and build a package (called test_pckg) in the catkin workspace:
+- - $ cd ~/Summer17/Laptop/ROS_code/catkin_ws/src
+- - $ catkin_create_pkg test_pckg std_msgs roscpp rospy
+- - $ cd ~/Summer17/Laptop/ROS_code/catkin_ws
+- - $ catkin_make
+- - Create a scripts directory in the package (it's in this directory we would place all python ROS code/scripts):
+- - - $ cd ~/Summer17/Laptop/ROS_code/catkin_ws/src/test_pckg
+- - - $ mkdir scripts
+- - Every python script that one writes and places in scripts (e.g. test.py) must be made executable:
+- - - $ chmod a+x test.py
+- - You should always also build the package (this is sometimes (quite often) needed even for python scripts since we use C++ messages):
+- - - $ cd ~/Summer17/Laptop/ROS_code/catkin_ws
+- - - $ catkin_make
+
+- Create a directory called "launch" in /home/fregu856/Summer17/Laptop/ROS_code/catkin_ws/src/test_pckg
+- Write test_Hector.launch (based on the above links) and place it in the above directory
+- Write test_Hector.rviz (based on mapping_demo.rviz linked above) and place it in /home/fregu856/Summer17/Laptop/ROS_code/catkin_ws/src/test_pckg/rviz
+- $ cd ~/Summer17/Laptop/ROS_code/catkin_ws
+- $ catkin_make
+- [Laptop terminal 1] $ roslaunch sweep_ros sweep2scan.launch
+- [Laptop terminal 2] $ roslaunch test_pckg test_Hector.launch
+
+
 
 
 
