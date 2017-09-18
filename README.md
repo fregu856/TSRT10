@@ -41,13 +41,12 @@ Setup of LIDAR (scanse sweep, https://github.com/scanse/sweep-ros):
 
 - Now, you should be able to launch sweep2scan.launch:
 - - $ roslaunch sweep_ros sweep2scan.launch
-- - Open a new terminal windowwin
+- - Open a new terminal window
 - - $ rostopic echo /scan
 - - Alot of data should now be printed
 
 - You should also be able to launch view_sweep_laser_scan.launch:
 - - $ roslaunch sweep_ros view_sweep_laser_scan.launch (this should launch rviz where you can see a visualization of the scans)
-
 
 ****
 
