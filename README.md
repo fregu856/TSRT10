@@ -13,18 +13,20 @@ Setup of LIDAR (scanse sweep, https://github.com/scanse/sweep-ros):
 - - $ sudo cmake --build . --target install
 - - $ sudo ldconfig
 
-Create a catkin workspace:
-- $ cd ~/TSRT10
-- $ mkdir catkin_ws
-- $ cd catkin_ws
-- $ mkdir src
-- $ catkin_make
-- Add "source ~/TSRT10/catkin_ws/devel/setup.bash" to the bottom of ~/.bashrc ($ sudo nano ~/.bashrc to edit, we do this for this line to be run everytime we open the terminal, otherwise we'd have to do it manually)  
-- $ source ~/TSRT10/catkin_ws/devel/setup.bash
+- Create a catkin workspace:
+- - $ cd ~/TSRT10
+- - $ mkdir catkin_ws
+- - $ cd catkin_ws
+- - $ mkdir src
+- - $ catkin_make
+- - Add "source ~/TSRT10/catkin_ws/devel/setup.bash" to the bottom of ~/.bashrc ($ sudo nano ~/.bashrc to edit, we do this for this line to be run everytime we open the terminal, otherwise we'd have to do it manually)  
+- - $ source ~/TSRT10/catkin_ws/devel/setup.bash
  
-Clone the sweep-ros repo:
-- $ cd ~/TSRT10/catkin_ws/src
-- $ git clone https://github.com/scanse/sweep-ros.git
-- $ cd ~/TSRT10/catkin_ws
-- $ catkin_make
+- Clone the sweep-ros repo:
+- - $ cd ~/TSRT10/catkin_ws/src
+- - $ git clone https://github.com/scanse/sweep-ros.git
+- - $ cd ~/TSRT10/catkin_ws
+- - $ catkin_make
+
+- Test
 
