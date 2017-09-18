@@ -56,24 +56,27 @@ Run Hector SLAM (only using the LiDAR scans, no odometry):
 - $ git clone https://github.com/tu-darmstadt-ros-pkg/hector_slam.git
 - $ cd ~/TSRT10/catkin_ws
 - $ catkin_make
+
 - Create and build a package (called test_pckg) in the catkin workspace:
-- - $ cd ~/Summer17/Laptop/ROS_code/catkin_ws/src
+- - $ cd ~/TSRT10/catkin_ws/src
 - - $ catkin_create_pkg test_pckg std_msgs roscpp rospy
-- - $ cd ~/Summer17/Laptop/ROS_code/catkin_ws
+- - $ cd ~/TSRT10/catkin_ws
 - - $ catkin_make
+
 - - Create a scripts directory in the package (it's in this directory we would place all python ROS code/scripts):
-- - - $ cd ~/Summer17/Laptop/ROS_code/catkin_ws/src/test_pckg
+- - - $ cd ~/TSRT10/catkin_ws/src/test_pckg
 - - - $ mkdir scripts
 - - Every python script that one writes and places in scripts (e.g. test.py) must be made executable:
 - - - $ chmod a+x test.py
 - - You should always also build the package (this is sometimes (quite often) needed even for python scripts since we use C++ messages):
-- - - $ cd ~/Summer17/Laptop/ROS_code/catkin_ws
+- - - $ cd ~/TSRT10/catkin_ws
 - - - $ catkin_make
 
-- Create a directory called "launch" in /home/fregu856/Summer17/Laptop/ROS_code/catkin_ws/src/test_pckg
-- Write test_Hector.launch (based on the above links) and place it in the above directory
-- Write test_Hector.rviz (based on mapping_demo.rviz linked above) and place it in /home/fregu856/Summer17/Laptop/ROS_code/catkin_ws/src/test_pckg/rviz
-- $ cd ~/Summer17/Laptop/ROS_code/catkin_ws
+- Create a directory called "launch" in ~/TSRT10/catkin_ws/src/test_pckg
+- Create a directory called "rviz" in ~/TSRT10/catkin_ws/src/test_pckg
+- Write test_Hector.launch (based on the above links) and place it in the launch directory
+- Write test_Hector.rviz (based on mapping_demo.rviz linked above) and place it in the rviz directory
+- $ cd ~/TSRT10/catkin_ws
 - $ catkin_make
 - [Laptop terminal 1] $ roslaunch sweep_ros sweep2scan.launch
 - [Laptop terminal 2] $ roslaunch test_pckg test_Hector.launch
