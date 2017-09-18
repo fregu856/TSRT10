@@ -78,8 +78,8 @@ Run Hector SLAM (only using the LiDAR scans, no odometry):
 - Write test_Hector.rviz (based on mapping_demo.rviz linked above) and place it in the rviz directory
 - $ cd ~/TSRT10/catkin_ws
 - $ catkin_make
-- [Laptop terminal 1] $ roslaunch sweep_ros sweep2scan.launch
-- [Laptop terminal 2] $ roslaunch test_pckg test_Hector.launch
+- [terminal 1] $ roslaunch sweep_ros sweep2scan.launch
+- [terminal 2] $ roslaunch test_pckg test_Hector.launch
 
 
 
