@@ -98,6 +98,11 @@ Test communication between two computers:
 - - Add the following two lines to the bottom of the file: "export ROS_MASTER_URI=http://xxx.xx.x.xx:11311" and "export ROS_HOSTNAME=yyy.yy.y.yy"
 - - $ source ~/.bashrc
 
+- [computer1 terminal 1] $ roscore
+- [computer1 terminal 2] $ rosrun test_pckg test.py
+- [computer1 terminal 3] $ rostopic echo /test_topic (now you should start receiving messages)
+- [computer2] $ rostopic echo /test_topic (now you should start receiving messages)
+
 
 
 
