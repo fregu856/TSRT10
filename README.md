@@ -81,6 +81,41 @@ Run Hector SLAM (only using the LiDAR scans, no odometry):
 - [terminal 1] $ roslaunch sweep_ros sweep2scan.launch
 - [terminal 2] $ roslaunch test_pckg test_Hector.launch
 
+****
+
+Test communication between two computers:
+
+- Connect the computers to the same WiFi network (eduroam doesn't seems to work)
+- On computer1 (Master):
+- - Find computer1's IP address by running $ ifconfig and look for "inet addr" below "wlan0, we call this xxx.xx.x.xx
+- - $ sudo nano ~/.bashrc
+- - Add the following two lines to the bottom of the file: "export ROS_MASTER_URI=http://xxx.xx.x.xx:11311" and "export ROS_HOSTNAME=xxx.xx.x.xx"
+- - $ source ~/.bashrc
+
+
+- Note the laptop's IP address (by running $ ifconfig. In my case I got: 172.24.1.72) 
+- In the Ubuntu RPI terminal:
+- - $ sudo nano ~/.bashrc
+- - Replace the second-to-last line "export ROS_MASTER_URI=http://localhost:11311" with "export ROS_MASTER_URI=http://172.24.1.72:11311" (where 172.24.1.72 is the IP address of the laptop)
+- - Replace the last line "export ROS_HOSTNAME=localhost" with "export ROS_HOSTNAME=172.24.1.57" (where 172.24.1.57 is the IP address of the Ubuntu RPI)
+- - $ source ~/.bashrc
+- In the laptop terminal:
+- - $ sudo nano ~/.bashrc
+- - Add the following two lines to the bottom of the file: "export ROS_MASTER_URI=http://172.24.1.72:11311" and "export ROS_HOSTNAME=172.24.1.72" (where again, 172.24.1.72 is the laptop's IP address)
+- - $ source ~/.bashrc
+- To test that everything works:
+- - [Laptop terminal 1] $ roscore
+- - [Ubuntu RPI terminal] $ roslaunch hls_lfcd_lds_driver hlds_laser.launch (the LiDAR should now start spinning, it might however take a few seconds)
+- - [Laptop terminal 2] $ rostopic echo /scan (a stream of scan messages should now start appearing in the terminal)
+- To also visualize the LiDAR measurements on the laptop using rviz:
+- - Create a directory called "rviz" in the package test_pckg:
+- - - $ cd ~/Summer17/Laptop/ROS_code/catkin_ws/src/test_pckg
+- - - $ mkdir rviz
+- - Create a file called "basic_lidar_visualization.rviz" that is a copy of the file "hlds_laser.rviz" in https://github.com/ROBOTIS-GIT/hls_lfcd_lds_driver and place it in the rviz directory AND make it executable
+- - [Laptop terminal 1] $ roscore
+- - [Ubuntu RPI terminal] $ roslaunch hls_lfcd_lds_driver hlds_laser.launch
+- - [Laptop terminal 2] $ rosrun rviz rviz -d /home/fregu856/Summer17/Laptop/ROS_code/catkin_ws/src/test_pckg/rviz/basic_lidar_visualization.rviz (rviz should now open and you should see some green/yellow/red lines/dots)
+
 
 
 
