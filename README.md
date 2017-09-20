@@ -103,6 +103,15 @@ Test communication between two computers:
 - [computer1 terminal 3] $ rostopic echo /test_topic (now you should start receiving messages)
 - [computer2] $ rostopic echo /test_topic (now you should start receiving messages)
 
+****
+
+To reset the ROS IP addresses (so that you can always run ROS code locally):
+- $ sudo nano ~/.bashrc
+- Modify the ROS_MASTER_URI and ROS_HOSTNAME lines so that they say:
+- - export ROS_MASTER_URI=http://localhost:11311
+- - export ROS_HOSTNAME=localhost
+- $ source ~/.bashrc
+
 
 
 
