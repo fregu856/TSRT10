@@ -27,12 +27,11 @@ Basic setup (this guide assumes that you're running Ubuntu (or possibly some dif
 - - $ mkdir src
 - - $ catkin_make
 - - $ sudo nano ~/.bashrc
-- - Add the below line to the bottom of this file
+- - Add the below line to the bottom of this file (Ctrl+Shift+v to paste the line, Ctrl+x - y - Enter to save the file)
 ```
 source ~/TSRT10/catkin_ws/devel/setup.bash
-```
-- - Add "source ~/TSRT10/catkin_ws/devel/setup.bash" to the bottom of ~/.bashrc ($ sudo nano ~/.bashrc to edit, we do this for this line to be run everytime we open the terminal, otherwise we'd have to do it manually)  
-- - $ source ~/TSRT10/catkin_ws/devel/setup.bash
+```  
+- - $ source ~/.bashrc
 
 ******
 Setup of LIDAR (scanse sweep, https://github.com/scanse/sweep-ros):
