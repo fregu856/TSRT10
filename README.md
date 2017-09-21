@@ -262,4 +262,44 @@ Run Hector SLAM (only using the LiDAR scans, no odometry):
 *****
 Balrog simulator:
 
-- 
+- $ sudo apt-get install ros-kinetic-turtlebot
+- $ sudo apt-get install ros-kinetic-turtlebot-apps
+- $ sudo apt-get install ros-kinetic-turtlebot-interactions
+- $ sudo apt-get install ros-kinetic-turtlebot-simulator
+
+- Reset the ROS IP addresses:
+- - Make sure that the lines with ROS_MASTER_URI and ROS_HOSTNAME in ~/.bashrc looks as below:
+```
+export ROS_MASTER_URI=http://localhost:11311
+export ROS_HOSTNAME=localhost
+```
+- - $ source ~/.bashrc
+
+- Create a package called balrog_sim in the workspace:
+- - $ cd ~/TSRT10/catkin_ws/src  
+- - $ catkin_create_pkg balrog_sim std_msgs roscpp rospy  
+- - $ cd ~/TSRT10/catkin_ws  
+- - $ catkin_make   
+
+- Create a python_scripts directory in the package:
+- - $ cd ~/TSRT10/catkin_ws/src/balrog_sim  
+- - $ mkdir python_scripts  
+
+- Every python script that you write and place in python_scripts (e.g. test.py) must be made executable:
+- - $ chmod a+x test.py    
+- You should also always build the package:
+- - $ cd ~/TSRT10/catkin_ws  
+- - $ catkin_make  
+
+- Clone the repo needed to simulate turtlebot in Gazebo:
+- - $ cd ~/TSRT10/catkin_ws/src  
+- - $ git clone https://github.com/StanfordASL/asl_turtlebot.git  
+- - $ cd ~/TSRT10/catkin_ws    
+- - $ catkin_make  
+- - Add "export GAZEBO_MODEL_PATH=~/TSRT10/catkin_ws/src/asl_turtlebot/models" to the bottom of ~/.bashrc ($ sudo nano ~/.bashrc to edit)
+- - $ source ~/.bashrc
+
+- Test the simulator:
+- - $ roslaunch asl_turtlebot turtlebot_sim.launch  
+
+![alt text](https://lh3.googleusercontent.com/ey3AtYxZtgDBUNeuQciB6m_P4AYebomhqmRpo5FS_BAPcIeAlxAn1iFX_-BHOOJXsB_CmzlKu4nIcE4e_wkVORsFrkQuqv5WZFta43BVfOH9Pwp-aX4mJQS7Pydoytf-NRPPvqHe6vdDYgGoAMNIRAof8vC_1orBLHVHaZb6EzUR2Wi4Hp2Vf5Lchwg69mXCnkuEMUnvl5o4NDeZ3Bk1060tPdjlBVD8raj66x3QKdCNpzZPrBuZH987-ZiUZFUG-hIgY0czMQD7lawK30jB3XiVELllIDHJ4Tg_wkRhsTwNJT7rS9v58S8QJgA4Fp_yy3jD2xuKHKqES5_jsE1RtPXZ8T6lgeYJ2Rqh2ePy9y9Aj-u_er9aB6lEe_XD-wH8wJNAQtsTUS-Ly8ilDD-AzU4AXtcYQMbS6_YkctHL2_lqxgZJPvIQbGzKHuJxXMKtIaA3ISqGaaTp1H6BfNcsFofQgA1apI_4V0VavulAu0XZfog9RN6WP5bX5IU9Hbf0vuYNZ4iFdypSdFfiZujQdvxryqd9CHrVCsHvclMCLS4wgDRIHkPMiuHTF0yBDagZumfttr1RfL7t9CT-x8kW1npoi9NhZCWxTcWkDdiq_RyloiFj8mL7tHxkEYPKeWqpoEmKt_PWvrggwAu_qnSZkl546hIYxp5HxoE=w800-h532-no)
