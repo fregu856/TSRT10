@@ -3,14 +3,14 @@
 ******
 Basic setup (this guide assumes that you're running Ubuntu (or possibly some different kind of Linux distribution)):
 
-- Install ROS (http://wiki.ros.org/lunar/Installation/Ubuntu):
+- Install ROS (http://wiki.ros.org/kinetic/Installation/Ubuntu):
 - - $ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 - - $ sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
 - - $ sudo apt-get update
 - - $ sudo apt-get install ros-kinetic-desktop (for RPIs, I'd probably recommend 'sudo apt-get install ros-kinetic-ros-base' instead)
 - - $ sudo rosdep init
 - - $ rosdep update
-- - $ echo "source /opt/ros/lunar/setup.bash" >> ~/.bashrc
+- - $ echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
 - - $ source ~/.bashrc
 
 - Install catkin (http://wiki.ros.org/catkin) (might have been installed automatically in the above step):
