@@ -147,7 +147,7 @@ if __name__ == "__main__":
 
 
 ****
-Test communication between two computers:
+Test communication between two computers (this assumes that one has followed the above steps on both computers):
 
 - Connect the computers to the same WiFi network (eduroam doesn't seems to work)
 - On computer1 (Master):
@@ -165,7 +165,9 @@ Test communication between two computers:
 - [computer1 terminal 1] $ roscore
 - [computer1 terminal 2] $ rosrun test_pckg test.py
 - [computer1 terminal 3] $ rostopic echo /test_topic (now you should start receiving messages)
-- [computer2] $ rostopic echo /test_topic (now you should start receiving messages)
+- [computer2 terminal 1] $ rostopic echo /test_topic (now you should start receiving messages)
+- [computer2 terminal 2] $ rosrun test_package subscriber.py (now you should start receiving messages)
+
 
 
 
@@ -198,15 +200,6 @@ Setup of LIDAR (scanse sweep, https://github.com/scanse/sweep-ros):
 - - $ cmake --build .
 - - $ sudo cmake --build . --target install
 - - $ sudo ldconfig
-
-- Create a catkin workspace:
-- - $ cd ~/TSRT10
-- - $ mkdir catkin_ws
-- - $ cd catkin_ws
-- - $ mkdir src
-- - $ catkin_make
-- - Add "source ~/TSRT10/catkin_ws/devel/setup.bash" to the bottom of ~/.bashrc ($ sudo nano ~/.bashrc to edit, we do this for this line to be run everytime we open the terminal, otherwise we'd have to do it manually)  
-- - $ source ~/TSRT10/catkin_ws/devel/setup.bash
  
 - Clone the sweep-ros repo:
 - - $ cd ~/TSRT10/catkin_ws/src
@@ -223,7 +216,7 @@ Setup of LIDAR (scanse sweep, https://github.com/scanse/sweep-ros):
 - - $ roslaunch sweep_ros sweep.launch
 
 - sweep2scan.launch and view_sweep_laser_scan.launch will however not work. For this we need to install the package pointcloud_to_laserscan:
-- - $ sudo apt-get install ros-kinetic-pointcloud-to-laserscan
+- - $ sudo apt-get install ros-kinetic-pointcloud-to-laserscan (ros-kinetic-pointcloud-to-laserscan if you instead have ROS kinetic)
 
 - Now, you should be able to launch sweep2scan.launch:
 - - $ roslaunch sweep_ros sweep2scan.launch
@@ -248,26 +241,11 @@ Run Hector SLAM (only using the LiDAR scans, no odometry):
 - $ cd ~/TSRT10/catkin_ws
 - $ catkin_make
 
-- Create and build a package (called test_pckg) in the catkin workspace:
-- - $ cd ~/TSRT10/catkin_ws/src
-- - $ catkin_create_pkg test_pckg std_msgs roscpp rospy
-- - $ cd ~/TSRT10/catkin_ws
-- - $ catkin_make
-
-- - Create a scripts directory in the package (it's in this directory we would place all python ROS code/scripts):
-- - - $ cd ~/TSRT10/catkin_ws/src/test_pckg
-- - - $ mkdir scripts
-- - Every python script that one writes and places in scripts (e.g. test.py) must be made executable:
-- - - $ chmod a+x test.py
-- - You should always also build the package (this is sometimes (quite often) needed even for python scripts since we use C++ messages):
-- - - $ cd ~/TSRT10/catkin_ws
-- - - $ catkin_make
-
-- Create a directory called "launch" in ~/TSRT10/catkin_ws/src/test_pckg
-- Create a directory called "rviz" in ~/TSRT10/catkin_ws/src/test_pckg
+- Create a directory called "launch" in ~/TSRT10/catkin_ws/src/test_package
+- Create a directory called "rviz" in ~/TSRT10/catkin_ws/src/test_package
 - Write test_Hector.launch (based on the above links) and place it in the launch directory
 - Write test_Hector.rviz (based on mapping_demo.rviz linked above) and place it in the rviz directory
 - $ cd ~/TSRT10/catkin_ws
 - $ catkin_make
 - [terminal 1] $ roslaunch sweep_ros sweep2scan.launch
-- [terminal 2] $ roslaunch test_pckg test_Hector.launch
+- [terminal 2] $ roslaunch test_package test_Hector.launch
