@@ -7,14 +7,14 @@ Basic setup (this guide assumes that you're running Ubuntu (or possibly some dif
 - - $ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 - - $ sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
 - - $ sudo apt-get update
-- - $ sudo apt-get install ros-lunar-desktop (for RPIs, I'd probably recommend 'sudo apt-get install ros-lunar-ros-base' instead)
+- - $ sudo apt-get install ros-kinetic-desktop (for RPIs, I'd probably recommend 'sudo apt-get install ros-kinetic-ros-base' instead)
 - - $ sudo rosdep init
 - - $ rosdep update
 - - $ echo "source /opt/ros/lunar/setup.bash" >> ~/.bashrc
 - - $ source ~/.bashrc
 
 - Install catkin (http://wiki.ros.org/catkin) (might have been installed automatically in the above step):
-- - $ sudo apt-get install ros-lunar-catkin
+- - $ sudo apt-get install ros-kinetic-catkin
 
 - Create a directory called TSRT10 in your home directory:
 - - $ cd --
@@ -216,7 +216,7 @@ Setup of LIDAR (scanse sweep, https://github.com/scanse/sweep-ros):
 - - $ roslaunch sweep_ros sweep.launch
 
 - sweep2scan.launch and view_sweep_laser_scan.launch will however not work. For this we need to install the package pointcloud_to_laserscan:
-- - $ sudo apt-get install ros-kinetic-pointcloud-to-laserscan (ros-kinetic-pointcloud-to-laserscan if you instead have ROS kinetic)
+- - $ sudo apt-get install ros-kinetic-pointcloud-to-laserscan 
 
 - Now, you should be able to launch sweep2scan.launch:
 - - $ roslaunch sweep_ros sweep2scan.launch
@@ -249,3 +249,17 @@ Run Hector SLAM (only using the LiDAR scans, no odometry):
 - $ catkin_make
 - [terminal 1] $ roslaunch sweep_ros sweep2scan.launch
 - [terminal 2] $ roslaunch test_package test_Hector.launch
+
+
+
+
+
+
+
+
+
+
+*****
+Balrog simulator:
+
+- 
