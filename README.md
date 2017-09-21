@@ -1,7 +1,7 @@
 # TSRT10
 
-*********
-# TSRT10 setup:
+******
+Basic setup:
 
 - Test.
 
