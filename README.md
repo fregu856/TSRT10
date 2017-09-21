@@ -3,7 +3,7 @@
 ******
 Basic setup:
 
-- Test.
+- This guide assumes that you're running Ubuntu (or possibly some different kind of Linux distribution)
 
 ******
 Setup of LIDAR (scanse sweep, https://github.com/scanse/sweep-ros):
