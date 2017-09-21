@@ -306,4 +306,19 @@ export ROS_HOSTNAME=localhost
 - - If this doesn't work, open another terminal and do this FIRST:
 - - - $ rosrun gazebo_ros gzclient
 
+- Run a test controller to check that everything is working:  
+- - Place "test_controller.py" in ~/TSRT10/catkin_ws/src/balrog_sim/python_scripts, make it executable and build the package  
+- - [terminal 1] $ roslaunch asl_turtlebot turtlebot_sim.launch  
+- - [terminal 2] $ rosrun balrog_sim test_controller.py  
+- - The robot should now move to the coordinate (1, 1)
 
+- Start a simulation of the robot in the TSRT10 test area:
+- - Create a launch directory in ~/TSRT10/catkin_ws/src/balrog_sim
+- - Place the file test_area.launch in ~/TSRT10/catkin_ws/src/balrog_sim/launch
+- - Create a world directory in ~/TSRT10/catkin_ws/src/balrog_sim
+- - Place the file test_area.world in ~/TSRT10/catkin_ws/src/balrog_sim/world
+- - $ cd ~/TSRT10/catkin_ws 
+- - $ catkin_make
+- - $ roslaunch balrog_sim test_area.launch
+- - If everything works as expected, Gazebo will launch and you will see this:
+![alt text](https://lh3.googleusercontent.com/ouaKpsPjT0b60fiYlbAbSutpYMIS16xXIKH_00L-WMpCKFYQFMVC9m2ygWSxQ_JNuJPOocEQBfmyCeNKPI7LbxcvY2w2mwmOQluUBOgyZHGxGNGi5bYW0F__B8yiq8PYW8s2exJyf4-zf-Ps-bbLvGlgqUJIWHTiD5PgmuhXR4t_FBpjN8o5heY6EQKUnVNKXTBKCnRNUhJxmFK6MqtxVLbqBNLjft340DvSHL1AzrG9ou4j8fP1vV58jCJhbDw7swVhHbKP1LFJNgF1tCOQWb03PVuyexQmg_9Jh_m2T14ZnSbNDRj-ebI_K2OfRPYthwb-Lyw4gtCk8Ppk2IxwppFyzdQLYOGHD1JWJLsNwqStT_gFIYoklqYn7c465bQwEJidoHnMKH9ojsGxG6ohoMYedSz9RzJ1tvWiZM-HTXeC9PRXef9ah2kdXBk4-r-Pcl0nJby8J-n1qIpYnyIJDkBMltt1k8ANwWLR6LX8YoRgfWB5_kQkoXXNFtOMnrUvHTKsGf26kpC0_8spnth8i3deWhcQdqVuF2NvoWobk1Rqa9vvAyOTjl4a1A0Pp5y9-2dbXRaiDk0NWVO9eOjs-fkrEENmvZfkN4xNkKbAopmUh9pj4Yqk7IHNi_pkbeaX1sxhhduoxSFeoZL1Ci2zssU-GuUPDfJxK1I=w700-h393-no)
