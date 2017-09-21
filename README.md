@@ -1,7 +1,7 @@
 # TSRT10
 
 ******
-Basic setup (this guide assumes that you're running Ubuntu (or possibly some different kind of Linux distribution):
+Basic setup (this guide assumes that you're running Ubuntu (or possibly some different kind of Linux distribution)):
 
 - Install ROS (http://wiki.ros.org/lunar/Installation/Ubuntu):
 - - $ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
@@ -12,6 +12,9 @@ Basic setup (this guide assumes that you're running Ubuntu (or possibly some dif
 - - $ rosdep update
 - - $ echo "source /opt/ros/lunar/setup.bash" >> ~/.bashrc
 - - $ source ~/.bashrc
+
+- Install catkin (http://wiki.ros.org/catkin) (might have been installed automatically in the above step):
+- - $ sudo apt-get install ros-lunar-catkin
 
 ******
 Setup of LIDAR (scanse sweep, https://github.com/scanse/sweep-ros):
