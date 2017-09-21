@@ -1,5 +1,10 @@
 # TSRT10
 
+*********
+# TSRT10 setup:
+
+- Test.
+
 ******
 Setup of LIDAR (scanse sweep, https://github.com/scanse/sweep-ros):
 - Install the libsweep library from sweep-sdk (https://github.com/scanse/sweep-sdk): 
@@ -111,13 +116,6 @@ To reset the ROS IP addresses (so that you can always run ROS code locally):
 - - export ROS_MASTER_URI=http://localhost:11311
 - - export ROS_HOSTNAME=localhost
 - $ source ~/.bashrc
-
-
-
-
-
-*********
-# TSRT10 setup:
 
 
 
