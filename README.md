@@ -140,6 +140,52 @@ if __name__ == "__main__":
 - - $ rosrun test_package subscriber.py ('Hej!' should now be printed to the terminal with 1 Hz)
 
 
+
+
+
+
+
+
+****
+Test communication between two computers:
+
+- Connect the computers to the same WiFi network (eduroam doesn't seems to work)
+- On computer1 (Master):
+- - Find computer1's IP address by running $ ifconfig and look for "inet addr" below "wlan0, we call this xxx.xx.x.xx
+- - $ sudo nano ~/.bashrc
+- - Add the following two lines to the bottom of the file: "export ROS_MASTER_URI=http://xxx.xx.x.xx:11311" and "export ROS_HOSTNAME=xxx.xx.x.xx"
+- - $ source ~/.bashrc
+
+- On computer2 (Slave):
+- - Find computer2's IP address by running $ ifconfig and look for "inet addr" below "wlan0, we call this yyy.yy.y.yy
+- - $ sudo nano ~/.bashrc
+- - Add the following two lines to the bottom of the file: "export ROS_MASTER_URI=http://xxx.xx.x.xx:11311" and "export ROS_HOSTNAME=yyy.yy.y.yy"
+- - $ source ~/.bashrc
+
+- [computer1 terminal 1] $ roscore
+- [computer1 terminal 2] $ rosrun test_pckg test.py
+- [computer1 terminal 3] $ rostopic echo /test_topic (now you should start receiving messages)
+- [computer2] $ rostopic echo /test_topic (now you should start receiving messages)
+
+
+
+
+
+****
+To reset the ROS IP addresses (so that you can always run ROS code locally):
+- $ sudo nano ~/.bashrc
+- Modify the ROS_MASTER_URI and ROS_HOSTNAME lines so that they say:
+- - export ROS_MASTER_URI=http://localhost:11311
+- - export ROS_HOSTNAME=localhost
+- $ source ~/.bashrc
+
+
+
+
+
+
+
+
 ******
 Setup of LIDAR (scanse sweep, https://github.com/scanse/sweep-ros):
 - Install the libsweep library from sweep-sdk (https://github.com/scanse/sweep-sdk): 
@@ -188,8 +234,13 @@ Setup of LIDAR (scanse sweep, https://github.com/scanse/sweep-ros):
 - You should also be able to launch view_sweep_laser_scan.launch:
 - - $ roslaunch sweep_ros view_sweep_laser_scan.launch (this should launch rviz where you can see a visualization of the scans)
 
-****
 
+
+
+
+
+
+****
 Run Hector SLAM (only using the LiDAR scans, no odometry):
 - Useful links: http://wiki.ros.org/hector_slam/Tutorials/SettingUpForYourRobot, https://github.com/tu-darmstadt-ros-pkg/hector_slam/blob/catkin/hector_slam_launch/rviz_cfg/mapping_demo.rviz, https://github.com/tu-darmstadt-ros-pkg/hector_slam/blob/catkin/hector_slam_launch/launch/mapping_box.launch
 - $ cd ~/TSRT10/catkin_ws/src
@@ -220,39 +271,3 @@ Run Hector SLAM (only using the LiDAR scans, no odometry):
 - $ catkin_make
 - [terminal 1] $ roslaunch sweep_ros sweep2scan.launch
 - [terminal 2] $ roslaunch test_pckg test_Hector.launch
-
-****
-
-Test communication between two computers:
-
-- Connect the computers to the same WiFi network (eduroam doesn't seems to work)
-- On computer1 (Master):
-- - Find computer1's IP address by running $ ifconfig and look for "inet addr" below "wlan0, we call this xxx.xx.x.xx
-- - $ sudo nano ~/.bashrc
-- - Add the following two lines to the bottom of the file: "export ROS_MASTER_URI=http://xxx.xx.x.xx:11311" and "export ROS_HOSTNAME=xxx.xx.x.xx"
-- - $ source ~/.bashrc
-
-- On computer2 (Slave):
-- - Find computer2's IP address by running $ ifconfig and look for "inet addr" below "wlan0, we call this yyy.yy.y.yy
-- - $ sudo nano ~/.bashrc
-- - Add the following two lines to the bottom of the file: "export ROS_MASTER_URI=http://xxx.xx.x.xx:11311" and "export ROS_HOSTNAME=yyy.yy.y.yy"
-- - $ source ~/.bashrc
-
-- [computer1 terminal 1] $ roscore
-- [computer1 terminal 2] $ rosrun test_pckg test.py
-- [computer1 terminal 3] $ rostopic echo /test_topic (now you should start receiving messages)
-- [computer2] $ rostopic echo /test_topic (now you should start receiving messages)
-
-****
-
-To reset the ROS IP addresses (so that you can always run ROS code locally):
-- $ sudo nano ~/.bashrc
-- Modify the ROS_MASTER_URI and ROS_HOSTNAME lines so that they say:
-- - export ROS_MASTER_URI=http://localhost:11311
-- - export ROS_HOSTNAME=localhost
-- $ source ~/.bashrc
-
-
-
-
-
