@@ -303,3 +303,7 @@ export ROS_HOSTNAME=localhost
 - - $ roslaunch asl_turtlebot turtlebot_sim.launch  
 - - If everything works as expected, Gazebo should launch and you should see this:
 ![alt text](https://lh3.googleusercontent.com/QOwaV2rTqrQWygOWAjcyfVmfAgBeBoOIuDD2pVh_V-oSXmR4psYg7j9c65WXFMbY1sENTiC1QcvwNVarQ1PMG_wOWtXRDyU_tHX5OggibJSWAhiZBtfspHJDHhqyiDEAIhG8BqOO77lZ0aUBStz96QbcENAdTfnC-Uas2-U_yRkigpAPd3JlByerDjuLwzrsBipIuq3wqzHhBhAGRaBTI_drODZvH-Q1rMUmWfV2ei854h17PMvKH1J6Nb4Gr3-WqMw8EbZvAwg4AhrjP-m_qmnvKrAKktPdIkGzPpQ2KtZuTMETaI2X66kX06Xc5nORQHrR252jz0nTSArxF9doQnwBaWFcRALz7cd5f3dWy3-b89c-1irwyEYBfxqab-C0QgSY9CBBJcT8kHbIkeqtelWHs5SwY3BuKd2zaGnWpmFT_XADFgEdNM6fNTo9L_i9z-mtoJPMJaANdni7TriLSH-0Vm7mzplYFRTZhfGxZykfQyJ1-6jHOuI1lTCnSVypnPc-M3xn52Y2RP6gPiyp5yLSVGVai1iEtbgpefooobPvExa73ZhJRiK2Em3_5N4PrvMG0v0q-hic4dJl6icOIlku7skioTTk3VUFL3e2iwtnOJVYr8fQ4z2dFQo0ijgcharzBlrFibKv2evsjwu6nYiK8O2IffRfUIA=w700-h393-no)
+- - If this doesn't work, open another terminal and do this FIRST:
+- - - $ rosrun gazebo_ros gzclient
+
+
