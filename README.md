@@ -124,6 +124,21 @@ if __name__ == "__main__":
 - - $ cd ~/TSRT10/catkin_ws
 - - $ catkin_make
 
+- Start the ROS master:
+- - $ roscore
+
+- Run publisher.py to publish messages to /test_topic:
+- - Open a new terminal window
+- - $ rosrun test_package publisher.py
+
+- Test that publisher.py is running:
+- - Open a new terminal window
+- - $ rostopic echo /test_topic ('data: "Hej!"' should now be printed to the terminal with 1 Hz)
+
+- Run subscriber.py to read messages from /test_topic:
+- - Open a new terminal window
+- - $ rosrun test_package subscriber.py ('Hej!' should now be printed to the terminal with 1 Hz)
+
 
 ******
 Setup of LIDAR (scanse sweep, https://github.com/scanse/sweep-ros):
