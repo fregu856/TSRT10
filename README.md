@@ -3,18 +3,18 @@
 ******
 Basic setup (this guide assumes that you're running Ubuntu (or possibly some different kind of Linux distribution)):
 
-- Install ROS (http://wiki.ros.org/lunar/Installation/Ubuntu):
+- Install ROS kinetic (lunar is newer but not all packages seem to be available for lunar) (http://wiki.ros.org/kinetic/Installation/Ubuntu):
 - - $ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 - - $ sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
 - - $ sudo apt-get update
-- - $ sudo apt-get install ros-lunar-desktop (for RPIs, I'd probably recommend 'sudo apt-get install ros-lunar-ros-base' instead)
+- - $ sudo apt-get install ros-kinetic-desktop (for RPIs, I'd probably recommend 'sudo apt-get install ros-kinetic-ros-base' instead)
 - - $ sudo rosdep init
 - - $ rosdep update
-- - $ echo "source /opt/ros/lunar/setup.bash" >> ~/.bashrc
+- - $ echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
 - - $ source ~/.bashrc
 
 - Install catkin (http://wiki.ros.org/catkin) (might have been installed automatically in the above step):
-- - $ sudo apt-get install ros-lunar-catkin
+- - $ sudo apt-get install ros-kinetic-catkin
 
 - Create a directory called TSRT10 in your home directory:
 - - $ cd --
@@ -147,7 +147,7 @@ if __name__ == "__main__":
 
 
 ****
-Test communication between two computers:
+Test communication between two computers (this assumes that one has followed the above steps on both computers):
 
 - Connect the computers to the same WiFi network (eduroam doesn't seems to work)
 - On computer1 (Master):
@@ -163,9 +163,11 @@ Test communication between two computers:
 - - $ source ~/.bashrc
 
 - [computer1 terminal 1] $ roscore
-- [computer1 terminal 2] $ rosrun test_pckg test.py
+- [computer1 terminal 2] $ rosrun test_package publisher.py
 - [computer1 terminal 3] $ rostopic echo /test_topic (now you should start receiving messages)
-- [computer2] $ rostopic echo /test_topic (now you should start receiving messages)
+- [computer2 terminal 1] $ rostopic echo /test_topic (now you should start receiving messages)
+- [computer2 terminal 2] $ rosrun test_package subscriber.py (now you should start receiving messages)
+
 
 
 
@@ -198,15 +200,6 @@ Setup of LIDAR (scanse sweep, https://github.com/scanse/sweep-ros):
 - - $ cmake --build .
 - - $ sudo cmake --build . --target install
 - - $ sudo ldconfig
-
-- Create a catkin workspace:
-- - $ cd ~/TSRT10
-- - $ mkdir catkin_ws
-- - $ cd catkin_ws
-- - $ mkdir src
-- - $ catkin_make
-- - Add "source ~/TSRT10/catkin_ws/devel/setup.bash" to the bottom of ~/.bashrc ($ sudo nano ~/.bashrc to edit, we do this for this line to be run everytime we open the terminal, otherwise we'd have to do it manually)  
-- - $ source ~/TSRT10/catkin_ws/devel/setup.bash
  
 - Clone the sweep-ros repo:
 - - $ cd ~/TSRT10/catkin_ws/src
@@ -223,7 +216,7 @@ Setup of LIDAR (scanse sweep, https://github.com/scanse/sweep-ros):
 - - $ roslaunch sweep_ros sweep.launch
 
 - sweep2scan.launch and view_sweep_laser_scan.launch will however not work. For this we need to install the package pointcloud_to_laserscan:
-- - $ sudo apt-get install ros-kinetic-pointcloud-to-laserscan
+- - $ sudo apt-get install ros-kinetic-pointcloud-to-laserscan 
 
 - Now, you should be able to launch sweep2scan.launch:
 - - $ roslaunch sweep_ros sweep2scan.launch
@@ -248,26 +241,84 @@ Run Hector SLAM (only using the LiDAR scans, no odometry):
 - $ cd ~/TSRT10/catkin_ws
 - $ catkin_make
 
-- Create and build a package (called test_pckg) in the catkin workspace:
-- - $ cd ~/TSRT10/catkin_ws/src
-- - $ catkin_create_pkg test_pckg std_msgs roscpp rospy
-- - $ cd ~/TSRT10/catkin_ws
-- - $ catkin_make
-
-- - Create a scripts directory in the package (it's in this directory we would place all python ROS code/scripts):
-- - - $ cd ~/TSRT10/catkin_ws/src/test_pckg
-- - - $ mkdir scripts
-- - Every python script that one writes and places in scripts (e.g. test.py) must be made executable:
-- - - $ chmod a+x test.py
-- - You should always also build the package (this is sometimes (quite often) needed even for python scripts since we use C++ messages):
-- - - $ cd ~/TSRT10/catkin_ws
-- - - $ catkin_make
-
-- Create a directory called "launch" in ~/TSRT10/catkin_ws/src/test_pckg
-- Create a directory called "rviz" in ~/TSRT10/catkin_ws/src/test_pckg
+- Create a directory called "launch" in ~/TSRT10/catkin_ws/src/test_package
+- Create a directory called "rviz" in ~/TSRT10/catkin_ws/src/test_package
 - Write test_Hector.launch (based on the above links) and place it in the launch directory
 - Write test_Hector.rviz (based on mapping_demo.rviz linked above) and place it in the rviz directory
 - $ cd ~/TSRT10/catkin_ws
 - $ catkin_make
 - [terminal 1] $ roslaunch sweep_ros sweep2scan.launch
-- [terminal 2] $ roslaunch test_pckg test_Hector.launch
+- [terminal 2] $ roslaunch test_package test_Hector.launch
+
+
+
+
+
+
+
+
+
+
+*****
+Balrog simulator:
+
+- $ sudo apt-get install ros-kinetic-turtlebot
+- $ sudo apt-get install ros-kinetic-turtlebot-apps
+- $ sudo apt-get install ros-kinetic-turtlebot-interactions
+- $ sudo apt-get install ros-kinetic-turtlebot-simulator
+
+- Reset the ROS IP addresses:
+- - Make sure that the lines with ROS_MASTER_URI and ROS_HOSTNAME in ~/.bashrc looks as below:
+```
+export ROS_MASTER_URI=http://localhost:11311
+export ROS_HOSTNAME=localhost
+```
+- - $ source ~/.bashrc
+
+- Create a package called balrog_sim in the workspace:
+- - $ cd ~/TSRT10/catkin_ws/src  
+- - $ catkin_create_pkg balrog_sim std_msgs roscpp rospy  
+- - $ cd ~/TSRT10/catkin_ws  
+- - $ catkin_make   
+
+- Create a python_scripts directory in the package:
+- - $ cd ~/TSRT10/catkin_ws/src/balrog_sim  
+- - $ mkdir python_scripts  
+
+- Every python script that you write and place in python_scripts (e.g. test.py) must be made executable:
+- - $ chmod a+x test.py    
+- You should also always build the package:
+- - $ cd ~/TSRT10/catkin_ws  
+- - $ catkin_make  
+
+- Clone the repo needed to simulate turtlebot in Gazebo:
+- - $ cd ~/TSRT10/catkin_ws/src  
+- - $ git clone https://github.com/StanfordASL/asl_turtlebot.git  
+- - $ cd ~/TSRT10/catkin_ws    
+- - $ catkin_make  
+- - Add "export GAZEBO_MODEL_PATH=~/TSRT10/catkin_ws/src/asl_turtlebot/models" to the bottom of ~/.bashrc ($ sudo nano ~/.bashrc to edit)
+- - $ source ~/.bashrc
+
+- Test the simulator:
+- - $ roslaunch asl_turtlebot turtlebot_sim.launch  
+- - If everything works as expected, Gazebo should launch and you should see this:
+![alt text](https://lh3.googleusercontent.com/QOwaV2rTqrQWygOWAjcyfVmfAgBeBoOIuDD2pVh_V-oSXmR4psYg7j9c65WXFMbY1sENTiC1QcvwNVarQ1PMG_wOWtXRDyU_tHX5OggibJSWAhiZBtfspHJDHhqyiDEAIhG8BqOO77lZ0aUBStz96QbcENAdTfnC-Uas2-U_yRkigpAPd3JlByerDjuLwzrsBipIuq3wqzHhBhAGRaBTI_drODZvH-Q1rMUmWfV2ei854h17PMvKH1J6Nb4Gr3-WqMw8EbZvAwg4AhrjP-m_qmnvKrAKktPdIkGzPpQ2KtZuTMETaI2X66kX06Xc5nORQHrR252jz0nTSArxF9doQnwBaWFcRALz7cd5f3dWy3-b89c-1irwyEYBfxqab-C0QgSY9CBBJcT8kHbIkeqtelWHs5SwY3BuKd2zaGnWpmFT_XADFgEdNM6fNTo9L_i9z-mtoJPMJaANdni7TriLSH-0Vm7mzplYFRTZhfGxZykfQyJ1-6jHOuI1lTCnSVypnPc-M3xn52Y2RP6gPiyp5yLSVGVai1iEtbgpefooobPvExa73ZhJRiK2Em3_5N4PrvMG0v0q-hic4dJl6icOIlku7skioTTk3VUFL3e2iwtnOJVYr8fQ4z2dFQo0ijgcharzBlrFibKv2evsjwu6nYiK8O2IffRfUIA=w700-h393-no)
+- - If this doesn't work, open another terminal and do this FIRST:
+- - - $ rosrun gazebo_ros gzclient
+
+- Run a test controller to check that everything is working:  
+- - Place "test_controller.py" in ~/TSRT10/catkin_ws/src/balrog_sim/python_scripts, make it executable and build the package  
+- - [terminal 1] $ roslaunch asl_turtlebot turtlebot_sim.launch  
+- - [terminal 2] $ rosrun balrog_sim test_controller.py  
+- - The robot should now move to the coordinate (1, 1)
+
+- Start a simulation of the robot in the TSRT10 test area:
+- - Create a launch directory in ~/TSRT10/catkin_ws/src/balrog_sim
+- - Place the file test_area.launch in ~/TSRT10/catkin_ws/src/balrog_sim/launch
+- - Create a world directory in ~/TSRT10/catkin_ws/src/balrog_sim
+- - Place the file test_area.world in ~/TSRT10/catkin_ws/src/balrog_sim/world
+- - $ cd ~/TSRT10/catkin_ws 
+- - $ catkin_make
+- - $ roslaunch balrog_sim test_area.launch
+- - If everything works as expected, Gazebo will launch and you will see this:
+![alt text](https://lh3.googleusercontent.com/ouaKpsPjT0b60fiYlbAbSutpYMIS16xXIKH_00L-WMpCKFYQFMVC9m2ygWSxQ_JNuJPOocEQBfmyCeNKPI7LbxcvY2w2mwmOQluUBOgyZHGxGNGi5bYW0F__B8yiq8PYW8s2exJyf4-zf-Ps-bbLvGlgqUJIWHTiD5PgmuhXR4t_FBpjN8o5heY6EQKUnVNKXTBKCnRNUhJxmFK6MqtxVLbqBNLjft340DvSHL1AzrG9ou4j8fP1vV58jCJhbDw7swVhHbKP1LFJNgF1tCOQWb03PVuyexQmg_9Jh_m2T14ZnSbNDRj-ebI_K2OfRPYthwb-Lyw4gtCk8Ppk2IxwppFyzdQLYOGHD1JWJLsNwqStT_gFIYoklqYn7c465bQwEJidoHnMKH9ojsGxG6ohoMYedSz9RzJ1tvWiZM-HTXeC9PRXef9ah2kdXBk4-r-Pcl0nJby8J-n1qIpYnyIJDkBMltt1k8ANwWLR6LX8YoRgfWB5_kQkoXXNFtOMnrUvHTKsGf26kpC0_8spnth8i3deWhcQdqVuF2NvoWobk1Rqa9vvAyOTjl4a1A0Pp5y9-2dbXRaiDk0NWVO9eOjs-fkrEENmvZfkN4xNkKbAopmUh9pj4Yqk7IHNi_pkbeaX1sxhhduoxSFeoZL1Ci2zssU-GuUPDfJxK1I=w700-h393-no)
