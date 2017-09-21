@@ -116,3 +116,10 @@ To reset the ROS IP addresses (so that you can always run ROS code locally):
 
 
 
+*********
+# TSRT10 setup:
+
+
+
+
+
