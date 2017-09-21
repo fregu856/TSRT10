@@ -2915,22 +2915,40 @@ clean: sweep-ros/CMakeFiles/sweep_node.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Directory level rules for directory test_pckg
+# Directory level rules for directory test_package
 
 # Convenience name for "all" pass in the directory.
-test_pckg/all:
+test_package/all:
 
-.PHONY : test_pckg/all
+.PHONY : test_package/all
 
 # Convenience name for "clean" pass in the directory.
-test_pckg/clean:
+test_package/clean:
 
-.PHONY : test_pckg/clean
+.PHONY : test_package/clean
 
 # Convenience name for "preinstall" pass in the directory.
-test_pckg/preinstall:
+test_package/preinstall:
 
-.PHONY : test_pckg/preinstall
+.PHONY : test_package/preinstall
+
+#=============================================================================
+# Directory level rules for directory test
+
+# Convenience name for "all" pass in the directory.
+test/all:
+
+.PHONY : test/all
+
+# Convenience name for "clean" pass in the directory.
+test/clean:
+
+.PHONY : test/clean
+
+# Convenience name for "preinstall" pass in the directory.
+test/preinstall:
+
+.PHONY : test/preinstall
 
 #=============================================================================
 # Directory level rules for directory hector_slam/hector_imu_attitude_to_tf

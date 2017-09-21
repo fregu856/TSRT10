@@ -1,0 +1,8 @@
+prefix=/home/fregu856/TSRT10/catkin_ws/install
+
+Name: test_package
+Description: Description of test_package
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/fregu856/TSRT10/catkin_ws/install/lib 
+Requires: 

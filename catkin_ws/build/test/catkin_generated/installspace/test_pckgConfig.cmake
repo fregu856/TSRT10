@@ -66,7 +66,7 @@ endif()
 set(test_pckg_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
-if("TRUE" STREQUAL "TRUE")
+if("FALSE" STREQUAL "TRUE")
   set(test_pckg_SOURCE_PREFIX /home/fregu856/TSRT10/catkin_ws/src/test)
   set(test_pckg_DEVEL_PREFIX /home/fregu856/TSRT10/catkin_ws/devel)
   set(test_pckg_INSTALL_PREFIX "")
@@ -103,7 +103,7 @@ if(NOT " " STREQUAL " ")
         message(FATAL_ERROR "Project 'test_pckg' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  Ask the maintainer 'fregu856 <fregu856@todo.todo>' to fix it.")
       endif()
     else()
-      message(FATAL_ERROR "Project 'test_pckg' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/fregu856/TSRT10/catkin_ws/src/test/${idir}'.  Ask the maintainer 'fregu856 <fregu856@todo.todo>' to fix it.")
+      message(FATAL_ERROR "Project 'test_pckg' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/fregu856/TSRT10/catkin_ws/install/${idir}'.  Ask the maintainer 'fregu856 <fregu856@todo.todo>' to fix it.")
     endif()
     _list_append_unique(test_pckg_INCLUDE_DIRS ${include})
   endforeach()
@@ -122,7 +122,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/fregu856/TSRT10/catkin_ws/devel/lib;/home/fregu856/TSRT10/catkin_ws/devel/lib;/home/fregu856/TSRT10_sim/catkin_ws/devel/lib;/home/fregu856/Summer17/Laptop/ROS_code/catkin_ws/devel/lib;/opt/ros/kinetic/lib)
+    foreach(path /home/fregu856/TSRT10/catkin_ws/install/lib;/home/fregu856/TSRT10/catkin_ws/devel/lib;/home/fregu856/TSRT10_sim/catkin_ws/devel/lib;/home/fregu856/Summer17/Laptop/ROS_code/catkin_ws/devel/lib;/opt/ros/kinetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

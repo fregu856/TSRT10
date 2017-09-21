@@ -1415,10 +1415,16 @@ sweep_ros_BINARY_DIR:STATIC=/home/fregu856/TSRT10/catkin_ws/build/sweep-ros
 sweep_ros_SOURCE_DIR:STATIC=/home/fregu856/TSRT10/catkin_ws/src/sweep-ros
 
 //Value Computed by CMake
-test_pckg_BINARY_DIR:STATIC=/home/fregu856/TSRT10/catkin_ws/build/test_pckg
+test_package_BINARY_DIR:STATIC=/home/fregu856/TSRT10/catkin_ws/build/test_package
 
 //Value Computed by CMake
-test_pckg_SOURCE_DIR:STATIC=/home/fregu856/TSRT10/catkin_ws/src/test_pckg
+test_package_SOURCE_DIR:STATIC=/home/fregu856/TSRT10/catkin_ws/src/test_package
+
+//Value Computed by CMake
+test_pckg_BINARY_DIR:STATIC=/home/fregu856/TSRT10/catkin_ws/build/test
+
+//Value Computed by CMake
+test_pckg_SOURCE_DIR:STATIC=/home/fregu856/TSRT10/catkin_ws/src/test
 
 //The directory containing a CMake configuration file for tf2.
 tf2_DIR:PATH=/opt/ros/kinetic/share/tf2/cmake
@@ -1594,7 +1600,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=17
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=18
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
