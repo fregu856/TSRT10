@@ -33,6 +33,98 @@ source ~/TSRT10/catkin_ws/devel/setup.bash
 ```  
 - - $ source ~/.bashrc
 
+- Create and build a package (called test_package) in the catkin workspace:
+- - $ cd ~/TSRT10/catkin_ws/src
+- - $ catkin_create_pkg test_package std_msgs roscpp rospy
+- - $ cd ~/TSRT10/catkin_ws
+- - $ catkin_make
+
+- - Create a python_scripts directory in the package (it's in this directory we will place all python ROS scripts):
+- - - $ cd ~/TSRT10/catkin_ws/src/test_package
+- - - $ mkdir python_scripts
+- - Every python script that one writes and places in python_scripts (e.g. test.py) must be made executable:
+- - - $ cd ~/TSRT10/catkin_ws/src/test_package/python_scripts 
+- - - $ chmod a+x test.py
+- - You should always also build the package (this is sometimes (quite often) needed even for python scripts since we use C++ messages):
+- - - $ cd ~/TSRT10/catkin_ws
+- - - $ catkin_make
+
+- Create a python script called publisher.py containing the code below and place it in python_scripts:
+```
+#!/usr/bin/env python
+
+import rospy
+from std_msgs.msg import String
+
+def publisher():
+    # create a publisher that publishes messages of type String on the
+    # topic /test_topic:
+    pub = rospy.Publisher("/test_topic", String, queue_size=10)
+
+    # initialize this code as a ROS node named publisher_node:
+    rospy.init_node("publisher_node", anonymous=True)
+
+    # specify the desired loop frequency in Hz:
+    rate = rospy.Rate(1)
+
+    while not rospy.is_shutdown(): # (while the ROS node is still active:)
+        # specify the string that you want to send/publish:
+        message = "Hej!"
+
+        # publish the message (on the specified topic, i.e., /test_topic):
+        pub.publish(message)
+
+        # sleep to get a loop frequency of 1 Hz:
+        rate.sleep()
+
+if __name__ == "__main__":
+    try:
+        publisher()
+    except rospy.ROSInterruptException:
+        pass
+```
+
+- Create a python script called subscriber.py containing the code below and place it in python_scripts:
+```
+#!/usr/bin/env python
+
+import rospy
+from std_msgs.msg import String
+
+def subscriber():
+    # initialize this code as a ROS node named subscriber_node:
+    rospy.init_node("subscriber_node", anonymous=True)
+
+    # subscribe to the topic /test_topic. That is, read every message (of type
+    # String) that is published on /test_topic. We will do this by calling the
+    # function callback_function everytime a new message is published:
+    rospy.Subscriber("/test_topic", String, callback_function)
+
+    # keep python from exiting until this ROS node is stopped:
+    rospy.spin()
+
+# define the callback function for the /test_topic subscriber:
+def callback_function(message_object):
+    # get the actual message String that was published:
+    received_message = message_object.data
+
+    # print the received String:
+    print received_message
+
+if __name__ == "__main__":
+    subscriber()
+```
+
+- Make the files executable:
+- - $ cd ~/TSRT10/catkin_ws/src/test_package/python_scripts 
+- - $ chmod a+x publisher.py
+- - $ chmod a+x subscriber.py
+
+- Build the package:
+- - $ cd ~/TSRT10/catkin_ws
+- - $ catkin_make
+
+
 ******
 Setup of LIDAR (scanse sweep, https://github.com/scanse/sweep-ros):
 - Install the libsweep library from sweep-sdk (https://github.com/scanse/sweep-sdk): 
