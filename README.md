@@ -163,7 +163,7 @@ Test communication between two computers (this assumes that one has followed the
 - - $ source ~/.bashrc
 
 - [computer1 terminal 1] $ roscore
-- [computer1 terminal 2] $ rosrun test_pckg test.py
+- [computer1 terminal 2] $ rosrun test_package publisher.py
 - [computer1 terminal 3] $ rostopic echo /test_topic (now you should start receiving messages)
 - [computer2 terminal 1] $ rostopic echo /test_topic (now you should start receiving messages)
 - [computer2 terminal 2] $ rosrun test_package subscriber.py (now you should start receiving messages)
