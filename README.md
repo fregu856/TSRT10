@@ -16,6 +16,24 @@ Basic setup (this guide assumes that you're running Ubuntu (or possibly some dif
 - Install catkin (http://wiki.ros.org/catkin) (might have been installed automatically in the above step):
 - - $ sudo apt-get install ros-lunar-catkin
 
+- Create a directory called TSRT10 in your home directory:
+- - $ cd --
+- - $ mkdir TSRT10
+
+- Create a catkin workspace:
+- - $ cd ~/TSRT10
+- - $ mkdir catkin_ws
+- - $ cd catkin_ws
+- - $ mkdir src
+- - $ catkin_make
+- - $ sudo nano ~/.bashrc
+- - Add the below line to the bottom of this file
+```
+source ~/TSRT10/catkin_ws/devel/setup.bash
+```
+- - Add "source ~/TSRT10/catkin_ws/devel/setup.bash" to the bottom of ~/.bashrc ($ sudo nano ~/.bashrc to edit, we do this for this line to be run everytime we open the terminal, otherwise we'd have to do it manually)  
+- - $ source ~/TSRT10/catkin_ws/devel/setup.bash
+
 ******
 Setup of LIDAR (scanse sweep, https://github.com/scanse/sweep-ros):
 - Install the libsweep library from sweep-sdk (https://github.com/scanse/sweep-sdk): 
