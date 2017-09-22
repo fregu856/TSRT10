@@ -241,6 +241,46 @@ if __name__ == "__main__":
 
 
 
+***
+# Setup the balrog package:
+
+- $ cd ~/TSRT10/catkin_ws/src
+- $ catkin_create_pkg balrog std_msgs roscpp rospy
+- $ cd ~/TSRT10/catkin_ws
+- $ catkin_make
+
+- Create a python_scripts directory in the package (it's in this directory we will place all python ROS scripts):
+- - $ cd ~/TSRT10/catkin_ws/src/balrog
+- - $ mkdir python_scripts
+- Every python script that one writes and places in python_scripts (e.g. test.py) must be made executable:
+- - $ cd ~/TSRT10/catkin_ws/src/balrog/python_scripts 
+- - $ chmod a+x test.py
+- You should always also build the package (this is sometimes (quite often) needed even for python scripts since we use C++ messages):
+- - $ cd ~/TSRT10/catkin_ws
+- - $ catkin_make
+
+- Create a launch directory in ~/TSRT10/catkin_ws/src/balrog
+- Place the file lidar.launch in ~/TSRT10/catkin_ws/src/balrog/launch
+- Place the file lidar_and_viz.launch in ~/TSRT10/catkin_ws/src/balrog/launch
+- Create an rviz directory in ~/TSRT10/catkin_ws/src/balrog
+- Place the file lidar.rviz in ~/TSRT10/catkin_ws/src/balrog/rviz
+
+- To run the LIDAR without any visualization:
+- - $ roslaunch balrog lidar.launch
+
+- To run the LIDAR together with a visualization:
+- - $ roslaunch balrog lidar_and_viz.launch
+
+
+
+
+
+
+
+
+
+
+
 ****
 # Run Hector SLAM 
 (only using the LiDAR scans, no odometry)
@@ -251,14 +291,12 @@ if __name__ == "__main__":
 - $ cd ~/TSRT10/catkin_ws
 - $ catkin_make
 
-- Create a directory called "launch" in ~/TSRT10/catkin_ws/src/test_package
-- Create a directory called "rviz" in ~/TSRT10/catkin_ws/src/test_package
-- Write test_Hector.launch (based on the above links) and place it in the launch directory
-- Write test_Hector.rviz (based on mapping_demo.rviz linked above) and place it in the rviz directory
+- Place the file hector.launch (which is written based on the above links) and place it in ~/TSRT10/catkin_ws/src/balrog/launch
+- Place the file hector.rviz (which is based on mapping_demo.rviz linked above) and place it in ~/TSRT10/catkin_ws/src/balrog/rviz
 - $ cd ~/TSRT10/catkin_ws
 - $ catkin_make
-- [terminal 1] $ roslaunch sweep_ros sweep2scan.launch
-- [terminal 2] $ roslaunch test_package test_Hector.launch
+- [terminal 1] $ roslaunch balrog lidar.launch
+- [terminal 2] $ roslaunch balrog hector.launch
 
 
 
