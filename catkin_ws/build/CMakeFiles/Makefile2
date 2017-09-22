@@ -2528,6 +2528,472 @@ clean: hector_slam/hector_marker_drawing/CMakeFiles/visualization_msgs_generate_
 .PHONY : clean
 
 #=============================================================================
+# Directory level rules for directory ros-keyboard
+
+# Convenience name for "all" pass in the directory.
+ros-keyboard/all: ros-keyboard/CMakeFiles/keyboard_generate_messages.dir/all
+ros-keyboard/all: ros-keyboard/CMakeFiles/keyboard.dir/all
+
+.PHONY : ros-keyboard/all
+
+# Convenience name for "clean" pass in the directory.
+ros-keyboard/clean: ros-keyboard/CMakeFiles/keyboard_generate_messages_cpp.dir/clean
+ros-keyboard/clean: ros-keyboard/CMakeFiles/keyboard_generate_messages_lisp.dir/clean
+ros-keyboard/clean: ros-keyboard/CMakeFiles/keyboard_generate_messages_py.dir/clean
+ros-keyboard/clean: ros-keyboard/CMakeFiles/keyboard_generate_messages.dir/clean
+ros-keyboard/clean: ros-keyboard/CMakeFiles/keyboard.dir/clean
+ros-keyboard/clean: ros-keyboard/CMakeFiles/keyboard_generate_messages_eus.dir/clean
+ros-keyboard/clean: ros-keyboard/CMakeFiles/keyboard_geneus.dir/clean
+ros-keyboard/clean: ros-keyboard/CMakeFiles/keyboard_genpy.dir/clean
+ros-keyboard/clean: ros-keyboard/CMakeFiles/keyboard_generate_messages_nodejs.dir/clean
+ros-keyboard/clean: ros-keyboard/CMakeFiles/_keyboard_generate_messages_check_deps_Key.dir/clean
+ros-keyboard/clean: ros-keyboard/CMakeFiles/keyboard_gencpp.dir/clean
+ros-keyboard/clean: ros-keyboard/CMakeFiles/keyboard_genlisp.dir/clean
+ros-keyboard/clean: ros-keyboard/CMakeFiles/keyboard_gennodejs.dir/clean
+
+.PHONY : ros-keyboard/clean
+
+# Convenience name for "preinstall" pass in the directory.
+ros-keyboard/preinstall:
+
+.PHONY : ros-keyboard/preinstall
+
+#=============================================================================
+# Target rules for target ros-keyboard/CMakeFiles/keyboard_generate_messages_cpp.dir
+
+# All Build rule for target.
+ros-keyboard/CMakeFiles/keyboard_generate_messages_cpp.dir/all: hector_slam/hector_map_tools/CMakeFiles/std_msgs_generate_messages_cpp.dir/all
+ros-keyboard/CMakeFiles/keyboard_generate_messages_cpp.dir/all: ros-keyboard/CMakeFiles/_keyboard_generate_messages_check_deps_Key.dir/all
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_generate_messages_cpp.dir/build.make ros-keyboard/CMakeFiles/keyboard_generate_messages_cpp.dir/depend
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_generate_messages_cpp.dir/build.make ros-keyboard/CMakeFiles/keyboard_generate_messages_cpp.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=65 "Built target keyboard_generate_messages_cpp"
+.PHONY : ros-keyboard/CMakeFiles/keyboard_generate_messages_cpp.dir/all
+
+# Build rule for subdir invocation for target.
+ros-keyboard/CMakeFiles/keyboard_generate_messages_cpp.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 ros-keyboard/CMakeFiles/keyboard_generate_messages_cpp.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+.PHONY : ros-keyboard/CMakeFiles/keyboard_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+keyboard_generate_messages_cpp: ros-keyboard/CMakeFiles/keyboard_generate_messages_cpp.dir/rule
+
+.PHONY : keyboard_generate_messages_cpp
+
+# clean rule for target.
+ros-keyboard/CMakeFiles/keyboard_generate_messages_cpp.dir/clean:
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_generate_messages_cpp.dir/build.make ros-keyboard/CMakeFiles/keyboard_generate_messages_cpp.dir/clean
+.PHONY : ros-keyboard/CMakeFiles/keyboard_generate_messages_cpp.dir/clean
+
+# clean rule for target.
+clean: ros-keyboard/CMakeFiles/keyboard_generate_messages_cpp.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target ros-keyboard/CMakeFiles/keyboard_generate_messages_lisp.dir
+
+# All Build rule for target.
+ros-keyboard/CMakeFiles/keyboard_generate_messages_lisp.dir/all: hector_slam/hector_map_tools/CMakeFiles/std_msgs_generate_messages_lisp.dir/all
+ros-keyboard/CMakeFiles/keyboard_generate_messages_lisp.dir/all: ros-keyboard/CMakeFiles/_keyboard_generate_messages_check_deps_Key.dir/all
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_generate_messages_lisp.dir/build.make ros-keyboard/CMakeFiles/keyboard_generate_messages_lisp.dir/depend
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_generate_messages_lisp.dir/build.make ros-keyboard/CMakeFiles/keyboard_generate_messages_lisp.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=68 "Built target keyboard_generate_messages_lisp"
+.PHONY : ros-keyboard/CMakeFiles/keyboard_generate_messages_lisp.dir/all
+
+# Build rule for subdir invocation for target.
+ros-keyboard/CMakeFiles/keyboard_generate_messages_lisp.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 ros-keyboard/CMakeFiles/keyboard_generate_messages_lisp.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+.PHONY : ros-keyboard/CMakeFiles/keyboard_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+keyboard_generate_messages_lisp: ros-keyboard/CMakeFiles/keyboard_generate_messages_lisp.dir/rule
+
+.PHONY : keyboard_generate_messages_lisp
+
+# clean rule for target.
+ros-keyboard/CMakeFiles/keyboard_generate_messages_lisp.dir/clean:
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_generate_messages_lisp.dir/build.make ros-keyboard/CMakeFiles/keyboard_generate_messages_lisp.dir/clean
+.PHONY : ros-keyboard/CMakeFiles/keyboard_generate_messages_lisp.dir/clean
+
+# clean rule for target.
+clean: ros-keyboard/CMakeFiles/keyboard_generate_messages_lisp.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target ros-keyboard/CMakeFiles/keyboard_generate_messages_py.dir
+
+# All Build rule for target.
+ros-keyboard/CMakeFiles/keyboard_generate_messages_py.dir/all: hector_slam/hector_map_tools/CMakeFiles/std_msgs_generate_messages_py.dir/all
+ros-keyboard/CMakeFiles/keyboard_generate_messages_py.dir/all: ros-keyboard/CMakeFiles/_keyboard_generate_messages_check_deps_Key.dir/all
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_generate_messages_py.dir/build.make ros-keyboard/CMakeFiles/keyboard_generate_messages_py.dir/depend
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_generate_messages_py.dir/build.make ros-keyboard/CMakeFiles/keyboard_generate_messages_py.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=70,71 "Built target keyboard_generate_messages_py"
+.PHONY : ros-keyboard/CMakeFiles/keyboard_generate_messages_py.dir/all
+
+# Build rule for subdir invocation for target.
+ros-keyboard/CMakeFiles/keyboard_generate_messages_py.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 ros-keyboard/CMakeFiles/keyboard_generate_messages_py.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+.PHONY : ros-keyboard/CMakeFiles/keyboard_generate_messages_py.dir/rule
+
+# Convenience name for target.
+keyboard_generate_messages_py: ros-keyboard/CMakeFiles/keyboard_generate_messages_py.dir/rule
+
+.PHONY : keyboard_generate_messages_py
+
+# clean rule for target.
+ros-keyboard/CMakeFiles/keyboard_generate_messages_py.dir/clean:
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_generate_messages_py.dir/build.make ros-keyboard/CMakeFiles/keyboard_generate_messages_py.dir/clean
+.PHONY : ros-keyboard/CMakeFiles/keyboard_generate_messages_py.dir/clean
+
+# clean rule for target.
+clean: ros-keyboard/CMakeFiles/keyboard_generate_messages_py.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target ros-keyboard/CMakeFiles/keyboard_generate_messages.dir
+
+# All Build rule for target.
+ros-keyboard/CMakeFiles/keyboard_generate_messages.dir/all: ros-keyboard/CMakeFiles/keyboard_generate_messages_cpp.dir/all
+ros-keyboard/CMakeFiles/keyboard_generate_messages.dir/all: ros-keyboard/CMakeFiles/keyboard_generate_messages_lisp.dir/all
+ros-keyboard/CMakeFiles/keyboard_generate_messages.dir/all: ros-keyboard/CMakeFiles/keyboard_generate_messages_py.dir/all
+ros-keyboard/CMakeFiles/keyboard_generate_messages.dir/all: ros-keyboard/CMakeFiles/keyboard_generate_messages_eus.dir/all
+ros-keyboard/CMakeFiles/keyboard_generate_messages.dir/all: ros-keyboard/CMakeFiles/keyboard_generate_messages_nodejs.dir/all
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_generate_messages.dir/build.make ros-keyboard/CMakeFiles/keyboard_generate_messages.dir/depend
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_generate_messages.dir/build.make ros-keyboard/CMakeFiles/keyboard_generate_messages.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target keyboard_generate_messages"
+.PHONY : ros-keyboard/CMakeFiles/keyboard_generate_messages.dir/all
+
+# Include target in all.
+all: ros-keyboard/CMakeFiles/keyboard_generate_messages.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+ros-keyboard/CMakeFiles/keyboard_generate_messages.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 7
+	$(MAKE) -f CMakeFiles/Makefile2 ros-keyboard/CMakeFiles/keyboard_generate_messages.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+.PHONY : ros-keyboard/CMakeFiles/keyboard_generate_messages.dir/rule
+
+# Convenience name for target.
+keyboard_generate_messages: ros-keyboard/CMakeFiles/keyboard_generate_messages.dir/rule
+
+.PHONY : keyboard_generate_messages
+
+# clean rule for target.
+ros-keyboard/CMakeFiles/keyboard_generate_messages.dir/clean:
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_generate_messages.dir/build.make ros-keyboard/CMakeFiles/keyboard_generate_messages.dir/clean
+.PHONY : ros-keyboard/CMakeFiles/keyboard_generate_messages.dir/clean
+
+# clean rule for target.
+clean: ros-keyboard/CMakeFiles/keyboard_generate_messages.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target ros-keyboard/CMakeFiles/keyboard.dir
+
+# All Build rule for target.
+ros-keyboard/CMakeFiles/keyboard.dir/all: ros-keyboard/CMakeFiles/keyboard_gencpp.dir/all
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard.dir/build.make ros-keyboard/CMakeFiles/keyboard.dir/depend
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard.dir/build.make ros-keyboard/CMakeFiles/keyboard.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=62,63,64 "Built target keyboard"
+.PHONY : ros-keyboard/CMakeFiles/keyboard.dir/all
+
+# Include target in all.
+all: ros-keyboard/CMakeFiles/keyboard.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+ros-keyboard/CMakeFiles/keyboard.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 4
+	$(MAKE) -f CMakeFiles/Makefile2 ros-keyboard/CMakeFiles/keyboard.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+.PHONY : ros-keyboard/CMakeFiles/keyboard.dir/rule
+
+# Convenience name for target.
+keyboard: ros-keyboard/CMakeFiles/keyboard.dir/rule
+
+.PHONY : keyboard
+
+# clean rule for target.
+ros-keyboard/CMakeFiles/keyboard.dir/clean:
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard.dir/build.make ros-keyboard/CMakeFiles/keyboard.dir/clean
+.PHONY : ros-keyboard/CMakeFiles/keyboard.dir/clean
+
+# clean rule for target.
+clean: ros-keyboard/CMakeFiles/keyboard.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target ros-keyboard/CMakeFiles/keyboard_generate_messages_eus.dir
+
+# All Build rule for target.
+ros-keyboard/CMakeFiles/keyboard_generate_messages_eus.dir/all: hector_slam/hector_map_tools/CMakeFiles/std_msgs_generate_messages_eus.dir/all
+ros-keyboard/CMakeFiles/keyboard_generate_messages_eus.dir/all: ros-keyboard/CMakeFiles/_keyboard_generate_messages_check_deps_Key.dir/all
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_generate_messages_eus.dir/build.make ros-keyboard/CMakeFiles/keyboard_generate_messages_eus.dir/depend
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_generate_messages_eus.dir/build.make ros-keyboard/CMakeFiles/keyboard_generate_messages_eus.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=66,67 "Built target keyboard_generate_messages_eus"
+.PHONY : ros-keyboard/CMakeFiles/keyboard_generate_messages_eus.dir/all
+
+# Build rule for subdir invocation for target.
+ros-keyboard/CMakeFiles/keyboard_generate_messages_eus.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 ros-keyboard/CMakeFiles/keyboard_generate_messages_eus.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+.PHONY : ros-keyboard/CMakeFiles/keyboard_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+keyboard_generate_messages_eus: ros-keyboard/CMakeFiles/keyboard_generate_messages_eus.dir/rule
+
+.PHONY : keyboard_generate_messages_eus
+
+# clean rule for target.
+ros-keyboard/CMakeFiles/keyboard_generate_messages_eus.dir/clean:
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_generate_messages_eus.dir/build.make ros-keyboard/CMakeFiles/keyboard_generate_messages_eus.dir/clean
+.PHONY : ros-keyboard/CMakeFiles/keyboard_generate_messages_eus.dir/clean
+
+# clean rule for target.
+clean: ros-keyboard/CMakeFiles/keyboard_generate_messages_eus.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target ros-keyboard/CMakeFiles/keyboard_geneus.dir
+
+# All Build rule for target.
+ros-keyboard/CMakeFiles/keyboard_geneus.dir/all: ros-keyboard/CMakeFiles/keyboard_generate_messages_eus.dir/all
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_geneus.dir/build.make ros-keyboard/CMakeFiles/keyboard_geneus.dir/depend
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_geneus.dir/build.make ros-keyboard/CMakeFiles/keyboard_geneus.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target keyboard_geneus"
+.PHONY : ros-keyboard/CMakeFiles/keyboard_geneus.dir/all
+
+# Build rule for subdir invocation for target.
+ros-keyboard/CMakeFiles/keyboard_geneus.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 ros-keyboard/CMakeFiles/keyboard_geneus.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+.PHONY : ros-keyboard/CMakeFiles/keyboard_geneus.dir/rule
+
+# Convenience name for target.
+keyboard_geneus: ros-keyboard/CMakeFiles/keyboard_geneus.dir/rule
+
+.PHONY : keyboard_geneus
+
+# clean rule for target.
+ros-keyboard/CMakeFiles/keyboard_geneus.dir/clean:
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_geneus.dir/build.make ros-keyboard/CMakeFiles/keyboard_geneus.dir/clean
+.PHONY : ros-keyboard/CMakeFiles/keyboard_geneus.dir/clean
+
+# clean rule for target.
+clean: ros-keyboard/CMakeFiles/keyboard_geneus.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target ros-keyboard/CMakeFiles/keyboard_genpy.dir
+
+# All Build rule for target.
+ros-keyboard/CMakeFiles/keyboard_genpy.dir/all: ros-keyboard/CMakeFiles/keyboard_generate_messages_py.dir/all
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_genpy.dir/build.make ros-keyboard/CMakeFiles/keyboard_genpy.dir/depend
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_genpy.dir/build.make ros-keyboard/CMakeFiles/keyboard_genpy.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target keyboard_genpy"
+.PHONY : ros-keyboard/CMakeFiles/keyboard_genpy.dir/all
+
+# Build rule for subdir invocation for target.
+ros-keyboard/CMakeFiles/keyboard_genpy.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 ros-keyboard/CMakeFiles/keyboard_genpy.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+.PHONY : ros-keyboard/CMakeFiles/keyboard_genpy.dir/rule
+
+# Convenience name for target.
+keyboard_genpy: ros-keyboard/CMakeFiles/keyboard_genpy.dir/rule
+
+.PHONY : keyboard_genpy
+
+# clean rule for target.
+ros-keyboard/CMakeFiles/keyboard_genpy.dir/clean:
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_genpy.dir/build.make ros-keyboard/CMakeFiles/keyboard_genpy.dir/clean
+.PHONY : ros-keyboard/CMakeFiles/keyboard_genpy.dir/clean
+
+# clean rule for target.
+clean: ros-keyboard/CMakeFiles/keyboard_genpy.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target ros-keyboard/CMakeFiles/keyboard_generate_messages_nodejs.dir
+
+# All Build rule for target.
+ros-keyboard/CMakeFiles/keyboard_generate_messages_nodejs.dir/all: hector_slam/hector_map_tools/CMakeFiles/std_msgs_generate_messages_nodejs.dir/all
+ros-keyboard/CMakeFiles/keyboard_generate_messages_nodejs.dir/all: ros-keyboard/CMakeFiles/_keyboard_generate_messages_check_deps_Key.dir/all
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_generate_messages_nodejs.dir/build.make ros-keyboard/CMakeFiles/keyboard_generate_messages_nodejs.dir/depend
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_generate_messages_nodejs.dir/build.make ros-keyboard/CMakeFiles/keyboard_generate_messages_nodejs.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=69 "Built target keyboard_generate_messages_nodejs"
+.PHONY : ros-keyboard/CMakeFiles/keyboard_generate_messages_nodejs.dir/all
+
+# Build rule for subdir invocation for target.
+ros-keyboard/CMakeFiles/keyboard_generate_messages_nodejs.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 ros-keyboard/CMakeFiles/keyboard_generate_messages_nodejs.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+.PHONY : ros-keyboard/CMakeFiles/keyboard_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+keyboard_generate_messages_nodejs: ros-keyboard/CMakeFiles/keyboard_generate_messages_nodejs.dir/rule
+
+.PHONY : keyboard_generate_messages_nodejs
+
+# clean rule for target.
+ros-keyboard/CMakeFiles/keyboard_generate_messages_nodejs.dir/clean:
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_generate_messages_nodejs.dir/build.make ros-keyboard/CMakeFiles/keyboard_generate_messages_nodejs.dir/clean
+.PHONY : ros-keyboard/CMakeFiles/keyboard_generate_messages_nodejs.dir/clean
+
+# clean rule for target.
+clean: ros-keyboard/CMakeFiles/keyboard_generate_messages_nodejs.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target ros-keyboard/CMakeFiles/_keyboard_generate_messages_check_deps_Key.dir
+
+# All Build rule for target.
+ros-keyboard/CMakeFiles/_keyboard_generate_messages_check_deps_Key.dir/all:
+	$(MAKE) -f ros-keyboard/CMakeFiles/_keyboard_generate_messages_check_deps_Key.dir/build.make ros-keyboard/CMakeFiles/_keyboard_generate_messages_check_deps_Key.dir/depend
+	$(MAKE) -f ros-keyboard/CMakeFiles/_keyboard_generate_messages_check_deps_Key.dir/build.make ros-keyboard/CMakeFiles/_keyboard_generate_messages_check_deps_Key.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target _keyboard_generate_messages_check_deps_Key"
+.PHONY : ros-keyboard/CMakeFiles/_keyboard_generate_messages_check_deps_Key.dir/all
+
+# Build rule for subdir invocation for target.
+ros-keyboard/CMakeFiles/_keyboard_generate_messages_check_deps_Key.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 ros-keyboard/CMakeFiles/_keyboard_generate_messages_check_deps_Key.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+.PHONY : ros-keyboard/CMakeFiles/_keyboard_generate_messages_check_deps_Key.dir/rule
+
+# Convenience name for target.
+_keyboard_generate_messages_check_deps_Key: ros-keyboard/CMakeFiles/_keyboard_generate_messages_check_deps_Key.dir/rule
+
+.PHONY : _keyboard_generate_messages_check_deps_Key
+
+# clean rule for target.
+ros-keyboard/CMakeFiles/_keyboard_generate_messages_check_deps_Key.dir/clean:
+	$(MAKE) -f ros-keyboard/CMakeFiles/_keyboard_generate_messages_check_deps_Key.dir/build.make ros-keyboard/CMakeFiles/_keyboard_generate_messages_check_deps_Key.dir/clean
+.PHONY : ros-keyboard/CMakeFiles/_keyboard_generate_messages_check_deps_Key.dir/clean
+
+# clean rule for target.
+clean: ros-keyboard/CMakeFiles/_keyboard_generate_messages_check_deps_Key.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target ros-keyboard/CMakeFiles/keyboard_gencpp.dir
+
+# All Build rule for target.
+ros-keyboard/CMakeFiles/keyboard_gencpp.dir/all: ros-keyboard/CMakeFiles/keyboard_generate_messages_cpp.dir/all
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_gencpp.dir/build.make ros-keyboard/CMakeFiles/keyboard_gencpp.dir/depend
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_gencpp.dir/build.make ros-keyboard/CMakeFiles/keyboard_gencpp.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target keyboard_gencpp"
+.PHONY : ros-keyboard/CMakeFiles/keyboard_gencpp.dir/all
+
+# Build rule for subdir invocation for target.
+ros-keyboard/CMakeFiles/keyboard_gencpp.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 ros-keyboard/CMakeFiles/keyboard_gencpp.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+.PHONY : ros-keyboard/CMakeFiles/keyboard_gencpp.dir/rule
+
+# Convenience name for target.
+keyboard_gencpp: ros-keyboard/CMakeFiles/keyboard_gencpp.dir/rule
+
+.PHONY : keyboard_gencpp
+
+# clean rule for target.
+ros-keyboard/CMakeFiles/keyboard_gencpp.dir/clean:
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_gencpp.dir/build.make ros-keyboard/CMakeFiles/keyboard_gencpp.dir/clean
+.PHONY : ros-keyboard/CMakeFiles/keyboard_gencpp.dir/clean
+
+# clean rule for target.
+clean: ros-keyboard/CMakeFiles/keyboard_gencpp.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target ros-keyboard/CMakeFiles/keyboard_genlisp.dir
+
+# All Build rule for target.
+ros-keyboard/CMakeFiles/keyboard_genlisp.dir/all: ros-keyboard/CMakeFiles/keyboard_generate_messages_lisp.dir/all
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_genlisp.dir/build.make ros-keyboard/CMakeFiles/keyboard_genlisp.dir/depend
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_genlisp.dir/build.make ros-keyboard/CMakeFiles/keyboard_genlisp.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target keyboard_genlisp"
+.PHONY : ros-keyboard/CMakeFiles/keyboard_genlisp.dir/all
+
+# Build rule for subdir invocation for target.
+ros-keyboard/CMakeFiles/keyboard_genlisp.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 ros-keyboard/CMakeFiles/keyboard_genlisp.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+.PHONY : ros-keyboard/CMakeFiles/keyboard_genlisp.dir/rule
+
+# Convenience name for target.
+keyboard_genlisp: ros-keyboard/CMakeFiles/keyboard_genlisp.dir/rule
+
+.PHONY : keyboard_genlisp
+
+# clean rule for target.
+ros-keyboard/CMakeFiles/keyboard_genlisp.dir/clean:
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_genlisp.dir/build.make ros-keyboard/CMakeFiles/keyboard_genlisp.dir/clean
+.PHONY : ros-keyboard/CMakeFiles/keyboard_genlisp.dir/clean
+
+# clean rule for target.
+clean: ros-keyboard/CMakeFiles/keyboard_genlisp.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target ros-keyboard/CMakeFiles/keyboard_gennodejs.dir
+
+# All Build rule for target.
+ros-keyboard/CMakeFiles/keyboard_gennodejs.dir/all: ros-keyboard/CMakeFiles/keyboard_generate_messages_nodejs.dir/all
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_gennodejs.dir/build.make ros-keyboard/CMakeFiles/keyboard_gennodejs.dir/depend
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_gennodejs.dir/build.make ros-keyboard/CMakeFiles/keyboard_gennodejs.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target keyboard_gennodejs"
+.PHONY : ros-keyboard/CMakeFiles/keyboard_gennodejs.dir/all
+
+# Build rule for subdir invocation for target.
+ros-keyboard/CMakeFiles/keyboard_gennodejs.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 ros-keyboard/CMakeFiles/keyboard_gennodejs.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+.PHONY : ros-keyboard/CMakeFiles/keyboard_gennodejs.dir/rule
+
+# Convenience name for target.
+keyboard_gennodejs: ros-keyboard/CMakeFiles/keyboard_gennodejs.dir/rule
+
+.PHONY : keyboard_gennodejs
+
+# clean rule for target.
+ros-keyboard/CMakeFiles/keyboard_gennodejs.dir/clean:
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_gennodejs.dir/build.make ros-keyboard/CMakeFiles/keyboard_gennodejs.dir/clean
+.PHONY : ros-keyboard/CMakeFiles/keyboard_gennodejs.dir/clean
+
+# clean rule for target.
+clean: ros-keyboard/CMakeFiles/keyboard_gennodejs.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Directory level rules for directory hector_slam/hector_compressed_map_transport
 
 # Convenience name for "all" pass in the directory.
@@ -2717,7 +3183,7 @@ clean: hector_slam/hector_compressed_map_transport/CMakeFiles/sensor_msgs_genera
 hector_slam/hector_compressed_map_transport/CMakeFiles/map_to_image_node.dir/all:
 	$(MAKE) -f hector_slam/hector_compressed_map_transport/CMakeFiles/map_to_image_node.dir/build.make hector_slam/hector_compressed_map_transport/CMakeFiles/map_to_image_node.dir/depend
 	$(MAKE) -f hector_slam/hector_compressed_map_transport/CMakeFiles/map_to_image_node.dir/build.make hector_slam/hector_compressed_map_transport/CMakeFiles/map_to_image_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=62,63 "Built target map_to_image_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=72,73 "Built target map_to_image_node"
 .PHONY : hector_slam/hector_compressed_map_transport/CMakeFiles/map_to_image_node.dir/all
 
 # Include target in all.
@@ -2937,7 +3403,7 @@ clean: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_cpp.dir/clean
 sweep-ros/CMakeFiles/sweep_node.dir/all:
 	$(MAKE) -f sweep-ros/CMakeFiles/sweep_node.dir/build.make sweep-ros/CMakeFiles/sweep_node.dir/depend
 	$(MAKE) -f sweep-ros/CMakeFiles/sweep_node.dir/build.make sweep-ros/CMakeFiles/sweep_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=66,67 "Built target sweep_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=76,77 "Built target sweep_node"
 .PHONY : sweep-ros/CMakeFiles/sweep_node.dir/all
 
 # Include target in all.
@@ -3560,7 +4026,7 @@ hector_slam/hector_imu_tools/preinstall:
 hector_slam/hector_imu_tools/CMakeFiles/pose_and_orientation_to_imu_node.dir/all:
 	$(MAKE) -f hector_slam/hector_imu_tools/CMakeFiles/pose_and_orientation_to_imu_node.dir/build.make hector_slam/hector_imu_tools/CMakeFiles/pose_and_orientation_to_imu_node.dir/depend
 	$(MAKE) -f hector_slam/hector_imu_tools/CMakeFiles/pose_and_orientation_to_imu_node.dir/build.make hector_slam/hector_imu_tools/CMakeFiles/pose_and_orientation_to_imu_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=64,65 "Built target pose_and_orientation_to_imu_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=74,75 "Built target pose_and_orientation_to_imu_node"
 .PHONY : hector_slam/hector_imu_tools/CMakeFiles/pose_and_orientation_to_imu_node.dir/all
 
 # Include target in all.

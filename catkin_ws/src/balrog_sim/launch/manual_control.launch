@@ -1,0 +1,7 @@
+<launch>
+    <node pkg="keyboard" type="keyboard" name="keyboard"></node>
+
+    <node pkg="balrog_sim" type="cmd_reader.py" name="cmd_reader_node"></node>
+
+    <node pkg="balrog_sim" type="manual_controller.py" name="manual_controller_node"></node>
+</launch>

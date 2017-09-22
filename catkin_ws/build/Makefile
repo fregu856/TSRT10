@@ -985,6 +985,175 @@ visualization_msgs_generate_messages_cpp/fast:
 .PHONY : visualization_msgs_generate_messages_cpp/fast
 
 #=============================================================================
+# Target rules for targets named keyboard_generate_messages_cpp
+
+# Build rule for target.
+keyboard_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 keyboard_generate_messages_cpp
+.PHONY : keyboard_generate_messages_cpp
+
+# fast build rule for target.
+keyboard_generate_messages_cpp/fast:
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_generate_messages_cpp.dir/build.make ros-keyboard/CMakeFiles/keyboard_generate_messages_cpp.dir/build
+.PHONY : keyboard_generate_messages_cpp/fast
+
+#=============================================================================
+# Target rules for targets named keyboard_generate_messages_lisp
+
+# Build rule for target.
+keyboard_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 keyboard_generate_messages_lisp
+.PHONY : keyboard_generate_messages_lisp
+
+# fast build rule for target.
+keyboard_generate_messages_lisp/fast:
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_generate_messages_lisp.dir/build.make ros-keyboard/CMakeFiles/keyboard_generate_messages_lisp.dir/build
+.PHONY : keyboard_generate_messages_lisp/fast
+
+#=============================================================================
+# Target rules for targets named keyboard_generate_messages_py
+
+# Build rule for target.
+keyboard_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 keyboard_generate_messages_py
+.PHONY : keyboard_generate_messages_py
+
+# fast build rule for target.
+keyboard_generate_messages_py/fast:
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_generate_messages_py.dir/build.make ros-keyboard/CMakeFiles/keyboard_generate_messages_py.dir/build
+.PHONY : keyboard_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named keyboard_generate_messages
+
+# Build rule for target.
+keyboard_generate_messages: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 keyboard_generate_messages
+.PHONY : keyboard_generate_messages
+
+# fast build rule for target.
+keyboard_generate_messages/fast:
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_generate_messages.dir/build.make ros-keyboard/CMakeFiles/keyboard_generate_messages.dir/build
+.PHONY : keyboard_generate_messages/fast
+
+#=============================================================================
+# Target rules for targets named keyboard
+
+# Build rule for target.
+keyboard: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 keyboard
+.PHONY : keyboard
+
+# fast build rule for target.
+keyboard/fast:
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard.dir/build.make ros-keyboard/CMakeFiles/keyboard.dir/build
+.PHONY : keyboard/fast
+
+#=============================================================================
+# Target rules for targets named keyboard_generate_messages_eus
+
+# Build rule for target.
+keyboard_generate_messages_eus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 keyboard_generate_messages_eus
+.PHONY : keyboard_generate_messages_eus
+
+# fast build rule for target.
+keyboard_generate_messages_eus/fast:
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_generate_messages_eus.dir/build.make ros-keyboard/CMakeFiles/keyboard_generate_messages_eus.dir/build
+.PHONY : keyboard_generate_messages_eus/fast
+
+#=============================================================================
+# Target rules for targets named keyboard_geneus
+
+# Build rule for target.
+keyboard_geneus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 keyboard_geneus
+.PHONY : keyboard_geneus
+
+# fast build rule for target.
+keyboard_geneus/fast:
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_geneus.dir/build.make ros-keyboard/CMakeFiles/keyboard_geneus.dir/build
+.PHONY : keyboard_geneus/fast
+
+#=============================================================================
+# Target rules for targets named keyboard_genpy
+
+# Build rule for target.
+keyboard_genpy: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 keyboard_genpy
+.PHONY : keyboard_genpy
+
+# fast build rule for target.
+keyboard_genpy/fast:
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_genpy.dir/build.make ros-keyboard/CMakeFiles/keyboard_genpy.dir/build
+.PHONY : keyboard_genpy/fast
+
+#=============================================================================
+# Target rules for targets named keyboard_generate_messages_nodejs
+
+# Build rule for target.
+keyboard_generate_messages_nodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 keyboard_generate_messages_nodejs
+.PHONY : keyboard_generate_messages_nodejs
+
+# fast build rule for target.
+keyboard_generate_messages_nodejs/fast:
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_generate_messages_nodejs.dir/build.make ros-keyboard/CMakeFiles/keyboard_generate_messages_nodejs.dir/build
+.PHONY : keyboard_generate_messages_nodejs/fast
+
+#=============================================================================
+# Target rules for targets named _keyboard_generate_messages_check_deps_Key
+
+# Build rule for target.
+_keyboard_generate_messages_check_deps_Key: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _keyboard_generate_messages_check_deps_Key
+.PHONY : _keyboard_generate_messages_check_deps_Key
+
+# fast build rule for target.
+_keyboard_generate_messages_check_deps_Key/fast:
+	$(MAKE) -f ros-keyboard/CMakeFiles/_keyboard_generate_messages_check_deps_Key.dir/build.make ros-keyboard/CMakeFiles/_keyboard_generate_messages_check_deps_Key.dir/build
+.PHONY : _keyboard_generate_messages_check_deps_Key/fast
+
+#=============================================================================
+# Target rules for targets named keyboard_gencpp
+
+# Build rule for target.
+keyboard_gencpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 keyboard_gencpp
+.PHONY : keyboard_gencpp
+
+# fast build rule for target.
+keyboard_gencpp/fast:
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_gencpp.dir/build.make ros-keyboard/CMakeFiles/keyboard_gencpp.dir/build
+.PHONY : keyboard_gencpp/fast
+
+#=============================================================================
+# Target rules for targets named keyboard_genlisp
+
+# Build rule for target.
+keyboard_genlisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 keyboard_genlisp
+.PHONY : keyboard_genlisp
+
+# fast build rule for target.
+keyboard_genlisp/fast:
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_genlisp.dir/build.make ros-keyboard/CMakeFiles/keyboard_genlisp.dir/build
+.PHONY : keyboard_genlisp/fast
+
+#=============================================================================
+# Target rules for targets named keyboard_gennodejs
+
+# Build rule for target.
+keyboard_gennodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 keyboard_gennodejs
+.PHONY : keyboard_gennodejs
+
+# fast build rule for target.
+keyboard_gennodejs/fast:
+	$(MAKE) -f ros-keyboard/CMakeFiles/keyboard_gennodejs.dir/build.make ros-keyboard/CMakeFiles/keyboard_gennodejs.dir/build
+.PHONY : keyboard_gennodejs/fast
+
+#=============================================================================
 # Target rules for targets named sensor_msgs_generate_messages_eus
 
 # Build rule for target.
@@ -1645,6 +1814,19 @@ help:
 	@echo "... visualization_msgs_generate_messages_lisp"
 	@echo "... visualization_msgs_generate_messages_py"
 	@echo "... visualization_msgs_generate_messages_cpp"
+	@echo "... keyboard_generate_messages_cpp"
+	@echo "... keyboard_generate_messages_lisp"
+	@echo "... keyboard_generate_messages_py"
+	@echo "... keyboard_generate_messages"
+	@echo "... keyboard"
+	@echo "... keyboard_generate_messages_eus"
+	@echo "... keyboard_geneus"
+	@echo "... keyboard_genpy"
+	@echo "... keyboard_generate_messages_nodejs"
+	@echo "... _keyboard_generate_messages_check_deps_Key"
+	@echo "... keyboard_gencpp"
+	@echo "... keyboard_genlisp"
+	@echo "... keyboard_gennodejs"
 	@echo "... sensor_msgs_generate_messages_eus"
 	@echo "... sensor_msgs_generate_messages_py"
 	@echo "... sensor_msgs_generate_messages_nodejs"

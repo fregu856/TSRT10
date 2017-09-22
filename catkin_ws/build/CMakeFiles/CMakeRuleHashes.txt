@@ -6,6 +6,7 @@ c2536113d6c14091504b4c383302d4f0 /home/fregu856/TSRT10/catkin_ws/devel/include/h
 ce232f1d9405ce95c95b40bbd8bc27c3 /home/fregu856/TSRT10/catkin_ws/devel/include/hector_nav_msgs/GetRecoveryInfo.h
 80dd906bf8f2776542e6fe30a1a2558c /home/fregu856/TSRT10/catkin_ws/devel/include/hector_nav_msgs/GetRobotTrajectory.h
 d0e99cd4cca7dfc3a84178b5f10df657 /home/fregu856/TSRT10/catkin_ws/devel/include/hector_nav_msgs/GetSearchPosition.h
+e51c4e6e74429138bb76d6904e28e5d3 /home/fregu856/TSRT10/catkin_ws/devel/include/keyboard/Key.h
 46ce87026cfc48f303b15a76b55e2e39 /home/fregu856/TSRT10/catkin_ws/devel/lib/python2.7/dist-packages/hector_mapping/msg/_HectorDebugInfo.py
 a18e67ae3df73bdf94f4befe5dffb6c0 /home/fregu856/TSRT10/catkin_ws/devel/lib/python2.7/dist-packages/hector_mapping/msg/_HectorIterData.py
 2ec26aac04933f9a3179ee466a57bbf7 /home/fregu856/TSRT10/catkin_ws/devel/lib/python2.7/dist-packages/hector_mapping/msg/__init__.py
@@ -15,6 +16,8 @@ e7759a14e73f8f332e91f0842a4f4292 /home/fregu856/TSRT10/catkin_ws/devel/lib/pytho
 b4317455be4d8d4ed4befb63f32017df /home/fregu856/TSRT10/catkin_ws/devel/lib/python2.7/dist-packages/hector_nav_msgs/srv/_GetRobotTrajectory.py
 738abe4c4991ef838e04b63686e79bdb /home/fregu856/TSRT10/catkin_ws/devel/lib/python2.7/dist-packages/hector_nav_msgs/srv/_GetSearchPosition.py
 824c1fdd49a7b07c1bb57f5f6d552acc /home/fregu856/TSRT10/catkin_ws/devel/lib/python2.7/dist-packages/hector_nav_msgs/srv/__init__.py
+4c8cf5324a8a978ec419ee795dc78c33 /home/fregu856/TSRT10/catkin_ws/devel/lib/python2.7/dist-packages/keyboard/msg/_Key.py
+af11390afafad56468ae2f79a273d996 /home/fregu856/TSRT10/catkin_ws/devel/lib/python2.7/dist-packages/keyboard/msg/__init__.py
 18f37f087b5141085ab83c3e6998de94 /home/fregu856/TSRT10/catkin_ws/devel/share/common-lisp/ros/hector_mapping/msg/HectorDebugInfo.lisp
 a748b4ea44d030cab6e01a8ce3202730 /home/fregu856/TSRT10/catkin_ws/devel/share/common-lisp/ros/hector_mapping/msg/HectorIterData.lisp
 4eb2711b2fcd59964f1709d7854ded4c /home/fregu856/TSRT10/catkin_ws/devel/share/common-lisp/ros/hector_nav_msgs/srv/GetDistanceToObstacle.lisp
@@ -22,6 +25,7 @@ f3bb890e330eb559a4b3a908dc8c261d /home/fregu856/TSRT10/catkin_ws/devel/share/com
 3b0045b7a147476810f3654bd8d82bf8 /home/fregu856/TSRT10/catkin_ws/devel/share/common-lisp/ros/hector_nav_msgs/srv/GetRecoveryInfo.lisp
 3f7c9b5e0eb4bbd5533605358afaf0c4 /home/fregu856/TSRT10/catkin_ws/devel/share/common-lisp/ros/hector_nav_msgs/srv/GetRobotTrajectory.lisp
 e5e1aaba236dfc94f2e3b849a3f5674c /home/fregu856/TSRT10/catkin_ws/devel/share/common-lisp/ros/hector_nav_msgs/srv/GetSearchPosition.lisp
+3949c249ebba6eb449d36ccbc29ef3ae /home/fregu856/TSRT10/catkin_ws/devel/share/common-lisp/ros/keyboard/msg/Key.lisp
 a6e2b335bcdc8e14f9d25c36a6d21fe2 /home/fregu856/TSRT10/catkin_ws/devel/share/gennodejs/ros/hector_mapping/msg/HectorDebugInfo.js
 250343d32a8c1bc299c5f33ae8eb3f58 /home/fregu856/TSRT10/catkin_ws/devel/share/gennodejs/ros/hector_mapping/msg/HectorIterData.js
 f4a78223d903f55d31ead33b25ec1d14 /home/fregu856/TSRT10/catkin_ws/devel/share/gennodejs/ros/hector_nav_msgs/srv/GetDistanceToObstacle.js
@@ -29,6 +33,7 @@ f4a78223d903f55d31ead33b25ec1d14 /home/fregu856/TSRT10/catkin_ws/devel/share/gen
 c5283302798157439166e1a40035f024 /home/fregu856/TSRT10/catkin_ws/devel/share/gennodejs/ros/hector_nav_msgs/srv/GetRecoveryInfo.js
 ad528927c2eb3d4e730e04ab9069f4c0 /home/fregu856/TSRT10/catkin_ws/devel/share/gennodejs/ros/hector_nav_msgs/srv/GetRobotTrajectory.js
 8cc7b98515d658bd672412d4c764ca23 /home/fregu856/TSRT10/catkin_ws/devel/share/gennodejs/ros/hector_nav_msgs/srv/GetSearchPosition.js
+67473a04dd01def8ca267a4d5d31c478 /home/fregu856/TSRT10/catkin_ws/devel/share/gennodejs/ros/keyboard/msg/Key.js
 b30ed715b1e695cf18f263b23ad3345e /home/fregu856/TSRT10/catkin_ws/devel/share/roseus/ros/hector_mapping/manifest.l
 a01f503cd2afd5c7e5db2635e8f0fda5 /home/fregu856/TSRT10/catkin_ws/devel/share/roseus/ros/hector_mapping/msg/HectorDebugInfo.l
 fa63564071985e4af8b964cbbd4b60c9 /home/fregu856/TSRT10/catkin_ws/devel/share/roseus/ros/hector_mapping/msg/HectorIterData.l
@@ -38,6 +43,8 @@ ee6739af076b2018cfeefcd28df61164 /home/fregu856/TSRT10/catkin_ws/devel/share/ros
 5c4c1371f9cd90cf91e7934242a6750b /home/fregu856/TSRT10/catkin_ws/devel/share/roseus/ros/hector_nav_msgs/srv/GetRecoveryInfo.l
 5f45dc0745740b750e6688c32145ffaf /home/fregu856/TSRT10/catkin_ws/devel/share/roseus/ros/hector_nav_msgs/srv/GetRobotTrajectory.l
 e0fae058c59e2c12486170079fb56e8f /home/fregu856/TSRT10/catkin_ws/devel/share/roseus/ros/hector_nav_msgs/srv/GetSearchPosition.l
+1423edc62344b9de4068697dd29bab5b /home/fregu856/TSRT10/catkin_ws/devel/share/roseus/ros/keyboard/manifest.l
+5b754d652f99954823e1bde59715dba8 /home/fregu856/TSRT10/catkin_ws/devel/share/roseus/ros/keyboard/msg/Key.l
 7fa9133cf984682a65f53d80cf9d28fa CMakeFiles/clean_test_results
 f97414b1e0a702ae160b1273c3c059fc hector_slam/hector_mapping/CMakeFiles/_hector_mapping_generate_messages_check_deps_HectorDebugInfo
 a7f91e561d526ea2cac96b2f15c44205 hector_slam/hector_mapping/CMakeFiles/_hector_mapping_generate_messages_check_deps_HectorIterData
@@ -56,3 +63,9 @@ fb0d085c89fc066200b425f93e4e7f35 hector_slam/hector_nav_msgs/CMakeFiles/_hector_
 1a1ba953ba45328534cabd55652a3eac hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_generate_messages_lisp
 1a1ba953ba45328534cabd55652a3eac hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_generate_messages_nodejs
 1a1ba953ba45328534cabd55652a3eac hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_generate_messages_py
+ede1a33706fb8020ecd8008eb0d84732 ros-keyboard/CMakeFiles/_keyboard_generate_messages_check_deps_Key
+f9c46967aecaffc210f9d6edeee502c9 ros-keyboard/CMakeFiles/keyboard_generate_messages_cpp
+f9c46967aecaffc210f9d6edeee502c9 ros-keyboard/CMakeFiles/keyboard_generate_messages_eus
+f9c46967aecaffc210f9d6edeee502c9 ros-keyboard/CMakeFiles/keyboard_generate_messages_lisp
+f9c46967aecaffc210f9d6edeee502c9 ros-keyboard/CMakeFiles/keyboard_generate_messages_nodejs
+f9c46967aecaffc210f9d6edeee502c9 ros-keyboard/CMakeFiles/keyboard_generate_messages_py

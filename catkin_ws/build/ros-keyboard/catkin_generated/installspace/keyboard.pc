@@ -1,0 +1,8 @@
+prefix=/home/fregu856/TSRT10/catkin_ws/install
+
+Name: keyboard
+Description: Description of keyboard
+Version: 0.1.1
+Cflags: -I/home/fregu856/TSRT10/catkin_ws/install/include
+Libs: -L/home/fregu856/TSRT10/catkin_ws/install/lib 
+Requires: roscpp std_msgs message_runtime
