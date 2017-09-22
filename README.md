@@ -385,7 +385,7 @@ export ROS_HOSTNAME=localhost
 - - [terminal 3] $ rosrun balrog_sim cmd_reader.py
 - - [terminal 4] $ rosrun balrog_sim manual_controller.py
 - - If you now click in the small window that appeared, you can use WASD to control the robot
-- Equivalent but more convenient way to run the above four commands:
+- Equivalent but more convenient way to run the four commands above:
 - - [terminal 1] $ roslaunch balrog_sim test_area.launch
 - - [terminal 2] $ roslaunch balrog_sim manual_control.launch (a small window should appear)
 - - If you now click in the small window that appeared, you can use WASD to control the robot
