@@ -1,7 +1,10 @@
 <launch>
+    <!-- run the ros-keyboard node: -->
     <node pkg="keyboard" type="keyboard" name="keyboard"></node>
 
+    <!-- run cmd_reader.py in balrog_sim/python_scripts: -->
     <node pkg="balrog_sim" type="cmd_reader.py" name="cmd_reader_node"></node>
 
+    <!-- run manual_controller.py in balrog_sim/python_scripts: -->
     <node pkg="balrog_sim" type="manual_controller.py" name="manual_controller_node"></node>
 </launch>

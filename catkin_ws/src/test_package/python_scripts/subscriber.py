@@ -9,7 +9,7 @@ def subscriber():
 
     # subscribe to the topic /test_topic. That is, read every message (of type
     # String) that is published on /test_topic. We will do this by calling the
-    # function callback_function everytime a new message is published:
+    # function callback_function every time a new message is published:
     rospy.Subscriber("/test_topic", String, callback_function)
 
     # keep python from exiting until this ROS node is stopped:

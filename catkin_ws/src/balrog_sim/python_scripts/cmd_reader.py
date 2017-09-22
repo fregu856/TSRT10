@@ -1,56 +1,76 @@
 #!/usr/bin/env python
 
+# this code reads from the topics /keyboard/keydown and /keyboard/keyup. On
+# these topics, the ros-keyboard node publishes info about all keys that are
+# either pressed (keydown) or released (keyup) when the small window that
+# appears when you run "rosrun keyboard keyboard" is in focus.
+
+# this code publishes steering commands ("Forward", "Backward", "No_throttle",
+# "Right", "Left", "No_steering") on the topic /steering_cmds.
+
 import rospy
 from std_msgs.msg import String
 from keyboard.msg import Key
 
 class Cmd_reader:
     def __init__(self):
+        # initialize this code as a ROS node named cmd_reader_node:
         rospy.init_node("cmd_reader_node", anonymous=True)
 
+        # create a publisher that publishes messages of type String on the
+        # topic /steering_cmds:
         self.pub = rospy.Publisher("/steering_cmds", String, queue_size=10)
 
+        # subscribe to the topic /keyboard/keydown (all published messages on
+        # this topic are of type Key), i.e., call the function keydown_callback
+        # every time a new message is published:
         rospy.Subscriber("/keyboard/keydown", Key, self.keydown_callback)
 
+        # subscribe to the topic /keyboard/keyup (all published messages on
+        # this topic are of type Key), i.e., call the function keyup_callback
+        # every time a new message is published:
         rospy.Subscriber("/keyboard/keyup", Key, self.keyup_callback)
 
+        # keep python from exiting until this ROS node is stopped:
         rospy.spin()
 
+    # define the callback function for the /keyboard/keydown subscriber:
     def keydown_callback(self, msg_obj):
+        # get the code of the key that was pressed down:
         key_code = msg_obj.code
 
-        if key_code == 119: # (w)
+        if key_code == 119: # (119 = w)
             msg = "Forward"
             self.pub.publish(msg)
-            #print "Forward"
 
-        elif key_code == 100: # (d)
+        elif key_code == 100: # (100 = d)
             msg = "Right"
             self.pub.publish(msg)
-            #print "Right"
 
-        elif key_code == 115: # (s)
+        elif key_code == 115: # (115 = s)
             msg = "Backward"
             self.pub.publish(msg)
-            #print "Backward"
 
-        elif key_code == 97: # (a)
+        elif key_code == 97: # (97 = a)
             msg = "Left"
             self.pub.publish(msg)
-            #print "Left"
 
+    # define the callback function for the /keyboard/keyup subscriber:
     def keyup_callback(self, msg_obj):
+        # get the code of the key that was released:
         key_code = msg_obj.code
 
-        if key_code in [119, 115]: # (w, s)
+        if key_code in [119, 115]: # (119 = w, 115 = s)
             msg = "No_throttle"
             self.pub.publish(msg)
             #print "No_throttle"
 
-        elif key_code in [100, 97]: # (d, a)
+        elif key_code in [100, 97]: # (100 = d, 97 = a)
             msg = "No_steering"
             self.pub.publish(msg)
             #print "No_steering"
 
 if __name__ == "__main__":
+    # create an instance of the Cmd_reader class (this will run
+    # its __init__ function):
     cmd_reader = Cmd_reader()
