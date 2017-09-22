@@ -291,14 +291,12 @@ if __name__ == "__main__":
 - $ cd ~/TSRT10/catkin_ws
 - $ catkin_make
 
-- Create a directory called "launch" in ~/TSRT10/catkin_ws/src/test_package
-- Create a directory called "rviz" in ~/TSRT10/catkin_ws/src/test_package
-- Write test_Hector.launch (based on the above links) and place it in the launch directory
-- Write test_Hector.rviz (based on mapping_demo.rviz linked above) and place it in the rviz directory
+- Place the file hector.launch (which is written based on the above links) and place it in ~/TSRT10/catkin_ws/src/balrog/launch
+- Place the file hector.rviz (which is based on mapping_demo.rviz linked above) and place it in ~/TSRT10/catkin_ws/src/balrog/rviz
 - $ cd ~/TSRT10/catkin_ws
 - $ catkin_make
-- [terminal 1] $ roslaunch sweep_ros sweep2scan.launch
-- [terminal 2] $ roslaunch test_package test_Hector.launch
+- [terminal 1] $ roslaunch balrog lidar.launch
+- [terminal 2] $ roslaunch balrog hector.launch
 
 
 
