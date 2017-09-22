@@ -1,7 +1,9 @@
 # TSRT10
 
 ******
-Basic setup (this guide assumes that you're running Ubuntu (or possibly some different kind of Linux distribution)):
+
+# Basic setup: 
+(this guide assumes that you're running Ubuntu (or possibly some different kind of Linux distribution))
 
 - Install ROS kinetic (lunar is newer but not all packages seem to be available for lunar) (http://wiki.ros.org/kinetic/Installation/Ubuntu):
 - - $ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
@@ -147,7 +149,8 @@ if __name__ == "__main__":
 
 
 ****
-Test communication between two computers (this assumes that one has followed the above steps on both computers):
+# Test communication between two computers: 
+(this assumes that one has followed the above steps on both computers)
 
 - Connect the computers to the same WiFi network (eduroam doesn't seems to work)
 - On computer1 (Master):
@@ -174,7 +177,9 @@ Test communication between two computers (this assumes that one has followed the
 
 
 ****
-To reset the ROS IP addresses (so that you can always run ROS code locally):
+# To reset the ROS IP addresses: 
+(so that you can always run ROS code locally)
+
 - $ sudo nano ~/.bashrc
 - Modify the ROS_MASTER_URI and ROS_HOSTNAME lines so that they say:
 - - export ROS_MASTER_URI=http://localhost:11311
@@ -189,7 +194,10 @@ To reset the ROS IP addresses (so that you can always run ROS code locally):
 
 
 ******
-Setup of LIDAR (scanse sweep, https://github.com/scanse/sweep-ros):
+# Setup of LIDAR: 
+(scanse sweep, https://github.com/scanse/sweep-ros):
+
+
 - Install the libsweep library from sweep-sdk (https://github.com/scanse/sweep-sdk): 
 - - $ cd ~/TSRT10
 - - $ git clone https://github.com/scanse/sweep-sdk
@@ -234,7 +242,9 @@ Setup of LIDAR (scanse sweep, https://github.com/scanse/sweep-ros):
 
 
 ****
-Run Hector SLAM (only using the LiDAR scans, no odometry):
+# Run Hector SLAM 
+(only using the LiDAR scans, no odometry)
+
 - Useful links: http://wiki.ros.org/hector_slam/Tutorials/SettingUpForYourRobot, https://github.com/tu-darmstadt-ros-pkg/hector_slam/blob/catkin/hector_slam_launch/rviz_cfg/mapping_demo.rviz, https://github.com/tu-darmstadt-ros-pkg/hector_slam/blob/catkin/hector_slam_launch/launch/mapping_box.launch
 - $ cd ~/TSRT10/catkin_ws/src
 - $ git clone https://github.com/tu-darmstadt-ros-pkg/hector_slam.git
@@ -260,7 +270,7 @@ Run Hector SLAM (only using the LiDAR scans, no odometry):
 
 
 *****
-Balrog simulator:
+# Balrog simulator:
 
 - $ sudo apt-get install ros-kinetic-turtlebot
 - $ sudo apt-get install ros-kinetic-turtlebot-apps
