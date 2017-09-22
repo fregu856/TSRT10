@@ -235,7 +235,7 @@ if __name__ == "__main__":
 - You should also be able to launch view_sweep_laser_scan.launch:
 - - $ roslaunch sweep_ros view_sweep_laser_scan.launch (this should launch rviz where you can see a visualization of the scans)
 
-- Create 
+
 
 
 
@@ -259,11 +259,11 @@ if __name__ == "__main__":
 - - $ cd ~/TSRT10/catkin_ws
 - - $ catkin_make
 
-- - Create a launch directory in ~/TSRT10/catkin_ws/src/balrog
-- - Place the file lidar.launch in ~/TSRT10/catkin_ws/src/balrog/launch
-- - Place the file lidar_and_viz.launch in ~/TSRT10/catkin_ws/src/balrog/launch
-- - Create an rviz directory in ~/TSRT10/catkin_ws/src/balrog
-- - Place the file lidar.rviz in ~/TSRT10/catkin_ws/src/balrog/rviz
+- Create a launch directory in ~/TSRT10/catkin_ws/src/balrog
+- Place the file lidar.launch in ~/TSRT10/catkin_ws/src/balrog/launch
+- Place the file lidar_and_viz.launch in ~/TSRT10/catkin_ws/src/balrog/launch
+- Create an rviz directory in ~/TSRT10/catkin_ws/src/balrog
+- Place the file lidar.rviz in ~/TSRT10/catkin_ws/src/balrog/rviz
 
 - To run the LIDAR without any visualization:
 - - $ roslaunch balrog lidar.launch
