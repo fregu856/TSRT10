@@ -1192,6 +1192,12 @@ asl_turtlebot_BINARY_DIR:STATIC=/home/fregu856/TSRT10/catkin_ws/build/asl_turtle
 asl_turtlebot_SOURCE_DIR:STATIC=/home/fregu856/TSRT10/catkin_ws/src/asl_turtlebot
 
 //Value Computed by CMake
+balrog_BINARY_DIR:STATIC=/home/fregu856/TSRT10/catkin_ws/build/balrog
+
+//Value Computed by CMake
+balrog_SOURCE_DIR:STATIC=/home/fregu856/TSRT10/catkin_ws/src/balrog
+
+//Value Computed by CMake
 balrog_sim_BINARY_DIR:STATIC=/home/fregu856/TSRT10/catkin_ws/build/balrog_sim
 
 //Value Computed by CMake
@@ -1612,7 +1618,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=19
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=20
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
