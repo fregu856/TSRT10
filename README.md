@@ -370,3 +370,22 @@ export ROS_HOSTNAME=localhost
 - - $ roslaunch balrog_sim test_area.launch
 - - If everything works as expected, Gazebo will launch and you will see this:
 ![alt text](https://lh3.googleusercontent.com/ouaKpsPjT0b60fiYlbAbSutpYMIS16xXIKH_00L-WMpCKFYQFMVC9m2ygWSxQ_JNuJPOocEQBfmyCeNKPI7LbxcvY2w2mwmOQluUBOgyZHGxGNGi5bYW0F__B8yiq8PYW8s2exJyf4-zf-Ps-bbLvGlgqUJIWHTiD5PgmuhXR4t_FBpjN8o5heY6EQKUnVNKXTBKCnRNUhJxmFK6MqtxVLbqBNLjft340DvSHL1AzrG9ou4j8fP1vV58jCJhbDw7swVhHbKP1LFJNgF1tCOQWb03PVuyexQmg_9Jh_m2T14ZnSbNDRj-ebI_K2OfRPYthwb-Lyw4gtCk8Ppk2IxwppFyzdQLYOGHD1JWJLsNwqStT_gFIYoklqYn7c465bQwEJidoHnMKH9ojsGxG6ohoMYedSz9RzJ1tvWiZM-HTXeC9PRXef9ah2kdXBk4-r-Pcl0nJby8J-n1qIpYnyIJDkBMltt1k8ANwWLR6LX8YoRgfWB5_kQkoXXNFtOMnrUvHTKsGf26kpC0_8spnth8i3deWhcQdqVuF2NvoWobk1Rqa9vvAyOTjl4a1A0Pp5y9-2dbXRaiDk0NWVO9eOjs-fkrEENmvZfkN4xNkKbAopmUh9pj4Yqk7IHNi_pkbeaX1sxhhduoxSFeoZL1Ci2zssU-GuUPDfJxK1I=w700-h393-no)
+
+- Manually control the robot using WASD:
+- - $ cd ~/TSRT10/catkin_ws/src
+- - $ git clone https://github.com/lrse/ros-keyboard.git
+- - $ cd ~/TSRT10/catkin_ws/
+- - $ catkin_make
+- - Place the file cmd_reader.py in ~/TSRT10/catkin_ws/src/balrog_sim/python_scripts and make it executable
+- - Place the file manual_controller.py in ~/TSRT10/catkin_ws/src/balrog_sim/python_scripts and make it executable
+- - $ cd ~/TSRT10/catkin_ws/
+- - $ catkin_make
+- - [terminal 1] $ roslaunch balrog_sim test_area.launch
+- - [terminal 2] $ rosrun keyboard keyboard (a small window should appear)
+- - [terminal 3] $ rosrun balrog_sim cmd_reader.py
+- - [terminal 4] $ rosrun balrog_sim manual_controller.py
+- - If you now click in the small window that appeared, you can use WASD to control the robot
+- Equivalent but more convenient way to run the above four commands:
+- - [terminal 1] $ roslaunch balrog_sim test_area.launch
+- - [terminal 2] $ roslaunch balrog_sim manual_control.launch (a small window should appear)
+- - If you now click in the small window that appeared, you can use WASD to control the robot
