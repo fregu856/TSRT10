@@ -404,3 +404,5 @@ export ROS_HOSTNAME=localhost
 - Place the file gmapping.rviz in ~/TSRT10/catkin_ws/src/balrog_sim/rviz
 - Place the file gmapping.launch in ~/TSRT10/catkin_ws/src/balrog_sim/launch
 - Place the file asl_turtlebot_custom_lidar.urdf.xacro in ~/TSRT10/catkin_ws/src/balrog_sim/robots
+
+- $ roslaunch balrog_sim gmapping.launch 
