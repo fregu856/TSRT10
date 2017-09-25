@@ -208,6 +208,7 @@ if __name__ == "__main__":
 - - $ cmake --build .
 - - $ sudo cmake --build . --target install
 - - $ sudo ldconfig
+- - $ sudo apt-get install ros-kinetic-pcl-conversions
  
 - Clone the sweep-ros repo:
 - - $ cd ~/TSRT10/catkin_ws/src
@@ -217,7 +218,7 @@ if __name__ == "__main__":
 
 - Make sure that your username is in the dialout group in /etc/group (otherwise you won't have permission to open /dev/ttyUSB0):
 - - $ sudo nano /etc/group
-- - In my case, I hade to change the line "dialout:x:20:" to "dialout:x:20:fregu856"
+- - In my case (my username is 'fregu856'), I hade to change the line "dialout:x:20:" to "dialout:x:20:fregu856"
 - - Restart the computer
 
 - Now, you should be able to launch sweep.launch:
@@ -389,3 +390,19 @@ export ROS_HOSTNAME=localhost
 - - [terminal 1] $ roslaunch balrog_sim test_area.launch
 - - [terminal 2] $ roslaunch balrog_sim manual_control.launch (a small window should appear)
 - - If you now click in the small window that appeared, you can use WASD to control the robot
+- Or, just do (after having placed test_area_manual_control.launch in the launch directory):
+- - $ roslaunch balrog_sim test_area_manual_control.launch
+
+### SLAM:
+
+- Install slam_gmapping:
+- - $ cd ~/TSRT10/catkin_ws/src
+- - $ git clone https://github.com/ros-perception/slam_gmapping.git
+- - $ cd ~/TSRT10/catkin_ws/
+- - $ catkin_make
+
+- Place the file gmapping.rviz in ~/TSRT10/catkin_ws/src/balrog_sim/rviz
+- Place the file gmapping.launch in ~/TSRT10/catkin_ws/src/balrog_sim/launch
+- Place the file asl_turtlebot_custom_lidar.urdf.xacro in ~/TSRT10/catkin_ws/src/balrog_sim/robots
+
+- $ roslaunch balrog_sim gmapping.launch 
