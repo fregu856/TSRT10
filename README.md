@@ -407,3 +407,7 @@ export ROS_HOSTNAME=localhost
 - Replace balrog_sim/world/test_area.world with the version found in the repo.
 
 - $ roslaunch balrog_sim gmapping.launch 
+
+- Or, if you'd rather use Hector:
+- - Place hector.launch (from balrog_sim/launch in this repo) in balrog_sim/launch
+- - $ roslaunch balrog_sim hector.launch 
