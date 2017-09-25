@@ -1,6 +1,6 @@
 <launch>
 
-    <arg name="world_file"  default="$(find asl_turtlebot)/world/AA274_Project.world"/>
+    <arg name="world_file"  default="$(find balrog_sim)/world/test_area.world"/>
     <param name="use_sim_time" value="true" />
 
     <arg name="base"      value="kobuki"/> <!-- create, roomba -->
