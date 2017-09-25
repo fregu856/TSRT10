@@ -1,0 +1,5 @@
+<launch>
+    <include file="$(find balrog_sim)/launch/test_area.launch"></include>
+
+    <include file="$(find balrog_sim)/launch/manual_control.launch"></include>
+</launch>
