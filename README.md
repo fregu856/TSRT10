@@ -218,7 +218,7 @@ if __name__ == "__main__":
 
 - Make sure that your username is in the dialout group in /etc/group (otherwise you won't have permission to open /dev/ttyUSB0):
 - - $ sudo nano /etc/group
-- - In my case, I hade to change the line "dialout:x:20:" to "dialout:x:20:fregu856"
+- - In my case (my username is 'fregu856'), I hade to change the line "dialout:x:20:" to "dialout:x:20:fregu856"
 - - Restart the computer
 
 - Now, you should be able to launch sweep.launch:
