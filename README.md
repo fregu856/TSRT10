@@ -208,7 +208,7 @@ if __name__ == "__main__":
 - - $ cmake --build .
 - - $ sudo cmake --build . --target install
 - - $ sudo ldconfig
-- - $ sudo apt-get install ros-kinetic-pcl-conversions
+- - $ sudo apt-get install ros-kinetic-pcl-conversions hhh
  
 - Clone the sweep-ros repo:
 - - $ cd ~/TSRT10/catkin_ws/src
