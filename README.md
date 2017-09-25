@@ -392,3 +392,7 @@ export ROS_HOSTNAME=localhost
 - - If you now click in the small window that appeared, you can use WASD to control the robot
 - Or, just do (after having placed test_area_manual_control.launch in the launch directory):
 - - $ roslaunch balrog_sim test_area_manual_control.launch
+
+### SLAM:
+
+- Test
