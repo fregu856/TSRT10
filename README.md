@@ -411,3 +411,9 @@ export ROS_HOSTNAME=localhost
 - Or, if you'd rather use Hector:
 - - Place hector.launch (from balrog_sim/launch in this repo) in balrog_sim/launch
 - - $ roslaunch balrog_sim hector.launch 
+
+
+
+### Odom:
+
+- $ rosrun balrog read_encoders.py
