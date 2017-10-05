@@ -417,3 +417,5 @@ export ROS_HOSTNAME=localhost
 # Odom:
 
 - $ rosrun balrog read_encoders.py
+- $ rosrun balrog slam_odom.py 
+
