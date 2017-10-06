@@ -419,3 +419,12 @@ export ROS_HOSTNAME=localhost
 - $ rosrun balrog read_encoders.py
 - $ rosrun balrog slam_odom.py 
 
+
+# GMapping on Balrog:
+
+- $ roslaunch balrog lidar.launch
+- $ rosrun balrog read_encoders.py
+- $ rosrun balrog slam_odom.py 
+- $ roslaunch balrog gmapping.launch 
+
+
