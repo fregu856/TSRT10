@@ -43,6 +43,9 @@
         <param name="publish_frequency" type="double" value="30.0" />
     </node>
 
+    <node pkg="tf" type="static_transform_publisher" name="footprint_static_tf" args="0 0 0 0 0 0 1 base_footprint base_link 100"/>
+    <node pkg="tf" type="static_transform_publisher" name="link_static_tf" args="0 0 0 0 0 0 1 base_link laser_frame 100"/>
+
     <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
         <param name="base_frame" value="$(arg base_frame)"/>
         <param name="odom_frame" value="$(arg odom_frame)"/>
@@ -80,9 +83,6 @@
         <param name="lasamplestep" value="0.005"/>
         <remap from="scan" to="$(arg scan_topic)"/>
     </node>
-
-    <node pkg="tf" type="static_transform_publisher" name="camera_static_tf" args="0.0 0.0 .25 0.5 -0.5 0.5 -0.5 /mobile_base /camera_depth_optical_frame 100"/>
-    <node pkg="tf" type="static_transform_publisher" name="footprint_static_tf" args="0.0 0.0 0.0 0.0 0.0 0.0 /base_footprint /mobile_base 100"/>
 
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find balrog_sim)/rviz/gmapping.rviz"/>
 

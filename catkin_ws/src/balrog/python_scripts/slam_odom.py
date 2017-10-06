@@ -3,6 +3,8 @@
 import rospy
 from std_msgs.msg import Float64MultiArray
 
+import tf
+
 import numpy as np
 
 r_w = 0.09 # (wheel radius)
@@ -11,6 +13,11 @@ b = 0.62 # (wheel base?)
 x = 0
 y = 0
 theta = 0
+
+br = tf.TransformBroadcaster()
+
+def wrapToPi(a):
+    return (a + np.pi) % (2*np.pi) - np.pi
 
 def callback_func(msg_obj):
     global x, y, theta
@@ -34,8 +41,16 @@ def callback_func(msg_obj):
     y = y + delta_s*np.sin(theta + delta_theta/2)
     theta = theta + delta_theta
 
-    state = [x, y, theta]
+    theta = wrapToPi(theta)
+
+    state = [x, -y, -theta]
     print state
+
+    pos = (x, -y, 0)
+    orient = tf.transformations.quaternion_from_euler(0, 0, -theta)
+
+    br.sendTransform(pos, orient, rospy.Time.now(), "base_footprint", "odom")
+
 
 if __name__ == "__main__":
     # initialize this code as a ROS node named slam_odom:

@@ -26,27 +26,27 @@ if __name__ == "__main__":
     while not rospy.is_shutdown():
         data = client_socket.recv(4)
         no_of_bytes_to_read = struct.unpack("<L", data)[0]
-        print "number of bytes to read: %d" % no_of_bytes_to_read
+        #print "number of bytes to read: %d" % no_of_bytes_to_read
 
         data = client_socket.recv(8)
         #print data
         #print "***"
         message_type = struct.unpack("<d", data)[0]
-        print "message type: %f" % message_type
+        #print "message type: %f" % message_type
         #print "^^^^^^"
 
         no_of_read_bytes = 0
         if no_of_bytes_to_read - 8 > 0:
             while no_of_read_bytes < no_of_bytes_to_read - 8:
                 data = client_socket.recv(no_of_bytes_to_read - 8 - no_of_read_bytes)
-                print len(data)
+                #print len(data)
                 no_of_read_bytes += len(data)
                 #print data
-                print "&&&&&&&&&&&&&&&"
+                #print "&&&&&&&&&&&&&&&"
 
         if message_type == 1:
             if len(data) == 136:
-                print "THE SENSOR DATA HAS ARRIVED!!"
+                #print "THE SENSOR DATA HAS ARRIVED!!"
                 lidar = data[0:8]
                 lidar = struct.unpack("<d", lidar)[0]
                 #print "lidar: %f" % lidar
@@ -105,15 +105,15 @@ if __name__ == "__main__":
 
                 odoRight = data[112:120]
                 odoRight = struct.unpack("<d", odoRight)[0]
-                print "odoRight: %f" % odoRight
+                #print "odoRight: %f" % odoRight
 
                 odoLeft = data[120:128]
                 odoLeft = struct.unpack("<d", odoLeft)[0]
-                print "odoLeft: %f" % odoLeft
+                #print "odoLeft: %f" % odoLeft
 
                 time = data[128:136]
                 time = struct.unpack("<d", time)[0]
-                print "time: %f" % time
+                #print "time: %f" % time
 
 
                 msg = Float64MultiArray()
