@@ -1,5 +1,5 @@
 <launch>
-		<rosparam file="$(find nav2d_tutorials)/param/ros.yaml"/>
+		<rosparam file="$(find balrog_sim)/param/ros.yaml"/>
 
 		<arg name="world_file"  default="$(find balrog_sim)/world/test_area.world"/>
 		<param name="use_sim_time" value="true" />
@@ -46,7 +46,7 @@
 
 		<!-- Start Mapper to genreate map from laser scans -->
 		<node name="Mapper" pkg="nav2d_karto" type="mapper" output="screen" launch-prefix="gdb -ex run --args">
-			<rosparam file="$(find nav2d_tutorials)/param/mapper.yaml"/>
+			<rosparam file="$(find balrog_sim)/param/mapper.yaml"/>
 		</node>
 
 	  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find balrog_sim)/rviz/gmapping.rviz"/>

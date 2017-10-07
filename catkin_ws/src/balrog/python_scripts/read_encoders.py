@@ -28,12 +28,18 @@ if __name__ == "__main__":
         no_of_bytes_to_read = struct.unpack("<L", data)[0]
         #print "number of bytes to read: %d" % no_of_bytes_to_read
 
-        data = client_socket.recv(8)
-        #print data
-        #print "***"
-        message_type = struct.unpack("<d", data)[0]
-        #print "message type: %f" % message_type
-        #print "^^^^^^"
+        no_of_read_bytes = 0
+        while no_of_read_bytes < 8:
+            data = client_socket.recv(8-no_of_read_bytes)
+            no_of_read_bytes += len(data)
+            #print data
+            #print "***"
+        if len(data) == 8:
+            message_type = struct.unpack("<d", data)[0]
+            #print "message type: %f" % message_type
+            #print "^^^^^^"
+        else:
+            message_type = -1 # (error)
 
         no_of_read_bytes = 0
         if no_of_bytes_to_read - 8 > 0:
