@@ -427,4 +427,12 @@ export ROS_HOSTNAME=localhost
 - $ rosrun balrog slam_odom.py 
 - $ roslaunch balrog gmapping.launch 
 
+# Run OpenKarto in simulation:
+
+- Install * some package that I don't remember right know *
+- Install * some other package that I don't remember right know *
+- Copy ~/TSRT10/catkin_ws/src/navigation_2d to your ~/TSRT10/catkin_ws/src
+- $ cd ~/TSRT10/catkin_ws
+- $ catkin_make
+- $ roslaunch balrog_sim OpenKarto.launch
 
