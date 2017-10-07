@@ -1,0 +1,8 @@
+prefix=/home/fregu856/TSRT10/catkin_ws/devel
+
+Name: nav2d_navigator
+Description: Description of nav2d_navigator
+Version: 0.3.2
+Cflags: -I/home/fregu856/TSRT10/catkin_ws/devel/include -I/home/fregu856/TSRT10/catkin_ws/src/navigation_2d/nav2d_navigator/include
+Libs: -L/home/fregu856/TSRT10/catkin_ws/devel/lib -lRobotNavigator -lMapInflationTool
+Requires: roscpp message_runtime tf actionlib actionlib_msgs geometry_msgs nav2d_msgs nav2d_operator

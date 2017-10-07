@@ -19,8 +19,6 @@
         <arg name="world_name" value="$(arg world_file)"/>
     </include>
 
-
-
     <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find balrog_sim)/robots/asl_turtlebot_custom_lidar.urdf.xacro'" />
     <param name="robot_description" command="$(arg urdf_file)" />
 

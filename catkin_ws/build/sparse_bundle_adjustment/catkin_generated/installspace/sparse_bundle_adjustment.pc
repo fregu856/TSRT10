@@ -1,0 +1,8 @@
+prefix=/home/fregu856/TSRT10/catkin_ws/install
+
+Name: sparse_bundle_adjustment
+Description: Description of sparse_bundle_adjustment
+Version: 0.3.2
+Cflags: -I/home/fregu856/TSRT10/catkin_ws/install/include
+Libs: -L/home/fregu856/TSRT10/catkin_ws/install/lib -lsba
+Requires: 
