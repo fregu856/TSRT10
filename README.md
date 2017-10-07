@@ -427,7 +427,7 @@ export ROS_HOSTNAME=localhost
 - $ rosrun balrog slam_odom.py 
 - $ roslaunch balrog gmapping.launch 
 
-# Run OpenKarto in simulation:
+# OpenKarto in simulation:
 
 - Install * some package that I don't remember right know *
 - Install * some other package that I don't remember right know *
@@ -436,3 +436,9 @@ export ROS_HOSTNAME=localhost
 - $ catkin_make
 - $ roslaunch balrog_sim OpenKarto.launch
 
+# OpenKarto on Balrog:
+
+- $ roslaunch balrog lidar.launch
+- $ rosrun balrog read_encoders.py
+- $ rosrun balrog slam_odom.py 
+- $ roslaunch balrog OpenKarto.launch 
