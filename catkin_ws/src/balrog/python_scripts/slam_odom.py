@@ -33,7 +33,7 @@ def callback_func(msg_obj):
     delta_s_l = delta_theta_l*r_w
     delta_s_r = delta_theta_r*r_w
 
-    delta_theta = (delta_s_l - delta_s_r)/b
+    delta_theta = (delta_s_r - delta_s_l)/b
 
     delta_s = (delta_s_l + delta_s_r)/2
 
@@ -43,11 +43,11 @@ def callback_func(msg_obj):
 
     theta = wrapToPi(theta)
 
-    state = [x, -y, -theta]
+    state = [x, y, theta]
     print state
 
-    pos = (x, -y, 0)
-    orient = tf.transformations.quaternion_from_euler(0, 0, -theta)
+    pos = (x, y, 0)
+    orient = tf.transformations.quaternion_from_euler(0, 0, theta)
 
     br.sendTransform(pos, orient, rospy.Time.now(), "base_footprint", "odom")
 
