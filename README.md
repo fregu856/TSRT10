@@ -459,3 +459,5 @@ To be able to generate code from Matlab:
 
 I wasn't able compile the ComputerVion code (which isn't needed anyway), to fix this:
 - Remove "$(RPI_CODE)/ComputerVision" in Makefile
+
+Had to restart my laptop once because for some reason it didn't seem to use the correct compiler (eventhough it looked like it did).
