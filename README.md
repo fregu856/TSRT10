@@ -442,3 +442,13 @@ export ROS_HOSTNAME=localhost
 - $ rosrun balrog read_encoders.py
 - $ rosrun balrog slam_odom.py 
 - $ roslaunch balrog OpenKarto.launch 
+
+# Matlab:
+
+To launch Matlab:
+- $ cd /usr/local/MATLAB/R2017a/bin
+- $ ./matlab
+
+Create alias so that one can launch Matlab by running just "matlab" in any directory (needed to compile code for Balrog):
+- $ cd /usr/local/bin/
+- $ sudo ln -s /usr/local/MATLAB/R2017a/bin/matlab matlab
