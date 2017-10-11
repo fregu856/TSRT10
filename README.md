@@ -452,3 +452,10 @@ To launch Matlab:
 Create alias so that one can launch Matlab by running just "matlab" in any directory (needed to compile code for Balrog):
 - $ cd /usr/local/bin/
 - $ sudo ln -s /usr/local/MATLAB/R2017a/bin/matlab matlab
+
+To be able to generate code from Matlab:
+- $ sudo chown -R fregu856:fregu856 /usr/local/MATLAB (to change owner of this folder from root to fregu856, this is needed to be able to install toolboxes in this folder)
+- Install MATLAB Coder (go to "Get more apps" in Matlab and search for "Coder")
+
+I wasn't able compile the ComputerVion code (which isn't needed anyway), to fix this:
+- Remove "$(RPI_CODE)/ComputerVision" in Makefile
