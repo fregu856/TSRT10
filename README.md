@@ -457,7 +457,10 @@ To be able to generate code from Matlab:
 - $ sudo chown -R fregu856:fregu856 /usr/local/MATLAB (to change owner of this folder from root to fregu856, this is needed to be able to install toolboxes in this folder)
 - Install MATLAB Coder (go to "Get more apps" in Matlab and search for "Coder")
 
-I wasn't able compile the ComputerVion code (which isn't needed anyway), to fix this:
+I wasn't able compile the ComputerVision code (which isn't needed anyway), to fix this:
 - Remove "$(RPI_CODE)/ComputerVision" in Makefile
 
-Had to restart my laptop once because for some reason it didn't seem to use the correct compiler (eventhough it looked like it did).
+Had to restart my laptop once because for some reason it didn't seem to use the correct compiler (eventhough it looked like it did).  
+
+
+If main doesnt start automatically, try to transmit the file and then SSH into the RPI and run ./main manually.
