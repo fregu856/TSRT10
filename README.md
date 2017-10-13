@@ -470,3 +470,4 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 - $ sudo apt install git
 - I followed the "Basic setup" steps above
 - I followed the "Setup of LIDAR" steps above
+- I followed the "Setup the balrog package" steps above
