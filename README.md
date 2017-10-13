@@ -475,7 +475,7 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 - Install OpenKarto:
 - - Install LAPACK:
 - - - $ sudo apt-get install liblapack-dev
-- - Install OpenBLAS:
+- - Install OpenBLAS (this step might not be needed, I haven't tested it without yet though):
 - - - $ cd ~/TSRT10
 - - - $ git clone https://github.com/xianyi/OpenBLAS.git
 - - - $ cd OpenBLAS
