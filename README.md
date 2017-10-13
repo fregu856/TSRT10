@@ -497,4 +497,5 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 - - $ cd ~/TSRT10/catkin_ws
 - - $ catkin_make
 
-sudo apt-get install liblapack-dev
+sudo apt-get install libsuitesparse-dev
+sudo apt-get install libatlas-base-dev
