@@ -477,7 +477,7 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 - - - $ cd ~/TSRT10
 - - - $ git clone https://github.com/xianyi/OpenBLAS.git
 - - - $ cd OpenBLAS
-- - - $ sudo make
+- - - - $ sudo make
 - - Install * some other package that I don't remember right know *
 - - Copy ~/TSRT10/catkin_ws/src/navigation_2d to your ~/TSRT10/catkin_ws/src
 - - $ cd ~/TSRT10/catkin_ws
