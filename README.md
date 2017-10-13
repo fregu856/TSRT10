@@ -465,42 +465,19 @@ Had to restart my laptop once because for some reason it didn't seem to use the 
 
 If main doesnt start automatically, try to transmit the file and then SSH into the RPI and run ./main manually.
 
+# Install OpenKarto:
+- Install the ROS navigation stack in order to get the costmap_2D package:
+- - $ sudo apt-get install ros-kinetic-navigation
+- Install SuiteSparse:
+- - $ sudo apt-get install libsuitesparse-dev
+- $ cd ~/TSRT10/catkin_ws/src
+- $ git clone https://github.com/skasperski/navigation_2d.git
+- $ cd ~/TSRT10/catkin_ws
+- $ catkin_make
+
 # Balrog-PC:
 
 - $ sudo apt install git
 - I followed the "Basic setup" steps above
 - I followed the "Setup of LIDAR" steps above
 - I followed the "Setup the balrog package" steps above
-
-- Install OpenKarto (THIS DOESN'T WORK YET!):
-- - Install the ROS navigation stack in order to get the costmap_2D package:
-- - - $ sudo apt-get install ros-kinetic-navigation
-- - Install LAPACK:
-- - - $ sudo apt-get install liblapack-dev
-- - Install OpenBLAS (this step might not be needed, I haven't tested it without yet though):
-- - - $ cd ~/TSRT10
-- - - $ git clone https://github.com/xianyi/OpenBLAS.git
-- - - $ cd OpenBLAS
-- - - $ sudo make
-- - - $ sudo make install
-- - - Copy the files "libopenblas.so" and "libopenblas.so.0" from /opt/OpenBLAS/lib to /usr/lib:
-- - - - $ cd /opt/OpenBLAS/lib
-- - - - $ sudo cp libopenblas.so /usr/lib
-- - - - $ sudo cp libopenblas.so.0 /usr/lib
-- - Install SuiteSparse:
-- - - $ cd ~/TSRT10
-- - - $ git clone https://github.com/jluttine/suitesparse.git
-- - - $ cd suitesparse
-- - - $ sudo make
-- - - $ sudo make install
-- - Copy ~/TSRT10/catkin_ws/src/navigation_2d to your ~/TSRT10/catkin_ws/src
-- - $ cd ~/TSRT10/catkin_ws
-- - $ catkin_make
-
-sudo apt-get install libsuitesparse-dev
-sudo apt-get install libatlas-base-dev
-
-Install eigen
-
-Change from "#include "cs.h"" to "#include "suitesparse/cs.h"".
-Change from "#include "cholmod.h"" to "#include "suitesparse/cholmod.h"".
