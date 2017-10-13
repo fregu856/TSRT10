@@ -473,6 +473,8 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 - I followed the "Setup the balrog package" steps above
 
 - Install OpenKarto:
+- - Install LAPACK:
+- - - $ sudo apt-get install liblapack-dev
 - - Install OpenBLAS:
 - - - $ cd ~/TSRT10
 - - - $ git clone https://github.com/xianyi/OpenBLAS.git
@@ -488,6 +490,9 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 - - - $ git clone https://github.com/jluttine/suitesparse.git
 - - - $ cd suitesparse
 - - - $ sudo make
+- - - $ sudo make install
 - - Copy ~/TSRT10/catkin_ws/src/navigation_2d to your ~/TSRT10/catkin_ws/src
 - - $ cd ~/TSRT10/catkin_ws
 - - $ catkin_make
+
+sudo apt-get install liblapack-dev
