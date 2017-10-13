@@ -477,8 +477,17 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 - - - $ cd ~/TSRT10
 - - - $ git clone https://github.com/xianyi/OpenBLAS.git
 - - - $ cd OpenBLAS
-- - - - $ sudo make
-- - Install * some other package that I don't remember right know *
+- - - $ sudo make
+- - - $ sudo make install
+- - - Copy the files "libopenblas.so" and "libopenblas.so.0" from /opt/OpenBLAS/lib to /usr/lib:
+- - - - $ cd /opt/OpenBLAS/lib
+- - - - $ sudo cp libopenblas.so /usr/lib
+- - - - $ sudo cp libopenblas.so.0 /usr/lib
+- - Install SuiteSparse:
+- - - $ cd ~/TSRT10
+- - - $ git clone https://github.com/jluttine/suitesparse.git
+- - - $ cd suitesparse
+- - - $ sudo make
 - - Copy ~/TSRT10/catkin_ws/src/navigation_2d to your ~/TSRT10/catkin_ws/src
 - - $ cd ~/TSRT10/catkin_ws
 - - $ catkin_make
