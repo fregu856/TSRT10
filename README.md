@@ -219,9 +219,9 @@ if __name__ == "__main__":
 - Make sure that your username is in the dialout group in /etc/group (otherwise you won't have permission to open /dev/ttyUSB0):
 - - $ sudo nano /etc/group
 - - In my case (my username is 'fregu856'), I hade to change the line "dialout:x:20:" to "dialout:x:20:fregu856"
-- - Restart the computer
+- - Restart the computer ($ sudo reboot)
 
-- Now, you should be able to launch sweep.launch:
+- Now, you should be able to launch sweep.launch (after connecting the LIDAR to the computer):
 - - $ roslaunch sweep_ros sweep.launch
 
 - sweep2scan.launch and view_sweep_laser_scan.launch will however not work. For this we need to install the package pointcloud_to_laserscan:
@@ -464,3 +464,9 @@ Had to restart my laptop once because for some reason it didn't seem to use the 
 
 
 If main doesnt start automatically, try to transmit the file and then SSH into the RPI and run ./main manually.
+
+# Balrog-PC:
+
+- $ sudo apt install git
+- I followed the "Basic setup" steps above
+- I followed the "Setup of LIDAR" steps above
