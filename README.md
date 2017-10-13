@@ -470,6 +470,11 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 - - $ sudo apt-get install ros-kinetic-navigation
 - Install SuiteSparse:
 - - $ sudo apt-get install libsuitesparse-dev
+- Install Eigen3:
+- - $ cd ~/TSRT10
+- - $ wget http://bitbucket.org/eigen/eigen/get/3.2.10.tar.gz
+- - $ tar -xvzf 3.2.10.tar.gz
+- - $ rm 3.2.10.tar.gz
 - $ cd ~/TSRT10/catkin_ws/src
 - $ git clone https://github.com/skasperski/navigation_2d.git
 - $ cd ~/TSRT10/catkin_ws
@@ -478,6 +483,8 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 # Balrog-PC:
 
 - $ sudo apt install git
-- I followed the "Basic setup" steps above
-- I followed the "Setup of LIDAR" steps above
-- I followed the "Setup the balrog package" steps above
+- Follow the "Basic setup" steps above
+- Follow the "Setup of LIDAR" steps above
+- Follow the "Setup the balrog package" steps above
+- Follow the "Install OpenKarto" steps above
+
