@@ -489,3 +489,10 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 - Follow the "Setup the balrog package" steps above
 - Follow the "Install OpenKarto" steps above
 
+- Create the directory ~/TSRT10/catkin_ws/src/balrog/param
+- Place the file balrog/param/ros.yaml in the param directory
+- Place the file balrog/param/mapper.yaml in the param directory
+
+- Place the file balrog/python_scripts/read_encoders.py in ~/TSRT10/catkin_ws/src/balrog/python_scripts
+- Place the file balrog/python_scripts/slam_odom.py in ~/TSRT10/catkin_ws/src/balrog/python_scripts
+
