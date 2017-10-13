@@ -472,7 +472,7 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 - I followed the "Setup of LIDAR" steps above
 - I followed the "Setup the balrog package" steps above
 
-- Install OpenKarto:
+- Install OpenKarto (THIS DOESN'T WORK YET!):
 - - Install the ROS navigation stack in order to get the costmap_2D package:
 - - - $ sudo apt-get install ros-kinetic-navigation
 - - Install LAPACK:
@@ -499,3 +499,8 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 
 sudo apt-get install libsuitesparse-dev
 sudo apt-get install libatlas-base-dev
+
+Install eigen
+
+Change from "#include "cs.h"" to "#include "suitesparse/cs.h"".
+Change from "#include "cholmod.h"" to "#include "suitesparse/cholmod.h"".
