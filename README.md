@@ -473,6 +473,8 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 - I followed the "Setup the balrog package" steps above
 
 - Install OpenKarto:
+- - Install the ROS navigation stack in order to get the costmap_2D package:
+- - - $ sudo apt-get install ros-kinetic-navigation
 - - Install LAPACK:
 - - - $ sudo apt-get install liblapack-dev
 - - Install OpenBLAS (this step might not be needed, I haven't tested it without yet though):
