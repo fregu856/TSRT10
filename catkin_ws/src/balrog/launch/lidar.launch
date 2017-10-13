@@ -20,7 +20,7 @@
 
             angle_min: -3.14 # -M_PI/2
             angle_max: 3.14 # M_PI/2
-            angle_increment: 0.03 # M_PI/360.0
+            angle_increment: 0.03
             scan_time: 0.1
             range_min: 0.0
             range_max: 40.0
