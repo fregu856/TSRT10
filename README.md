@@ -475,6 +475,7 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 - - $ wget http://bitbucket.org/eigen/eigen/get/3.2.10.tar.gz
 - - $ tar -xvzf 3.2.10.tar.gz
 - - $ rm 3.2.10.tar.gz
+- - $ sudo ln -s /usr/include/eigen3/Eigen /usr/local/include/Eigen
 - $ cd ~/TSRT10/catkin_ws/src
 - $ git clone https://github.com/skasperski/navigation_2d.git
 - $ cd ~/TSRT10/catkin_ws
