@@ -429,15 +429,12 @@ export ROS_HOSTNAME=localhost
 
 # OpenKarto in simulation:
 
-- Install * some package that I don't remember right know *
-- Install * some other package that I don't remember right know *
-- Copy ~/TSRT10/catkin_ws/src/navigation_2d to your ~/TSRT10/catkin_ws/src
-- $ cd ~/TSRT10/catkin_ws
-- $ catkin_make
+- Follow the "Install OpenKarto" steps below
 - $ roslaunch balrog_sim OpenKarto.launch
 
 # OpenKarto on Balrog:
 
+- Connect to the RPI network
 - $ roslaunch balrog lidar.launch
 - $ rosrun balrog read_encoders.py
 - $ rosrun balrog slam_odom.py 
@@ -493,6 +490,13 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 - Place the file balrog/param/ros.yaml in the param directory
 - Place the file balrog/param/mapper.yaml in the param directory
 
-- Place the file balrog/python_scripts/read_encoders.py in ~/TSRT10/catkin_ws/src/balrog/python_scripts
-- Place the file balrog/python_scripts/slam_odom.py in ~/TSRT10/catkin_ws/src/balrog/python_scripts
+- Place the file balrog/python_scripts/read_encoders.py in ~/TSRT10/catkin_ws/src/balrog/python_scripts and make it executaböe
+- Place the file balrog/python_scripts/slam_odom.py in ~/TSRT10/catkin_ws/src/balrog/python_scripts and make it executaböe
 
+- Place the file balrog/launch/OpenKarto.launch in ~/TSRT10/catkin_ws/src/balrog/launch
+- Place the file balrog/rviz/OpenKarto.rviz in ~/TSRT10/catkin_ws/src/balrog/rviz
+
+- $ cd ~/TSRT10/catkin_ws
+- $ catkin_make
+
+- Folow the "OpenKarto on Balrog" steps above to start SLAMing using OpenKarto
