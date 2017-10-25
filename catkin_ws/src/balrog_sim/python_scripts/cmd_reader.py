@@ -39,19 +39,19 @@ class Cmd_reader:
         # get the code of the key that was pressed down:
         key_code = msg_obj.code
 
-        if key_code == 119: # (119 = w)
+        if key_code in [119, 273]: # (119 = w, 273 = up arrow)
             msg = "Forward"
             self.pub.publish(msg)
 
-        elif key_code == 100: # (100 = d)
+        elif key_code in [100, 275]: # (100 = d, 275 = right arrow)
             msg = "Right"
             self.pub.publish(msg)
 
-        elif key_code == 115: # (115 = s)
+        elif key_code in [115, 274]: # (115 = s, 274 = down arrow)
             msg = "Backward"
             self.pub.publish(msg)
 
-        elif key_code == 97: # (97 = a)
+        elif key_code in [97, 276]: # (97 = a, 276 = left arrow)
             msg = "Left"
             self.pub.publish(msg)
 
@@ -60,12 +60,12 @@ class Cmd_reader:
         # get the code of the key that was released:
         key_code = msg_obj.code
 
-        if key_code in [119, 115]: # (119 = w, 115 = s)
+        if key_code in [119, 115, 273, 274]: # (119 = w, 115 = s)
             msg = "No_throttle"
             self.pub.publish(msg)
             #print "No_throttle"
 
-        elif key_code in [100, 97]: # (100 = d, 97 = a)
+        elif key_code in [100, 97, 275, 276]: # (100 = d, 97 = a)
             msg = "No_steering"
             self.pub.publish(msg)
             #print "No_steering"
