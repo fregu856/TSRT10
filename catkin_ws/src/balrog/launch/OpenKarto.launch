@@ -8,5 +8,5 @@
 			<rosparam file="$(find balrog)/param/mapper.yaml"/>
 		</node>
 
-	  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find balrog)/rviz/gmapping.rviz"/>
+	  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find balrog)/rviz/OpenKarto.rviz"/>
 </launch>

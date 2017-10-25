@@ -219,9 +219,9 @@ if __name__ == "__main__":
 - Make sure that your username is in the dialout group in /etc/group (otherwise you won't have permission to open /dev/ttyUSB0):
 - - $ sudo nano /etc/group
 - - In my case (my username is 'fregu856'), I hade to change the line "dialout:x:20:" to "dialout:x:20:fregu856"
-- - Restart the computer
+- - Restart the computer ($ sudo reboot)
 
-- Now, you should be able to launch sweep.launch:
+- Now, you should be able to launch sweep.launch (after connecting the LIDAR to the computer):
 - - $ roslaunch sweep_ros sweep.launch
 
 - sweep2scan.launch and view_sweep_laser_scan.launch will however not work. For this we need to install the package pointcloud_to_laserscan:
@@ -429,16 +429,74 @@ export ROS_HOSTNAME=localhost
 
 # OpenKarto in simulation:
 
-- Install * some package that I don't remember right know *
-- Install * some other package that I don't remember right know *
-- Copy ~/TSRT10/catkin_ws/src/navigation_2d to your ~/TSRT10/catkin_ws/src
-- $ cd ~/TSRT10/catkin_ws
-- $ catkin_make
+- Follow the "Install OpenKarto" steps below
 - $ roslaunch balrog_sim OpenKarto.launch
 
 # OpenKarto on Balrog:
 
+- Connect to the RPI network
 - $ roslaunch balrog lidar.launch
 - $ rosrun balrog read_encoders.py
 - $ rosrun balrog slam_odom.py 
 - $ roslaunch balrog OpenKarto.launch 
+
+# Matlab:
+
+To launch Matlab:
+- $ cd /usr/local/MATLAB/R2017a/bin
+- $ ./matlab
+
+Create alias so that one can launch Matlab by running just "matlab" in any directory (needed to compile code for Balrog):
+- $ cd /usr/local/bin/
+- $ sudo ln -s /usr/local/MATLAB/R2017a/bin/matlab matlab
+
+To be able to generate code from Matlab:
+- $ sudo chown -R fregu856:fregu856 /usr/local/MATLAB (to change owner of this folder from root to fregu856, this is needed to be able to install toolboxes in this folder)
+- Install MATLAB Coder (go to "Get more apps" in Matlab and search for "Coder")
+
+I wasn't able compile the ComputerVision code (which isn't needed anyway), to fix this:
+- Remove "$(RPI_CODE)/ComputerVision" in Makefile
+
+Had to restart my laptop once because for some reason it didn't seem to use the correct compiler (eventhough it looked like it did).  
+
+
+If main doesnt start automatically, try to transmit the file and then SSH into the RPI and run ./main manually.
+
+# Install OpenKarto:
+- Install the ROS navigation stack in order to get the costmap_2D package:
+- - $ sudo apt-get install ros-kinetic-navigation
+- Install SuiteSparse:
+- - $ sudo apt-get install libsuitesparse-dev
+- Install Eigen3:
+- - $ cd ~/TSRT10
+- - $ wget http://bitbucket.org/eigen/eigen/get/3.2.10.tar.gz
+- - $ tar -xvzf 3.2.10.tar.gz
+- - $ rm 3.2.10.tar.gz
+- - $ sudo ln -s /usr/include/eigen3/Eigen /usr/local/include/Eigen
+- $ cd ~/TSRT10/catkin_ws/src
+- $ git clone https://github.com/skasperski/navigation_2d.git
+- $ cd ~/TSRT10/catkin_ws
+- $ catkin_make
+
+# Balrog-PC:
+
+- $ sudo apt install git
+- Follow the "Basic setup" steps above
+- Follow the "Setup of LIDAR" steps above
+- Follow the "Setup the balrog package" steps above
+- Follow the "Install OpenKarto" steps above
+
+- Create the directory ~/TSRT10/catkin_ws/src/balrog/param
+- Place the file balrog/param/ros.yaml in the param directory
+- Place the file balrog/param/mapper.yaml in the param directory
+
+- Place the file balrog/python_scripts/read_encoders.py in ~/TSRT10/catkin_ws/src/balrog/python_scripts and make it executaböe
+- Place the file balrog/python_scripts/slam_odom.py in ~/TSRT10/catkin_ws/src/balrog/python_scripts and make it executaböe
+
+- Place the file balrog/launch/OpenKarto.launch in ~/TSRT10/catkin_ws/src/balrog/launch
+- Place the file balrog/rviz/OpenKarto.rviz in ~/TSRT10/catkin_ws/src/balrog/rviz
+
+- $ cd ~/TSRT10/catkin_ws
+- $ catkin_make
+
+- Folow the "OpenKarto on Balrog" steps above to start SLAMing using OpenKarto
