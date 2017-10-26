@@ -508,7 +508,15 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 
 # Drone:
 
+Yellow = Orange = RX
+Blue = Green = TX
+
 
 ## PC:
+- Install Dronekit (http://python.dronekit.io/guide/quick_start.html#installation):
+- - $ sudo pip install dronekit
+- - $ sudo pip install dronekit-sitl
+- - $ sudo pip install dronekit-sitl -UI
+
 
 ## RPI:
