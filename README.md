@@ -520,5 +520,9 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 
 
 ## RPI:
+- Enable serial (NO, then YES in raspi-config)
 - Install Dronekit:
 - - $ sudo pip install dronekit
+
+- $ cd drone_test
+- $ python drone_start.py
