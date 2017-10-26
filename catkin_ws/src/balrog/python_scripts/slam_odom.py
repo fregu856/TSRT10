@@ -7,6 +7,8 @@ import tf
 
 import numpy as np
 
+pub = rospy.Publisher("/odom_data", Float64MultiArray, queue_size=10)
+
 r_w = 0.09 # (wheel radius)
 b = 0.62 # (wheel base?)
 
@@ -45,6 +47,11 @@ def callback_func(msg_obj):
 
     state = [x, y, theta]
     print state
+
+    msg = Float64MultiArray()
+    data = [x, y, theta]
+    msg.data = data
+    pub.publish(msg)
 
     pos = (x, y, 0)
     orient = tf.transformations.quaternion_from_euler(0, 0, theta)

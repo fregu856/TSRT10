@@ -84,10 +84,6 @@ def callback_func(msg_obj):
 
         cv2.imwrite("test.png", img)
 
-
-
-
-
 def callback_func_map(msg_obj):
     global most_recent_map, most_recent_map_origin, most_recent_map_width
     global most_recent_map_height

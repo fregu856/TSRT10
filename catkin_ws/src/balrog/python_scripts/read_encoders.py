@@ -124,5 +124,6 @@ if __name__ == "__main__":
 
                 msg = Float64MultiArray()
                 data = [odoRight, odoLeft]
+                #print data
                 msg.data = data
                 pub.publish(msg)
