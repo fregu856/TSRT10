@@ -440,6 +440,11 @@ export ROS_HOSTNAME=localhost
 - $ rosrun balrog slam_odom.py 
 - $ roslaunch balrog OpenKarto.launch 
 
+# OpenKarto with slam_visted:
+
+- Follow the steps for OpenKarto
+- $ rosrun balrog slam_visited.py
+
 # Matlab:
 
 To launch Matlab:
@@ -500,3 +505,24 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 - $ catkin_make
 
 - Folow the "OpenKarto on Balrog" steps above to start SLAMing using OpenKarto
+
+# Drone:
+
+- Yellow = Orange = RX
+- Blue = Green = TX
+
+
+## PC:
+- Install Dronekit (http://python.dronekit.io/guide/quick_start.html#installation):
+- - $ sudo pip install dronekit
+- - $ sudo pip install dronekit-sitl
+- - $ sudo pip install dronekit-sitl -UI
+
+
+## RPI:
+- Enable serial (NO, then YES in raspi-config)
+- Install Dronekit:
+- - $ sudo pip install dronekit
+
+- $ cd drone_test
+- $ python drone_start.py
