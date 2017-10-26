@@ -505,3 +505,10 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 - $ catkin_make
 
 - Folow the "OpenKarto on Balrog" steps above to start SLAMing using OpenKarto
+
+# Drone:
+
+
+## PC:
+
+## RPI:
