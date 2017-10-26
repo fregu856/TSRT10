@@ -508,8 +508,8 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 
 # Drone:
 
-Yellow = Orange = RX
-Blue = Green = TX
+- Yellow = Orange = RX
+- Blue = Green = TX
 
 
 ## PC:
@@ -520,3 +520,5 @@ Blue = Green = TX
 
 
 ## RPI:
+- Install Dronekit:
+- - $ sudo pip install dronekit
