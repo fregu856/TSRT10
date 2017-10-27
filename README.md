@@ -518,6 +518,9 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 - - $ sudo pip install dronekit-sitl
 - - $ sudo pip install dronekit-sitl -UI
 
+- http://ardupilot.org/dev/docs/setting-up-sitl-on-linux.html
+- http://ardupilot.org/dev/docs/using-gazebo-simulator-with-sitl.html
+
 
 ## RPI:
 - Enable serial (NO, then YES in raspi-config)
