@@ -489,6 +489,11 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 - $ cd ~/TSRT10/catkin_ws
 - $ catkin_make
 
+# Test coordinator and controller in simulation:
+- $ roslaunch balrog_sim OpenKarto_complete.launch
+- $ rosrun balrog_sim controller.py
+- $ rosrun balrog_sim coordinator.py 
+
 # Balrog-PC:
 
 - $ sudo apt install git
