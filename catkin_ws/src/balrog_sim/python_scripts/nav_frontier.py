@@ -7,6 +7,17 @@ from nav_msgs.msg import OccupancyGrid
 
 import numpy as np
 
+# def initMap():
+#     slamMap = -1*np.ones((15, 15))
+#     rows, cols = slamMap.shape
+#
+#     for j in range(0,10):
+#          for i in range(0,10):
+#              slamMap[j][i] = 0
+#     slamMap[5,5] = -2
+#     goalNode = frontier_func(slamMap, [5,5])
+#     print(goalNode)
+
 def frontier_func(slamMap, currentPosition):
     rows, cols = slamMap.shape
     frontierMap = np.zeros(shape=(rows,cols))
@@ -15,13 +26,21 @@ def frontier_func(slamMap, currentPosition):
     slamMapNoObstacles[slamMapNoObstacles == -2] = 0    #Covered
     slamMapNoObstacles[slamMapNoObstacles == 100] = 0   #Obstacle]
     #print slamMapNoObstacles
-    tempMapA = np.vstack( [ np.zeros(shape=(1,rows)), slamMapNoObstacles ] )
+    #tempMapA = np.vstack( [ np.zeros(shape=(1,rows)), slamMapNoObstacles ] )
+    #tempMapA = np.zeros((rows+1, cols))
+    #tempMapA[1:, :] = slamMapNoObstacles
     #print tempMapA
-    tempMap1 = np.column_stack( [ np.zeros(shape=(cols+1,1)), tempMapA ] )
+    #tempMap1 = np.column_stack( [ np.zeros(shape=(cols+1,1)), tempMapA ] )
     #print tempMap1
-    tempMapB = np.vstack( [ slamMapNoObstacles, np.zeros(shape=(1,rows)) ] )
-    tempMap2 = np.column_stack( [ tempMapB, np.zeros(shape=(cols+1,1)) ] )
+    tempMap1 = np.zeros((rows+1, cols+1))
+    tempMap1[1:, 1:] = slamMapNoObstacles
+    #print tempMap1
+    #tempMapB = np.vstack( [ slamMapNoObstacles, np.zeros(shape=(1,rows)) ] )
+    #tempMap2 = np.column_stack( [ tempMapB, np.zeros(shape=(cols+1,1)) ] )
     #print tempMapB
+    #print tempMap2
+    tempMap2 = np.zeros((rows+1, cols+1))
+    tempMap2[0:-1, 0:-1] = slamMapNoObstacles
     #print tempMap2
     frontierNodes = tempMap2 - tempMap1 ## 16x16
     #print frontierNodes
@@ -33,10 +52,18 @@ def frontier_func(slamMap, currentPosition):
     frontierMap[FirstMap == -1] = 1
     frontierMap[SecondMap == 1] = 1
     #print frontierMap
-    tempMapC = np.vstack( [ slamMapNoObstacles, np.zeros(shape=(1,cols)) ] )
-    tempMap3 = np.column_stack( [ np.zeros(shape=(cols+1,1)), tempMapC ] )
-    tempMapD = np.column_stack( [ slamMapNoObstacles, np.zeros(shape=(rows,1)) ] )
-    tempMap4 = np.vstack( [ np.zeros(shape=(1,cols+1)), tempMapD  ] )
+    #tempMapC = np.vstack( [ slamMapNoObstacles, np.zeros(shape=(1,cols)) ] )
+    #tempMap3 = np.column_stack( [ np.zeros(shape=(cols+1,1)), tempMapC ] )
+    #print tempMap3
+    tempMap3 = np.zeros((rows+1, cols+1))
+    tempMap3[0:-1, 1:] = slamMapNoObstacles
+    #print tempMap3
+    #tempMapD = np.column_stack( [ slamMapNoObstacles, np.zeros(shape=(rows,1)) ] )
+    #tempMap4 = np.vstack( [ np.zeros(shape=(1,cols+1)), tempMapD  ] )
+    #print tempMap4
+    tempMap4 = np.zeros((rows+1, cols+1))
+    tempMap4[1:, 0:-1] = slamMapNoObstacles
+    #print tempMap4
     frontierNodes = tempMap3 - tempMap4
     #print frontierNodes
 
@@ -45,14 +72,67 @@ def frontier_func(slamMap, currentPosition):
     frontierMap[FirstMap == -1] = 1
     frontierMap[SecondMap == 1] = 1
     #print frontierMap
+
+
+
+
+
+
+    #################################
+    #################################
+    # fullösning!
+    # expand all obstacles:
+    obst_inds = np.nonzero(slamMap == 100)
+    obst_inds_row = obst_inds[0].tolist()
+    obst_inds_col = obst_inds[1].tolist()
+    obst_inds = zip(obst_inds_row, obst_inds_col)
+    for obst_ind in obst_inds:
+        obst_row = obst_ind[0]
+        obst_col = obst_ind[1]
+        for row in range(obst_row-3, obst_row+4):
+            for col in range(obst_col-3, obst_col+4):
+                if row < rows and col < cols:
+                    slamMap[row][col] = 100
+    #################################
+    #################################
+
+
+
+
+
+
+
     # Remove covered area and obstacles as frontier candidates
     frontierMap[slamMap == 100] = 0
     frontierMap[slamMap == -2] = 0
+
+
+
+
+
+    #print frontierMap
+    #################################
+    #################################
+    # fullösning!
+    # remove nodes that are too close to the current node:
+    for row in range(currentPosition[1]-1, currentPosition[1]+2):
+        for col in range(currentPosition[0]-1, currentPosition[0]+2):
+            if row < rows and col < cols:
+                frontierMap[row][col] = 0
+    #################################
+    #################################
+
+
+
+
+
     #print frontierMap
     x = np.nonzero(frontierMap)
-    goalNode = np.argmin(((x[0]-currentPosition[0])**2 + (x[1]-currentPosition[1])**2)**0.5)
+    goalNode = np.argmin((x[0]-currentPosition[0])**2 + (x[1]-currentPosition[1])**2)
 
-    return [x[0][goalNode],x[1][goalNode]]
+    print frontierMap[x[0][goalNode], x[1][goalNode]]
+
+    return [x[1][goalNode],x[0][goalNode]]
 
 def map_index_2_pos(map_msg, pos_index):
     map_origin_obj = map_msg.info.origin
@@ -199,3 +279,5 @@ if __name__ == "__main__":
     frontier = Frontier()
 
     #frontier.run()
+
+    # initMap()
