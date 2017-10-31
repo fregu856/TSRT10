@@ -490,7 +490,7 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 - $ catkin_make
 
 # Test coordinator and controller in simulation:
-- $ roslaunch balrog_sim OpenKarto_complete.launch
+- $ roslaunch balrog_sim OpenKarto_complete_control.launch (this is needed since OpenKarto_complete.launch launches also manual_controller.py which interferes with the controller)
 - $ rosrun balrog_sim controller.py
 - $ rosrun balrog_sim coordinator.py 
 
