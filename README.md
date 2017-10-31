@@ -432,9 +432,14 @@ export ROS_HOSTNAME=localhost
 - Follow the "Install OpenKarto" steps below
 - $ roslaunch balrog_sim OpenKarto.launch
 
+# OpenKarto with slam_visited and slam_pose in simulation:
+
+- $ roslaunch balrog_sim OpenKarto_complete.launch
+
 # OpenKarto on Balrog:
 
 - Connect to the RPI network
+- Connect the LIDAR to the computer
 - $ roslaunch balrog lidar.launch
 - $ rosrun balrog read_encoders.py
 - $ rosrun balrog slam_odom.py 
@@ -442,9 +447,7 @@ export ROS_HOSTNAME=localhost
 
 # OpenKarto with slam_visted and slam_pose:
 
-- Follow the steps for OpenKarto
-- $ rosrun balrog slam_visited.py
-- $ rosrun balrog slam_pose.py
+- $ roslaunch balrog OpenKarto_complete.launch
 
 # Matlab:
 
