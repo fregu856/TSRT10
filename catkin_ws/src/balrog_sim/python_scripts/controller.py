@@ -45,8 +45,6 @@ class Controller:
     def est_pose_callback(self, msg_obj):
         pose = msg_obj.data
 
-        print "hej"
-
         self.x = pose[0]
         self.y = pose[1]
         self.theta = pose[2]
