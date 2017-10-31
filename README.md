@@ -445,8 +445,10 @@ export ROS_HOSTNAME=localhost
 - $ rosrun balrog slam_odom.py 
 - $ roslaunch balrog OpenKarto.launch 
 
-# OpenKarto with slam_visted and slam_pose:
+# OpenKarto with slam_visted and slam_pose on Balrog:
 
+- Connect to the RPI network
+- Connect the LIDAR to the computer and wait a few seconds for the LIDAR to obtain full rotation speed
 - $ roslaunch balrog OpenKarto_complete.launch
 
 # Matlab:
