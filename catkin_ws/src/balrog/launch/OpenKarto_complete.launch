@@ -1,0 +1,19 @@
+<launch>
+    <!-- launch the lidar: -->
+    <include file="$(find balrog)/launch/lidar.launch"></include>
+
+    <!-- run read_encoders.py in balrog/python_scripts: -->
+    <node pkg="balrog" type="read_encoders.py" name="read_encoders_node"></node>
+
+    <!-- run slam_odom.py in balrog/python_scripts: -->
+    <node pkg="balrog" type="slam_odom.py" name="slam_odom_node"></node>
+
+    <!-- launch OpenKarto: -->
+    <include file="$(find balrog)/launch/OpenKarto.launch"></include>
+
+    <!-- run slam_visited.py in balrog/python_scripts: -->
+    <node pkg="balrog" type="slam_visited.py" name="slam_visited_node"></node>
+
+    <!-- run slam_pose.py in balrog/python_scripts: -->
+    <node pkg="balrog" type="slam_pose.py" name="slam_pose_node"></node>
+</launch>

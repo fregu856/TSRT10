@@ -7,7 +7,7 @@ import tf
 
 import numpy as np
 
-pub = rospy.Publisher("/odom_data", Float64MultiArray, queue_size=10)
+pub = rospy.Publisher("/odom_pose", Float64MultiArray, queue_size=10)
 
 r_w = 0.09 # (wheel radius)
 b = 0.6138 # (wheel base?) 0.625
@@ -57,7 +57,6 @@ def callback_func(msg_obj):
     orient = tf.transformations.quaternion_from_euler(0, 0, theta)
 
     br.sendTransform(pos, orient, rospy.Time.now(), "base_footprint", "odom")
-
 
 if __name__ == "__main__":
     # initialize this code as a ROS node named slam_odom:
