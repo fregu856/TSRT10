@@ -66,15 +66,12 @@ def callback_func(msg_obj):
 
             print map_local[y_map_ind][x_map_ind]
 
-            #img[y_map_ind][x_map_ind] = [0, 255, 0]
-
             for row in range(y_map_ind-10, y_map_ind+11):
                 for col in range(x_map_ind-10, x_map_ind+11):
                     if row < map_height_local and col < map_width_local:
                         map_point = map_local[row][col]
                         if map_point == 0:
                             img[row][col] = [0, 255, 0]
-
 
             print "x: %f, y: %f" % (x, y)
             print "origin: (%f, %f)" % (map_origin_local[0], map_origin_local[1])
@@ -100,7 +97,7 @@ def callback_func_map(msg_obj):
     map_matrix = np.array(map_data)
     # split the array into a list of map_height arrays (a list containing each row):
     map_matrix = np.split(map_matrix, map_height)
-    # convert the list of array into a 2D array:
+    # convert the list of arrays into a 2D array:
     map_matrix = np.array(map_matrix)
 
     most_recent_map = map_matrix
@@ -110,22 +107,6 @@ def callback_func_map(msg_obj):
 
     print "width: %d, height: %d" % (map_width, map_height)
     print map_matrix.shape
-
-    # # convert the map to an image and save to disk (for visualization):
-    # img = np.zeros((map_height, map_width, 3))
-    # for row in range(map_height):
-    #     for col in range(map_width):
-    #         point = map_matrix[row][col]
-    #         if point == -1:
-    #             img[row][col] = [100, 100, 100]
-    #         elif point == 0:
-    #             img[row][col] = [255, 255, 255]
-    #         elif point == 100:
-    #             img[row][col] = [0, 0, 0]
-    # cv2.imwrite("test.png", img)
-
-
-
 
 if __name__ == "__main__":
     # initialize this code as a ROS node named slam_visited:

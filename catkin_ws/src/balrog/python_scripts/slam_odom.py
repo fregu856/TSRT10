@@ -10,7 +10,7 @@ import numpy as np
 pub = rospy.Publisher("/odom_data", Float64MultiArray, queue_size=10)
 
 r_w = 0.09 # (wheel radius)
-b = 0.62 # (wheel base?)
+b = 0.6138 # (wheel base?) 0.625
 
 x = 0
 y = 0
