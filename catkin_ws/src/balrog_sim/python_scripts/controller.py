@@ -9,16 +9,13 @@ import tf
 import numpy as np
 import math
 
-myGlobal_x = -1
-myGlobal_y = 1
-
 class Controller:
     def __init__(self):
         rospy.init_node("test_controller", anonymous=True)
 
-        rospy.Subscriber("/estimated_pose", Float64MultiArray, self.pose_callback)
+        rospy.Subscriber("/estimated_pose", Float64MultiArray, self.est_pose_callback)
 
-        rospy.Subscriber("/test_topic", Float64MultiArray, self.callback_function)
+        rospy.Subscriber("/goal_pos", Float64MultiArray, self.goal_pos_callback)
 
         self.control_pub = rospy.Publisher("cmd_vel_mux/input/navi", Twist, queue_size=10)
 
@@ -26,21 +23,19 @@ class Controller:
         self.y = 0.0
         self.theta = 0.0
 
-    def callback_function(self, message_object):
-        # get the actual message String that was published:
-        received_message = message_object.data
+        self.x_goal = -1
+        self.y_goal = 1
 
-        # print the received String:
-        print "x-coordinate %f" % received_message[0]
-        print "y-coordinate %f" % received_message[1]
+    def goal_pos_callback(self, msg_obj):
+        data = msg_obj.data
 
-        global myGlobal_x
-        myGlobal_x = received_message[0]
+        print "x_goal: %f" % data[0]
+        print "y_goal: %f" % data[1]
 
-        global myGlobal_y
-        myGlobal_y = received_message[1]
+        self.x_goal = data[0]
+        self.y_goal = data[1]
 
-    def pose_callback(self, msg_obj):
+    def est_pose_callback(self, msg_obj):
         pose = msg_obj.data
 
         self.x = pose[0]
@@ -49,9 +44,8 @@ class Controller:
 
     def get_ctrl_output(self):
         # set a goal x, y, theta:
-        x_g = myGlobal_x
-        y_g = myGlobal_y
-        th_g = 0.0
+        x_g = self.x_goal
+        y_g = self.y_goal
 
         # CONTROL_LAW
         TOLERANCE = 0.01 # (how close to the target position the robot should stop [m])
@@ -76,7 +70,6 @@ class Controller:
             print "Current x: %f" % self.x
             print "Current y: %f" % self.y
             print "Goal angle: %f" % goal_angle
-            print "True Robot angle: %f" % self.theta
             print "Robot angle: %f" % robot_angle
             print "Angle error: %f" % angle_error
 
