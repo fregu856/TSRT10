@@ -440,10 +440,11 @@ export ROS_HOSTNAME=localhost
 - $ rosrun balrog slam_odom.py 
 - $ roslaunch balrog OpenKarto.launch 
 
-# OpenKarto with slam_visted:
+# OpenKarto with slam_visted and slam_pose:
 
 - Follow the steps for OpenKarto
 - $ rosrun balrog slam_visited.py
+- $ rosrun balrog slam_pose.py
 
 # Matlab:
 
