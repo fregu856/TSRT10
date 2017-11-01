@@ -21,7 +21,10 @@ class Coordinator:
         # create a publisher for publishing goal positions to the controller:
         self.goal_pos_pub = rospy.Publisher("/goal_pos", Float64MultiArray, queue_size=10)
 
-        self.path = [[0,0], [0,1], [-1,1], [-2,2], [-2,3], [-1.5, 3.5], [1, 3.5], [1, 2], [0,1], [0,0]]
+        self.status_pub = rospy.Publisher("/coordinator_status", String, queue_size=10)
+
+        #self.path = [[0,0], [0,1], [-1,1], [-2,2], [-2,3], [-1.5, 3.5], [1, 3.5], [1, 2], [0,1], [0,0]]
+        self.path = [[0,0]]
         self.next_index = 0 # (list index of the next goal position to be published)
         self.final_index = len(self.path) - 1 # (index of the last path list element)
 
@@ -33,9 +36,15 @@ class Coordinator:
         print "received new path!"
 
         # get the published path:
-        path = msg_obj.data
+        path_list = msg_obj.data
+
+        path = []
+        for i in range(len(path_list)):
+            if i % 2 == 0:
+                path.append([path_list[i], path_list[i+1]])
 
         self.path = path
+        print self.path
         self.next_index = 0
         self.final_index = len(self.path) - 1
 
@@ -67,6 +76,10 @@ class Coordinator:
                 self.next_index += 1
 
                 print "published new goal position, x: %f, y: %f" % (goal_pos[0], goal_pos[1])
+            else:
+                print "reached end of path"
+                msg = "reached target position"
+                self.status_pub.publish(msg)
 
 if __name__ == "__main__":
     # create a Coordinator object (this will run its __init__ function):
