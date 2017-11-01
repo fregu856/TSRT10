@@ -100,17 +100,17 @@ def astar_func(goalNode, startNode, obstacleMap):
     #             img[row][col] = [0, 0, 0]
     # cv2.imwrite("test_astar.png", img)
 
-    # filter lone obstacle points:
-    n_threshold = 3
-    slamMap_binary = np.zeros((rows, cols))
-    slamMap_binary[slamMap == 100] = 1
-    labeled_array, num_features = label(slamMap_binary)
-    binc = np.bincount(labeled_array.ravel())
-    noise_idx = np.where(binc <= n_threshold)
-    shp = slamMap.shape
-    mask = np.in1d(labeled_array, noise_idx).reshape(shp)
-    slamMap[mask] = 0
-
+    # # filter lone obstacle points:
+    # n_threshold = 3
+    # slamMap_binary = np.zeros((rows, cols))
+    # slamMap_binary[slamMap == 100] = 1
+    # labeled_array, num_features = label(slamMap_binary)
+    # binc = np.bincount(labeled_array.ravel())
+    # noise_idx = np.where(binc <= n_threshold)
+    # shp = slamMap.shape
+    # mask = np.in1d(labeled_array, noise_idx).reshape(shp)
+    # slamMap[mask] = 0
+    #
     # map_height, map_width = slamMap.shape
     # # convert map_visited to an image and save to disk (for visualization):
     # img = np.zeros((map_height, map_width, 3))
@@ -334,7 +334,11 @@ class Astar:
         self.y = None
         self.theta = None
 
-        self.goal_pos = [-1, 1]
+        self.goal_pos = [3, 1]
+
+        msg = Float64MultiArray()
+        msg.data = [0, 0.5]
+        self.path_pub.publish(msg)
 
         # keep python from exiting until this ROS node is stopped:
         rospy.spin()
