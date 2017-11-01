@@ -107,7 +107,7 @@ def frontier_func(slamMap, currentPosition):
     noise_idx = np.where(binc <= n_threshold)
     shp = frontierMap.shape
     mask = np.in1d(labeled_array, noise_idx).reshape(shp)
-    frontierMap[mask] = 0	
+    frontierMap[mask] = 0
 
 
     #print frontierMap
@@ -148,7 +148,7 @@ def map_index_2_pos(map_msg, pos_index):
     y_map_ind = pos_index[1]
 
     x_map = x_map_ind*map_resolution
-    y_map = (map_height - y_map_ind)*map_resolution
+    y_map = y_map_ind*map_resolution
 
     x = x_map + map_origin[0]
     y = y_map + map_origin[1]
@@ -172,7 +172,7 @@ def pos_2_map_index(map_msg, pos):
     y_map = y - map_origin[1]
 
     x_map_ind = int(x_map/map_resolution) # (col)
-    y_map_ind = map_height - int(y_map/map_resolution) # (row)
+    y_map_ind = int(y_map/map_resolution) # (row)
 
     pos_index = [x_map_ind, y_map_ind]
 

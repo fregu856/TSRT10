@@ -8,6 +8,9 @@ from nav_msgs.msg import OccupancyGrid
 import numpy as np
 from operator import xor
 
+import cv2
+from scipy.ndimage.measurements import label
+
 def map_index_2_pos(map_msg, pos_index):
     map_origin_obj = map_msg.info.origin
     map_origin = [map_origin_obj.position.x, map_origin_obj.position.y]
@@ -20,7 +23,7 @@ def map_index_2_pos(map_msg, pos_index):
     y_map_ind = pos_index[1]
 
     x_map = x_map_ind*map_resolution
-    y_map = (map_height - y_map_ind)*map_resolution
+    y_map = y_map_ind*map_resolution
 
     x = x_map + map_origin[0]
     y = y_map + map_origin[1]
@@ -44,7 +47,7 @@ def pos_2_map_index(map_msg, pos):
     y_map = y - map_origin[1]
 
     x_map_ind = int(x_map/map_resolution) # (col)
-    y_map_ind = map_height - int(y_map/map_resolution) # (row)
+    y_map_ind = int(y_map/map_resolution) # (row)
 
     pos_index = [x_map_ind, y_map_ind]
 
@@ -80,12 +83,52 @@ def raw_path_2_path(raw_path, map_msg):
 def astar_func(goalNode, startNode, obstacleMap):
     print "start of Astar!"
 
-    #################################
-    #################################
+    ################################
+    ################################
     # fullosning!
-    # expand all obstacles:
-    slamMap = obstacleMap
+    slamMap = np.copy(obstacleMap)
     rows, cols = slamMap.shape
+
+    # map_height, map_width = obstacleMap.shape
+    # # convert map_visited to an image and save to disk (for visualization):
+    # img = np.zeros((map_height, map_width, 3))
+    # for row in range(map_height):
+    #     for col in range(map_width):
+    #         point = obstacleMap[row][col]
+    #         if point == -1:
+    #             img[row][col] = [100, 100, 100]
+    #         elif point == 0:
+    #             img[row][col] = [255, 255, 255]
+    #         elif point == 100:
+    #             img[row][col] = [0, 0, 0]
+    # cv2.imwrite("/home/fregu856/test_astar.png", img)
+
+    # filter lone obstacle points:
+    n_threshold = 3
+    slamMap_binary = np.zeros((rows, cols))
+    slamMap_binary[slamMap == 100] = 1
+    labeled_array, num_features = label(slamMap_binary)
+    binc = np.bincount(labeled_array.ravel())
+    noise_idx = np.where(binc <= n_threshold)
+    shp = slamMap.shape
+    mask = np.in1d(labeled_array, noise_idx).reshape(shp)
+    slamMap[mask] = 0
+
+    # map_height, map_width = slamMap.shape
+    # # convert map_visited to an image and save to disk (for visualization):
+    # img = np.zeros((map_height, map_width, 3))
+    # for row in range(map_height):
+    #     for col in range(map_width):
+    #         point = slamMap[row][col]
+    #         if point == -1:
+    #             img[row][col] = [100, 100, 100]
+    #         elif point == 0:
+    #             img[row][col] = [255, 255, 255]
+    #         elif point == 100:
+    #             img[row][col] = [0, 0, 0]
+    # cv2.imwrite("/home/fregu856/test_astar_filtered.png", img)
+
+    # expand all obstacles:
     obst_inds = np.nonzero(slamMap == 100)
     obst_inds_row = obst_inds[0].tolist()
     obst_inds_col = obst_inds[1].tolist()
@@ -93,14 +136,42 @@ def astar_func(goalNode, startNode, obstacleMap):
     for obst_ind in obst_inds:
         obst_row = obst_ind[0]
         obst_col = obst_ind[1]
-        for row in range(obst_row-10, obst_row+11):
-            for col in range(obst_col-10, obst_col+11):
+        for row in range(obst_row-6, obst_row+7):
+            for col in range(obst_col-6, obst_col+7):
                 if row < rows and col < cols:
-                    if abs(row - startNode[0]) > 10 and abs(col - startNode[1]) > 10:
-                        slamMap[row][col] = 100
+                    slamMap[row][col] = 100
     obstacleMap = slamMap
-    #################################
-    #################################
+    ################################
+    ################################
+
+    map_height, map_width = obstacleMap.shape
+    # convert map_visited to an image and save to disk (for visualization):
+    img = np.zeros((map_height, map_width, 3))
+    for row in range(map_height):
+        for col in range(map_width):
+            point = obstacleMap[row][col]
+            if point == -1:
+                img[row][col] = [100, 100, 100]
+            elif point == 0:
+                img[row][col] = [255, 255, 255]
+            elif point == 100:
+                img[row][col] = [0, 0, 0]
+    cv2.imwrite("/home/fregu856/test_astar_expanded.png", img)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     [xmax,ymax]=obstacleMap.shape
     fCostMap=np.full((xmax,ymax),float('nan'))
@@ -216,6 +287,26 @@ def astar_func(goalNode, startNode, obstacleMap):
                     yRoute.append(prevY)
                 route=[xRoute,yRoute]
                 routeS2G=np.fliplr(route)
+
+                map_height, map_width = obstacleMap.shape
+                # convert map_visited to an image and save to disk (for visualization):
+                img = np.zeros((map_height, map_width, 3))
+                for row in range(map_height):
+                    for col in range(map_width):
+                        point = obstacleMap[row][col]
+                        if point == -1:
+                            img[row][col] = [100, 100, 100]
+                        elif point == 0:
+                            img[row][col] = [255, 255, 255]
+                        elif point == 100:
+                            img[row][col] = [0, 0, 0]
+                cols = yRoute
+                rows = xRoute
+                for (row, col) in zip(rows, cols):
+                    img[row, col] = [0, 0, 255]
+                cv2.imwrite("/home/fregu856/test_astar_route.png", img)
+
+
 
                 print "end of Astar, routeS2G"
                 return routeS2G
