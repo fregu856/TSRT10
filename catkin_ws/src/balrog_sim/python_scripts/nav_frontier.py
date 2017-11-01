@@ -77,31 +77,11 @@ def frontier_func(slamMap, currentPosition):
 
 
 
-
-
-    #################################
-    #################################
-    # fullosning!
-    # expand all obstacles:
-    obst_inds = np.nonzero(slamMap == 100)
-    obst_inds_row = obst_inds[0].tolist()
-    obst_inds_col = obst_inds[1].tolist()
-    obst_inds = zip(obst_inds_row, obst_inds_col)
-    for obst_ind in obst_inds:
-        obst_row = obst_ind[0]
-        obst_col = obst_ind[1]
-        for row in range(obst_row-20, obst_row+21):
-            for col in range(obst_col-20, obst_col+21):
-                if row < rows and col < cols:
-                    slamMap[row][col] = 100
-    #################################
-    #################################
-
     # Remove covered area and obstacles as frontier candidates
     frontierMap[slamMap == 100] = 0
     frontierMap[slamMap == -2] = 0
 
-    n_threshold = 1
+    n_threshold = 3
     labeled_array, num_features = label(frontierMap)
     binc = np.bincount(labeled_array.ravel())
     noise_idx = np.where(binc <= n_threshold)
@@ -115,8 +95,8 @@ def frontier_func(slamMap, currentPosition):
     #################################
     # fullosning!
     # remove nodes that are too close to the current node:
-    for row in range(currentPosition[1]-1, currentPosition[1]+2):
-        for col in range(currentPosition[0]-1, currentPosition[0]+2):
+    for row in range(currentPosition[1]-4, currentPosition[1]+5):
+        for col in range(currentPosition[0]-4, currentPosition[0]+5):
             if row < rows and col < cols:
                 frontierMap[row][col] = 0
     #################################
