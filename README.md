@@ -508,6 +508,12 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 - $ rosrun balrog_sim coordinator.py 
 - $ rosrun balrog_sim nav_astar.py (close and then start again a couple of times if nothing happens) (the goal position is set in Astar's __init__ function)
 
+# Auto mapping (frontier and A*) in simulation:
+- $ roslaunch balrog_sim OpenKarto_complete_control.launch
+- $ rosrun balrog_sim controller.py
+- $ rosrun balrog_sim coordinator.py
+- $ rosrun balrog_sim nav_mapping.py
+
 # Balrog-PC:
 
 - $ sudo apt install git
