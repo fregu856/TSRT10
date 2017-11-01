@@ -79,6 +79,29 @@ def raw_path_2_path(raw_path, map_msg):
 
 def astar_func(goalNode, startNode, obstacleMap):
     print "start of Astar!"
+
+    #################################
+    #################################
+    # fullosning!
+    # expand all obstacles:
+    slamMap = obstacleMap
+    rows, cols = slamMap.shape
+    obst_inds = np.nonzero(slamMap == 100)
+    obst_inds_row = obst_inds[0].tolist()
+    obst_inds_col = obst_inds[1].tolist()
+    obst_inds = zip(obst_inds_row, obst_inds_col)
+    for obst_ind in obst_inds:
+        obst_row = obst_ind[0]
+        obst_col = obst_ind[1]
+        for row in range(obst_row-10, obst_row+11):
+            for col in range(obst_col-10, obst_col+11):
+                if row < rows and col < cols:
+                    if abs(row - startNode[0]) > 10 and abs(col - startNode[1]) > 10:
+                        slamMap[row][col] = 100
+    obstacleMap = slamMap
+    #################################
+    #################################
+
     [xmax,ymax]=obstacleMap.shape
     fCostMap=np.full((xmax,ymax),float('nan'))
     fCostMapOld=np.full((xmax,ymax),float('nan'))
@@ -153,6 +176,7 @@ def astar_func(goalNode, startNode, obstacleMap):
                 minPosition=np.where(searchFCost==np.nanmin(searchFCost[np.nonzero(searchFCost)]))
             else:
                 route=[-1000, -1000]
+                print "route = [-1000, -1000] break!"
                 break
 
             numMinPoints=np.shape(minPosition)
@@ -193,11 +217,11 @@ def astar_func(goalNode, startNode, obstacleMap):
                 route=[xRoute,yRoute]
                 routeS2G=np.fliplr(route)
 
-                print "end of Astar"
+                print "end of Astar, routeS2G"
                 return routeS2G
                 break
         #print gCostMap
-        print "end of Astar"
+        print "end of Astar, currentNode"
         return currentNode
     else:
         return "Funkar inte"
@@ -223,7 +247,7 @@ class Astar:
         self.y = None
         self.theta = None
 
-        self.goal_pos = [1, -2]
+        self.goal_pos = [3, 1]
 
         msg = Float64MultiArray()
         msg.data = [[0,0], [0, 0.5]]
