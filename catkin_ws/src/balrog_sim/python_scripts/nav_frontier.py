@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import rospy
+from scipy.ndimage.measurements import label
 from std_msgs.msg import Float64MultiArray
 from std_msgs.msg import String
 from nav_msgs.msg import OccupancyGrid
@@ -96,18 +97,17 @@ def frontier_func(slamMap, currentPosition):
     #################################
     #################################
 
-
-
-
-
-
-
     # Remove covered area and obstacles as frontier candidates
     frontierMap[slamMap == 100] = 0
     frontierMap[slamMap == -2] = 0
 
-
-
+    n_threshold = 1
+    labeled_array, num_features = label(frontierMap)
+    binc = np.bincount(labeled_array.ravel())
+    noise_idx = np.where(binc <= n_threshold)
+    shp = frontierMap.shape
+    mask = np.in1d(labeled_array, noise_idx).reshape(shp)
+    frontierMap[mask] = 0	
 
 
     #print frontierMap
