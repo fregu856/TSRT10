@@ -80,7 +80,7 @@ def frontier_func(slamMap, currentPosition):
 
     #################################
     #################################
-    # fullösning!
+    # fullosning!
     # expand all obstacles:
     obst_inds = np.nonzero(slamMap == 100)
     obst_inds_row = obst_inds[0].tolist()
@@ -89,8 +89,8 @@ def frontier_func(slamMap, currentPosition):
     for obst_ind in obst_inds:
         obst_row = obst_ind[0]
         obst_col = obst_ind[1]
-        for row in range(obst_row-3, obst_row+4):
-            for col in range(obst_col-3, obst_col+4):
+        for row in range(obst_row-20, obst_row+21):
+            for col in range(obst_col-20, obst_col+21):
                 if row < rows and col < cols:
                     slamMap[row][col] = 100
     #################################
@@ -113,7 +113,7 @@ def frontier_func(slamMap, currentPosition):
     #print frontierMap
     #################################
     #################################
-    # fullösning!
+    # fullosning!
     # remove nodes that are too close to the current node:
     for row in range(currentPosition[1]-1, currentPosition[1]+2):
         for col in range(currentPosition[0]-1, currentPosition[0]+2):
@@ -127,12 +127,14 @@ def frontier_func(slamMap, currentPosition):
 
 
     #print frontierMap
-    x = np.nonzero(frontierMap)
-    goalNode = np.argmin((x[0]-currentPosition[0])**2 + (x[1]-currentPosition[1])**2)
+    temp = np.nonzero(frontierMap)
+    x = temp[1]
+    y = temp[0]
+    goalNode = np.argmin((x-currentPosition[0])**2 + (y-currentPosition[1])**2)
 
-    print frontierMap[x[0][goalNode], x[1][goalNode]]
+    print frontierMap[x[goalNode], y[goalNode]]
 
-    return [x[1][goalNode],x[0][goalNode]]
+    return [x[goalNode], y[goalNode]] # ([x (col), y (row)])
 
 def map_index_2_pos(map_msg, pos_index):
     map_origin_obj = map_msg.info.origin
