@@ -278,13 +278,69 @@ def astar_func(goalNode, startNode, obstacleMap):
                 yRoute=[]
                 xRoute.append(goalNode[0])
                 yRoute.append(goalNode[1])
+                # while walkingNode[0]!=startNode[0] or walkingNode[1]!=startNode[1]:
+                #     numberOfsteps=numberOfsteps+1
+                #     prevX=int(fromXNode[walkingNode[0],walkingNode[1]])
+                #     prevY=int(fromYNode[walkingNode[0],walkingNode[1]])
+                #     walkingNode=[prevX,prevY]
+                #     xRoute.append((prevX))
+                #     yRoute.append(prevY)
+                # route=[xRoute,yRoute]
+                # routeS2G=np.fliplr(route)
+                #
+                # map_height, map_width = obstacleMap.shape
+                # # convert map_visited to an image and save to disk (for visualization):
+                # img = np.zeros((map_height, map_width, 3))
+                # for row in range(map_height):
+                #     for col in range(map_width):
+                #         point = obstacleMap[row][col]
+                #         if point == -1:
+                #             img[row][col] = [100, 100, 100]
+                #         elif point == 0:
+                #             img[row][col] = [255, 255, 255]
+                #         elif point == 100:
+                #             img[row][col] = [0, 0, 0]
+                # cols = yRoute
+                # rows = xRoute
+                # for (row, col) in zip(rows, cols):
+                #     img[row, col] = [0, 0, 255]
+                # cv2.imwrite("/home/haand/test_astar_route.png", img)
+                #
+                #
+                # print "end of Astar, routeS2G"
+                # return routeS2G
+                # break
+                dir=0
                 while walkingNode[0]!=startNode[0] or walkingNode[1]!=startNode[1]:
+                #for p in range(0,3):
                     numberOfsteps=numberOfsteps+1
                     prevX=int(fromXNode[walkingNode[0],walkingNode[1]])
                     prevY=int(fromYNode[walkingNode[0],walkingNode[1]])
+
+
+                    if prevX==walkingNode[0]:
+                        if dir!=5:
+                            xRoute.append((walkingNode[0]))
+                            yRoute.append(walkingNode[1])
+                            dir=5
+                    elif prevY==walkingNode[1]:
+                        if dir!=3:
+                            xRoute.append((walkingNode[0]))
+                            yRoute.append(walkingNode[1])
+                            dir=3
+                    elif (prevY==walkingNode[1]+1 and prevY==walkingNode[1]+1) or (prevY==walkingNode[1]-1 and prevY==walkingNode[1]-1):
+                        if dir!=2:
+                            xRoute.append((walkingNode[0]))
+                            yRoute.append(walkingNode[1])
+                            dir=2
+                    else:
+                        if dir!=-2:
+                            xRoute.append((walkingNode[0]))
+                            yRoute.append(walkingNode[1])
+                            dir=-2
+
                     walkingNode=[prevX,prevY]
-                    xRoute.append((prevX))
-                    yRoute.append(prevY)
+
                 route=[xRoute,yRoute]
                 routeS2G=np.fliplr(route)
 
@@ -304,10 +360,8 @@ def astar_func(goalNode, startNode, obstacleMap):
                 rows = xRoute
                 for (row, col) in zip(rows, cols):
                     img[row, col] = [0, 0, 255]
-                cv2.imwrite("/home/haand/test_astar_route.png", img)
+                cv2.imwrite("/home/fregu856/test_astar_route.png", img)
 
-
-                print "end of Astar, routeS2G"
                 return routeS2G
                 break
         #print gCostMap
@@ -337,7 +391,7 @@ class Astar:
         self.y = None
         self.theta = None
 
-        self.goal_pos = [3.5, 3.5]
+        self.goal_pos = [-1, 1]
 
         msg = Float64MultiArray()
         msg.data = [[0,0], [0, 0.5]]
