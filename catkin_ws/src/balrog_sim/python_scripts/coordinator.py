@@ -77,9 +77,14 @@ class Coordinator:
 
                 print "published new goal position, x: %f, y: %f" % (goal_pos[0], goal_pos[1])
             else:
-                print "reached end of path"
-                msg = "reached end of path"
-                self.status_pub.publish(msg)
+                if self.next_index == self.final_index + 1:
+                    print "reached end of path"
+                    msg = "reached end of path"
+                    self.status_pub.publish(msg)
+                else:
+                    print "waiting for new path"
+                    
+                self.next_index += 1
 
 if __name__ == "__main__":
     # create a Coordinator object (this will run its __init__ function):

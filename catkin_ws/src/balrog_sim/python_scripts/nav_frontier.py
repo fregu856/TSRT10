@@ -9,6 +9,8 @@ from nav_msgs.msg import OccupancyGrid
 import numpy as np
 import cv2
 
+import time
+
 def frontier_func(slamMap, currentPosition, map_msg):
     rows, cols = slamMap.shape
     frontierMap = np.zeros(shape=(rows,cols))
@@ -266,8 +268,12 @@ class Frontier:
         self.y = None
         self.theta = None
 
+
+        # get things moving (seems like we need to wait a short moment for the
+        # message to actually be published):
         msg = Float64MultiArray()
-        msg.data = [0, 0.5]
+        msg.data = [0, 0.1]
+        time.sleep(0.5)
         self.goal_pos_pub.publish(msg)
 
         print "hej"
