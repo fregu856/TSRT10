@@ -101,7 +101,7 @@ def astar_func(goalNode, startNode, obstacleMap):
     #             img[row][col] = [255, 255, 255]
     #         elif point == 100:
     #             img[row][col] = [0, 0, 0]
-    # cv2.imwrite("/home/fregu856/test_astar.png", img)
+    # cv2.imwrite("~/TSRT10/test_astar.png", img)
 
     # filter lone obstacle points:
     n_threshold = 3
@@ -126,7 +126,7 @@ def astar_func(goalNode, startNode, obstacleMap):
     #             img[row][col] = [255, 255, 255]
     #         elif point == 100:
     #             img[row][col] = [0, 0, 0]
-    # cv2.imwrite("/home/fregu856/test_astar_filtered.png", img)
+    # cv2.imwrite("~/TSRT10/test_astar_filtered.png", img)
 
     # expand all obstacles:
     obst_inds = np.nonzero(slamMap == 100)
@@ -156,7 +156,7 @@ def astar_func(goalNode, startNode, obstacleMap):
                 img[row][col] = [255, 255, 255]
             elif point == 100:
                 img[row][col] = [0, 0, 0]
-    cv2.imwrite("/home/fregu856/test_astar_expanded.png", img)
+    cv2.imwrite("/home/haand/test_astar_expanded.png", img)
 
 
 
@@ -304,8 +304,7 @@ def astar_func(goalNode, startNode, obstacleMap):
                 rows = xRoute
                 for (row, col) in zip(rows, cols):
                     img[row, col] = [0, 0, 255]
-                cv2.imwrite("/home/fregu856/test_astar_route.png", img)
-
+                cv2.imwrite("/home/haand/test_astar_route.png", img)
 
 
                 print "end of Astar, routeS2G"
@@ -338,7 +337,7 @@ class Astar:
         self.y = None
         self.theta = None
 
-        self.goal_pos = [3, 1]
+        self.goal_pos = [3.5, 3.5]
 
         msg = Float64MultiArray()
         msg.data = [[0,0], [0, 0.5]]
