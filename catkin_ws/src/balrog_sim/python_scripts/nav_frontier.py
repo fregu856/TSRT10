@@ -7,53 +7,149 @@ from std_msgs.msg import String
 from nav_msgs.msg import OccupancyGrid
 
 import numpy as np
+import cv2
 
-def frontier_func(slamMap, currentPosition):
+def frontier_func(slamMap, currentPosition, map_msg):
     rows, cols = slamMap.shape
     frontierMap = np.zeros(shape=(rows,cols))
     #print slamMap
+
+    # save slamMap as an image:
+    map_height, map_width = slamMap.shape
+    img = np.zeros((map_height, map_width, 3))
+    for row in range(map_height):
+        for col in range(map_width):
+            point = slamMap[row][col]
+            if point == -1:
+                img[row][col] = [100, 100, 100]
+            elif point == 0:
+                img[row][col] = [255, 255, 255]
+            elif point == 100:
+                img[row][col] = [0, 0, 0]
+    cv2.imwrite("test_frontier.png", img)
+
+    # set all nodes outside of the 8x8 square to 100 (= obstacle):
+    x_min = -4
+    x_max = 4
+    y_min = -4
+    y_max = 4
+    #
+    temp = pos_2_map_index(map_msg, [x_min, y_min])
+    x_min_ind = temp[0]
+    y_min_ind = temp[1]
+    temp = pos_2_map_index(map_msg, [x_max, y_max])
+    x_max_ind = temp[0]
+    y_max_ind = temp[1]
+    #
+    if x_max_ind < cols:
+        slamMap[:, x_max_ind:] = 100
+    if x_min_ind > 0:
+        slamMap[:, 0:x_min_ind] = 100
+    if y_max_ind < rows:
+        slamMap[y_max_ind:, :] = 100
+    if y_min_ind > 0:
+        slamMap[0:y_min_ind, :] = 100
+
+    # save slamMap as an image after bordering:
+    map_height, map_width = slamMap.shape
+    img = np.zeros((map_height, map_width, 3))
+    for row in range(map_height):
+        for col in range(map_width):
+            point = slamMap[row][col]
+            if point == -1:
+                img[row][col] = [100, 100, 100]
+            elif point == 0:
+                img[row][col] = [255, 255, 255]
+            elif point == 100:
+                img[row][col] = [0, 0, 0]
+    cv2.imwrite("test_frontier_border.png", img)
+
+    # # filter lone obstacle points:
+    # n_threshold = 1
+    # slamMap_binary = np.zeros((rows, cols))
+    # slamMap_binary[slamMap == 100] = 1
+    # labeled_array, num_features = label(slamMap_binary)
+    # binc = np.bincount(labeled_array.ravel())
+    # noise_idx = np.where(binc <= n_threshold)
+    # shp = slamMap.shape
+    # mask = np.in1d(labeled_array, noise_idx).reshape(shp)
+    # slamMap[mask] = 0
+    #
+    # # save slamMap as an image after obstacle filtering:
+    # map_height, map_width = slamMap.shape
+    # img = np.zeros((map_height, map_width, 3))
+    # for row in range(map_height):
+    #     for col in range(map_width):
+    #         point = slamMap[row][col]
+    #         if point == -1:
+    #             img[row][col] = [100, 100, 100]
+    #         elif point == 0:
+    #             img[row][col] = [255, 255, 255]
+    #         elif point == 100:
+    #             img[row][col] = [0, 0, 0]
+    # cv2.imwrite("test_frontier_filtered.png", img)
+
+    # expand all obstacles:
+    obst_inds = np.nonzero(slamMap == 100)
+    obst_inds_row = obst_inds[0].tolist()
+    obst_inds_col = obst_inds[1].tolist()
+    obst_inds = zip(obst_inds_row, obst_inds_col)
+    for obst_ind in obst_inds:
+        obst_row = obst_ind[0]
+        obst_col = obst_ind[1]
+        for row in range(obst_row-6, obst_row+7):
+            for col in range(obst_col-6, obst_col+7):
+                if row < rows and col < cols:
+                    slamMap[row][col] = 100
+
+    # save slamMap as an image after obstacle expansion:
+    map_height, map_width = slamMap.shape
+    img = np.zeros((map_height, map_width, 3))
+    for row in range(map_height):
+        for col in range(map_width):
+            point = slamMap[row][col]
+            if point == -1:
+                img[row][col] = [100, 100, 100]
+            elif point == 0:
+                img[row][col] = [255, 255, 255]
+            elif point == 100:
+                img[row][col] = [0, 0, 0]
+    cv2.imwrite("test_frontier_expanded.png", img)
+
     slamMapNoObstacles = slamMap
     slamMapNoObstacles[slamMapNoObstacles == -2] = 0    #Covered
     slamMapNoObstacles[slamMapNoObstacles == 100] = 0   #Obstacle]
     #print slamMapNoObstacles
-    #tempMapA = np.vstack( [ np.zeros(shape=(1,rows)), slamMapNoObstacles ] )
-    #tempMapA = np.zeros((rows+1, cols))
-    #tempMapA[1:, :] = slamMapNoObstacles
-    #print tempMapA
-    #tempMap1 = np.column_stack( [ np.zeros(shape=(cols+1,1)), tempMapA ] )
-    #print tempMap1
+
     tempMap1 = np.zeros((rows+1, cols+1))
     tempMap1[1:, 1:] = slamMapNoObstacles
     #print tempMap1
-    #tempMapB = np.vstack( [ slamMapNoObstacles, np.zeros(shape=(1,rows)) ] )
-    #tempMap2 = np.column_stack( [ tempMapB, np.zeros(shape=(cols+1,1)) ] )
-    #print tempMapB
-    #print tempMap2
+
     tempMap2 = np.zeros((rows+1, cols+1))
     tempMap2[0:-1, 0:-1] = slamMapNoObstacles
     #print tempMap2
+
     frontierNodes = tempMap2 - tempMap1 ## 16x16
     #print frontierNodes
+
     FirstMap = frontierNodes[0:-1,0:-1]
     #print FirstMap
+
     SecondMap = frontierNodes[1:,1:]
     #print SecondMap
 
     frontierMap[FirstMap == -1] = 1
     frontierMap[SecondMap == 1] = 1
     #print frontierMap
-    #tempMapC = np.vstack( [ slamMapNoObstacles, np.zeros(shape=(1,cols)) ] )
-    #tempMap3 = np.column_stack( [ np.zeros(shape=(cols+1,1)), tempMapC ] )
-    #print tempMap3
+
     tempMap3 = np.zeros((rows+1, cols+1))
     tempMap3[0:-1, 1:] = slamMapNoObstacles
     #print tempMap3
-    #tempMapD = np.column_stack( [ slamMapNoObstacles, np.zeros(shape=(rows,1)) ] )
-    #tempMap4 = np.vstack( [ np.zeros(shape=(1,cols+1)), tempMapD  ] )
-    #print tempMap4
+
     tempMap4 = np.zeros((rows+1, cols+1))
     tempMap4[1:, 0:-1] = slamMapNoObstacles
     #print tempMap4
+
     frontierNodes = tempMap3 - tempMap4
     #print frontierNodes
 
@@ -63,13 +159,11 @@ def frontier_func(slamMap, currentPosition):
     frontierMap[SecondMap == 1] = 1
     #print frontierMap
 
-
-
-
-    # Remove covered area and obstacles as frontier candidates
+    # Remove covered area and obstacles as frontier candidates:
     frontierMap[slamMap == 100] = 0
     frontierMap[slamMap == -2] = 0
 
+    # filter lone frontier nodes:
     n_threshold = 3
     labeled_array, num_features = label(frontierMap)
     binc = np.bincount(labeled_array.ravel())
@@ -77,33 +171,24 @@ def frontier_func(slamMap, currentPosition):
     shp = frontierMap.shape
     mask = np.in1d(labeled_array, noise_idx).reshape(shp)
     frontierMap[mask] = 0
-
-
     #print frontierMap
-    #################################
-    #################################
-    # fullosning!
+
     # remove nodes that are too close to the current node:
-    for row in range(currentPosition[1]-4, currentPosition[1]+5):
-        for col in range(currentPosition[0]-4, currentPosition[0]+5):
+    for row in range(currentPosition[1]-6, currentPosition[1]+7):
+        for col in range(currentPosition[0]-6, currentPosition[0]+7):
             if row < rows and col < cols:
                 frontierMap[row][col] = 0
-    #################################
-    #################################
-
-
-
-
-
     #print frontierMap
+
     temp = np.nonzero(frontierMap)
     x = temp[1]
     y = temp[0]
-    goalNode = np.argmin((x-currentPosition[0])**2 + (y-currentPosition[1])**2)
-
-    print frontierMap[x[goalNode], y[goalNode]]
-
-    return [x[goalNode], y[goalNode]] # ([x (col), y (row)])
+    if len(x) > 0:
+        goalNode = np.argmin((x-currentPosition[0])**2 + (y-currentPosition[1])**2)
+        return [x[goalNode], y[goalNode]] # ([x (col), y (row)])
+    else:
+        while True:
+            print "frontier is done!"
 
 def map_index_2_pos(map_msg, pos_index):
     map_origin_obj = map_msg.info.origin
@@ -182,8 +267,10 @@ class Frontier:
         self.theta = None
 
         msg = Float64MultiArray()
-        msg.data = [0, 0]
+        msg.data = [0, 0.5]
         self.goal_pos_pub.publish(msg)
+
+        print "hej"
 
         # keep python from exiting until this ROS node is stopped:
         rospy.spin()
@@ -225,19 +312,24 @@ class Frontier:
             pos = [x, y]
 
             map_matrix = map_msg_2_matrix(map_msg)
-            print map_matrix
-            print map_matrix.shape
+            #print map_matrix
+            #print map_matrix.shape
 
             pos_index = pos_2_map_index(map_msg, pos)
+            print "current pos:"
             print pos
+            print "current pos index:"
             print pos_index
-            print map_index_2_pos(map_msg, pos_index)
+            #print map_index_2_pos(map_msg, pos_index)
 
-            goal_pos_index = frontier_func(map_matrix, pos_index)
+            goal_pos_index = frontier_func(map_matrix, pos_index, map_msg)
+            print "goal pos index:"
             print goal_pos_index
 
             goal_pos = map_index_2_pos(map_msg, goal_pos_index)
+            print "goal pos:"
             print goal_pos
+            print "##################################################"
 
             return goal_pos
         else:
