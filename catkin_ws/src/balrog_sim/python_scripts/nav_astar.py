@@ -83,9 +83,6 @@ def raw_path_2_path(raw_path, map_msg):
 def astar_func(goalNode, startNode, obstacleMap):
     print "start of Astar!"
 
-    ################################
-    ################################
-    # fullosning!
     slamMap = np.copy(obstacleMap)
     rows, cols = slamMap.shape
 
@@ -101,7 +98,7 @@ def astar_func(goalNode, startNode, obstacleMap):
     #             img[row][col] = [255, 255, 255]
     #         elif point == 100:
     #             img[row][col] = [0, 0, 0]
-    # cv2.imwrite("~/TSRT10/test_astar.png", img)
+    # cv2.imwrite("test_astar.png", img)
 
     # filter lone obstacle points:
     n_threshold = 3
@@ -126,7 +123,7 @@ def astar_func(goalNode, startNode, obstacleMap):
     #             img[row][col] = [255, 255, 255]
     #         elif point == 100:
     #             img[row][col] = [0, 0, 0]
-    # cv2.imwrite("~/TSRT10/test_astar_filtered.png", img)
+    # cv2.imwrite("test_astar_filtered.png", img)
 
     # expand all obstacles:
     obst_inds = np.nonzero(slamMap == 100)
@@ -141,8 +138,6 @@ def astar_func(goalNode, startNode, obstacleMap):
                 if row < rows and col < cols:
                     slamMap[row][col] = 100
     obstacleMap = slamMap
-    ################################
-    ################################
 
     map_height, map_width = obstacleMap.shape
     # convert map_visited to an image and save to disk (for visualization):
@@ -156,21 +151,7 @@ def astar_func(goalNode, startNode, obstacleMap):
                 img[row][col] = [255, 255, 255]
             elif point == 100:
                 img[row][col] = [0, 0, 0]
-    cv2.imwrite("/home/haand/test_astar_expanded.png", img)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    cv2.imwrite("test_astar_expanded.png", img)
 
 
     [xmax,ymax]=obstacleMap.shape
@@ -254,20 +235,14 @@ def astar_func(goalNode, startNode, obstacleMap):
             minRow=minPosition[0]
             minColumn=minPosition[1]
             for nodeCounter in range(0,numMinPoints[1]):
-                #if checkedMap[minRow[nodeCounter],minColumn[nodeCounter]]==0:
-                    lookH.append(hCostMap[minRow[nodeCounter],minColumn[nodeCounter]])
-                 #   minRowElim.append(minRow[nodeCounter])
-                  #  minColumnElim.append(minColumn[nodeCounter])
+                lookH.append(hCostMap[minRow[nodeCounter],minColumn[nodeCounter]])
 
             minHValue=np.where(lookH==np.min(lookH))
-
 
             currentNode=[minRow[minHValue[0][0]],minColumn[minHValue[0][0]]]
 
             gCostMapOld=np.copy(gCostMap)
             fCostMapOld=np.copy(fCostMap)
-
-
 
             if fValueMap[goalNode[0],goalNode[1]]==1:
                 found=1
@@ -278,45 +253,12 @@ def astar_func(goalNode, startNode, obstacleMap):
                 yRoute=[]
                 xRoute.append(goalNode[0])
                 yRoute.append(goalNode[1])
-                # while walkingNode[0]!=startNode[0] or walkingNode[1]!=startNode[1]:
-                #     numberOfsteps=numberOfsteps+1
-                #     prevX=int(fromXNode[walkingNode[0],walkingNode[1]])
-                #     prevY=int(fromYNode[walkingNode[0],walkingNode[1]])
-                #     walkingNode=[prevX,prevY]
-                #     xRoute.append((prevX))
-                #     yRoute.append(prevY)
-                # route=[xRoute,yRoute]
-                # routeS2G=np.fliplr(route)
-                #
-                # map_height, map_width = obstacleMap.shape
-                # # convert map_visited to an image and save to disk (for visualization):
-                # img = np.zeros((map_height, map_width, 3))
-                # for row in range(map_height):
-                #     for col in range(map_width):
-                #         point = obstacleMap[row][col]
-                #         if point == -1:
-                #             img[row][col] = [100, 100, 100]
-                #         elif point == 0:
-                #             img[row][col] = [255, 255, 255]
-                #         elif point == 100:
-                #             img[row][col] = [0, 0, 0]
-                # cols = yRoute
-                # rows = xRoute
-                # for (row, col) in zip(rows, cols):
-                #     img[row, col] = [0, 0, 255]
-                # cv2.imwrite("/home/haand/test_astar_route.png", img)
-                #
-                #
-                # print "end of Astar, routeS2G"
-                # return routeS2G
-                # break
+
                 dir=0
                 while walkingNode[0]!=startNode[0] or walkingNode[1]!=startNode[1]:
-                #for p in range(0,3):
                     numberOfsteps=numberOfsteps+1
                     prevX=int(fromXNode[walkingNode[0],walkingNode[1]])
                     prevY=int(fromYNode[walkingNode[0],walkingNode[1]])
-
 
                     if prevX==walkingNode[0]:
                         if dir!=5:
@@ -344,8 +286,9 @@ def astar_func(goalNode, startNode, obstacleMap):
                 route=[xRoute,yRoute]
                 routeS2G=np.fliplr(route)
 
+                # save obstacleMap as an image, with each point on the A* path
+                # marked in red:
                 map_height, map_width = obstacleMap.shape
-                # convert map_visited to an image and save to disk (for visualization):
                 img = np.zeros((map_height, map_width, 3))
                 for row in range(map_height):
                     for col in range(map_width):
@@ -360,15 +303,15 @@ def astar_func(goalNode, startNode, obstacleMap):
                 rows = xRoute
                 for (row, col) in zip(rows, cols):
                     img[row, col] = [0, 0, 255]
-                cv2.imwrite("/home/fregu856/test_astar_route.png", img)
+                cv2.imwrite("test_astar_route.png", img)
 
                 return routeS2G
                 break
-        #print gCostMap
+
         print "end of Astar, currentNode"
         return currentNode
     else:
-        return "Funkar inte"
+        return "Astar does NOT work!"
 
 class Astar:
     def __init__(self):
@@ -379,7 +322,7 @@ class Astar:
 
         rospy.Subscriber("/estimated_pose", Float64MultiArray, self.est_pose_callback)
 
-        # subscribe to the topic onto which the controller publishes data once
+        # subscribe to the topic onto which the coordinator publishes data once
         # it has reached a goal position:
         rospy.Subscriber("/coordinator_status", String, self.coordinator_callback)
 
@@ -392,10 +335,6 @@ class Astar:
         self.theta = None
 
         self.goal_pos = [-1, 1]
-
-        msg = Float64MultiArray()
-        msg.data = [[0,0], [0, 0.5]]
-        self.path_pub.publish(msg)
 
         # keep python from exiting until this ROS node is stopped:
         rospy.spin()
@@ -421,11 +360,11 @@ class Astar:
         # get the recived string:
         msg_string = msg_obj.data
 
-        if msg_string == "reached target position":
+        if msg_string == "reached end of path":
             path = self.get_path()
             if path is not None:
                 print path
-                # publish the goal position:
+                # publish the path:
                 msg = Float64MultiArray()
                 msg.data = path
                 self.path_pub.publish(msg)
@@ -442,26 +381,20 @@ class Astar:
             pos = [x, y]
 
             map_matrix = map_msg_2_matrix(map_msg)
-            print map_matrix
-            print map_matrix.shape
+            #print map_matrix
+            #print map_matrix.shape
 
             pos_index = pos_2_map_index(map_msg, pos)
-            print pos
-            print pos_index
-            print map_index_2_pos(map_msg, pos_index)
+            #print pos
+            #print pos_index
+            #print map_index_2_pos(map_msg, pos_index)
 
             goal_index = pos_2_map_index(map_msg, self.goal_pos)
-            print "goal:"
-            print self.goal_pos
-            print goal_index
+            #print "goal:"
+            #print self.goal_pos
+            #print goal_index
 
-            print map_matrix[goal_index[1], goal_index[0]]
-            # print [1,1]
-            # print pos_2_map_index(map_msg, [1,1])
-            # print [-1,-1]
-            # print pos_2_map_index(map_msg, [-1,-1])
-            # print [1,-1]
-            # print pos_2_map_index(map_msg, [1,-1])
+            #print map_matrix[goal_index[1], goal_index[0]]
 
             raw_path = astar_func([goal_index[1], goal_index[0]], [pos_index[1], pos_index[0]], map_matrix)
             print raw_path
@@ -472,14 +405,6 @@ class Astar:
         else:
             return None
 
-    # def run(self):
-    #     rate = rospy.Rate(1) # (1 Hz)
-    #     while not rospy.is_shutdown():
-    #         path = self.get_path()
-    #         rate.sleep() # (to get it to loop with 1 Hz)
-
 if __name__ == "__main__":
-    # create a Frontier object (this will run its __init__ function):
+    # create an Astar object (this will run its __init__ function):
     astar = Astar()
-
-    #frontier.run()

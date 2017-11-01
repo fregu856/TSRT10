@@ -8,17 +8,6 @@ from nav_msgs.msg import OccupancyGrid
 
 import numpy as np
 
-# def initMap():
-#     slamMap = -1*np.ones((15, 15))
-#     rows, cols = slamMap.shape
-#
-#     for j in range(0,10):
-#          for i in range(0,10):
-#              slamMap[j][i] = 0
-#     slamMap[5,5] = -2
-#     goalNode = frontier_func(slamMap, [5,5])
-#     print(goalNode)
-
 def frontier_func(slamMap, currentPosition):
     rows, cols = slamMap.shape
     frontierMap = np.zeros(shape=(rows,cols))
@@ -254,16 +243,6 @@ class Frontier:
         else:
             return None
 
-    # def run(self):
-    #     rate = rospy.Rate(1) # (1 Hz)
-    #     while not rospy.is_shutdown():
-    #         goal_pos = self.get_goal_pos()
-    #         rate.sleep() # (to get it to loop with 1 Hz)
-
 if __name__ == "__main__":
     # create a Frontier object (this will run its __init__ function):
     frontier = Frontier()
-
-    #frontier.run()
-
-    # initMap()
