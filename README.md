@@ -494,6 +494,20 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 - $ rosrun balrog_sim controller.py
 - $ rosrun balrog_sim coordinator.py 
 
+# Test frontier (auto mapping) in empty map in simulation:
+- $ roslaunch balrog_sim OpenKarto_complete_control_empty.launch
+- $ rosrun balrog_sim controller.py
+- $ rosrun balrog_sim nav_frontier.py (close and then start again a couple of times if nothing happens)
+
+# Test A* in simulation:
+- $ roslaunch balrog_sim OpenKarto_complete_control.launch
+- $ roslaunch balrog_sim manual_control.launch
+- Manually map at least a part of the map
+- Shut down manual_control.launch (it will interfere with the controller otherwise, not good!)
+- $ rosrun balrog_sim controller.py
+- $ rosrun balrog_sim coordinator.py 
+- $ rosrun balrog_sim nav_astar.py (close and then start again a couple of times if nothing happens) (the goal position is set in Astar's __init__ function)
+
 # Balrog-PC:
 
 - $ sudo apt install git
