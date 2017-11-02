@@ -189,9 +189,9 @@ def frontier_func(slamMap, currentPosition, map_msg):
                 img[row][col] = [0, 0, 0]
     cv2.imwrite("test_frontier_expanded.png", img)
 
-    slamMapNoObstacles = slamMap
+    slamMapNoObstacles = np.copy(slamMap)
     slamMapNoObstacles[slamMapNoObstacles == -2] = 0    #Covered
-    slamMapNoObstacles[slamMapNoObstacles == 100] = 0   #Obstacle]
+    slamMapNoObstacles[slamMapNoObstacles == 100] = -1   #Obstacle]
     #print slamMapNoObstacles
 
     tempMap1 = np.zeros((rows+1, cols+1))
@@ -232,9 +232,101 @@ def frontier_func(slamMap, currentPosition, map_msg):
     frontierMap[SecondMap == 1] = 1
     #print frontierMap
 
+
+
+
+
+
+    map_height, map_width = frontierMap.shape
+    img = np.zeros((map_height, map_width, 3))
+    for row in range(map_height):
+        for col in range(map_width):
+            point = frontierMap[row][col]
+            if point == 1:
+                img[row][col] = [255, 0, 0]
+            elif point == 0:
+                img[row][col] = [255, 255, 255]
+    cv2.imwrite("frontierMap1.png", img)
+
+
+
+
+
+
     # Remove covered area and obstacles as frontier candidates:
     frontierMap[slamMap == 100] = 0
     frontierMap[slamMap == -2] = 0
+
+
+
+    map_height, map_width = frontierMap.shape
+    img = np.zeros((map_height, map_width, 3))
+    for row in range(map_height):
+        for col in range(map_width):
+            point = frontierMap[row][col]
+            if point == 1:
+                img[row][col] = [255, 0, 0]
+            elif point == 0:
+                img[row][col] = [255, 255, 255]
+    cv2.imwrite("frontierMap2.png", img)
+
+    # save slamMap as an image after bordering:
+    map_height, map_width = slamMap.shape
+    img = np.zeros((map_height, map_width, 3))
+    for row in range(map_height):
+        for col in range(map_width):
+            point = slamMap[row][col]
+            if point == -1:
+                img[row][col] = [100, 100, 100]
+            elif point == 0:
+                img[row][col] = [255, 255, 255]
+            elif point == 100:
+                img[row][col] = [0, 0, 0]
+    cv2.imwrite("slamMap2.png", img)
+
+
+
+    # onlyObs = slamMap
+    # onlyObs[slamMap == -2] = 0
+    #
+    # clearFrontiers1_A = np.zeros((rows+1,cols))
+    # clearFrontiers1_B = np.zeros((rows+1,cols))
+    # clearFrontiers1_A[0:-1, :] = onlyObs
+    # clearFrontiers1_B[1:, :] = onlyObs
+    # clearFrontiers1 = clearFrontiers1_A - clearFrontiers1_B
+    #
+    # clearFrontiers2_A = np.zeros((rows,cols+1))
+    # clearFrontiers2_B = np.zeros((rows,cols+1))
+    # clearFrontiers2_A[:, 0:-1] = onlyObs
+    # clearFrontiers2_B[:, 1:] = onlyObs
+    # clearFrontiers2 = clearFrontiers2_A - clearFrontiers2_B
+    #
+    # frontierMap[clearFrontiers1[1:, :] == 101] = 0;
+    # frontierMap[clearFrontiers1[1:, :] == 1] = 1;
+    # frontierMap[clearFrontiers1[0:-1, :] == -101] = 0;
+    # frontierMap[clearFrontiers1[0:-1, :] == -1] = 1;
+    #
+    # frontierMap[clearFrontiers2[:, 1:] == 101] = 0;
+    # frontierMap[clearFrontiers2[:, 1:] == 1] = 1;
+    # frontierMap[clearFrontiers2[:, 0:-1] == -101] = 0;
+    # frontierMap[clearFrontiers2[:, 0:-1] == -1] = 1;
+
+
+
+
+
+    map_height, map_width = frontierMap.shape
+    img = np.zeros((map_height, map_width, 3))
+    for row in range(map_height):
+        for col in range(map_width):
+            point = frontierMap[row][col]
+            if point == 1:
+                img[row][col] = [255, 0, 0]
+            elif point == 0:
+                img[row][col] = [255, 255, 255]
+    cv2.imwrite("frontierMap3.png", img)
+
+
 
     # filter lone frontier nodes:
     n_threshold = 3
@@ -246,12 +338,47 @@ def frontier_func(slamMap, currentPosition, map_msg):
     frontierMap[mask] = 0
     #print frontierMap
 
+
+
+
+
+
+    map_height, map_width = frontierMap.shape
+    img = np.zeros((map_height, map_width, 3))
+    for row in range(map_height):
+        for col in range(map_width):
+            point = frontierMap[row][col]
+            if point == 1:
+                img[row][col] = [255, 0, 0]
+            elif point == 0:
+                img[row][col] = [255, 255, 255]
+    cv2.imwrite("frontierMap4.png", img)
+
+
+
+
+
     # remove nodes that are too close to the current node:
     for row in range(currentPosition[1]-6, currentPosition[1]+7):
         for col in range(currentPosition[0]-6, currentPosition[0]+7):
             if row < rows and col < cols:
                 frontierMap[row][col] = 0
     #print frontierMap
+
+
+
+    map_height, map_width = frontierMap.shape
+    img = np.zeros((map_height, map_width, 3))
+    for row in range(map_height):
+        for col in range(map_width):
+            point = frontierMap[row][col]
+            if point == 1:
+                img[row][col] = [255, 0, 0]
+            elif point == 0:
+                img[row][col] = [255, 255, 255]
+    cv2.imwrite("frontierMap5.png", img)
+
+
 
     temp = np.nonzero(frontierMap)
     x = temp[1]
@@ -269,19 +396,20 @@ def astar_func(goalNode, startNode, obstacleMap):
     slamMap = np.copy(obstacleMap)
     rows, cols = slamMap.shape
 
-    # map_height, map_width = obstacleMap.shape
-    # # convert map_visited to an image and save to disk (for visualization):
-    # img = np.zeros((map_height, map_width, 3))
-    # for row in range(map_height):
-    #     for col in range(map_width):
-    #         point = obstacleMap[row][col]
-    #         if point == -1:
-    #             img[row][col] = [100, 100, 100]
-    #         elif point == 0:
-    #             img[row][col] = [255, 255, 255]
-    #         elif point == 100:
-    #             img[row][col] = [0, 0, 0]
-    # cv2.imwrite("test_astar.png", img)
+    map_height, map_width = obstacleMap.shape
+    # convert map_visited to an image and save to disk (for visualization):
+    img = np.zeros((map_height, map_width, 3))
+    for row in range(map_height):
+        for col in range(map_width):
+            point = obstacleMap[row][col]
+            if point == -1:
+                img[row][col] = [100, 100, 100]
+            elif point == 0:
+                img[row][col] = [255, 255, 255]
+            elif point == 100:
+                img[row][col] = [0, 0, 0]
+    img[goalNode[0]][goalNode[1]] = [0, 255, 0]
+    cv2.imwrite("test_astar.png", img)
 
     # # filter lone obstacle points:
     # n_threshold = 3
@@ -322,8 +450,8 @@ def astar_func(goalNode, startNode, obstacleMap):
                     slamMap[row][col] = 100
     obstacleMap = slamMap
 
+    # save slamMap as an image after obstacle expansion:
     map_height, map_width = obstacleMap.shape
-    # convert map_visited to an image and save to disk (for visualization):
     img = np.zeros((map_height, map_width, 3))
     for row in range(map_height):
         for col in range(map_width):
@@ -334,6 +462,7 @@ def astar_func(goalNode, startNode, obstacleMap):
                 img[row][col] = [255, 255, 255]
             elif point == 100:
                 img[row][col] = [0, 0, 0]
+    img[goalNode[0]][goalNode[1]] = [0, 255, 0]
     cv2.imwrite("test_astar_expanded.png", img)
 
 
@@ -427,6 +556,7 @@ def astar_func(goalNode, startNode, obstacleMap):
             gCostMapOld=np.copy(gCostMap)
             fCostMapOld=np.copy(fCostMap)
 
+
             if fValueMap[goalNode[0],goalNode[1]]==1:
                 found=1
                 walkingNode=goalNode
@@ -486,6 +616,7 @@ def astar_func(goalNode, startNode, obstacleMap):
                 rows = xRoute
                 for (row, col) in zip(rows, cols):
                     img[row, col] = [0, 0, 255]
+                img[goalNode[0]][goalNode[1]] = [0, 255, 0]
                 cv2.imwrite("test_astar_route.png", img)
 
                 return routeS2G
@@ -520,7 +651,7 @@ class Mapping:
         # get things moving (seems like we need to wait a short moment for the
         # message to actually be published):
         msg = Float64MultiArray()
-        msg.data = [0, 0.1]
+        msg.data = [0, 0.5]
         time.sleep(0.5)
         self.path_pub.publish(msg)
 
@@ -578,8 +709,10 @@ class Mapping:
             #print map_index_2_pos(map_msg, pos_index)
 
             goal_pos_index = frontier_func(np.copy(map_matrix), pos_index, map_msg)
-            #print "goal:"
-            #print goal_pos_index
+            print "goal:"
+            print goal_pos_index
+            print map_index_2_pos(map_msg, goal_pos_index)
+            print map_matrix[goal_pos_index[1], goal_pos_index[0]]
 
             raw_path = astar_func([goal_pos_index[1], goal_pos_index[0]],
                         [pos_index[1], pos_index[0]], np.copy(map_matrix))
