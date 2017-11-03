@@ -562,4 +562,7 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 - $ python drone_start.py
 
 # Changes made to the code on Balrog RPI:
-- Test
+- Modified toolbox/communicatorTransmit.m so that it only sends sensor data, not maps or state
+- Modified toolbox/CV_read.m so that it doesn't try to read from the camera, it only returns zeros
+- Removed "$(RPI_CODE)/Lidar" from Makefile, since we don't use the 2016 Lidar sensor
+- Modified rpi startup_root.sh so that it only starts Communicator, Logger and main (not computervision or Lidar since we don't use these)
