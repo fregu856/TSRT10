@@ -560,3 +560,6 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 
 - $ cd drone_test
 - $ python drone_start.py
+
+# Changes made to the code on Balrog RPI:
+- Test
