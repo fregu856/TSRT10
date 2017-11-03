@@ -1,4 +1,6 @@
 # Hashes of file build rules.
+24843353b5768363a62cecdaec54778f /home/fregu856/TSRT10/catkin_ws/devel/include/apriltags/AprilTagDetection.h
+29848eab66cc765a6640b8dda8457681 /home/fregu856/TSRT10/catkin_ws/devel/include/apriltags/AprilTagDetections.h
 db804ca1c14b061d8277f1abf44516e0 /home/fregu856/TSRT10/catkin_ws/devel/include/hector_mapping/HectorDebugInfo.h
 c2536113d6c14091504b4c383302d4f0 /home/fregu856/TSRT10/catkin_ws/devel/include/hector_mapping/HectorIterData.h
 9d1ee64dcf39a1d462e558ebe7175e0e /home/fregu856/TSRT10/catkin_ws/devel/include/hector_nav_msgs/GetDistanceToObstacle.h
@@ -38,6 +40,9 @@ e605408ec383a049f8996cbf2a980c18 /home/fregu856/TSRT10/catkin_ws/devel/include/n
 98ef1b7aabc56b2085f8b22b6df2522e /home/fregu856/TSRT10/catkin_ws/devel/include/nav2d_navigator/MoveToPosition2DGoal.h
 365c9dfdd1918d124e9b71fc82bf319c /home/fregu856/TSRT10/catkin_ws/devel/include/nav2d_navigator/MoveToPosition2DResult.h
 2931f386f26fa448d14c9921254fcc69 /home/fregu856/TSRT10/catkin_ws/devel/include/nav2d_operator/cmd.h
+b28787d97be9026ac83016c6e564b8c6 /home/fregu856/TSRT10/catkin_ws/devel/lib/python2.7/dist-packages/apriltags/msg/_AprilTagDetection.py
+fbdc2697ec13a724d8742d3bb032add2 /home/fregu856/TSRT10/catkin_ws/devel/lib/python2.7/dist-packages/apriltags/msg/_AprilTagDetections.py
+f350dff991f1e2e40d483d99613a96f0 /home/fregu856/TSRT10/catkin_ws/devel/lib/python2.7/dist-packages/apriltags/msg/__init__.py
 46ce87026cfc48f303b15a76b55e2e39 /home/fregu856/TSRT10/catkin_ws/devel/lib/python2.7/dist-packages/hector_mapping/msg/_HectorDebugInfo.py
 a18e67ae3df73bdf94f4befe5dffb6c0 /home/fregu856/TSRT10/catkin_ws/devel/lib/python2.7/dist-packages/hector_mapping/msg/_HectorIterData.py
 2ec26aac04933f9a3179ee466a57bbf7 /home/fregu856/TSRT10/catkin_ws/devel/lib/python2.7/dist-packages/hector_mapping/msg/__init__.py
@@ -83,6 +88,8 @@ d309e643eeefd18011e8d466cf2c707e /home/fregu856/TSRT10/catkin_ws/devel/lib/pytho
 2bd8406808936917817bf01da0f527ef /home/fregu856/TSRT10/catkin_ws/devel/lib/python2.7/dist-packages/nav2d_navigator/msg/__init__.py
 c9078d94851970c0024bd102cf08be0c /home/fregu856/TSRT10/catkin_ws/devel/lib/python2.7/dist-packages/nav2d_operator/msg/__init__.py
 abb46300b2c50d24442999f4145b00b5 /home/fregu856/TSRT10/catkin_ws/devel/lib/python2.7/dist-packages/nav2d_operator/msg/_cmd.py
+4539aaef77a92c754b9cb75324f79c3a /home/fregu856/TSRT10/catkin_ws/devel/share/common-lisp/ros/apriltags/msg/AprilTagDetection.lisp
+55821f79bb16628220e9e515d630a5dc /home/fregu856/TSRT10/catkin_ws/devel/share/common-lisp/ros/apriltags/msg/AprilTagDetections.lisp
 18f37f087b5141085ab83c3e6998de94 /home/fregu856/TSRT10/catkin_ws/devel/share/common-lisp/ros/hector_mapping/msg/HectorDebugInfo.lisp
 a748b4ea44d030cab6e01a8ce3202730 /home/fregu856/TSRT10/catkin_ws/devel/share/common-lisp/ros/hector_mapping/msg/HectorIterData.lisp
 4eb2711b2fcd59964f1709d7854ded4c /home/fregu856/TSRT10/catkin_ws/devel/share/common-lisp/ros/hector_nav_msgs/srv/GetDistanceToObstacle.lisp
@@ -122,6 +129,8 @@ dd1ab8a102098907879d04cffff5ca50 /home/fregu856/TSRT10/catkin_ws/devel/share/com
 735328fd28f41b4018c60c4e30e5e2fd /home/fregu856/TSRT10/catkin_ws/devel/share/common-lisp/ros/nav2d_navigator/msg/MoveToPosition2DGoal.lisp
 e9b4ad19faf90cf24423877a4ba5e133 /home/fregu856/TSRT10/catkin_ws/devel/share/common-lisp/ros/nav2d_navigator/msg/MoveToPosition2DResult.lisp
 4e414422855b92b770fb8658376b3984 /home/fregu856/TSRT10/catkin_ws/devel/share/common-lisp/ros/nav2d_operator/msg/cmd.lisp
+2217f02e44e1afdc3adae82788f99199 /home/fregu856/TSRT10/catkin_ws/devel/share/gennodejs/ros/apriltags/msg/AprilTagDetection.js
+01f375072bdda07fd4116fcff7358878 /home/fregu856/TSRT10/catkin_ws/devel/share/gennodejs/ros/apriltags/msg/AprilTagDetections.js
 a6e2b335bcdc8e14f9d25c36a6d21fe2 /home/fregu856/TSRT10/catkin_ws/devel/share/gennodejs/ros/hector_mapping/msg/HectorDebugInfo.js
 250343d32a8c1bc299c5f33ae8eb3f58 /home/fregu856/TSRT10/catkin_ws/devel/share/gennodejs/ros/hector_mapping/msg/HectorIterData.js
 f4a78223d903f55d31ead33b25ec1d14 /home/fregu856/TSRT10/catkin_ws/devel/share/gennodejs/ros/hector_nav_msgs/srv/GetDistanceToObstacle.js
@@ -161,6 +170,9 @@ f8f6d84d05a67b289e2b8535e168e7f3 /home/fregu856/TSRT10/catkin_ws/devel/share/gen
 6671bb6f79b29871521beb2ea67e7ad0 /home/fregu856/TSRT10/catkin_ws/devel/share/gennodejs/ros/nav2d_navigator/msg/MoveToPosition2DGoal.js
 9e9d974a289bb34153cc9d397ca15685 /home/fregu856/TSRT10/catkin_ws/devel/share/gennodejs/ros/nav2d_navigator/msg/MoveToPosition2DResult.js
 8c0f97908b52b3e0f3f4f7e97713e894 /home/fregu856/TSRT10/catkin_ws/devel/share/gennodejs/ros/nav2d_operator/msg/cmd.js
+5e43077c8c8ba01c752b6e398ee7580f /home/fregu856/TSRT10/catkin_ws/devel/share/roseus/ros/apriltags/manifest.l
+85d9d6e031fa0be452b447f28f6b6b36 /home/fregu856/TSRT10/catkin_ws/devel/share/roseus/ros/apriltags/msg/AprilTagDetection.l
+88d45e290aa308ea0782314da43a7c62 /home/fregu856/TSRT10/catkin_ws/devel/share/roseus/ros/apriltags/msg/AprilTagDetections.l
 b30ed715b1e695cf18f263b23ad3345e /home/fregu856/TSRT10/catkin_ws/devel/share/roseus/ros/hector_mapping/manifest.l
 a01f503cd2afd5c7e5db2635e8f0fda5 /home/fregu856/TSRT10/catkin_ws/devel/share/roseus/ros/hector_mapping/msg/HectorDebugInfo.l
 fa63564071985e4af8b964cbbd4b60c9 /home/fregu856/TSRT10/catkin_ws/devel/share/roseus/ros/hector_mapping/msg/HectorIterData.l
