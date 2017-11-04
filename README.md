@@ -585,8 +585,8 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 - Add the following lines to the bottom of balrog/CMakeLists.txt:
 ``include_directories(
 ${catkin_INCLUDE_DIRS}
-)
-add_executable(optimizer src/optimizer.cpp)
+)  
+add_executable(optimizer src/optimizer.cpp)  
 target_link_libraries(optimizer ${catkin_LIBRARIES})``
 - catkin_make
 - Now one can run it by "rosrun balrog slam_pose")
