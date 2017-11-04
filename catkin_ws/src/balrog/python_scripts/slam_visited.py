@@ -72,20 +72,20 @@ def callback_func(msg_obj):
         msg.info.origin = map_origin_local_obj
         pub.publish(msg)
 
-        # convert map_visited to an image and save to disk (for visualization):
-        img = np.zeros((map_height, map_width, 3))
-        for row in range(map_height):
-            for col in range(map_width):
-                point = map_visited[row][col]
-                if point == -1:
-                    img[row][col] = [100, 100, 100]
-                elif point == 0:
-                    img[row][col] = [255, 255, 255]
-                elif point == 100:
-                    img[row][col] = [0, 0, 0]
-                elif point == -2:
-                    img[row][col] = [0, 255, 0]
-        cv2.imwrite("/home/fregu856/test.png", img)
+        # # convert map_visited to an image and save to disk (for visualization):
+        # img = np.zeros((map_height, map_width, 3))
+        # for row in range(map_height):
+        #     for col in range(map_width):
+        #         point = map_visited[row][col]
+        #         if point == -1:
+        #             img[row][col] = [100, 100, 100]
+        #         elif point == 0:
+        #             img[row][col] = [255, 255, 255]
+        #         elif point == 100:
+        #             img[row][col] = [0, 0, 0]
+        #         elif point == -2:
+        #             img[row][col] = [0, 255, 0]
+        # cv2.imwrite("/home/fregu856/test.png", img)
 
 def callback_func_map(msg_obj):
     global most_recent_map, most_recent_map_origin

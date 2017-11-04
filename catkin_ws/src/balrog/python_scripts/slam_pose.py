@@ -31,7 +31,7 @@ if __name__ == "__main__":
             #print msg
             pub.publish(msg)
         except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
-            print "An exception occured!"
+            print "Could not look up transform /map -> /base_footprint!"
 
         # sleep to get the desired loop frequency:
         rate.sleep()

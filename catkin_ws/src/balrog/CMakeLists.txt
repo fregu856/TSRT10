@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  tf
 )
 
 ## System dependencies are found with CMake's conventions
@@ -197,3 +198,13 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+include_directories(
+${catkin_INCLUDE_DIRS}
+)
+
+add_executable(slam_pose src/slam_pose.cpp)
+target_link_libraries(slam_pose ${catkin_LIBRARIES})
+
+add_executable(slam_odom src/slam_odom.cpp)
+target_link_libraries(slam_odom ${catkin_LIBRARIES})

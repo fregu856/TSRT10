@@ -4,7 +4,6 @@ import rospy
 from std_msgs.msg import Float64MultiArray
 
 import tf
-
 import numpy as np
 
 pub = rospy.Publisher("/odom_pose", Float64MultiArray, queue_size=10)
