@@ -576,3 +576,17 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 - Modified toolbox/createLogStruct.m so that it only takes stuff that we actually use as input and create a struct only out of that data
 - Modified toolbox/sensor_read.m so that it doesn't read from the Lidar
 - Modified toolbox/sendSensorsToGui.m so that it doesn't transmits Lidar data (then also had to modify read_encoder.py!)
+
+# C++:
+
+- Adding C++ node (e.g. slam_pose.cpp) in package (e.g. balrog):
+
+- Place slam_pose.cpp in balrog/src
+- Add the following lines to the bottom of balrog/CMakeLists.txt:
+``include_directories(
+${catkin_INCLUDE_DIRS}
+)
+add_executable(optimizer src/optimizer.cpp)
+target_link_libraries(optimizer ${catkin_LIBRARIES})``
+- catkin_make
+- Now one can run it by "rosrun balrog slam_pose")
