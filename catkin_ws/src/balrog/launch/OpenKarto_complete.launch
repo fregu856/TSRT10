@@ -2,8 +2,8 @@
     <!-- launch the lidar: -->
     <include file="$(find balrog)/launch/lidar.launch"></include>
 
-    <!-- run read_encoders.py in balrog/python_scripts: -->
-    <node pkg="balrog" type="read_encoders.py" name="read_encoders_node"></node>
+    <!-- run communicator.py in balrog/python_scripts: -->
+    <node pkg="balrog" type="communicator.py" name="communicator_node"></node>
 
     <!-- run slam_odom.py in balrog/python_scripts: -->
     <node pkg="balrog" type="slam_odom.py" name="slam_odom_node"></node>

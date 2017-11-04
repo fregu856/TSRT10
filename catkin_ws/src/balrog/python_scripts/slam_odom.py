@@ -46,7 +46,7 @@ def callback_func(msg_obj):
     theta = wrapToPi(theta)
 
     state = [x, y, theta]
-    print state
+    #print state
 
     msg = Float64MultiArray()
     data = [x, y, theta]
@@ -66,10 +66,6 @@ if __name__ == "__main__":
     # Float64MultiArray) that is published on /encoder. We will do this by
     # calling the function callback_func every time a new message is published:
     rospy.Subscriber("/encoder_data", Float64MultiArray, callback_func)
-
-    # # create a publisher that publishes messages of type String on the
-    # # topic /test_topic:
-    # pub = rospy.Publisher("/test_topic", String, queue_size=10)
 
     # keep python from exiting until this ROS node is stopped:
     rospy.spin()

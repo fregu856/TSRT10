@@ -45,6 +45,8 @@ class Communicator:
 
     # define the callback function for the /control_signals subscriber:
     def control_callback(self, msg_obj):
+        print "control_callback"
+
         ctrl_signals = msg_obj.data
 
         omega_l = ctrl_signals[0]
