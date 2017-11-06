@@ -610,3 +610,10 @@ find_package(catkin REQUIRED COMPONENTS
 - - $ cd TSRT10/catkin_ws
 - - $ catkin_make
 - - Now one can run it by "rosrun balrog slam_pose"
+
+# Manual control of Balrog using WASD:
+- $ roscore
+- $ rosrun keyboard keyboard
+- $ rosrun balrog cmd_reader.py
+- $ rosrun balrog manual_controller.py
+- $ Set Balrog in auto mode using the RC controller
