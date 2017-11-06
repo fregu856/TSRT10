@@ -172,7 +172,7 @@ def frontier_func(slamMap, currentPosition, map_msg):
         obst_col = obst_ind[1]
         for row in range(obst_row-6, obst_row+7):
             for col in range(obst_col-6, obst_col+7):
-                if row < rows and col < cols:
+                if row < rows and col < cols:            #  KOLLA SA ATT DEN INTE AR MINDRE AN 0 MED!
                     slamMap[row][col] = 100
 
     # save slamMap as an image after obstacle expansion:
