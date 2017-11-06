@@ -3,17 +3,17 @@
     <include file="$(find balrog)/launch/lidar.launch"></include>
 
     <!-- run communicator.py in balrog/python_scripts: -->
-    <node pkg="balrog" type="communicator.py" name="communicator_node"></node>
+    <node pkg="balrog" type="communicator.py" name="communicator_node" output="screen"></node>
 
     <!-- run slam_odom.py in balrog/python_scripts: -->
-    <node pkg="balrog" type="slam_odom.py" name="slam_odom_node"></node>
+    <node pkg="balrog" type="slam_odom.py" name="slam_odom_node" output="screen"></node>
 
     <!-- launch OpenKarto: -->
     <include file="$(find balrog)/launch/OpenKarto.launch"></include>
 
     <!-- run slam_visited.py in balrog/python_scripts: -->
-    <node pkg="balrog" type="slam_visited.py" name="slam_visited_node"></node>
+    <node pkg="balrog" type="slam_visited.py" name="slam_visited_node" output="screen"></node>
 
     <!-- run slam_pose.py in balrog/python_scripts: -->
-    <node pkg="balrog" type="slam_pose.py" name="slam_pose_node"></node>
+    <node pkg="balrog" type="slam_pose.py" name="slam_pose_node" output="screen"></node>
 </launch>

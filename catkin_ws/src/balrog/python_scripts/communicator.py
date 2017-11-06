@@ -7,6 +7,8 @@ import socket
 import numpy as np
 import struct
 
+import threading
+
 class Communicator:
     def __init__(self):
         # initialize this code as a ROS node named laptop_comm_node:
@@ -22,6 +24,8 @@ class Communicator:
         # create a TCP/IP socket:
         self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
+        self.socket_lock = threading.Lock()
+
         # connect to the RPI server:
         self.host = "192.168.137.3" # (RPI IP address)
         self.port = 2100
@@ -29,19 +33,23 @@ class Communicator:
 
         omega_l = 0
         omega_r = 0
-        self.client_socket.sendall(np.int32(48)) # (6 doubles = 6*8 bytes = 48 bytes)
         data1 = np.double(omega_l)
         data2 = np.double(omega_r)
         data3 = np.double(10)
         data4 = np.double(20)
         data5 = np.double(30)
         checksum = np.double(data1 + data2 + data3 + data4 + data5)
+        print "socket_lock.acquire()"
+        self.socket_lock.acquire()
+        print "socket_lock acquired!"
+        self.client_socket.sendall(np.int32(48)) # (6 doubles = 6*8 bytes = 48 bytes)
         self.client_socket.sendall(data1)
         self.client_socket.sendall(data2)
         self.client_socket.sendall(data3)
         self.client_socket.sendall(data4)
         self.client_socket.sendall(data5)
         self.client_socket.sendall(checksum)
+        self.socket_lock.release()
 
     # define the callback function for the /control_signals subscriber:
     def control_callback(self, msg_obj):
@@ -52,8 +60,6 @@ class Communicator:
         omega_l = ctrl_signals[0]
         omega_r = ctrl_signals[1]
 
-        self.client_socket.sendall(np.int32(48)) # (6 doubles = 6*8 bytes = 48 bytes)
-
         data1 = np.double(omega_l)
         data2 = np.double(omega_r)
         data3 = np.double(10)
@@ -61,18 +67,29 @@ class Communicator:
         data5 = np.double(30)
         checksum = np.double(data1 + data2 + data3 + data4 + data5)
 
+        print "socket_lock.acquire() in control_callback()"
+        self.socket_lock.acquire()
+        print "socket_lock acquired in control_callback()!"
+        self.client_socket.sendall(np.int32(48)) # (6 doubles = 6*8 bytes = 48 bytes)
+
         self.client_socket.sendall(data1)
         self.client_socket.sendall(data2)
         self.client_socket.sendall(data3)
         self.client_socket.sendall(data4)
         self.client_socket.sendall(data5)
         self.client_socket.sendall(checksum)
+        self.socket_lock.release()
 
     def run(self):
         while not rospy.is_shutdown():
+            print "####################"
+            print "socket_lock.acquire() in run()"
+            self.socket_lock.acquire()
+            print "socket_lock acquired in run()!"
             data = self.client_socket.recv(4)
+            print len(data)
             no_of_bytes_to_read = struct.unpack("<L", data)[0]
-            #print "number of bytes to read: %d" % no_of_bytes_to_read
+            print "number of bytes to read: %d" % no_of_bytes_to_read
 
             no_of_read_bytes = 0
             while no_of_read_bytes < 8:
@@ -82,7 +99,7 @@ class Communicator:
                 #print "***"
             if len(data) == 8:
                 message_type = struct.unpack("<d", data)[0]
-                #print "message type: %f" % message_type
+                print "message type: %f" % message_type
                 #print "^^^^^^"
             else:
                 message_type = -1 # (error)
@@ -95,6 +112,7 @@ class Communicator:
                     no_of_read_bytes += len(data)
                     #print data
                     #print "&&&&&&&&&&&&&&&"
+            self.socket_lock.release()
 
             if message_type == 1:
                 if len(data) == 128:

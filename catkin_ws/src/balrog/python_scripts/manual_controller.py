@@ -10,15 +10,6 @@ import rospy
 from std_msgs.msg import String
 from std_msgs.msg import Float64MultiArray
 
-def linear_interp(x_val, x_min, x_max, y_min, y_max):
-    x_range = x_max - x_min
-    y_range = y_max - y_min
-    xy_ratio = float(x_range)/float(y_range)
-
-    y = (x_val-x_min)/xy_ratio + y_min
-
-    return y
-
 class Manual_controller:
     def __init__(self):
         # initialize this code as a ROS node named manual_controller_node:
