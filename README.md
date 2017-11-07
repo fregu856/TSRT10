@@ -636,5 +636,26 @@ find_package(catkin REQUIRED COMPONENTS
 - $ rosrun balrog communicator.py
 - $ Set Balrog in auto mode using the RC controller
 
+### Autonomous rectangle with Balrog:
+- TODO!
+
 ### SLAM and manual control in SIMULATION:
 - $ roslaunch balrog_sim OpenKarto_complete.launch
+
+### Autonomous mapping of EMPTY SIMULATION:
+- $ roslaunch balrog_sim OpenKarto_complete_control_empty.launch
+- $ rosrun balrog_sim controller.py
+- $ rosrun balrog_sim coordinator.py
+- $ rosrun balrog_sim nav_mapping.py
+
+### Autonomous mapping of EMPTY map SIMULATION:
+- $ roslaunch balrog_sim OpenKarto_complete_control_empty.launch
+- $ rosrun balrog_sim controller.py
+- $ rosrun balrog_sim coordinator.py
+- $ rosrun balrog_sim nav_mapping.py
+
+### Autonomous mapping of full map SIMULATION:
+- $ roslaunch balrog_sim OpenKarto_complete_control.launch
+- $ rosrun balrog_sim controller.py
+- $ rosrun balrog_sim coordinator.py
+- $ rosrun balrog_sim nav_mapping.py
