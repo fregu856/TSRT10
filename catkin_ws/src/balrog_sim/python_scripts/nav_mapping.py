@@ -13,7 +13,7 @@ from scipy.ndimage.measurements import label
 
 import time
 
-def map_index_2_pos(map_msg, pos_index):
+def map_index_2_pos(map_msg, pos_index): #mappa from index in map to real pos
     map_origin_obj = map_msg.info.origin
     map_origin = [map_origin_obj.position.x, map_origin_obj.position.y]
 
@@ -34,7 +34,7 @@ def map_index_2_pos(map_msg, pos_index):
 
     return pos
 
-def pos_2_map_index(map_msg, pos):
+def pos_2_map_index(map_msg, pos): # real pos to mapp index
     map_origin_obj = map_msg.info.origin
     map_origin = [map_origin_obj.position.x, map_origin_obj.position.y]
 
@@ -55,7 +55,7 @@ def pos_2_map_index(map_msg, pos):
 
     return pos_index
 
-def map_msg_2_matrix(map_msg):
+def map_msg_2_matrix(map_msg): #
     map_data = map_msg.data
     map_height = map_msg.info.height
 
@@ -69,9 +69,8 @@ def map_msg_2_matrix(map_msg):
     return map_matrix
 
 def raw_path_2_path(raw_path, map_msg):
-    rows = raw_path[0].tolist()
-    cols = raw_path[1].tolist()
-
+    rows = raw_path[0].tolist() ######################################################################## before: rows = raw_path[1].tolist()
+    cols = raw_path[1].tolist() ######################################################################## before: cols = raw_path[0].tolist()
     path = []
 
     for (row, col) in zip(rows, cols):
@@ -163,17 +162,17 @@ def frontier_func(slamMap, currentPosition, map_msg):
     # cv2.imwrite("test_frontier_filtered.png", img)
 
     # expand all obstacles:
-    obst_inds = np.nonzero(slamMap == 100)
-    obst_inds_row = obst_inds[0].tolist()
-    obst_inds_col = obst_inds[1].tolist()
-    obst_inds = zip(obst_inds_row, obst_inds_col)
-    for obst_ind in obst_inds:
-        obst_row = obst_ind[0]
-        obst_col = obst_ind[1]
-        for row in range(obst_row-6, obst_row+7):
-            for col in range(obst_col-6, obst_col+7):
-                if row < rows and col < cols:            #  KOLLA SA ATT DEN INTE AR MINDRE AN 0 MED!
-                    slamMap[row][col] = 100
+    # obst_inds = np.nonzero(slamMap == 100)
+    # obst_inds_row = obst_inds[0].tolist()
+    # obst_inds_col = obst_inds[1].tolist()
+    # obst_inds = zip(obst_inds_row, obst_inds_col)
+    # for obst_ind in obst_inds:
+    #     obst_row = obst_ind[0]
+    #     obst_col = obst_ind[1]
+    #     for row in range(obst_row-6, obst_row+7):
+    #         for col in range(obst_col-6, obst_col+7):
+    #             if row < rows and col < cols:
+    #                 slamMap[row][col] = 100
 
     # save slamMap as an image after obstacle expansion:
     map_height, map_width = slamMap.shape
@@ -232,11 +231,6 @@ def frontier_func(slamMap, currentPosition, map_msg):
     frontierMap[SecondMap == 1] = 1
     #print frontierMap
 
-
-
-
-
-
     map_height, map_width = frontierMap.shape
     img = np.zeros((map_height, map_width, 3))
     for row in range(map_height):
@@ -248,16 +242,9 @@ def frontier_func(slamMap, currentPosition, map_msg):
                 img[row][col] = [255, 255, 255]
     cv2.imwrite("frontierMap1.png", img)
 
-
-
-
-
-
     # Remove covered area and obstacles as frontier candidates:
     frontierMap[slamMap == 100] = 0
     frontierMap[slamMap == -2] = 0
-
-
 
     map_height, map_width = frontierMap.shape
     img = np.zeros((map_height, map_width, 3))
@@ -283,8 +270,6 @@ def frontier_func(slamMap, currentPosition, map_msg):
             elif point == 100:
                 img[row][col] = [0, 0, 0]
     cv2.imwrite("slamMap2.png", img)
-
-
 
     # onlyObs = slamMap
     # onlyObs[slamMap == -2] = 0
@@ -312,9 +297,6 @@ def frontier_func(slamMap, currentPosition, map_msg):
     # frontierMap[clearFrontiers2[:, 0:-1] == -1] = 1;
 
 
-
-
-
     map_height, map_width = frontierMap.shape
     img = np.zeros((map_height, map_width, 3))
     for row in range(map_height):
@@ -326,8 +308,6 @@ def frontier_func(slamMap, currentPosition, map_msg):
                 img[row][col] = [255, 255, 255]
     cv2.imwrite("frontierMap3.png", img)
 
-
-
     # filter lone frontier nodes:
     n_threshold = 3
     labeled_array, num_features = label(frontierMap)
@@ -337,11 +317,6 @@ def frontier_func(slamMap, currentPosition, map_msg):
     mask = np.in1d(labeled_array, noise_idx).reshape(shp)
     frontierMap[mask] = 0
     #print frontierMap
-
-
-
-
-
 
     map_height, map_width = frontierMap.shape
     img = np.zeros((map_height, map_width, 3))
@@ -354,18 +329,11 @@ def frontier_func(slamMap, currentPosition, map_msg):
                 img[row][col] = [255, 255, 255]
     cv2.imwrite("frontierMap4.png", img)
 
-
-
-
-
     # remove nodes that are too close to the current node:
     for row in range(currentPosition[1]-6, currentPosition[1]+7):
         for col in range(currentPosition[0]-6, currentPosition[0]+7):
             if row < rows and col < cols:
                 frontierMap[row][col] = 0
-    #print frontierMap
-
-
 
     map_height, map_width = frontierMap.shape
     img = np.zeros((map_height, map_width, 3))
@@ -377,8 +345,6 @@ def frontier_func(slamMap, currentPosition, map_msg):
             elif point == 0:
                 img[row][col] = [255, 255, 255]
     cv2.imwrite("frontierMap5.png", img)
-
-
 
     temp = np.nonzero(frontierMap)
     x = temp[1]
@@ -437,18 +403,18 @@ def astar_func(goalNode, startNode, obstacleMap):
     # cv2.imwrite("test_astar_filtered.png", img)
 
     # expand all obstacles:
-    obst_inds = np.nonzero(slamMap == 100)
-    obst_inds_row = obst_inds[0].tolist()
-    obst_inds_col = obst_inds[1].tolist()
-    obst_inds = zip(obst_inds_row, obst_inds_col)
-    for obst_ind in obst_inds:
-        obst_row = obst_ind[0]
-        obst_col = obst_ind[1]
-        for row in range(obst_row-6, obst_row+7):
-            for col in range(obst_col-6, obst_col+7):
-                if row < rows and col < cols:
-                    slamMap[row][col] = 100
-    obstacleMap = slamMap
+    # obst_inds = np.nonzero(slamMap == 100)
+    # obst_inds_row = obst_inds[0].tolist()
+    # obst_inds_col = obst_inds[1].tolist()
+    # obst_inds = zip(obst_inds_row, obst_inds_col)
+    # for obst_ind in obst_inds:
+    #     obst_row = obst_ind[0]
+    #     obst_col = obst_ind[1]
+    #     for row in range(obst_row-6, obst_row+7):
+    #         for col in range(obst_col-6, obst_col+7):
+    #             if row < rows and col < cols:
+    #                 slamMap[row][col] = 100
+    # obstacleMap = slamMap
 
     # save slamMap as an image after obstacle expansion:
     map_height, map_width = obstacleMap.shape
@@ -464,7 +430,6 @@ def astar_func(goalNode, startNode, obstacleMap):
                 img[row][col] = [0, 0, 0]
     img[goalNode[0]][goalNode[1]] = [0, 255, 0]
     cv2.imwrite("test_astar_expanded.png", img)
-
 
     [xmax,ymax]=obstacleMap.shape
     fCostMap=np.full((xmax,ymax),float('nan'))
@@ -561,7 +526,8 @@ def astar_func(goalNode, startNode, obstacleMap):
                 found=1
                 walkingNode=goalNode
                 numberOfsteps=0
-
+                wholeXroute=[]
+                wholeYroute=[]
                 xRoute=[]
                 yRoute=[]
                 xRoute.append(goalNode[0])
@@ -572,6 +538,8 @@ def astar_func(goalNode, startNode, obstacleMap):
                     numberOfsteps=numberOfsteps+1
                     prevX=int(fromXNode[walkingNode[0],walkingNode[1]])
                     prevY=int(fromYNode[walkingNode[0],walkingNode[1]])
+                    wholeXroute.append(prevX)
+                    wholeYroute.append(prevY)
 
                     if prevX==walkingNode[0]:
                         if dir!=5:
@@ -595,9 +563,10 @@ def astar_func(goalNode, startNode, obstacleMap):
                             dir=-2
 
                     walkingNode=[prevX,prevY]
-
-                route=[xRoute,yRoute]
+                    #wholeRoute = [wholeXroute, wholeYroute]
+                route=[xRoute, yRoute] ############################################################################################################################### before: route=[xRoute, xRoute]
                 routeS2G=np.fliplr(route)
+                wholeRoute = np.fliplr([wholeXroute, wholeYroute])
 
                 # save obstacleMap as an image, with each point on the A* path
                 # marked in red:
@@ -619,7 +588,7 @@ def astar_func(goalNode, startNode, obstacleMap):
                 img[goalNode[0]][goalNode[1]] = [0, 255, 0]
                 cv2.imwrite("test_astar_route.png", img)
 
-                return routeS2G
+                return routeS2G, wholeRoute
                 break
 
         print "end of Astar, currentNode"
@@ -642,37 +611,69 @@ class Mapping:
 
         # create a publisher for publishing paths to the coordinator:
         self.path_pub = rospy.Publisher("/path", Float64MultiArray, queue_size=10)
-
         self.map_msg = None
         self.x = None
         self.y = None
         self.theta = None
+        self.goal_pos_index = None
+        self.path = None
+        self.map_matrix = None
+        self.map_matrix_expand = None
 
         # get things moving (seems like we need to wait a short moment for the
-        # message to actually be published):
+        # message to actually be published):a
         msg = Float64MultiArray()
         msg.data = [0, 0.5]
         time.sleep(0.5)
         self.path_pub.publish(msg)
 
         # keep python from exiting until this ROS node is stopped:
-        rospy.spin()
-
+        #rospy.spin()
     # define the callback function for the /map subscriber:
+
     def map_callback(self, msg_obj):
         self.map_msg = msg_obj
+        self.map_matrix = map_msg_2_matrix(self.map_msg)
+        map_matrix = self.map_matrix
+        map_matrix_rows, map_matrix_cols = map_matrix.shape
+        map_matrix_expand = np.copy(map_matrix)
 
+        # # filter lone obstacle points:
+        n_threshold = 5
+        slamMap_binary = np.zeros((map_matrix_rows, map_matrix_cols))
+        slamMap_binary[map_matrix == 100] = 1
+        labeled_array, num_features = label(slamMap_binary)
+        binc = np.bincount(labeled_array.ravel())
+        noise_idx = np.where(binc <= n_threshold)
+        shp = map_matrix.shape
+        mask = np.in1d(labeled_array, noise_idx).reshape(shp)
+        map_matrix[mask] = 0
+
+        # Obstacle EXPAND:
+        OBSTACLE_EXPAND_SIZE = 6
+        obst_inds = np.nonzero(map_matrix == 100)
+        obst_inds_row = obst_inds[0].tolist()
+        obst_inds_col = obst_inds[1].tolist()
+        obst_inds = zip(obst_inds_row, obst_inds_col)
+        for obst_ind in obst_inds:
+            obst_row = obst_ind[0]
+            obst_col = obst_ind[1]
+            for row in range(obst_row-OBSTACLE_EXPAND_SIZE, obst_row+OBSTACLE_EXPAND_SIZE+1):
+                for col in range(obst_col-OBSTACLE_EXPAND_SIZE, obst_col+OBSTACLE_EXPAND_SIZE+1):
+                    if row >= 0 and row < map_matrix_rows and col >= 0 and col < map_matrix_cols:
+                        if map_matrix[row][col] != 100:
+                            map_matrix_expand[row][col] = 100
+
+        self.map_matrix_expand = map_matrix_expand
         print "map_callback"
 
     # define the callback function for the /estimated_pose subscriber:
     def est_pose_callback(self, msg_obj):
         pose = msg_obj.data
-
         self.x = pose[0]
         self.y = pose[1]
         self.theta = pose[2]
-
-        print "est_pose_callback"
+        #print "est_pose_callback"
 
     # define the callback function for the /coordinator_status subscriber:
     def coordinator_callback(self, msg_obj):
@@ -692,32 +693,129 @@ class Mapping:
 
         print "coordinator_callback"
 
+    def check_path(self):
+        rate = rospy.Rate(1) # (1 Hz)
+        while not rospy.is_shutdown():
+            if self.path is not None and self.goal_pos_index is not None and self.map_msg is not None:
+                map_matrix = self.map_matrix_expand
+                raw_path = self.path
+                map_msg = self.map_msg
+                goal_pos_index = self.goal_pos_index
+                x = self.x
+                y = self.y
+
+                pos = [x, y]
+                map_matrix = self.map_matrix_expand
+                pos_index = pos_2_map_index(map_msg, pos)
+                tempPath = [raw_path[1], raw_path[0]] # (x,y)
+                tempPath = list(tempPath)
+                map_path = map_matrix[tempPath[1], tempPath[0]] ################################################################### before: map_path = map_matrix[tempPath[0], tempPath[1]] (tror det ar ratt nu, men inte 100 saker)
+
+                print "map_path in check_path:"
+                print map_path
+
+                if map_matrix[goal_pos_index[1],goal_pos_index[0]] == 100: # if goal_pos is not allowed
+                    print "###############################################################################"
+                    print "###############################################################################"
+                    print "###############################################################################"
+                    print "###############################################################################"
+                    print('goal_pos Not allowed')
+                    print "###############################################################################"
+                    print "###############################################################################"
+                    print "###############################################################################"
+                    print "###############################################################################"
+                    path = self.get_path()
+                    if path is not None:
+                        print path
+                        # publish the path:
+                        msg = Float64MultiArray()
+                        msg.data = path
+                        self.path_pub.publish(msg)
+                    else:
+                        print "path is None!"
+
+                elif 100 in map_path:
+                    print "###############################################################################"
+                    print "###############################################################################"
+                    print "###############################################################################"
+                    print "###############################################################################"
+                    print('Route Not allowed')
+                    print "###############################################################################"
+                    print "###############################################################################"
+                    print "###############################################################################"
+                    print "###############################################################################"
+                    raw_path = astar_func([goal_pos_index[1], goal_pos_index[0]],
+                                [pos_index[1], pos_index[0]], np.copy(map_matrix))
+                    self.path = raw_path[1]
+                    path = raw_path_2_path(raw_path[0], map_msg)
+
+                    if path is not None:
+                        print path
+                        # publish the path:
+                        msg = Float64MultiArray()
+                        msg.data = path
+                        self.path_pub.publish(msg)
+                    else:
+                        print "path is None!"
+                else:
+                    print "######################################"
+                    print "current path is OK!"
+                    print "######################################"
+
+            rate.sleep() # (to get it to loop with 1 Hz)
+
+
     def get_path(self):
         if self.map_msg is not None and self.x is not None and self.y is not None:
             map_msg = self.map_msg
             x = self.x
             y = self.y
             pos = [x, y]
-
-            map_matrix = map_msg_2_matrix(map_msg)
-            #print map_matrix
-            #print map_matrix.shape
-
+            map_matrix = self.map_matrix_expand
             pos_index = pos_2_map_index(map_msg, pos)
-            #print pos
-            #print pos_index
+
+            print "pos:"
+            print pos
+            print "pos index:"
+            print pos_index
             #print map_index_2_pos(map_msg, pos_index)
 
             goal_pos_index = frontier_func(np.copy(map_matrix), pos_index, map_msg)
-            print "goal:"
+            self.goal_pos_index = goal_pos_index
+            print "goal index:"
             print goal_pos_index
+            print "goal pos:"
             print map_index_2_pos(map_msg, goal_pos_index)
+            print "value of goal node:"
             print map_matrix[goal_pos_index[1], goal_pos_index[0]]
 
             raw_path = astar_func([goal_pos_index[1], goal_pos_index[0]],
                         [pos_index[1], pos_index[0]], np.copy(map_matrix))
-            print raw_path
-            path = raw_path_2_path(raw_path, map_msg)
+            self.path = raw_path[1]
+
+            print "raw_path[0]:" ########################################### raw_path[0] var fel! Fixat nu!
+            print raw_path[0]
+            print "raw_path[1]:"
+            print raw_path[1]
+
+            """
+            pos index:
+            [80, 90]
+
+            goal index:
+            [73, 96]
+
+            raw_path[1]:
+            [[90 91 92 92 93 94 95]
+             [80 79 78 77 76 75 74]]
+
+            raw_path[0]:
+            [[92 92 96 96]
+             [92 92 96 96]]
+            """
+
+            path = raw_path_2_path(raw_path[0], map_msg)
+            print "computed path in get_path:"
             print path
 
             return path
@@ -727,3 +825,4 @@ class Mapping:
 if __name__ == "__main__":
     # create an Mapping object (this will run its __init__ function):
     mapping = Mapping()
+    mapping.check_path()

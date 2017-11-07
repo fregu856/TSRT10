@@ -618,3 +618,38 @@ find_package(catkin REQUIRED COMPONENTS
 - $ rosrun balrog cmd_reader.py
 - $ rosrun balrog manual_controller.py
 - $ Set Balrog in auto mode using the RC controller
+
+# BP4 demos:
+
+### SLAM on Balrog:
+- Connect to the RPI network
+- Connect the LIDAR to the computer and wait a few seconds for the LIDAR to obtain full rotation speed
+- $ roslaunch balrog OpenKarto_complete.launch
+- (ssh pi@10.0.0.10, password: cdio2016)
+- ($ ./Logger, $ ./Communicator, $ ./main)
+
+### Manual control of Balrog using WASD:
+- $ roscore
+- $ rosrun keyboard keyboard
+- $ rosrun balrog cmd_reader.py
+- $ rosrun balrog manual_controller.py
+- $ rosrun balrog communicator.py
+- $ Set Balrog in auto mode using the RC controller
+
+### Autonomous rectangle with Balrog:
+- TODO!
+
+### SLAM and manual control in SIMULATION:
+- $ roslaunch balrog_sim OpenKarto_complete.launch
+
+### Autonomous mapping of EMPTY map SIMULATION:
+- $ roslaunch balrog_sim OpenKarto_complete_control_empty.launch
+- $ rosrun balrog_sim controller.py
+- $ rosrun balrog_sim coordinator.py
+- $ rosrun balrog_sim nav_mapping.py
+
+### Autonomous mapping of full map SIMULATION:
+- $ roslaunch balrog_sim OpenKarto_complete_control.launch
+- $ rosrun balrog_sim controller.py
+- $ rosrun balrog_sim coordinator.py
+- $ rosrun balrog_sim nav_mapping.py
