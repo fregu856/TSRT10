@@ -627,3 +627,11 @@ find_package(catkin REQUIRED COMPONENTS
 - $ roslaunch balrog OpenKarto_complete.launch
 - (ssh pi@10.0.0.10, password: cdio2016)
 - ($ ./Logger, $ ./Communicator, $ ./main)
+
+### Manual control of Balrog using WASD:
+- $ roscore
+- $ rosrun keyboard keyboard
+- $ rosrun balrog cmd_reader.py
+- $ rosrun balrog manual_controller.py
+- $ rosrun balrog communicator.py
+- $ Set Balrog in auto mode using the RC controller
