@@ -8,6 +8,7 @@
 #include <Eigen/Dense>
 
 // typedef Matrix<double, Dynamic, Dynamic> MatrixXd;
+// typedef Matrix<float, Dynamic, 1> VectorXd;
 
 class SlamVisited
 {
@@ -32,8 +33,8 @@ private:
 
 SlamVisited::SlamVisited()
 {
-    map_origin_.push_back(0.0);
-    map_origin_.push_back(0.0);
+    map_origin_.push_back(-1000);
+    map_origin_.push_back(-1000);
 
     map_visited_pub_ =
           nh_.advertise<nav_msgs::OccupancyGrid>("/map_visited", 10);
@@ -46,7 +47,30 @@ SlamVisited::SlamVisited()
 
 void SlamVisited::marker_callback_(const visualization_msgs::Marker &msg_obj)
 {
+    if (map_origin_[0] != -1000)
+    {
+        std::cout << "marker_callback_" << std::endl;
 
+        // TODO! protect with mutex
+        Eigen::Matrix<int8_t, Eigen::Dynamic, Eigen::Dynamic> map_visited_matrix = map_matrix_;
+        std::vector<double> map_origin = map_origin_;
+        double map_resolution = map_resolution_;
+
+        // ** do stuff with map_visited_matrix **
+
+        map_visited_matrix.transposeInPlace();
+        Eigen::Matrix<int8_t, Eigen::Dynamic, 1> map_visited_eigen_vector(Eigen::Map<Eigen::Matrix<int8_t, Eigen::Dynamic, 1> >(map_visited_matrix.data(), map_visited_matrix.cols()*map_visited_matrix.rows()));
+        std::vector<int8_t> map_visited_vector(map_visited_eigen_vector.data(), map_visited_eigen_vector.data() + map_visited_eigen_vector.size());
+
+        nav_msgs::OccupancyGrid map_visited_msg;
+        map_visited_msg.data = map_visited_vector;
+        map_visited_msg.info.resolution = map_resolution;
+        map_visited_msg.info.width = map_visited_matrix.cols();
+        map_visited_msg.info.height = map_visited_matrix.rows();
+        map_visited_msg.info.origin.position.x = map_origin[0];
+        map_visited_msg.info.origin.position.y = map_origin[1];
+        map_visited_pub_.publish(map_visited_msg);
+    }
 }
 
 void SlamVisited::map_callback_(const nav_msgs::OccupancyGrid &msg_obj)
@@ -69,17 +93,6 @@ void SlamVisited::map_callback_(const nav_msgs::OccupancyGrid &msg_obj)
 
     std::cout << "rows: " << map_matrix_.rows() << std::endl;
     std::cout << "cols: " << map_matrix_.cols() << std::endl;
-
-    // double data[4] = {4.0, 3.3, 1.1, 4.4};
-    // Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> M = Eigen::Map<Eigen::Matrix<double,Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> >(data, map_height, map_width);
-
-    // std::vector<int8_t> test_data(msg_obj.data);
-    // for (int i = 0; i < test_data.size(); ++i)
-    // {
-    //     int8_t value = test_data[i];
-    //     int int_value = static_cast<int> (value);
-    //     std::cout << int_value << std::endl;
-    // }
 }
 
 int main(int argc, char **argv)
@@ -88,8 +101,6 @@ int main(int argc, char **argv)
     ros::init(argc, argv, "slam_visited_cpp_node");
 
     SlamVisited slam_visited;
-
-
 
     ros::spin();
 
