@@ -642,12 +642,6 @@ find_package(catkin REQUIRED COMPONENTS
 ### SLAM and manual control in SIMULATION:
 - $ roslaunch balrog_sim OpenKarto_complete.launch
 
-### Autonomous mapping of EMPTY SIMULATION:
-- $ roslaunch balrog_sim OpenKarto_complete_control_empty.launch
-- $ rosrun balrog_sim controller.py
-- $ rosrun balrog_sim coordinator.py
-- $ rosrun balrog_sim nav_mapping.py
-
 ### Autonomous mapping of EMPTY map SIMULATION:
 - $ roslaunch balrog_sim OpenKarto_complete_control_empty.launch
 - $ rosrun balrog_sim controller.py
