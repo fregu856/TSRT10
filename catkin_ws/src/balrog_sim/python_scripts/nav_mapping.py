@@ -628,7 +628,7 @@ class Mapping:
         self.path_pub.publish(msg)
 
         # keep python from exiting until this ROS node is stopped:
-        rospy.spin()
+        #rospy.spin()
     # define the callback function for the /map subscriber:
 
     def map_callback(self, msg_obj):
@@ -673,7 +673,7 @@ class Mapping:
         self.x = pose[0]
         self.y = pose[1]
         self.theta = pose[2]
-        print "est_pose_callback"
+        #print "est_pose_callback"
 
     # define the callback function for the /coordinator_status subscriber:
     def coordinator_callback(self, msg_obj):
@@ -709,13 +709,21 @@ class Mapping:
                 pos_index = pos_2_map_index(map_msg, pos)
                 tempPath = [raw_path[1], raw_path[0]] # (x,y)
                 tempPath = list(tempPath)
-                map_path = map_matrix[tempPath[0], tempPath[1]]
+                map_path = map_matrix[tempPath[1], tempPath[0]] ################################################################### before: map_path = map_matrix[tempPath[0], tempPath[1]] (tror det ar ratt nu, men inte 100 saker)
 
                 print "map_path in check_path:"
                 print map_path
 
                 if map_matrix[goal_pos_index[1],goal_pos_index[0]] == 100: # if goal_pos is not allowed
+                    print "###############################################################################"
+                    print "###############################################################################"
+                    print "###############################################################################"
+                    print "###############################################################################"
                     print('goal_pos Not allowed')
+                    print "###############################################################################"
+                    print "###############################################################################"
+                    print "###############################################################################"
+                    print "###############################################################################"
                     path = self.get_path()
                     if path is not None:
                         print path
@@ -727,7 +735,15 @@ class Mapping:
                         print "path is None!"
 
                 elif 100 in map_path:
+                    print "###############################################################################"
+                    print "###############################################################################"
+                    print "###############################################################################"
+                    print "###############################################################################"
                     print('Route Not allowed')
+                    print "###############################################################################"
+                    print "###############################################################################"
+                    print "###############################################################################"
+                    print "###############################################################################"
                     raw_path = astar_func([goal_pos_index[1], goal_pos_index[0]],
                                 [pos_index[1], pos_index[0]], np.copy(map_matrix))
                     self.path = raw_path[1]
@@ -741,6 +757,10 @@ class Mapping:
                         self.path_pub.publish(msg)
                     else:
                         print "path is None!"
+                else:
+                    print "######################################"
+                    print "current path is OK!"
+                    print "######################################"
 
             rate.sleep() # (to get it to loop with 1 Hz)
 
@@ -805,4 +825,4 @@ class Mapping:
 if __name__ == "__main__":
     # create an Mapping object (this will run its __init__ function):
     mapping = Mapping()
-    #mapping.check_path()
+    mapping.check_path()
