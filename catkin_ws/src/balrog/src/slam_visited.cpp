@@ -11,9 +11,6 @@
 
 #include <time.h>
 
-// typedef Matrix<double, Dynamic, Dynamic> MatrixXd;
-// typedef Matrix<float, Dynamic, 1> VectorXd;
-
 typedef Eigen::Matrix<int8_t, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> MapMatrix;
 typedef Eigen::Matrix<int8_t, Eigen::Dynamic, 1> MapEigenVector;
 
