@@ -626,3 +626,4 @@ find_package(catkin REQUIRED COMPONENTS
 - Connect the LIDAR to the computer and wait a few seconds for the LIDAR to obtain full rotation speed
 - $ roslaunch balrog OpenKarto_complete.launch
 - (ssh pi@10.0.0.10, password: cdio2016)
+- ($ ./Logger, $ ./Communicator, $ ./main)
