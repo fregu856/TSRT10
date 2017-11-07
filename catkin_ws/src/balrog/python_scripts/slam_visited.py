@@ -7,6 +7,8 @@ from visualization_msgs.msg import Marker
 import numpy as np
 import cv2
 
+import time
+
 # -1: unknown
 # 0: free
 # 100: obstacle
@@ -19,6 +21,7 @@ map_resolution = 0.05
 pub = rospy.Publisher("/map_visited", OccupancyGrid, queue_size=10)
 
 def callback_func(msg_obj):
+    start = time.time()
     if most_recent_map_origin != []:
         points = msg_obj.points
 
@@ -91,6 +94,9 @@ def callback_func(msg_obj):
         #         elif point == -2:
         #             img[row][col] = [0, 255, 0]
         # cv2.imwrite("/home/fregu856/test.png", img)
+    end = time.time()
+    print "marker_callback:"
+    print end - start
 
 def callback_func_map(msg_obj):
     global most_recent_map, most_recent_map_origin

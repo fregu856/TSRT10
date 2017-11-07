@@ -1,11 +1,15 @@
 #include <ros/ros.h>
 #include <nav_msgs/OccupancyGrid.h>
 #include <visualization_msgs/Marker.h>
+#include <geometry_msgs/Point.h>
 
 #include <vector>
 #include <iostream>
 #include <math.h>
 #include <Eigen/Dense>
+#include <algorithm>
+
+#include <time.h>
 
 // typedef Matrix<double, Dynamic, Dynamic> MatrixXd;
 // typedef Matrix<float, Dynamic, 1> VectorXd;
@@ -26,7 +30,7 @@ private:
     ros::Subscriber map_sub_;
     ros::Subscriber marker_sub_;
 
-    Eigen::Matrix<int8_t, Eigen::Dynamic, Eigen::Dynamic> map_matrix_;
+    Eigen::Matrix<int8_t, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> map_matrix_;
     std::vector<double> map_origin_;
     double map_resolution_;
 }; // Class SlamVisited
@@ -47,18 +51,50 @@ SlamVisited::SlamVisited()
 
 void SlamVisited::marker_callback_(const visualization_msgs::Marker &msg_obj)
 {
+    //const clock_t begin_time = clock();
+
     if (map_origin_[0] != -1000)
     {
         std::cout << "marker_callback_" << std::endl;
 
         // TODO! protect with mutex
-        Eigen::Matrix<int8_t, Eigen::Dynamic, Eigen::Dynamic> map_visited_matrix = map_matrix_;
+        Eigen::Matrix<int8_t, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> map_visited_matrix = map_matrix_;
         std::vector<double> map_origin = map_origin_;
         double map_resolution = map_resolution_;
 
-        // ** do stuff with map_visited_matrix **
+        int cols = map_visited_matrix.cols();
+        int rows = map_visited_matrix.rows();
 
-        map_visited_matrix.transposeInPlace();
+        std::cout << "rows: " << rows << " cols: " << cols << std::endl;
+
+        std::vector<geometry_msgs::Point> points(msg_obj.points);
+        for (int i = 0; i < points.size(); ++i)
+        {
+            double x = points[i].x;
+            double y = points[i].y;
+
+            double x_map = x - map_origin[0];
+            double y_map = y - map_origin[1];
+
+            int x_map_ind(x_map/map_resolution); // (col)
+            int y_map_ind(y_map/map_resolution); // (row)
+
+            std::cout << "x_map: " << x_map << " x_map_ind: " << x_map_ind << std::endl;
+            std::cout << "y_map: " << y_map << " y_map_ind: " << y_map_ind << std::endl;
+
+            int col_ind_max = std::min(x_map_ind+11, cols);
+            int col_ind_min = std::max(x_map_ind-10, 0);
+            int row_ind_max = std::min(y_map_ind+11, rows);
+            int row_ind_min = std::max(y_map_ind-10, 0);
+            int block_width = col_ind_max - col_ind_min;
+            int block_height = row_ind_max - row_ind_min;
+            std::cout << "block_width: " << block_width << " block_height: " << block_height << std::endl;
+
+            //Eigen::Matrix<int8_t, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> test = Eigen::Matrix<int8_t, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>::Zero(block_height, block_width);
+            Eigen::Matrix<int8_t, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> test = Eigen::Matrix<int8_t, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>::Constant(block_height, block_width, -2);
+            map_visited_matrix.block(row_ind_min, col_ind_min, block_height, block_width) = test;
+        }
+
         Eigen::Matrix<int8_t, Eigen::Dynamic, 1> map_visited_eigen_vector(Eigen::Map<Eigen::Matrix<int8_t, Eigen::Dynamic, 1> >(map_visited_matrix.data(), map_visited_matrix.cols()*map_visited_matrix.rows()));
         std::vector<int8_t> map_visited_vector(map_visited_eigen_vector.data(), map_visited_eigen_vector.data() + map_visited_eigen_vector.size());
 
@@ -71,6 +107,8 @@ void SlamVisited::marker_callback_(const visualization_msgs::Marker &msg_obj)
         map_visited_msg.info.origin.position.y = map_origin[1];
         map_visited_pub_.publish(map_visited_msg);
     }
+
+    //std::cout << float(clock() - begin_time)/CLOCKS_PER_SEC;
 }
 
 void SlamVisited::map_callback_(const nav_msgs::OccupancyGrid &msg_obj)

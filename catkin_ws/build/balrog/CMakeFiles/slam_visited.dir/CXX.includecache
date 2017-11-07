@@ -13,6 +13,8 @@ nav_msgs/OccupancyGrid.h
 -
 visualization_msgs/Marker.h
 -
+geometry_msgs/Point.h
+-
 vector
 -
 iostream
@@ -20,6 +22,8 @@ iostream
 math.h
 -
 Eigen/Dense
+-
+algorithm
 -
 time.h
 -
