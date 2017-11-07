@@ -1,7 +1,8 @@
 <launch>
     <include file="$(find balrog_sim)/launch/OpenKarto.launch"></include>
 
-
+    <!-- run slam_visited.py in balrog/python_scripts: -->
+    <node pkg="balrog" type="slam_visited.py" name="slam_visited_node"></node>
 
     <!-- run slam_pose.py in balrog/python_scripts: -->
     <node pkg="balrog" type="slam_pose.py" name="slam_pose_node"></node>
