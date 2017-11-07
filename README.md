@@ -618,3 +618,10 @@ find_package(catkin REQUIRED COMPONENTS
 - $ rosrun balrog cmd_reader.py
 - $ rosrun balrog manual_controller.py
 - $ Set Balrog in auto mode using the RC controller
+
+# BP4 demos:
+
+### SLAM on Balrog:
+- Connect to the RPI network
+- Connect the LIDAR to the computer and wait a few seconds for the LIDAR to obtain full rotation speed
+- $ roslaunch balrog OpenKarto_complete.launch
