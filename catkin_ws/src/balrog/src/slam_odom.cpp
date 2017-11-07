@@ -39,7 +39,7 @@ SlamOdom::SlamOdom()
     theta_ = 0.0;
 
     odom_pose_pub_ =
-          nh_.advertise<std_msgs::Float64MultiArray>("/odom_pose2", 10);
+          nh_.advertise<std_msgs::Float64MultiArray>("/odom_pose", 10);
 
     encoder_sub_ =
           nh_.subscribe("/encoder_data", 10, &SlamOdom::odom_callback_, this);

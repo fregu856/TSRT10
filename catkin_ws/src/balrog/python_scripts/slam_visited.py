@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import rospy
-from std_msgs.msg import Float64MultiArray
 from nav_msgs.msg import OccupancyGrid
 from visualization_msgs.msg import Marker
 
@@ -53,10 +52,16 @@ def callback_func(msg_obj):
             x_map_ind = int(x_map // 0.05) # (col)
             y_map_ind = int(y_map // 0.05) # (row)
 
-            for row in range(y_map_ind-10, y_map_ind+11):
-                for col in range(x_map_ind-10, x_map_ind+11):
-                    if row < map_height and col < map_width:
-                        map_visited[row][col] = -2
+            col_ind_max = min(x_map_ind+11, map_width)
+            col_ind_min = max(x_map_ind-10, 0)
+            row_ind_max = min(y_map_ind+11, map_height)
+            row_ind_min = max(y_map_ind-10, 0)
+            map_visited[row_ind_min:row_ind_max, col_ind_min:col_ind_max] = -2
+
+            # for row in range(y_map_ind-10, y_map_ind+11):
+            #     for col in range(x_map_ind-10, x_map_ind+11):
+            #         if row < map_height and row >= 0 and col < map_width and col >= 0:
+            #             map_visited[row][col] = -2
 
             print "x: %f, y: %f" % (x, y)
             print "origin: (%f, %f)" % (map_origin_local[0], map_origin_local[1])

@@ -150,12 +150,12 @@
 /home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/list_install_components.dir
 /home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/actionlib_generate_messages_py.dir
 /home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/slam_pose.dir
+/home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/rebuild_cache.dir
+/home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir
 /home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/tf_generate_messages_py.dir
 /home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/tf2_msgs_generate_messages_cpp.dir
 /home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/actionlib_generate_messages_lisp.dir
 /home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/slam_odom.dir
-/home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/actionlib_generate_messages_eus.dir
-/home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/tf_generate_messages_cpp.dir
 /home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/actionlib_generate_messages_cpp.dir
 /home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/tf_generate_messages_eus.dir
 /home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/tf_generate_messages_nodejs.dir
@@ -166,8 +166,9 @@
 /home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/install.dir
 /home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/tf2_msgs_generate_messages_eus.dir
 /home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/tf2_msgs_generate_messages_py.dir
-/home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir
-/home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/rebuild_cache.dir
+/home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/actionlib_generate_messages_eus.dir
+/home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/tf_generate_messages_cpp.dir
+/home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/slam_visited.dir
 /home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/install/strip.dir
 /home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/install/local.dir
 /home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/test.dir

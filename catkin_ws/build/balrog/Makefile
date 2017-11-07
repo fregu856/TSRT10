@@ -66,6 +66,17 @@ list_install_components/fast: list_install_components
 
 .PHONY : list_install_components/fast
 
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
+
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -88,17 +99,6 @@ install/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
-
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
 
 # Special rule for the target install/strip
 install/strip: preinstall
@@ -196,6 +196,21 @@ slam_pose/fast:
 .PHONY : slam_pose/fast
 
 # Convenience name for target.
+balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule:
+	cd /home/fregu856/TSRT10/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
+.PHONY : balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+actionlib_generate_messages_nodejs: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
+
+.PHONY : actionlib_generate_messages_nodejs
+
+# fast build rule for target.
+actionlib_generate_messages_nodejs/fast:
+	cd /home/fregu856/TSRT10/catkin_ws/build && $(MAKE) -f balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/build.make balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/build
+.PHONY : actionlib_generate_messages_nodejs/fast
+
+# Convenience name for target.
 balrog/CMakeFiles/tf_generate_messages_py.dir/rule:
 	cd /home/fregu856/TSRT10/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 balrog/CMakeFiles/tf_generate_messages_py.dir/rule
 .PHONY : balrog/CMakeFiles/tf_generate_messages_py.dir/rule
@@ -254,36 +269,6 @@ slam_odom: balrog/CMakeFiles/slam_odom.dir/rule
 slam_odom/fast:
 	cd /home/fregu856/TSRT10/catkin_ws/build && $(MAKE) -f balrog/CMakeFiles/slam_odom.dir/build.make balrog/CMakeFiles/slam_odom.dir/build
 .PHONY : slam_odom/fast
-
-# Convenience name for target.
-balrog/CMakeFiles/actionlib_generate_messages_eus.dir/rule:
-	cd /home/fregu856/TSRT10/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 balrog/CMakeFiles/actionlib_generate_messages_eus.dir/rule
-.PHONY : balrog/CMakeFiles/actionlib_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-actionlib_generate_messages_eus: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/rule
-
-.PHONY : actionlib_generate_messages_eus
-
-# fast build rule for target.
-actionlib_generate_messages_eus/fast:
-	cd /home/fregu856/TSRT10/catkin_ws/build && $(MAKE) -f balrog/CMakeFiles/actionlib_generate_messages_eus.dir/build.make balrog/CMakeFiles/actionlib_generate_messages_eus.dir/build
-.PHONY : actionlib_generate_messages_eus/fast
-
-# Convenience name for target.
-balrog/CMakeFiles/tf_generate_messages_cpp.dir/rule:
-	cd /home/fregu856/TSRT10/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 balrog/CMakeFiles/tf_generate_messages_cpp.dir/rule
-.PHONY : balrog/CMakeFiles/tf_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-tf_generate_messages_cpp: balrog/CMakeFiles/tf_generate_messages_cpp.dir/rule
-
-.PHONY : tf_generate_messages_cpp
-
-# fast build rule for target.
-tf_generate_messages_cpp/fast:
-	cd /home/fregu856/TSRT10/catkin_ws/build && $(MAKE) -f balrog/CMakeFiles/tf_generate_messages_cpp.dir/build.make balrog/CMakeFiles/tf_generate_messages_cpp.dir/build
-.PHONY : tf_generate_messages_cpp/fast
 
 # Convenience name for target.
 balrog/CMakeFiles/actionlib_generate_messages_cpp.dir/rule:
@@ -406,19 +391,49 @@ tf2_msgs_generate_messages_py/fast:
 .PHONY : tf2_msgs_generate_messages_py/fast
 
 # Convenience name for target.
-balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule:
-	cd /home/fregu856/TSRT10/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
-.PHONY : balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
+balrog/CMakeFiles/actionlib_generate_messages_eus.dir/rule:
+	cd /home/fregu856/TSRT10/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 balrog/CMakeFiles/actionlib_generate_messages_eus.dir/rule
+.PHONY : balrog/CMakeFiles/actionlib_generate_messages_eus.dir/rule
 
 # Convenience name for target.
-actionlib_generate_messages_nodejs: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
+actionlib_generate_messages_eus: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/rule
 
-.PHONY : actionlib_generate_messages_nodejs
+.PHONY : actionlib_generate_messages_eus
 
 # fast build rule for target.
-actionlib_generate_messages_nodejs/fast:
-	cd /home/fregu856/TSRT10/catkin_ws/build && $(MAKE) -f balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/build.make balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/build
-.PHONY : actionlib_generate_messages_nodejs/fast
+actionlib_generate_messages_eus/fast:
+	cd /home/fregu856/TSRT10/catkin_ws/build && $(MAKE) -f balrog/CMakeFiles/actionlib_generate_messages_eus.dir/build.make balrog/CMakeFiles/actionlib_generate_messages_eus.dir/build
+.PHONY : actionlib_generate_messages_eus/fast
+
+# Convenience name for target.
+balrog/CMakeFiles/tf_generate_messages_cpp.dir/rule:
+	cd /home/fregu856/TSRT10/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 balrog/CMakeFiles/tf_generate_messages_cpp.dir/rule
+.PHONY : balrog/CMakeFiles/tf_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+tf_generate_messages_cpp: balrog/CMakeFiles/tf_generate_messages_cpp.dir/rule
+
+.PHONY : tf_generate_messages_cpp
+
+# fast build rule for target.
+tf_generate_messages_cpp/fast:
+	cd /home/fregu856/TSRT10/catkin_ws/build && $(MAKE) -f balrog/CMakeFiles/tf_generate_messages_cpp.dir/build.make balrog/CMakeFiles/tf_generate_messages_cpp.dir/build
+.PHONY : tf_generate_messages_cpp/fast
+
+# Convenience name for target.
+balrog/CMakeFiles/slam_visited.dir/rule:
+	cd /home/fregu856/TSRT10/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 balrog/CMakeFiles/slam_visited.dir/rule
+.PHONY : balrog/CMakeFiles/slam_visited.dir/rule
+
+# Convenience name for target.
+slam_visited: balrog/CMakeFiles/slam_visited.dir/rule
+
+.PHONY : slam_visited
+
+# fast build rule for target.
+slam_visited/fast:
+	cd /home/fregu856/TSRT10/catkin_ws/build && $(MAKE) -f balrog/CMakeFiles/slam_visited.dir/build.make balrog/CMakeFiles/slam_visited.dir/build
+.PHONY : slam_visited/fast
 
 src/slam_odom.o: src/slam_odom.cpp.o
 
@@ -474,6 +489,33 @@ src/slam_pose.cpp.s:
 	cd /home/fregu856/TSRT10/catkin_ws/build && $(MAKE) -f balrog/CMakeFiles/slam_pose.dir/build.make balrog/CMakeFiles/slam_pose.dir/src/slam_pose.cpp.s
 .PHONY : src/slam_pose.cpp.s
 
+src/slam_visited.o: src/slam_visited.cpp.o
+
+.PHONY : src/slam_visited.o
+
+# target to build an object file
+src/slam_visited.cpp.o:
+	cd /home/fregu856/TSRT10/catkin_ws/build && $(MAKE) -f balrog/CMakeFiles/slam_visited.dir/build.make balrog/CMakeFiles/slam_visited.dir/src/slam_visited.cpp.o
+.PHONY : src/slam_visited.cpp.o
+
+src/slam_visited.i: src/slam_visited.cpp.i
+
+.PHONY : src/slam_visited.i
+
+# target to preprocess a source file
+src/slam_visited.cpp.i:
+	cd /home/fregu856/TSRT10/catkin_ws/build && $(MAKE) -f balrog/CMakeFiles/slam_visited.dir/build.make balrog/CMakeFiles/slam_visited.dir/src/slam_visited.cpp.i
+.PHONY : src/slam_visited.cpp.i
+
+src/slam_visited.s: src/slam_visited.cpp.s
+
+.PHONY : src/slam_visited.s
+
+# target to generate assembly for a file
+src/slam_visited.cpp.s:
+	cd /home/fregu856/TSRT10/catkin_ws/build && $(MAKE) -f balrog/CMakeFiles/slam_visited.dir/build.make balrog/CMakeFiles/slam_visited.dir/src/slam_visited.cpp.s
+.PHONY : src/slam_visited.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -483,12 +525,12 @@ help:
 	@echo "... list_install_components"
 	@echo "... actionlib_generate_messages_py"
 	@echo "... slam_pose"
+	@echo "... rebuild_cache"
+	@echo "... actionlib_generate_messages_nodejs"
 	@echo "... tf_generate_messages_py"
 	@echo "... tf2_msgs_generate_messages_cpp"
 	@echo "... actionlib_generate_messages_lisp"
 	@echo "... slam_odom"
-	@echo "... actionlib_generate_messages_eus"
-	@echo "... tf_generate_messages_cpp"
 	@echo "... actionlib_generate_messages_cpp"
 	@echo "... tf_generate_messages_eus"
 	@echo "... tf_generate_messages_nodejs"
@@ -499,8 +541,9 @@ help:
 	@echo "... install"
 	@echo "... tf2_msgs_generate_messages_eus"
 	@echo "... tf2_msgs_generate_messages_py"
-	@echo "... actionlib_generate_messages_nodejs"
-	@echo "... rebuild_cache"
+	@echo "... actionlib_generate_messages_eus"
+	@echo "... tf_generate_messages_cpp"
+	@echo "... slam_visited"
 	@echo "... install/strip"
 	@echo "... install/local"
 	@echo "... test"
@@ -510,6 +553,9 @@ help:
 	@echo "... src/slam_pose.o"
 	@echo "... src/slam_pose.i"
 	@echo "... src/slam_pose.s"
+	@echo "... src/slam_visited.o"
+	@echo "... src/slam_visited.i"
+	@echo "... src/slam_visited.s"
 .PHONY : help
 
 

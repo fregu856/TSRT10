@@ -1128,6 +1128,19 @@ slam_pose/fast:
 .PHONY : slam_pose/fast
 
 #=============================================================================
+# Target rules for targets named actionlib_generate_messages_nodejs
+
+# Build rule for target.
+actionlib_generate_messages_nodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 actionlib_generate_messages_nodejs
+.PHONY : actionlib_generate_messages_nodejs
+
+# fast build rule for target.
+actionlib_generate_messages_nodejs/fast:
+	$(MAKE) -f balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/build.make balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/build
+.PHONY : actionlib_generate_messages_nodejs/fast
+
+#=============================================================================
 # Target rules for targets named tf_generate_messages_py
 
 # Build rule for target.
@@ -1178,32 +1191,6 @@ slam_odom: cmake_check_build_system
 slam_odom/fast:
 	$(MAKE) -f balrog/CMakeFiles/slam_odom.dir/build.make balrog/CMakeFiles/slam_odom.dir/build
 .PHONY : slam_odom/fast
-
-#=============================================================================
-# Target rules for targets named actionlib_generate_messages_eus
-
-# Build rule for target.
-actionlib_generate_messages_eus: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 actionlib_generate_messages_eus
-.PHONY : actionlib_generate_messages_eus
-
-# fast build rule for target.
-actionlib_generate_messages_eus/fast:
-	$(MAKE) -f balrog/CMakeFiles/actionlib_generate_messages_eus.dir/build.make balrog/CMakeFiles/actionlib_generate_messages_eus.dir/build
-.PHONY : actionlib_generate_messages_eus/fast
-
-#=============================================================================
-# Target rules for targets named tf_generate_messages_cpp
-
-# Build rule for target.
-tf_generate_messages_cpp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 tf_generate_messages_cpp
-.PHONY : tf_generate_messages_cpp
-
-# fast build rule for target.
-tf_generate_messages_cpp/fast:
-	$(MAKE) -f balrog/CMakeFiles/tf_generate_messages_cpp.dir/build.make balrog/CMakeFiles/tf_generate_messages_cpp.dir/build
-.PHONY : tf_generate_messages_cpp/fast
 
 #=============================================================================
 # Target rules for targets named actionlib_generate_messages_cpp
@@ -1310,17 +1297,43 @@ tf2_msgs_generate_messages_py/fast:
 .PHONY : tf2_msgs_generate_messages_py/fast
 
 #=============================================================================
-# Target rules for targets named actionlib_generate_messages_nodejs
+# Target rules for targets named actionlib_generate_messages_eus
 
 # Build rule for target.
-actionlib_generate_messages_nodejs: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 actionlib_generate_messages_nodejs
-.PHONY : actionlib_generate_messages_nodejs
+actionlib_generate_messages_eus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 actionlib_generate_messages_eus
+.PHONY : actionlib_generate_messages_eus
 
 # fast build rule for target.
-actionlib_generate_messages_nodejs/fast:
-	$(MAKE) -f balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/build.make balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/build
-.PHONY : actionlib_generate_messages_nodejs/fast
+actionlib_generate_messages_eus/fast:
+	$(MAKE) -f balrog/CMakeFiles/actionlib_generate_messages_eus.dir/build.make balrog/CMakeFiles/actionlib_generate_messages_eus.dir/build
+.PHONY : actionlib_generate_messages_eus/fast
+
+#=============================================================================
+# Target rules for targets named tf_generate_messages_cpp
+
+# Build rule for target.
+tf_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tf_generate_messages_cpp
+.PHONY : tf_generate_messages_cpp
+
+# fast build rule for target.
+tf_generate_messages_cpp/fast:
+	$(MAKE) -f balrog/CMakeFiles/tf_generate_messages_cpp.dir/build.make balrog/CMakeFiles/tf_generate_messages_cpp.dir/build
+.PHONY : tf_generate_messages_cpp/fast
+
+#=============================================================================
+# Target rules for targets named slam_visited
+
+# Build rule for target.
+slam_visited: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 slam_visited
+.PHONY : slam_visited
+
+# fast build rule for target.
+slam_visited/fast:
+	$(MAKE) -f balrog/CMakeFiles/slam_visited.dir/build.make balrog/CMakeFiles/slam_visited.dir/build
+.PHONY : slam_visited/fast
 
 #=============================================================================
 # Target rules for targets named geotiff_writer
@@ -3749,12 +3762,11 @@ help:
 	@echo "... rosgraph_msgs_generate_messages_py"
 	@echo "... actionlib_generate_messages_py"
 	@echo "... slam_pose"
+	@echo "... actionlib_generate_messages_nodejs"
 	@echo "... tf_generate_messages_py"
 	@echo "... tf2_msgs_generate_messages_cpp"
 	@echo "... actionlib_generate_messages_lisp"
 	@echo "... slam_odom"
-	@echo "... actionlib_generate_messages_eus"
-	@echo "... tf_generate_messages_cpp"
 	@echo "... actionlib_generate_messages_cpp"
 	@echo "... tf_generate_messages_eus"
 	@echo "... tf_generate_messages_nodejs"
@@ -3763,7 +3775,9 @@ help:
 	@echo "... tf2_msgs_generate_messages_nodejs"
 	@echo "... tf2_msgs_generate_messages_eus"
 	@echo "... tf2_msgs_generate_messages_py"
-	@echo "... actionlib_generate_messages_nodejs"
+	@echo "... actionlib_generate_messages_eus"
+	@echo "... tf_generate_messages_cpp"
+	@echo "... slam_visited"
 	@echo "... geotiff_writer"
 	@echo "... geotiff_node"
 	@echo "... geotiff_saver"

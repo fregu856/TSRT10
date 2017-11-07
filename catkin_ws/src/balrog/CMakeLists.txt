@@ -208,3 +208,6 @@ target_link_libraries(slam_pose ${catkin_LIBRARIES})
 
 add_executable(slam_odom src/slam_odom.cpp)
 target_link_libraries(slam_odom ${catkin_LIBRARIES})
+
+add_executable(slam_visited src/slam_visited.cpp)
+target_link_libraries(slam_visited ${catkin_LIBRARIES})

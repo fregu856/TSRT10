@@ -1158,12 +1158,12 @@ hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_generate_messages_lisp.di
 hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_generate_messages_lisp.dir/all: hector_slam/hector_nav_msgs/CMakeFiles/_hector_nav_msgs_generate_messages_check_deps_GetNormal.dir/all
 	$(MAKE) -f hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_generate_messages_lisp.dir/build.make hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_generate_messages_lisp.dir/depend
 	$(MAKE) -f hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_generate_messages_lisp.dir/build.make hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_generate_messages_lisp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=32,33 "Built target hector_nav_msgs_generate_messages_lisp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=32 "Built target hector_nav_msgs_generate_messages_lisp"
 .PHONY : hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_generate_messages_lisp.dir/all
 
 # Build rule for subdir invocation for target.
 hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_generate_messages_lisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_generate_messages_lisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_generate_messages_lisp.dir/rule
@@ -1341,7 +1341,7 @@ hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_gennodejs.dir/all: hector
 
 # Build rule for subdir invocation for target.
 hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_gennodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_gennodejs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_gennodejs.dir/rule
@@ -1447,12 +1447,12 @@ hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_generate_messages_nodejs.
 hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_generate_messages_nodejs.dir/all: hector_slam/hector_nav_msgs/CMakeFiles/_hector_nav_msgs_generate_messages_check_deps_GetNormal.dir/all
 	$(MAKE) -f hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_generate_messages_nodejs.dir/build.make hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_generate_messages_nodejs.dir/depend
 	$(MAKE) -f hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_generate_messages_nodejs.dir/build.make hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_generate_messages_nodejs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=34 "Built target hector_nav_msgs_generate_messages_nodejs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=33,34 "Built target hector_nav_msgs_generate_messages_nodejs"
 .PHONY : hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_generate_messages_nodejs.dir/all
 
 # Build rule for subdir invocation for target.
 hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_generate_messages_nodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_generate_messages_nodejs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_generate_messages_nodejs.dir/rule
@@ -1676,7 +1676,7 @@ hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_genlisp.dir/all: hector_s
 
 # Build rule for subdir invocation for target.
 hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_genlisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_genlisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : hector_slam/hector_nav_msgs/CMakeFiles/hector_nav_msgs_genlisp.dir/rule
@@ -1939,7 +1939,7 @@ navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_geneus.dir/all: navigation_2d/nav
 
 # Build rule for subdir invocation for target.
 navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_geneus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_geneus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_geneus.dir/rule
@@ -2034,12 +2034,12 @@ navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_generate_messages_lisp.dir/all: n
 navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_generate_messages_lisp.dir/all: navigation_2d/nav2d_msgs/CMakeFiles/_nav2d_msgs_generate_messages_check_deps_RobotPose.dir/all
 	$(MAKE) -f navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_generate_messages_lisp.dir/build.make navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_generate_messages_lisp.dir/depend
 	$(MAKE) -f navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_generate_messages_lisp.dir/build.make navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_generate_messages_lisp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target nav2d_msgs_generate_messages_lisp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=45 "Built target nav2d_msgs_generate_messages_lisp"
 .PHONY : navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_generate_messages_lisp.dir/all
 
 # Build rule for subdir invocation for target.
 navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_generate_messages_lisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_generate_messages_lisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_generate_messages_lisp.dir/rule
@@ -2138,12 +2138,12 @@ navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_generate_messages_eus.dir/all: na
 navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_generate_messages_eus.dir/all: navigation_2d/nav2d_msgs/CMakeFiles/sensor_msgs_generate_messages_eus.dir/all
 	$(MAKE) -f navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_generate_messages_eus.dir/build.make navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_generate_messages_eus.dir/depend
 	$(MAKE) -f navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_generate_messages_eus.dir/build.make navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_generate_messages_eus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=45 "Built target nav2d_msgs_generate_messages_eus"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target nav2d_msgs_generate_messages_eus"
 .PHONY : navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_generate_messages_eus.dir/all
 
 # Build rule for subdir invocation for target.
 navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_generate_messages_eus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_generate_messages_eus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_generate_messages_eus.dir/rule
@@ -2175,7 +2175,7 @@ navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_genlisp.dir/all: navigation_2d/na
 
 # Build rule for subdir invocation for target.
 navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_genlisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_genlisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : navigation_2d/nav2d_msgs/CMakeFiles/nav2d_msgs_genlisp.dir/rule
@@ -2689,18 +2689,18 @@ clean: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/clean
 # Convenience name for "all" pass in the directory.
 balrog/all: balrog/CMakeFiles/slam_pose.dir/all
 balrog/all: balrog/CMakeFiles/slam_odom.dir/all
+balrog/all: balrog/CMakeFiles/slam_visited.dir/all
 
 .PHONY : balrog/all
 
 # Convenience name for "clean" pass in the directory.
 balrog/clean: balrog/CMakeFiles/actionlib_generate_messages_py.dir/clean
 balrog/clean: balrog/CMakeFiles/slam_pose.dir/clean
+balrog/clean: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/clean
 balrog/clean: balrog/CMakeFiles/tf_generate_messages_py.dir/clean
 balrog/clean: balrog/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/clean
 balrog/clean: balrog/CMakeFiles/actionlib_generate_messages_lisp.dir/clean
 balrog/clean: balrog/CMakeFiles/slam_odom.dir/clean
-balrog/clean: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/clean
-balrog/clean: balrog/CMakeFiles/tf_generate_messages_cpp.dir/clean
 balrog/clean: balrog/CMakeFiles/actionlib_generate_messages_cpp.dir/clean
 balrog/clean: balrog/CMakeFiles/tf_generate_messages_eus.dir/clean
 balrog/clean: balrog/CMakeFiles/tf_generate_messages_nodejs.dir/clean
@@ -2709,7 +2709,9 @@ balrog/clean: balrog/CMakeFiles/tf_generate_messages_lisp.dir/clean
 balrog/clean: balrog/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/clean
 balrog/clean: balrog/CMakeFiles/tf2_msgs_generate_messages_eus.dir/clean
 balrog/clean: balrog/CMakeFiles/tf2_msgs_generate_messages_py.dir/clean
-balrog/clean: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/clean
+balrog/clean: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/clean
+balrog/clean: balrog/CMakeFiles/tf_generate_messages_cpp.dir/clean
+balrog/clean: balrog/CMakeFiles/slam_visited.dir/clean
 
 .PHONY : balrog/clean
 
@@ -2757,7 +2759,7 @@ clean: balrog/CMakeFiles/actionlib_generate_messages_py.dir/clean
 balrog/CMakeFiles/slam_pose.dir/all:
 	$(MAKE) -f balrog/CMakeFiles/slam_pose.dir/build.make balrog/CMakeFiles/slam_pose.dir/depend
 	$(MAKE) -f balrog/CMakeFiles/slam_pose.dir/build.make balrog/CMakeFiles/slam_pose.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=99 "Built target slam_pose"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target slam_pose"
 .PHONY : balrog/CMakeFiles/slam_pose.dir/all
 
 # Include target in all.
@@ -2767,7 +2769,7 @@ all: balrog/CMakeFiles/slam_pose.dir/all
 
 # Build rule for subdir invocation for target.
 balrog/CMakeFiles/slam_pose.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 balrog/CMakeFiles/slam_pose.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : balrog/CMakeFiles/slam_pose.dir/rule
@@ -2784,6 +2786,38 @@ balrog/CMakeFiles/slam_pose.dir/clean:
 
 # clean rule for target.
 clean: balrog/CMakeFiles/slam_pose.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir
+
+# All Build rule for target.
+balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all:
+	$(MAKE) -f balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/build.make balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/depend
+	$(MAKE) -f balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/build.make balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target actionlib_generate_messages_nodejs"
+.PHONY : balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
+
+# Build rule for subdir invocation for target.
+balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+.PHONY : balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+actionlib_generate_messages_nodejs: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
+
+.PHONY : actionlib_generate_messages_nodejs
+
+# clean rule for target.
+balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/clean:
+	$(MAKE) -f balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/build.make balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/clean
+.PHONY : balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/clean
+
+# clean rule for target.
+clean: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/clean
 
 .PHONY : clean
 
@@ -2890,7 +2924,7 @@ clean: balrog/CMakeFiles/actionlib_generate_messages_lisp.dir/clean
 balrog/CMakeFiles/slam_odom.dir/all:
 	$(MAKE) -f balrog/CMakeFiles/slam_odom.dir/build.make balrog/CMakeFiles/slam_odom.dir/depend
 	$(MAKE) -f balrog/CMakeFiles/slam_odom.dir/build.make balrog/CMakeFiles/slam_odom.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target slam_odom"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=98 "Built target slam_odom"
 .PHONY : balrog/CMakeFiles/slam_odom.dir/all
 
 # Include target in all.
@@ -2900,7 +2934,7 @@ all: balrog/CMakeFiles/slam_odom.dir/all
 
 # Build rule for subdir invocation for target.
 balrog/CMakeFiles/slam_odom.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 balrog/CMakeFiles/slam_odom.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : balrog/CMakeFiles/slam_odom.dir/rule
@@ -2917,70 +2951,6 @@ balrog/CMakeFiles/slam_odom.dir/clean:
 
 # clean rule for target.
 clean: balrog/CMakeFiles/slam_odom.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target balrog/CMakeFiles/actionlib_generate_messages_eus.dir
-
-# All Build rule for target.
-balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all:
-	$(MAKE) -f balrog/CMakeFiles/actionlib_generate_messages_eus.dir/build.make balrog/CMakeFiles/actionlib_generate_messages_eus.dir/depend
-	$(MAKE) -f balrog/CMakeFiles/actionlib_generate_messages_eus.dir/build.make balrog/CMakeFiles/actionlib_generate_messages_eus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target actionlib_generate_messages_eus"
-.PHONY : balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
-
-# Build rule for subdir invocation for target.
-balrog/CMakeFiles/actionlib_generate_messages_eus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
-.PHONY : balrog/CMakeFiles/actionlib_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-actionlib_generate_messages_eus: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/rule
-
-.PHONY : actionlib_generate_messages_eus
-
-# clean rule for target.
-balrog/CMakeFiles/actionlib_generate_messages_eus.dir/clean:
-	$(MAKE) -f balrog/CMakeFiles/actionlib_generate_messages_eus.dir/build.make balrog/CMakeFiles/actionlib_generate_messages_eus.dir/clean
-.PHONY : balrog/CMakeFiles/actionlib_generate_messages_eus.dir/clean
-
-# clean rule for target.
-clean: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target balrog/CMakeFiles/tf_generate_messages_cpp.dir
-
-# All Build rule for target.
-balrog/CMakeFiles/tf_generate_messages_cpp.dir/all:
-	$(MAKE) -f balrog/CMakeFiles/tf_generate_messages_cpp.dir/build.make balrog/CMakeFiles/tf_generate_messages_cpp.dir/depend
-	$(MAKE) -f balrog/CMakeFiles/tf_generate_messages_cpp.dir/build.make balrog/CMakeFiles/tf_generate_messages_cpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target tf_generate_messages_cpp"
-.PHONY : balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
-
-# Build rule for subdir invocation for target.
-balrog/CMakeFiles/tf_generate_messages_cpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
-.PHONY : balrog/CMakeFiles/tf_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-tf_generate_messages_cpp: balrog/CMakeFiles/tf_generate_messages_cpp.dir/rule
-
-.PHONY : tf_generate_messages_cpp
-
-# clean rule for target.
-balrog/CMakeFiles/tf_generate_messages_cpp.dir/clean:
-	$(MAKE) -f balrog/CMakeFiles/tf_generate_messages_cpp.dir/build.make balrog/CMakeFiles/tf_generate_messages_cpp.dir/clean
-.PHONY : balrog/CMakeFiles/tf_generate_messages_cpp.dir/clean
-
-# clean rule for target.
-clean: balrog/CMakeFiles/tf_generate_messages_cpp.dir/clean
 
 .PHONY : clean
 
@@ -3241,34 +3211,103 @@ clean: balrog/CMakeFiles/tf2_msgs_generate_messages_py.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir
+# Target rules for target balrog/CMakeFiles/actionlib_generate_messages_eus.dir
 
 # All Build rule for target.
-balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all:
-	$(MAKE) -f balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/build.make balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/depend
-	$(MAKE) -f balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/build.make balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target actionlib_generate_messages_nodejs"
-.PHONY : balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
+balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all:
+	$(MAKE) -f balrog/CMakeFiles/actionlib_generate_messages_eus.dir/build.make balrog/CMakeFiles/actionlib_generate_messages_eus.dir/depend
+	$(MAKE) -f balrog/CMakeFiles/actionlib_generate_messages_eus.dir/build.make balrog/CMakeFiles/actionlib_generate_messages_eus.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target actionlib_generate_messages_eus"
+.PHONY : balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
 
 # Build rule for subdir invocation for target.
-balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule: cmake_check_build_system
+balrog/CMakeFiles/actionlib_generate_messages_eus.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
-.PHONY : balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
+.PHONY : balrog/CMakeFiles/actionlib_generate_messages_eus.dir/rule
 
 # Convenience name for target.
-actionlib_generate_messages_nodejs: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
+actionlib_generate_messages_eus: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/rule
 
-.PHONY : actionlib_generate_messages_nodejs
-
-# clean rule for target.
-balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/clean:
-	$(MAKE) -f balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/build.make balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/clean
-.PHONY : balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/clean
+.PHONY : actionlib_generate_messages_eus
 
 # clean rule for target.
-clean: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/clean
+balrog/CMakeFiles/actionlib_generate_messages_eus.dir/clean:
+	$(MAKE) -f balrog/CMakeFiles/actionlib_generate_messages_eus.dir/build.make balrog/CMakeFiles/actionlib_generate_messages_eus.dir/clean
+.PHONY : balrog/CMakeFiles/actionlib_generate_messages_eus.dir/clean
+
+# clean rule for target.
+clean: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target balrog/CMakeFiles/tf_generate_messages_cpp.dir
+
+# All Build rule for target.
+balrog/CMakeFiles/tf_generate_messages_cpp.dir/all:
+	$(MAKE) -f balrog/CMakeFiles/tf_generate_messages_cpp.dir/build.make balrog/CMakeFiles/tf_generate_messages_cpp.dir/depend
+	$(MAKE) -f balrog/CMakeFiles/tf_generate_messages_cpp.dir/build.make balrog/CMakeFiles/tf_generate_messages_cpp.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target tf_generate_messages_cpp"
+.PHONY : balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
+
+# Build rule for subdir invocation for target.
+balrog/CMakeFiles/tf_generate_messages_cpp.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+.PHONY : balrog/CMakeFiles/tf_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+tf_generate_messages_cpp: balrog/CMakeFiles/tf_generate_messages_cpp.dir/rule
+
+.PHONY : tf_generate_messages_cpp
+
+# clean rule for target.
+balrog/CMakeFiles/tf_generate_messages_cpp.dir/clean:
+	$(MAKE) -f balrog/CMakeFiles/tf_generate_messages_cpp.dir/build.make balrog/CMakeFiles/tf_generate_messages_cpp.dir/clean
+.PHONY : balrog/CMakeFiles/tf_generate_messages_cpp.dir/clean
+
+# clean rule for target.
+clean: balrog/CMakeFiles/tf_generate_messages_cpp.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target balrog/CMakeFiles/slam_visited.dir
+
+# All Build rule for target.
+balrog/CMakeFiles/slam_visited.dir/all:
+	$(MAKE) -f balrog/CMakeFiles/slam_visited.dir/build.make balrog/CMakeFiles/slam_visited.dir/depend
+	$(MAKE) -f balrog/CMakeFiles/slam_visited.dir/build.make balrog/CMakeFiles/slam_visited.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=99 "Built target slam_visited"
+.PHONY : balrog/CMakeFiles/slam_visited.dir/all
+
+# Include target in all.
+all: balrog/CMakeFiles/slam_visited.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+balrog/CMakeFiles/slam_visited.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 balrog/CMakeFiles/slam_visited.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+.PHONY : balrog/CMakeFiles/slam_visited.dir/rule
+
+# Convenience name for target.
+slam_visited: balrog/CMakeFiles/slam_visited.dir/rule
+
+.PHONY : slam_visited
+
+# clean rule for target.
+balrog/CMakeFiles/slam_visited.dir/clean:
+	$(MAKE) -f balrog/CMakeFiles/slam_visited.dir/build.make balrog/CMakeFiles/slam_visited.dir/clean
+.PHONY : balrog/CMakeFiles/slam_visited.dir/clean
+
+# clean rule for target.
+clean: balrog/CMakeFiles/slam_visited.dir/clean
 
 .PHONY : clean
 
@@ -5461,11 +5500,10 @@ slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/all: asl_turtlebot/CMakeFile
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/all: balrog/CMakeFiles/actionlib_generate_messages_py.dir/all
+slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/all: balrog/CMakeFiles/tf_generate_messages_py.dir/all
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/all: balrog/CMakeFiles/actionlib_generate_messages_lisp.dir/all
-slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
-slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/all: balrog/CMakeFiles/actionlib_generate_messages_cpp.dir/all
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/all: balrog/CMakeFiles/tf_generate_messages_eus.dir/all
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/all: balrog/CMakeFiles/tf_generate_messages_nodejs.dir/all
@@ -5474,7 +5512,8 @@ slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/all: balrog/CMakeFiles/tf_ge
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_py.dir/all
-slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
+slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
+slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/all: slam_gmapping/gmapping/CMakeFiles/bond_generate_messages_lisp.dir/all
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/all: slam_gmapping/gmapping/CMakeFiles/bond_generate_messages_eus.dir/all
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/all: slam_gmapping/gmapping/CMakeFiles/bond_generate_messages_nodejs.dir/all
@@ -5487,7 +5526,7 @@ slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/all: slam_gmapping/gmapping/
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/all: slam_gmapping/gmapping/CMakeFiles/nodelet_generate_messages_lisp.dir/all
 	$(MAKE) -f slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/build.make slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/depend
 	$(MAKE) -f slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/build.make slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=96 "Built target slam_gmapping"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=95 "Built target slam_gmapping"
 .PHONY : slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/all
 
 # Include target in all.
@@ -5524,7 +5563,7 @@ clean: slam_gmapping/gmapping/CMakeFiles/slam_gmapping.dir/clean
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping_nodelet.dir/all:
 	$(MAKE) -f slam_gmapping/gmapping/CMakeFiles/slam_gmapping_nodelet.dir/build.make slam_gmapping/gmapping/CMakeFiles/slam_gmapping_nodelet.dir/depend
 	$(MAKE) -f slam_gmapping/gmapping/CMakeFiles/slam_gmapping_nodelet.dir/build.make slam_gmapping/gmapping/CMakeFiles/slam_gmapping_nodelet.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=97 "Built target slam_gmapping_nodelet"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=96 "Built target slam_gmapping_nodelet"
 .PHONY : slam_gmapping/gmapping/CMakeFiles/slam_gmapping_nodelet.dir/all
 
 # Include target in all.
@@ -5659,11 +5698,10 @@ slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/all: asl_turtlebot/CM
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/all: balrog/CMakeFiles/actionlib_generate_messages_py.dir/all
+slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/all: balrog/CMakeFiles/tf_generate_messages_py.dir/all
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/all: balrog/CMakeFiles/actionlib_generate_messages_lisp.dir/all
-slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
-slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/all: balrog/CMakeFiles/actionlib_generate_messages_cpp.dir/all
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/all: balrog/CMakeFiles/tf_generate_messages_eus.dir/all
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/all: balrog/CMakeFiles/tf_generate_messages_nodejs.dir/all
@@ -5672,7 +5710,8 @@ slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/all: balrog/CMakeFile
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_py.dir/all
-slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
+slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
+slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/all: slam_gmapping/gmapping/CMakeFiles/bond_generate_messages_lisp.dir/all
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/all: slam_gmapping/gmapping/CMakeFiles/bond_generate_messages_eus.dir/all
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/all: slam_gmapping/gmapping/CMakeFiles/bond_generate_messages_nodejs.dir/all
@@ -5685,7 +5724,7 @@ slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/all: slam_gmapping/gm
 slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/all: slam_gmapping/gmapping/CMakeFiles/nodelet_generate_messages_lisp.dir/all
 	$(MAKE) -f slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/build.make slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/depend
 	$(MAKE) -f slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/build.make slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=98 "Built target slam_gmapping_replay"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=97 "Built target slam_gmapping_replay"
 .PHONY : slam_gmapping/gmapping/CMakeFiles/slam_gmapping_replay.dir/all
 
 # Include target in all.
@@ -6135,7 +6174,7 @@ hector_slam/hector_imu_tools/preinstall:
 hector_slam/hector_imu_tools/CMakeFiles/pose_and_orientation_to_imu_node.dir/all:
 	$(MAKE) -f hector_slam/hector_imu_tools/CMakeFiles/pose_and_orientation_to_imu_node.dir/build.make hector_slam/hector_imu_tools/CMakeFiles/pose_and_orientation_to_imu_node.dir/depend
 	$(MAKE) -f hector_slam/hector_imu_tools/CMakeFiles/pose_and_orientation_to_imu_node.dir/build.make hector_slam/hector_imu_tools/CMakeFiles/pose_and_orientation_to_imu_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target pose_and_orientation_to_imu_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=93 "Built target pose_and_orientation_to_imu_node"
 .PHONY : hector_slam/hector_imu_tools/CMakeFiles/pose_and_orientation_to_imu_node.dir/all
 
 # Include target in all.
@@ -6145,7 +6184,7 @@ all: hector_slam/hector_imu_tools/CMakeFiles/pose_and_orientation_to_imu_node.di
 
 # Build rule for subdir invocation for target.
 hector_slam/hector_imu_tools/CMakeFiles/pose_and_orientation_to_imu_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 hector_slam/hector_imu_tools/CMakeFiles/pose_and_orientation_to_imu_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : hector_slam/hector_imu_tools/CMakeFiles/pose_and_orientation_to_imu_node.dir/rule
@@ -6228,11 +6267,10 @@ hector_slam/hector_map_server/CMakeFiles/hector_map_server.dir/all: asl_turtlebo
 hector_slam/hector_map_server/CMakeFiles/hector_map_server.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
 hector_slam/hector_map_server/CMakeFiles/hector_map_server.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all
 hector_slam/hector_map_server/CMakeFiles/hector_map_server.dir/all: balrog/CMakeFiles/actionlib_generate_messages_py.dir/all
+hector_slam/hector_map_server/CMakeFiles/hector_map_server.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
 hector_slam/hector_map_server/CMakeFiles/hector_map_server.dir/all: balrog/CMakeFiles/tf_generate_messages_py.dir/all
 hector_slam/hector_map_server/CMakeFiles/hector_map_server.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
 hector_slam/hector_map_server/CMakeFiles/hector_map_server.dir/all: balrog/CMakeFiles/actionlib_generate_messages_lisp.dir/all
-hector_slam/hector_map_server/CMakeFiles/hector_map_server.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
-hector_slam/hector_map_server/CMakeFiles/hector_map_server.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
 hector_slam/hector_map_server/CMakeFiles/hector_map_server.dir/all: balrog/CMakeFiles/actionlib_generate_messages_cpp.dir/all
 hector_slam/hector_map_server/CMakeFiles/hector_map_server.dir/all: balrog/CMakeFiles/tf_generate_messages_eus.dir/all
 hector_slam/hector_map_server/CMakeFiles/hector_map_server.dir/all: balrog/CMakeFiles/tf_generate_messages_nodejs.dir/all
@@ -6241,7 +6279,8 @@ hector_slam/hector_map_server/CMakeFiles/hector_map_server.dir/all: balrog/CMake
 hector_slam/hector_map_server/CMakeFiles/hector_map_server.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
 hector_slam/hector_map_server/CMakeFiles/hector_map_server.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
 hector_slam/hector_map_server/CMakeFiles/hector_map_server.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_py.dir/all
-hector_slam/hector_map_server/CMakeFiles/hector_map_server.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
+hector_slam/hector_map_server/CMakeFiles/hector_map_server.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
+hector_slam/hector_map_server/CMakeFiles/hector_map_server.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
 hector_slam/hector_map_server/CMakeFiles/hector_map_server.dir/all: hector_slam/hector_marker_drawing/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
 hector_slam/hector_map_server/CMakeFiles/hector_map_server.dir/all: hector_slam/hector_marker_drawing/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all
 hector_slam/hector_map_server/CMakeFiles/hector_map_server.dir/all: hector_slam/hector_marker_drawing/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all
@@ -6342,11 +6381,10 @@ hector_slam/hector_trajectory_server/CMakeFiles/hector_trajectory_server.dir/all
 hector_slam/hector_trajectory_server/CMakeFiles/hector_trajectory_server.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
 hector_slam/hector_trajectory_server/CMakeFiles/hector_trajectory_server.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all
 hector_slam/hector_trajectory_server/CMakeFiles/hector_trajectory_server.dir/all: balrog/CMakeFiles/actionlib_generate_messages_py.dir/all
+hector_slam/hector_trajectory_server/CMakeFiles/hector_trajectory_server.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
 hector_slam/hector_trajectory_server/CMakeFiles/hector_trajectory_server.dir/all: balrog/CMakeFiles/tf_generate_messages_py.dir/all
 hector_slam/hector_trajectory_server/CMakeFiles/hector_trajectory_server.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
 hector_slam/hector_trajectory_server/CMakeFiles/hector_trajectory_server.dir/all: balrog/CMakeFiles/actionlib_generate_messages_lisp.dir/all
-hector_slam/hector_trajectory_server/CMakeFiles/hector_trajectory_server.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
-hector_slam/hector_trajectory_server/CMakeFiles/hector_trajectory_server.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
 hector_slam/hector_trajectory_server/CMakeFiles/hector_trajectory_server.dir/all: balrog/CMakeFiles/actionlib_generate_messages_cpp.dir/all
 hector_slam/hector_trajectory_server/CMakeFiles/hector_trajectory_server.dir/all: balrog/CMakeFiles/tf_generate_messages_eus.dir/all
 hector_slam/hector_trajectory_server/CMakeFiles/hector_trajectory_server.dir/all: balrog/CMakeFiles/tf_generate_messages_nodejs.dir/all
@@ -6355,7 +6393,8 @@ hector_slam/hector_trajectory_server/CMakeFiles/hector_trajectory_server.dir/all
 hector_slam/hector_trajectory_server/CMakeFiles/hector_trajectory_server.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
 hector_slam/hector_trajectory_server/CMakeFiles/hector_trajectory_server.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
 hector_slam/hector_trajectory_server/CMakeFiles/hector_trajectory_server.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_py.dir/all
-hector_slam/hector_trajectory_server/CMakeFiles/hector_trajectory_server.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
+hector_slam/hector_trajectory_server/CMakeFiles/hector_trajectory_server.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
+hector_slam/hector_trajectory_server/CMakeFiles/hector_trajectory_server.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
 	$(MAKE) -f hector_slam/hector_trajectory_server/CMakeFiles/hector_trajectory_server.dir/build.make hector_slam/hector_trajectory_server/CMakeFiles/hector_trajectory_server.dir/depend
 	$(MAKE) -f hector_slam/hector_trajectory_server/CMakeFiles/hector_trajectory_server.dir/build.make hector_slam/hector_trajectory_server/CMakeFiles/hector_trajectory_server.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target hector_trajectory_server"
@@ -6452,7 +6491,7 @@ clean: navigation_2d/nav2d_localizer/CMakeFiles/SelfLocalizer.dir/clean
 navigation_2d/nav2d_localizer/CMakeFiles/localizer.dir/all: navigation_2d/nav2d_localizer/CMakeFiles/SelfLocalizer.dir/all
 	$(MAKE) -f navigation_2d/nav2d_localizer/CMakeFiles/localizer.dir/build.make navigation_2d/nav2d_localizer/CMakeFiles/localizer.dir/depend
 	$(MAKE) -f navigation_2d/nav2d_localizer/CMakeFiles/localizer.dir/build.make navigation_2d/nav2d_localizer/CMakeFiles/localizer.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target localizer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=41 "Built target localizer"
 .PHONY : navigation_2d/nav2d_localizer/CMakeFiles/localizer.dir/all
 
 # Include target in all.
@@ -6462,7 +6501,7 @@ all: navigation_2d/nav2d_localizer/CMakeFiles/localizer.dir/all
 
 # Build rule for subdir invocation for target.
 navigation_2d/nav2d_localizer/CMakeFiles/localizer.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 5
 	$(MAKE) -f CMakeFiles/Makefile2 navigation_2d/nav2d_localizer/CMakeFiles/localizer.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : navigation_2d/nav2d_localizer/CMakeFiles/localizer.dir/rule
@@ -7313,12 +7352,12 @@ clean: navigation_2d/nav2d_operator/CMakeFiles/map_msgs_generate_messages_lisp.d
 navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_nodejs.dir/all: navigation_2d/nav2d_operator/CMakeFiles/_nav2d_operator_generate_messages_check_deps_cmd.dir/all
 	$(MAKE) -f navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_nodejs.dir/build.make navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_nodejs.dir/depend
 	$(MAKE) -f navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_nodejs.dir/build.make navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_nodejs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=91 "Built target nav2d_operator_generate_messages_nodejs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target nav2d_operator_generate_messages_nodejs"
 .PHONY : navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_nodejs.dir/all
 
 # Build rule for subdir invocation for target.
 navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_nodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_nodejs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_nodejs.dir/rule
@@ -7409,7 +7448,7 @@ clean: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_generate_mess
 navigation_2d/nav2d_operator/CMakeFiles/operator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all
 	$(MAKE) -f navigation_2d/nav2d_operator/CMakeFiles/operator.dir/build.make navigation_2d/nav2d_operator/CMakeFiles/operator.dir/depend
 	$(MAKE) -f navigation_2d/nav2d_operator/CMakeFiles/operator.dir/build.make navigation_2d/nav2d_operator/CMakeFiles/operator.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=93 "Built target operator"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target operator"
 .PHONY : navigation_2d/nav2d_operator/CMakeFiles/operator.dir/all
 
 # Include target in all.
@@ -7419,7 +7458,7 @@ all: navigation_2d/nav2d_operator/CMakeFiles/operator.dir/all
 
 # Build rule for subdir invocation for target.
 navigation_2d/nav2d_operator/CMakeFiles/operator.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 navigation_2d/nav2d_operator/CMakeFiles/operator.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : navigation_2d/nav2d_operator/CMakeFiles/operator.dir/rule
@@ -7575,11 +7614,10 @@ navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: asl_turtlebot/CMa
 navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
 navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all
 navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: balrog/CMakeFiles/actionlib_generate_messages_py.dir/all
+navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: balrog/CMakeFiles/tf_generate_messages_py.dir/all
 navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
 navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: balrog/CMakeFiles/actionlib_generate_messages_lisp.dir/all
-navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
-navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
 navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: balrog/CMakeFiles/actionlib_generate_messages_cpp.dir/all
 navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: balrog/CMakeFiles/tf_generate_messages_eus.dir/all
 navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: balrog/CMakeFiles/tf_generate_messages_nodejs.dir/all
@@ -7588,8 +7626,9 @@ navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: balrog/CMakeFiles
 navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
 navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_py.dir/all
-navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
-navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/all
+navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
+navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
+navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/map_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/all
 navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_py.dir/all
@@ -7615,7 +7654,7 @@ navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: navigation_2d/nav
 navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/topic_tools_generate_messages_cpp.dir/all
 navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/topic_tools_generate_messages_eus.dir/all
 navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_gencfg.dir/all
-navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/map_msgs_generate_messages_nodejs.dir/all
+navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/all
 navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_gencfg.dir/all
 navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_generate_messages_lisp.dir/all
 navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_generate_messages_eus.dir/all
@@ -8358,7 +8397,7 @@ navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_genlisp.dir/all: navigati
 
 # Build rule for subdir invocation for target.
 navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_genlisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_genlisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_genlisp.dir/rule
@@ -8417,12 +8456,12 @@ clean: navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_
 navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_eus.dir/all: navigation_2d/nav2d_operator/CMakeFiles/_nav2d_operator_generate_messages_check_deps_cmd.dir/all
 	$(MAKE) -f navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_eus.dir/build.make navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_eus.dir/depend
 	$(MAKE) -f navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_eus.dir/build.make navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_eus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=90 "Built target nav2d_operator_generate_messages_eus"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target nav2d_operator_generate_messages_eus"
 .PHONY : navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_eus.dir/all
 
 # Build rule for subdir invocation for target.
 navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_eus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_eus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_eus.dir/rule
@@ -8454,7 +8493,7 @@ navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_geneus.dir/all: navigatio
 
 # Build rule for subdir invocation for target.
 navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_geneus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_geneus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_geneus.dir/rule
@@ -8486,7 +8525,7 @@ navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_gennodejs.dir/all: naviga
 
 # Build rule for subdir invocation for target.
 navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_gennodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_gennodejs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_gennodejs.dir/rule
@@ -8513,12 +8552,12 @@ clean: navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_gennodejs.dir/clea
 navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_lisp.dir/all: navigation_2d/nav2d_operator/CMakeFiles/_nav2d_operator_generate_messages_check_deps_cmd.dir/all
 	$(MAKE) -f navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_lisp.dir/build.make navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_lisp.dir/depend
 	$(MAKE) -f navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_lisp.dir/build.make navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_lisp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target nav2d_operator_generate_messages_lisp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=90 "Built target nav2d_operator_generate_messages_lisp"
 .PHONY : navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_lisp.dir/all
 
 # Build rule for subdir invocation for target.
 navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_lisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_lisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_lisp.dir/rule
@@ -8545,12 +8584,12 @@ clean: navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_
 navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_py.dir/all: navigation_2d/nav2d_operator/CMakeFiles/_nav2d_operator_generate_messages_check_deps_cmd.dir/all
 	$(MAKE) -f navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_py.dir/build.make navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_py.dir/depend
 	$(MAKE) -f navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_py.dir/build.make navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_py.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target nav2d_operator_generate_messages_py"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=91 "Built target nav2d_operator_generate_messages_py"
 .PHONY : navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_py.dir/all
 
 # Build rule for subdir invocation for target.
 navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_py.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_py.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_generate_messages_py.dir/rule
@@ -8582,7 +8621,7 @@ navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_genpy.dir/all: navigation
 
 # Build rule for subdir invocation for target.
 navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_genpy.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_genpy.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : navigation_2d/nav2d_operator/CMakeFiles/nav2d_operator_genpy.dir/rule
@@ -8941,11 +8980,10 @@ navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: asl_turtlebot/
 navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_py.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: balrog/CMakeFiles/tf_generate_messages_py.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_lisp.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_cpp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: balrog/CMakeFiles/tf_generate_messages_eus.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: balrog/CMakeFiles/tf_generate_messages_nodejs.dir/all
@@ -8954,8 +8992,9 @@ navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: balrog/CMakeFi
 navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_py.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/map_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_py.dir/all
@@ -8983,7 +9022,7 @@ navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: navigation_2d/
 navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/topic_tools_generate_messages_eus.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_gencfg.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/map_msgs_generate_messages_nodejs.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_gencfg.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_generate_messages_lisp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_generate_messages_eus.dir/all
@@ -9007,7 +9046,7 @@ navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: navigation_2d/
 navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all: navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_generate_messages_cpp.dir/all
 	$(MAKE) -f navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/build.make navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/depend
 	$(MAKE) -f navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/build.make navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=41 "Built target localize_client"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target localize_client"
 .PHONY : navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all
 
 # Include target in all.
@@ -9017,7 +9056,7 @@ all: navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all
 
 # Build rule for subdir invocation for target.
 navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 15
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 14
 	$(MAKE) -f CMakeFiles/Makefile2 navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : navigation_2d/nav2d_navigator/CMakeFiles/localize_client.dir/rule
@@ -9463,11 +9502,10 @@ navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: asl_turtlebot/C
 navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_py.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: balrog/CMakeFiles/tf_generate_messages_py.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_lisp.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_cpp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: balrog/CMakeFiles/tf_generate_messages_eus.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: balrog/CMakeFiles/tf_generate_messages_nodejs.dir/all
@@ -9476,8 +9514,9 @@ navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: balrog/CMakeFil
 navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_py.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/map_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_py.dir/all
@@ -9505,7 +9544,7 @@ navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: navigation_2d/n
 navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/topic_tools_generate_messages_eus.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_gencfg.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/map_msgs_generate_messages_nodejs.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_gencfg.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_generate_messages_lisp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/explore_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_generate_messages_eus.dir/all
@@ -9700,12 +9739,12 @@ navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_generate_messages_eus.d
 navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_generate_messages_eus.dir/all: navigation_2d/nav2d_navigator/CMakeFiles/_nav2d_navigator_generate_messages_check_deps_ExploreResult.dir/all
 	$(MAKE) -f navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_generate_messages_eus.dir/build.make navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_generate_messages_eus.dir/depend
 	$(MAKE) -f navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_generate_messages_eus.dir/build.make navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_generate_messages_eus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=56,57,58,59,60,61,62,63,64 "Built target nav2d_navigator_generate_messages_eus"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=56,57,58,59,60,61,62,63 "Built target nav2d_navigator_generate_messages_eus"
 .PHONY : navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_generate_messages_eus.dir/all
 
 # Build rule for subdir invocation for target.
 navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_generate_messages_eus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 9
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 8
 	$(MAKE) -f CMakeFiles/Makefile2 navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_generate_messages_eus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_generate_messages_eus.dir/rule
@@ -9865,7 +9904,7 @@ navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_genlisp.dir/all: naviga
 
 # Build rule for subdir invocation for target.
 navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_genlisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 9
 	$(MAKE) -f CMakeFiles/Makefile2 navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_genlisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_genlisp.dir/rule
@@ -10026,11 +10065,10 @@ navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: asl_turtlebot/CMakeF
 navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: balrog/CMakeFiles/actionlib_generate_messages_py.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: balrog/CMakeFiles/tf_generate_messages_py.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: balrog/CMakeFiles/actionlib_generate_messages_lisp.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: balrog/CMakeFiles/actionlib_generate_messages_cpp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: balrog/CMakeFiles/tf_generate_messages_eus.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: balrog/CMakeFiles/tf_generate_messages_nodejs.dir/all
@@ -10039,8 +10077,9 @@ navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: balrog/CMakeFiles/tf
 navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_py.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/map_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_py.dir/all
@@ -10068,7 +10107,7 @@ navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: navigation_2d/nav2d_
 navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/topic_tools_generate_messages_eus.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_gencfg.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/map_msgs_generate_messages_nodejs.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_gencfg.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_generate_messages_lisp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/navigator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_generate_messages_eus.dir/all
@@ -10297,11 +10336,10 @@ navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: asl_turtlebot/C
 navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_py.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: balrog/CMakeFiles/tf_generate_messages_py.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_lisp.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_cpp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: balrog/CMakeFiles/tf_generate_messages_eus.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: balrog/CMakeFiles/tf_generate_messages_nodejs.dir/all
@@ -10310,8 +10348,9 @@ navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: balrog/CMakeFil
 navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_py.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/map_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_py.dir/all
@@ -10339,7 +10378,7 @@ navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: navigation_2d/n
 navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/topic_tools_generate_messages_eus.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_gencfg.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/map_msgs_generate_messages_nodejs.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_gencfg.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_generate_messages_lisp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/get_map_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_generate_messages_eus.dir/all
@@ -10466,7 +10505,7 @@ navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_geneus.dir/all: navigat
 
 # Build rule for subdir invocation for target.
 navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_geneus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 9
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 8
 	$(MAKE) -f CMakeFiles/Makefile2 navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_geneus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_geneus.dir/rule
@@ -10554,12 +10593,12 @@ navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_generate_messages_lisp.
 navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_generate_messages_lisp.dir/all: navigation_2d/nav2d_navigator/CMakeFiles/_nav2d_navigator_generate_messages_check_deps_ExploreResult.dir/all
 	$(MAKE) -f navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_generate_messages_lisp.dir/build.make navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_generate_messages_lisp.dir/depend
 	$(MAKE) -f navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_generate_messages_lisp.dir/build.make navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_generate_messages_lisp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=65,66,67,68,69,70,71,72 "Built target nav2d_navigator_generate_messages_lisp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=64,65,66,67,68,69,70,71,72 "Built target nav2d_navigator_generate_messages_lisp"
 .PHONY : navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_generate_messages_lisp.dir/all
 
 # Build rule for subdir invocation for target.
 navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_generate_messages_lisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 9
 	$(MAKE) -f CMakeFiles/Makefile2 navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_generate_messages_lisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_generate_messages_lisp.dir/rule
@@ -10754,11 +10793,10 @@ navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: asl_turtlebot/C
 navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: balrog/CMakeFiles/actionlib_generate_messages_py.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: balrog/CMakeFiles/tf_generate_messages_py.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: balrog/CMakeFiles/actionlib_generate_messages_lisp.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: balrog/CMakeFiles/actionlib_generate_messages_cpp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: balrog/CMakeFiles/tf_generate_messages_eus.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: balrog/CMakeFiles/tf_generate_messages_nodejs.dir/all
@@ -10767,8 +10805,9 @@ navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: balrog/CMakeFil
 navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_py.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/map_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_py.dir/all
@@ -10796,7 +10835,7 @@ navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: navigation_2d/n
 navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/topic_tools_generate_messages_eus.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_gencfg.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/map_msgs_generate_messages_nodejs.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_gencfg.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_generate_messages_lisp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_generate_messages_eus.dir/all
@@ -10896,11 +10935,10 @@ navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: asl_turtlebot/
 navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_py.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: balrog/CMakeFiles/tf_generate_messages_py.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_lisp.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_cpp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: balrog/CMakeFiles/tf_generate_messages_eus.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: balrog/CMakeFiles/tf_generate_messages_nodejs.dir/all
@@ -10909,8 +10947,9 @@ navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: balrog/CMakeFi
 navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_py.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/map_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_py.dir/all
@@ -10938,7 +10977,7 @@ navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: navigation_2d/
 navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/topic_tools_generate_messages_eus.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_gencfg.dir/all
-navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/map_msgs_generate_messages_nodejs.dir/all
+navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_gencfg.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_generate_messages_lisp.dir/all
 navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_generate_messages_eus.dir/all
@@ -10962,7 +11001,7 @@ navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: navigation_2d/
 navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all: navigation_2d/nav2d_navigator/CMakeFiles/nav2d_navigator_generate_messages_cpp.dir/all
 	$(MAKE) -f navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/build.make navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/depend
 	$(MAKE) -f navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/build.make navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target set_goal_client"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=94 "Built target set_goal_client"
 .PHONY : navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all
 
 # Include target in all.
@@ -10972,7 +11011,7 @@ all: navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all
 
 # Build rule for subdir invocation for target.
 navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 14
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 15
 	$(MAKE) -f CMakeFiles/Makefile2 navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : navigation_2d/nav2d_navigator/CMakeFiles/set_goal_client.dir/rule
@@ -11055,11 +11094,10 @@ navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: asl_turtl
 navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
 navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all
 navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: balrog/CMakeFiles/actionlib_generate_messages_py.dir/all
+navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: balrog/CMakeFiles/tf_generate_messages_py.dir/all
 navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
 navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: balrog/CMakeFiles/actionlib_generate_messages_lisp.dir/all
-navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
-navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
 navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: balrog/CMakeFiles/actionlib_generate_messages_cpp.dir/all
 navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: balrog/CMakeFiles/tf_generate_messages_eus.dir/all
 navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: balrog/CMakeFiles/tf_generate_messages_nodejs.dir/all
@@ -11068,8 +11106,9 @@ navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: balrog/CM
 navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
 navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_py.dir/all
-navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
-navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/all
+navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
+navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
+navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: navigation_2d/nav2d_operator/CMakeFiles/map_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: hector_slam/hector_marker_drawing/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: hector_slam/hector_marker_drawing/CMakeFiles/visualization_msgs_generate_messages_eus.dir/all
 navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: hector_slam/hector_marker_drawing/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/all
@@ -11102,7 +11141,7 @@ navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: navigatio
 navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: navigation_2d/nav2d_operator/CMakeFiles/topic_tools_generate_messages_eus.dir/all
 navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all
 navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_gencfg.dir/all
-navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: navigation_2d/nav2d_operator/CMakeFiles/map_msgs_generate_messages_nodejs.dir/all
+navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/all
 navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_gencfg.dir/all
 navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_generate_messages_lisp.dir/all
 navigation_2d/nav2d_exploration/CMakeFiles/ExplorationPlugins.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_generate_messages_eus.dir/all
@@ -11228,11 +11267,10 @@ navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: asl_turtlebot/CMakeFil
 navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: balrog/CMakeFiles/actionlib_generate_messages_py.dir/all
+navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: balrog/CMakeFiles/tf_generate_messages_py.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: balrog/CMakeFiles/actionlib_generate_messages_lisp.dir/all
-navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
-navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: balrog/CMakeFiles/actionlib_generate_messages_cpp.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: balrog/CMakeFiles/tf_generate_messages_eus.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: balrog/CMakeFiles/tf_generate_messages_nodejs.dir/all
@@ -11241,8 +11279,9 @@ navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: balrog/CMakeFiles/tf_g
 navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_py.dir/all
-navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
-navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/all
+navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
+navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
+navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: navigation_2d/nav2d_operator/CMakeFiles/map_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_py.dir/all
@@ -11270,7 +11309,7 @@ navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: navigation_2d/nav2d_op
 navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: navigation_2d/nav2d_operator/CMakeFiles/topic_tools_generate_messages_eus.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_gencfg.dir/all
-navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: navigation_2d/nav2d_operator/CMakeFiles/map_msgs_generate_messages_nodejs.dir/all
+navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_gencfg.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_generate_messages_lisp.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_generate_messages_eus.dir/all
@@ -11300,7 +11339,7 @@ navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: navigation_2d/nav2d_na
 navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all: navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all
 	$(MAKE) -f navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/build.make navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/depend
 	$(MAKE) -f navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/build.make navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=94 "Built target remote_joy"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target remote_joy"
 .PHONY : navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all
 
 # Include target in all.
@@ -11310,7 +11349,7 @@ all: navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all
 
 # Build rule for subdir invocation for target.
 navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 51
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 50
 	$(MAKE) -f CMakeFiles/Makefile2 navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : navigation_2d/nav2d_remote/CMakeFiles/remote_joy.dir/rule
@@ -11376,11 +11415,10 @@ navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: asl_turtlebot/CMakeFiles/
 navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: asl_turtlebot/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: balrog/CMakeFiles/actionlib_generate_messages_py.dir/all
+navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: balrog/CMakeFiles/tf_generate_messages_py.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: balrog/CMakeFiles/actionlib_generate_messages_lisp.dir/all
-navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
-navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: balrog/CMakeFiles/actionlib_generate_messages_cpp.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: balrog/CMakeFiles/tf_generate_messages_eus.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: balrog/CMakeFiles/tf_generate_messages_nodejs.dir/all
@@ -11389,8 +11427,9 @@ navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: balrog/CMakeFiles/tf_gene
 navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: balrog/CMakeFiles/tf2_msgs_generate_messages_py.dir/all
-navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: balrog/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
-navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/all
+navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: balrog/CMakeFiles/actionlib_generate_messages_eus.dir/all
+navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: balrog/CMakeFiles/tf_generate_messages_cpp.dir/all
+navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: navigation_2d/nav2d_operator/CMakeFiles/map_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: sweep-ros/CMakeFiles/pcl_msgs_generate_messages_py.dir/all
@@ -11418,7 +11457,7 @@ navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: navigation_2d/nav2d_opera
 navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: navigation_2d/nav2d_operator/CMakeFiles/topic_tools_generate_messages_eus.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: navigation_2d/nav2d_operator/CMakeFiles/RobotOperator.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_gencfg.dir/all
-navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: navigation_2d/nav2d_operator/CMakeFiles/map_msgs_generate_messages_nodejs.dir/all
+navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: navigation_2d/nav2d_operator/CMakeFiles/dynamic_reconfigure_gencfg.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_generate_messages_lisp.dir/all
 navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: navigation_2d/nav2d_operator/CMakeFiles/costmap_2d_generate_messages_eus.dir/all
@@ -11448,7 +11487,7 @@ navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: navigation_2d/nav2d_navig
 navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all: navigation_2d/nav2d_navigator/CMakeFiles/RobotNavigator.dir/all
 	$(MAKE) -f navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/build.make navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/depend
 	$(MAKE) -f navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/build.make navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num=95 "Built target sim_joy"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fregu856/TSRT10/catkin_ws/build/CMakeFiles --progress-num= "Built target sim_joy"
 .PHONY : navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all
 
 # Include target in all.
@@ -11458,7 +11497,7 @@ all: navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all
 
 # Build rule for subdir invocation for target.
 navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 51
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 50
 	$(MAKE) -f CMakeFiles/Makefile2 navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fregu856/TSRT10/catkin_ws/build/CMakeFiles 0
 .PHONY : navigation_2d/nav2d_remote/CMakeFiles/sim_joy.dir/rule
