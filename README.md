@@ -635,3 +635,6 @@ find_package(catkin REQUIRED COMPONENTS
 - $ rosrun balrog manual_controller.py
 - $ rosrun balrog communicator.py
 - $ Set Balrog in auto mode using the RC controller
+
+### SLAM and manual control in SIMULATION:
+- $ roslaunch balrog_sim OpenKarto_complete.launch
