@@ -66,11 +66,11 @@ def callback_func(msg_obj):
             #         if row < map_height and row >= 0 and col < map_width and col >= 0:
             #             map_visited[row][col] = -2
 
-            print "x: %f, y: %f" % (x, y)
-            print "origin: (%f, %f)" % (map_origin_local[0], map_origin_local[1])
-            print "x_map: %f, y_map: %f" % (x_map, y_map)
-            print "x_map_ind: %d, y_map_ind: %d" % (x_map_ind, y_map_ind)
-            print "##############################################"
+            #print "x: %f, y: %f" % (x, y)
+            #print "origin: (%f, %f)" % (map_origin_local[0], map_origin_local[1])
+            #print "x_map: %f, y_map: %f" % (x_map, y_map)
+            #print "x_map_ind: %d, y_map_ind: %d" % (x_map_ind, y_map_ind)
+            #print "##############################################"
 
         msg = OccupancyGrid()
         msg.data = map_visited.flatten().tolist()

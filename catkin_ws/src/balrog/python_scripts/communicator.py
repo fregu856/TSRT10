@@ -79,6 +79,7 @@ class Communicator:
         self.client_socket.sendall(data5)
         self.client_socket.sendall(checksum)
         self.socket_lock.release()
+        print "socket_lock released in control_callback()!"
 
     def run(self):
         while not rospy.is_shutdown():
@@ -113,10 +114,12 @@ class Communicator:
                     #print data
                     #print "&&&&&&&&&&&&&&&"
             self.socket_lock.release()
+            print "socket_lock released in run()!"
 
             if message_type == 1:
+                print "THE SENSOR DATA HAS ARRIVED!"
                 if len(data) == 128:
-                    #print "THE SENSOR DATA HAS ARRIVED!!"
+                    print "ALL THE SENSOR DATA HAS ARRIVED!"
                     us_1 = data[0:8]
                     us_1 = struct.unpack("<d", us_1)[0]
                     #print "us 1: %f" % us_1
