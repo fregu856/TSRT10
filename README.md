@@ -637,7 +637,12 @@ find_package(catkin REQUIRED COMPONENTS
 - $ Set Balrog in auto mode using the RC controller
 
 ### Autonomous rectangle with Balrog:
-- TODO!
+- Connect to the RPI network
+- Connect the LIDAR to the computer and wait a few seconds for the LIDAR to obtain full rotation speed
+- $ roslaunch balrog OpenKarto_complete.launch
+- (ssh pi@10.0.0.10, password: cdio2016)
+- ($ ./Logger, $ ./Communicator, $ ./main)
+- Mattias runs his stuff
 
 ### SLAM and manual control in SIMULATION:
 - $ roslaunch balrog_sim OpenKarto_complete.launch
