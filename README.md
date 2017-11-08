@@ -658,3 +658,9 @@ find_package(catkin REQUIRED COMPONENTS
 - $ rosrun balrog_sim controller.py
 - $ rosrun balrog_sim coordinator.py
 - $ rosrun balrog_sim nav_mapping.py
+
+### Covering_map in SIMULATION:
+- $ roslaunch balrog_sim OpenKarto_complete_control.launch
+- $ rosrun balrog_sim controller_route.py
+- $ rosrun balrog_sim coordinator_route.py
+- $ rosrun balrog_sim map_explored.py
