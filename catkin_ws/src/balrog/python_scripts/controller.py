@@ -27,7 +27,7 @@ class Controller:
         self.y = 0.0
         self.theta = 0.0
 
-        self.x_goal = 0
+        self.x_goal = 1
         self.y_goal = 0
 
         self.previous_linear_velocity = 0
@@ -213,6 +213,7 @@ class Controller:
         rate = rospy.Rate(10) # (10 Hz)
 
         while not rospy.is_shutdown():
+            print "publishing control signal!"
             ctrl_output_msg = self.get_ctrl_output()
             self.control_pub.publish(ctrl_output_msg)
 

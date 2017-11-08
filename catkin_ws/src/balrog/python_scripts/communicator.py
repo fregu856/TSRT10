@@ -89,6 +89,7 @@ class Communicator:
             print "socket_lock acquired in run()!"
             data = self.client_socket.recv(4)
             print len(data)
+            print data
             no_of_bytes_to_read = struct.unpack("<L", data)[0]
             print "number of bytes to read: %d" % no_of_bytes_to_read
 
@@ -98,12 +99,16 @@ class Communicator:
                 no_of_read_bytes += len(data)
                 #print data
                 #print "***"
+            print "no_of_read_bytes after reading of message_type: %d" % no_of_read_bytes
+            print data
+            print "len(data) after reading of message_type: %d" % len(data)
             if len(data) == 8:
                 message_type = struct.unpack("<d", data)[0]
                 print "message type: %f" % message_type
                 #print "^^^^^^"
             else:
                 message_type = -1 # (error)
+                print "message_type = -1 (error)"
 
             no_of_read_bytes = 0
             if no_of_bytes_to_read - 8 > 0:
@@ -111,10 +116,15 @@ class Communicator:
                     data = self.client_socket.recv(no_of_bytes_to_read - 8 - no_of_read_bytes)
                     #print len(data)
                     no_of_read_bytes += len(data)
+                    print "no_of_read_bytes in reading of data: %d" % no_of_read_bytes
                     #print data
                     #print "&&&&&&&&&&&&&&&"
             self.socket_lock.release()
             print "socket_lock released in run()!"
+
+            print "no_of_read_bytes after reading of data: %d" % no_of_read_bytes
+            print data
+            print "len(data) after reading of data: %d" % len(data)
 
             if message_type == 1:
                 print "THE SENSOR DATA HAS ARRIVED!"
