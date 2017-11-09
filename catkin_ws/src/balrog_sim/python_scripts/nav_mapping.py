@@ -611,6 +611,7 @@ class Mapping:
 
         # create a publisher for publishing paths to the coordinator:
         self.path_pub = rospy.Publisher("/path", Float64MultiArray, queue_size=10)
+        self.warning_pub = rospy.Publisher("/node_status", String, queue_size=1)
         self.map_msg = None
         self.x = None
         self.y = None
@@ -677,6 +678,8 @@ class Mapping:
 
     # define the callback function for the /coordinator_status subscriber:
     def coordinator_callback(self, msg_obj):
+        print "start of coordinator_callback"
+
         # get the recived string:
         msg_string = msg_obj.data
 
@@ -691,7 +694,8 @@ class Mapping:
             else:
                 print "path is None!"
 
-        print "coordinator_callback"
+        print "end of coordinator_callback"
+
 
     def check_path(self):
         rate = rospy.Rate(1) # (1 Hz)
@@ -704,12 +708,19 @@ class Mapping:
                 x = self.x
                 y = self.y
 
+                print "pos:"
                 pos = [x, y]
                 map_matrix = self.map_matrix_expand
+                print "pos_index:"
                 pos_index = pos_2_map_index(map_msg, pos)
-                tempPath = [raw_path[1], raw_path[0]] # (x,y)
-                tempPath = list(tempPath)
-                map_path = map_matrix[tempPath[1], tempPath[0]] ################################################################### before: map_path = map_matrix[tempPath[0], tempPath[1]] (tror det ar ratt nu, men inte 100 saker)
+                print "************************************"
+                print map_matrix[max(pos_index[1]-2, 0):min(pos_index[1]+2, rows), max(pos_index[0]-2, 0):min(pos_index[0]+2, cols)]
+                print "************************************"
+                #tempPath = [raw_path[1], raw_path[0]] # (x,y)
+                #tempPath = list(tempPath)
+                #map_path = map_matrix[tempPath[1], tempPath[0]] ################################################################### before: map_path = map_matrix[tempPath[0], tempPath[1]] (tror det ar ratt nu, men inte 100 saker)
+                raw_path = list(raw_path)
+                map_path = map_matrix[raw_path[0], raw_path[1]]
 
                 print "map_path in check_path:"
                 print map_path
@@ -724,6 +735,8 @@ class Mapping:
                     print "###############################################################################"
                     print "###############################################################################"
                     print "###############################################################################"
+                    msg_string = "stop"
+                    self.warning_pub.publish(msg_string)
                     path = self.get_path()
                     if path is not None:
                         print path
@@ -744,10 +757,37 @@ class Mapping:
                     print "###############################################################################"
                     print "###############################################################################"
                     print "###############################################################################"
-                    raw_path = astar_func([goal_pos_index[1], goal_pos_index[0]],
-                                [pos_index[1], pos_index[0]], np.copy(map_matrix))
+                    msg_string = "stop"
+                    self.warning_pub.publish(msg_string)
                     self.path = raw_path[1]
-                    path = raw_path_2_path(raw_path[0], map_msg)
+
+                    if 0 in map_matrix[max(pos_index[1]-2, 0):min(pos_index[1]+2, rows), max(pos_index[0]-2, 0):min(pos_index[0]+2, cols)].flatten().tolist() or -1 in map_matrix[max(pos_index[1]-2, 0):min(pos_index[1]+2, rows), max(pos_index[0]-2, 0):min(pos_index[0]+2, cols)].flatten().tolist():
+                        raw_path = astar_func([goal_pos_index[1], goal_pos_index[0]],
+                                    [pos_index[1], pos_index[0]], np.copy(map_matrix))
+                        path = raw_path_2_path(raw_path[0], map_msg)
+                    else:
+                        print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                        print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                        print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                        print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                        print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                        print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                        print "go to safe node!"
+                        print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                        print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                        print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                        print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                        print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                        print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                        temp1 = map_matrix == 0
+                        temp2 = map_matrix == -1
+                        temp3 = np.nonzero(temp1 + temp2)
+                        x = temp3[1]
+                        y = temp3[0]
+                        goalNode = np.argmin((x-pos_index[0])**2 + (y-pos_index[1])**2)
+
+                        goal_pos = [x[goalNode], y[goalNode]]
+                        path = [goal_pos]
 
                     if path is not None:
                         print path
@@ -764,7 +804,6 @@ class Mapping:
 
             rate.sleep() # (to get it to loop with 1 Hz)
 
-
     def get_path(self):
         if self.map_msg is not None and self.x is not None and self.y is not None:
             map_msg = self.map_msg
@@ -774,49 +813,62 @@ class Mapping:
             map_matrix = self.map_matrix_expand
             pos_index = pos_2_map_index(map_msg, pos)
 
+            rows, cols = map_matrix.shape
+
             print "pos:"
             print pos
             print "pos index:"
             print pos_index
+            print "************************************"
+            print map_matrix[max(pos_index[1]-2, 0):min(pos_index[1]+2, rows), max(pos_index[0]-2, 0):min(pos_index[0]+2, cols)]
+            print "************************************"
             #print map_index_2_pos(map_msg, pos_index)
 
-            goal_pos_index = frontier_func(np.copy(map_matrix), pos_index, map_msg)
-            self.goal_pos_index = goal_pos_index
-            print "goal index:"
-            print goal_pos_index
-            print "goal pos:"
-            print map_index_2_pos(map_msg, goal_pos_index)
-            print "value of goal node:"
-            print map_matrix[goal_pos_index[1], goal_pos_index[0]]
+            if 0 in map_matrix[max(pos_index[1]-2, 0):min(pos_index[1]+2, rows), max(pos_index[0]-2, 0):min(pos_index[0]+2, cols)].flatten().tolist() or -1 in map_matrix[max(pos_index[1]-2, 0):min(pos_index[1]+2, rows), max(pos_index[0]-2, 0):min(pos_index[0]+2, cols)].flatten().tolist():
+                goal_pos_index = frontier_func(np.copy(map_matrix), pos_index, map_msg)
+                self.goal_pos_index = goal_pos_index
+                print "goal index:"
+                print goal_pos_index
+                print "goal pos:"
+                print map_index_2_pos(map_msg, goal_pos_index)
+                print "value of goal node:"
+                print map_matrix[goal_pos_index[1], goal_pos_index[0]]
 
-            raw_path = astar_func([goal_pos_index[1], goal_pos_index[0]],
-                        [pos_index[1], pos_index[0]], np.copy(map_matrix))
-            self.path = raw_path[1]
+                raw_path = astar_func([goal_pos_index[1], goal_pos_index[0]],
+                            [pos_index[1], pos_index[0]], np.copy(map_matrix))
+                self.path = raw_path[1]
 
-            print "raw_path[0]:" ########################################### raw_path[0] var fel! Fixat nu!
-            print raw_path[0]
-            print "raw_path[1]:"
-            print raw_path[1]
+                print "raw_path[0]:" ########################################### raw_path[0] var fel! Fixat nu!
+                print raw_path[0]
+                print "raw_path[1]:"
+                print raw_path[1]
 
-            """
-            pos index:
-            [80, 90]
+                path = raw_path_2_path(raw_path[0], map_msg)
+                print "computed path in get_path:"
+                print path
+            else:
+                print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                print "go to safe node!"
+                print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                temp1 = map_matrix == 0
+                temp2 = map_matrix == -1
+                temp3 = np.nonzero(temp1 + temp2)
+                x = temp3[1]
+                y = temp3[0]
+                goalNode = np.argmin((x-pos_index[0])**2 + (y-pos_index[1])**2)
 
-            goal index:
-            [73, 96]
-
-            raw_path[1]:
-            [[90 91 92 92 93 94 95]
-             [80 79 78 77 76 75 74]]
-
-            raw_path[0]:
-            [[92 92 96 96]
-             [92 92 96 96]]
-            """
-
-            path = raw_path_2_path(raw_path[0], map_msg)
-            print "computed path in get_path:"
-            print path
+                goal_pos = [x[goalNode], y[goalNode]]
+                path = [goal_pos]
 
             return path
         else:
