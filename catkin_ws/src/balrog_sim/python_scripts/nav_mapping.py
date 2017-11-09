@@ -100,94 +100,6 @@ def frontier_func(slamMap, currentPosition, map_msg):
                 img[row][col] = [0, 0, 0]
     cv2.imwrite("test_frontier.png", img)
 
-    # set all nodes outside of the 8x8 square to 100 (= obstacle):
-    x_min = -4
-    x_max = 4
-    y_min = -4
-    y_max = 4
-    #
-    temp = pos_2_map_index(map_msg, [x_min, y_min])
-    x_min_ind = temp[0]
-    y_min_ind = temp[1]
-    temp = pos_2_map_index(map_msg, [x_max, y_max])
-    x_max_ind = temp[0]
-    y_max_ind = temp[1]
-    #
-    if x_max_ind < cols:
-        slamMap[:, x_max_ind:] = 100
-    if x_min_ind > 0:
-        slamMap[:, 0:x_min_ind] = 100
-    if y_max_ind < rows:
-        slamMap[y_max_ind:, :] = 100
-    if y_min_ind > 0:
-        slamMap[0:y_min_ind, :] = 100
-
-    # save slamMap as an image after bordering:
-    map_height, map_width = slamMap.shape
-    img = np.zeros((map_height, map_width, 3))
-    for row in range(map_height):
-        for col in range(map_width):
-            point = slamMap[row][col]
-            if point == -1:
-                img[row][col] = [100, 100, 100]
-            elif point == 0:
-                img[row][col] = [255, 255, 255]
-            elif point == 100:
-                img[row][col] = [0, 0, 0]
-    cv2.imwrite("test_frontier_border.png", img)
-
-    # # filter lone obstacle points:
-    # n_threshold = 1
-    # slamMap_binary = np.zeros((rows, cols))
-    # slamMap_binary[slamMap == 100] = 1
-    # labeled_array, num_features = label(slamMap_binary)
-    # binc = np.bincount(labeled_array.ravel())
-    # noise_idx = np.where(binc <= n_threshold)
-    # shp = slamMap.shape
-    # mask = np.in1d(labeled_array, noise_idx).reshape(shp)
-    # slamMap[mask] = 0
-    #
-    # # save slamMap as an image after obstacle filtering:
-    # map_height, map_width = slamMap.shape
-    # img = np.zeros((map_height, map_width, 3))
-    # for row in range(map_height):
-    #     for col in range(map_width):
-    #         point = slamMap[row][col]
-    #         if point == -1:
-    #             img[row][col] = [100, 100, 100]
-    #         elif point == 0:
-    #             img[row][col] = [255, 255, 255]
-    #         elif point == 100:
-    #             img[row][col] = [0, 0, 0]
-    # cv2.imwrite("test_frontier_filtered.png", img)
-
-    # expand all obstacles:
-    # obst_inds = np.nonzero(slamMap == 100)
-    # obst_inds_row = obst_inds[0].tolist()
-    # obst_inds_col = obst_inds[1].tolist()
-    # obst_inds = zip(obst_inds_row, obst_inds_col)
-    # for obst_ind in obst_inds:
-    #     obst_row = obst_ind[0]
-    #     obst_col = obst_ind[1]
-    #     for row in range(obst_row-6, obst_row+7):
-    #         for col in range(obst_col-6, obst_col+7):
-    #             if row < rows and col < cols:
-    #                 slamMap[row][col] = 100
-
-    # save slamMap as an image after obstacle expansion:
-    map_height, map_width = slamMap.shape
-    img = np.zeros((map_height, map_width, 3))
-    for row in range(map_height):
-        for col in range(map_width):
-            point = slamMap[row][col]
-            if point == -1:
-                img[row][col] = [100, 100, 100]
-            elif point == 0:
-                img[row][col] = [255, 255, 255]
-            elif point == 100:
-                img[row][col] = [0, 0, 0]
-    cv2.imwrite("test_frontier_expanded.png", img)
-
     slamMapNoObstacles = np.copy(slamMap)
     slamMapNoObstacles[slamMapNoObstacles == -2] = 0    #Covered
     slamMapNoObstacles[slamMapNoObstacles == 100] = -1   #Obstacle]
@@ -271,32 +183,6 @@ def frontier_func(slamMap, currentPosition, map_msg):
                 img[row][col] = [0, 0, 0]
     cv2.imwrite("slamMap2.png", img)
 
-    # onlyObs = slamMap
-    # onlyObs[slamMap == -2] = 0
-    #
-    # clearFrontiers1_A = np.zeros((rows+1,cols))
-    # clearFrontiers1_B = np.zeros((rows+1,cols))
-    # clearFrontiers1_A[0:-1, :] = onlyObs
-    # clearFrontiers1_B[1:, :] = onlyObs
-    # clearFrontiers1 = clearFrontiers1_A - clearFrontiers1_B
-    #
-    # clearFrontiers2_A = np.zeros((rows,cols+1))
-    # clearFrontiers2_B = np.zeros((rows,cols+1))
-    # clearFrontiers2_A[:, 0:-1] = onlyObs
-    # clearFrontiers2_B[:, 1:] = onlyObs
-    # clearFrontiers2 = clearFrontiers2_A - clearFrontiers2_B
-    #
-    # frontierMap[clearFrontiers1[1:, :] == 101] = 0;
-    # frontierMap[clearFrontiers1[1:, :] == 1] = 1;
-    # frontierMap[clearFrontiers1[0:-1, :] == -101] = 0;
-    # frontierMap[clearFrontiers1[0:-1, :] == -1] = 1;
-    #
-    # frontierMap[clearFrontiers2[:, 1:] == 101] = 0;
-    # frontierMap[clearFrontiers2[:, 1:] == 1] = 1;
-    # frontierMap[clearFrontiers2[:, 0:-1] == -101] = 0;
-    # frontierMap[clearFrontiers2[:, 0:-1] == -1] = 1;
-
-
     map_height, map_width = frontierMap.shape
     img = np.zeros((map_height, map_width, 3))
     for row in range(map_height):
@@ -377,60 +263,6 @@ def astar_func(goalNode, startNode, obstacleMap):
     img[goalNode[0]][goalNode[1]] = [0, 255, 0]
     cv2.imwrite("test_astar.png", img)
 
-    # # filter lone obstacle points:
-    # n_threshold = 3
-    # slamMap_binary = np.zeros((rows, cols))
-    # slamMap_binary[slamMap == 100] = 1
-    # labeled_array, num_features = label(slamMap_binary)
-    # binc = np.bincount(labeled_array.ravel())
-    # noise_idx = np.where(binc <= n_threshold)
-    # shp = slamMap.shape
-    # mask = np.in1d(labeled_array, noise_idx).reshape(shp)
-    # slamMap[mask] = 0
-    #
-    # map_height, map_width = slamMap.shape
-    # # convert map_visited to an image and save to disk (for visualization):
-    # img = np.zeros((map_height, map_width, 3))
-    # for row in range(map_height):
-    #     for col in range(map_width):
-    #         point = slamMap[row][col]
-    #         if point == -1:
-    #             img[row][col] = [100, 100, 100]
-    #         elif point == 0:
-    #             img[row][col] = [255, 255, 255]
-    #         elif point == 100:
-    #             img[row][col] = [0, 0, 0]
-    # cv2.imwrite("test_astar_filtered.png", img)
-
-    # expand all obstacles:
-    # obst_inds = np.nonzero(slamMap == 100)
-    # obst_inds_row = obst_inds[0].tolist()
-    # obst_inds_col = obst_inds[1].tolist()
-    # obst_inds = zip(obst_inds_row, obst_inds_col)
-    # for obst_ind in obst_inds:
-    #     obst_row = obst_ind[0]
-    #     obst_col = obst_ind[1]
-    #     for row in range(obst_row-6, obst_row+7):
-    #         for col in range(obst_col-6, obst_col+7):
-    #             if row < rows and col < cols:
-    #                 slamMap[row][col] = 100
-    # obstacleMap = slamMap
-
-    # save slamMap as an image after obstacle expansion:
-    map_height, map_width = obstacleMap.shape
-    img = np.zeros((map_height, map_width, 3))
-    for row in range(map_height):
-        for col in range(map_width):
-            point = obstacleMap[row][col]
-            if point == -1:
-                img[row][col] = [100, 100, 100]
-            elif point == 0:
-                img[row][col] = [255, 255, 255]
-            elif point == 100:
-                img[row][col] = [0, 0, 0]
-    img[goalNode[0]][goalNode[1]] = [0, 255, 0]
-    cv2.imwrite("test_astar_expanded.png", img)
-
     [xmax,ymax]=obstacleMap.shape
     fCostMap=np.full((xmax,ymax),float('nan'))
     fCostMapOld=np.full((xmax,ymax),float('nan'))
@@ -453,148 +285,146 @@ def astar_func(goalNode, startNode, obstacleMap):
     gCostMapOld[currentNode[0],currentNode[1]]=0
 
     sum=0
-    if True:
-        while 1:
-            #print sum
-            sum +=1
-        #for p in range(0,2):
-            checkedMap[currentNode[0], currentNode[1]]=1
-            for i in range(-1,2):
-                for j in range(-1,2):
-                    temp=[]
-                    temp1=[]
-                    b=gCostMapOld[currentNode[0],currentNode[1]]
+    for i in range(15000):
+        #print sum
+        sum +=1
+    #for p in range(0,2):
+        checkedMap[currentNode[0], currentNode[1]]=1
+        for i in range(-1,2):
+            for j in range(-1,2):
+                temp=[]
+                temp1=[]
+                b=gCostMapOld[currentNode[0],currentNode[1]]
 
-                    if (currentNode[0]+i)>-1 and (currentNode[1]+j)>-1 and (currentNode[0]+i)<xmax and (currentNode[1]+j)<ymax and xor(j==0, i==0)  and obstacleMap[(currentNode[0]+i),(currentNode[1]+j)]!=100:
+                if (currentNode[0]+i)>-1 and (currentNode[1]+j)>-1 and (currentNode[0]+i)<xmax and (currentNode[1]+j)<ymax and xor(j==0, i==0)  and obstacleMap[(currentNode[0]+i),(currentNode[1]+j)]!=100:
 
-                        gCostMap[currentNode[0]+i,(currentNode[1]+j)]=b+1
-                        temp=gCostMapOld[currentNode[0]+i,(currentNode[1]+j)]
-                        if (gCostMap[currentNode[0]+i,(currentNode[1]+j)]>temp):
-                            gCostMap[currentNode[0]+i,(currentNode[1]+j)]=temp
-                            bigger=1
+                    gCostMap[currentNode[0]+i,(currentNode[1]+j)]=b+1
+                    temp=gCostMapOld[currentNode[0]+i,(currentNode[1]+j)]
+                    if (gCostMap[currentNode[0]+i,(currentNode[1]+j)]>temp):
+                        gCostMap[currentNode[0]+i,(currentNode[1]+j)]=temp
+                        bigger=1
 
-                        else:
-                            fromXNode[currentNode[0]+i,(currentNode[1]+j)]=currentNode[0]
-                            fromYNode[currentNode[0]+i,(currentNode[1]+j)]=currentNode[1]
-                            fValueMap[currentNode[0]+i,(currentNode[1]+j)]=1
-
-                    elif (currentNode[0]+i)>-1 and (currentNode[1]+j)>-1 and (currentNode[0]+i)<xmax and (currentNode[1]+j)<ymax and i!=0 and j!=0  and obstacleMap[(currentNode[0]+i),(currentNode[1]+j)]!=100:
-                        gCostMap[currentNode[0]+i,(currentNode[1]+j)]=b+2**(0.5)
-                        temp1=gCostMapOld[currentNode[0]+i,(currentNode[1]+j)]
-
-                        if (gCostMap[currentNode[0]+i,(currentNode[1]+j)]>temp1):
-                            gCostMap[currentNode[0]+i,(currentNode[1]+j)]=temp1
-                        else:
-                            fromXNode[currentNode[0]+i,(currentNode[1]+j)]=currentNode[0]
-                            fromYNode[currentNode[0]+i,(currentNode[1]+j)]=currentNode[1]
-                            fValueMap[currentNode[0]+i,(currentNode[1]+j)]=1
-            gCostMap[currentNode[0],currentNode[1]]=b
-            gCostMap[startNode[0],startNode[1]]=0
-
-            minRow=[]
-            minColumn=[]
-            minRowElim=[]
-            minColumnElim=[]
-            minHValue=[]
-            lookH=[]
-            minPosition=[]
-            numMinPoints=[]
-            fCostMap=np.add(gCostMap,hCostMap)
-            searchFCost=fCostMap*fValueMap*(checkedMap!=1)*(obstacleMap!=100)
-            if np.nansum(searchFCost)>0:
-                minPosition=np.where(searchFCost==np.nanmin(searchFCost[np.nonzero(searchFCost)]))
-            else:
-                route=[-1000, -1000]
-                print "route = [-1000, -1000] break!"
-                break
-
-            numMinPoints=np.shape(minPosition)
-            minRow=minPosition[0]
-            minColumn=minPosition[1]
-            for nodeCounter in range(0,numMinPoints[1]):
-                lookH.append(hCostMap[minRow[nodeCounter],minColumn[nodeCounter]])
-
-            minHValue=np.where(lookH==np.min(lookH))
-
-            currentNode=[minRow[minHValue[0][0]],minColumn[minHValue[0][0]]]
-
-            gCostMapOld=np.copy(gCostMap)
-            fCostMapOld=np.copy(fCostMap)
-
-
-            if fValueMap[goalNode[0],goalNode[1]]==1:
-                found=1
-                walkingNode=goalNode
-                numberOfsteps=0
-                wholeXroute=[]
-                wholeYroute=[]
-                xRoute=[]
-                yRoute=[]
-                xRoute.append(goalNode[0])
-                yRoute.append(goalNode[1])
-
-                dir=0
-                while walkingNode[0]!=startNode[0] or walkingNode[1]!=startNode[1]:
-                    numberOfsteps=numberOfsteps+1
-                    prevX=int(fromXNode[walkingNode[0],walkingNode[1]])
-                    prevY=int(fromYNode[walkingNode[0],walkingNode[1]])
-                    wholeXroute.append(prevX)
-                    wholeYroute.append(prevY)
-
-                    if prevX==walkingNode[0]:
-                        if dir!=5:
-                            xRoute.append((walkingNode[0]))
-                            yRoute.append(walkingNode[1])
-                            dir=5
-                    elif prevY==walkingNode[1]:
-                        if dir!=3:
-                            xRoute.append((walkingNode[0]))
-                            yRoute.append(walkingNode[1])
-                            dir=3
-                    elif (prevY==walkingNode[1]+1 and prevY==walkingNode[1]+1) or (prevY==walkingNode[1]-1 and prevY==walkingNode[1]-1):
-                        if dir!=2:
-                            xRoute.append((walkingNode[0]))
-                            yRoute.append(walkingNode[1])
-                            dir=2
                     else:
-                        if dir!=-2:
-                            xRoute.append((walkingNode[0]))
-                            yRoute.append(walkingNode[1])
-                            dir=-2
+                        fromXNode[currentNode[0]+i,(currentNode[1]+j)]=currentNode[0]
+                        fromYNode[currentNode[0]+i,(currentNode[1]+j)]=currentNode[1]
+                        fValueMap[currentNode[0]+i,(currentNode[1]+j)]=1
 
-                    walkingNode=[prevX,prevY]
-                    #wholeRoute = [wholeXroute, wholeYroute]
-                route=[xRoute, yRoute] ############################################################################################################################### before: route=[xRoute, xRoute]
-                routeS2G=np.fliplr(route)
-                wholeRoute = np.fliplr([wholeXroute, wholeYroute])
+                elif (currentNode[0]+i)>-1 and (currentNode[1]+j)>-1 and (currentNode[0]+i)<xmax and (currentNode[1]+j)<ymax and i!=0 and j!=0  and obstacleMap[(currentNode[0]+i),(currentNode[1]+j)]!=100:
+                    gCostMap[currentNode[0]+i,(currentNode[1]+j)]=b+2**(0.5)
+                    temp1=gCostMapOld[currentNode[0]+i,(currentNode[1]+j)]
 
-                # save obstacleMap as an image, with each point on the A* path
-                # marked in red:
-                map_height, map_width = obstacleMap.shape
-                img = np.zeros((map_height, map_width, 3))
-                for row in range(map_height):
-                    for col in range(map_width):
-                        point = obstacleMap[row][col]
-                        if point == -1:
-                            img[row][col] = [100, 100, 100]
-                        elif point == 0:
-                            img[row][col] = [255, 255, 255]
-                        elif point == 100:
-                            img[row][col] = [0, 0, 0]
-                cols = yRoute
-                rows = xRoute
-                for (row, col) in zip(rows, cols):
-                    img[row, col] = [0, 0, 255]
-                img[goalNode[0]][goalNode[1]] = [0, 255, 0]
-                cv2.imwrite("test_astar_route.png", img)
+                    if (gCostMap[currentNode[0]+i,(currentNode[1]+j)]>temp1):
+                        gCostMap[currentNode[0]+i,(currentNode[1]+j)]=temp1
+                    else:
+                        fromXNode[currentNode[0]+i,(currentNode[1]+j)]=currentNode[0]
+                        fromYNode[currentNode[0]+i,(currentNode[1]+j)]=currentNode[1]
+                        fValueMap[currentNode[0]+i,(currentNode[1]+j)]=1
+        gCostMap[currentNode[0],currentNode[1]]=b
+        gCostMap[startNode[0],startNode[1]]=0
 
-                return routeS2G, wholeRoute
-                break
+        minRow=[]
+        minColumn=[]
+        minRowElim=[]
+        minColumnElim=[]
+        minHValue=[]
+        lookH=[]
+        minPosition=[]
+        numMinPoints=[]
+        fCostMap=np.add(gCostMap,hCostMap)
+        searchFCost=fCostMap*fValueMap*(checkedMap!=1)*(obstacleMap!=100)
+        if np.nansum(searchFCost)>0:
+            minPosition=np.where(searchFCost==np.nanmin(searchFCost[np.nonzero(searchFCost)]))
+        else:
+            print "np.nansum(searchFCost)>0 is NOT true, break!"
+            break
 
-        print "end of Astar, currentNode"
-        return currentNode
-    else:
-        return "Astar does NOT work!"
+        numMinPoints=np.shape(minPosition)
+        minRow=minPosition[0]
+        minColumn=minPosition[1]
+        for nodeCounter in range(0,numMinPoints[1]):
+            lookH.append(hCostMap[minRow[nodeCounter],minColumn[nodeCounter]])
+
+        minHValue=np.where(lookH==np.min(lookH))
+
+        currentNode=[minRow[minHValue[0][0]],minColumn[minHValue[0][0]]]
+
+        gCostMapOld=np.copy(gCostMap)
+        fCostMapOld=np.copy(fCostMap)
+
+
+        if fValueMap[goalNode[0],goalNode[1]]==1:
+            found=1
+            walkingNode=goalNode
+            numberOfsteps=0
+            wholeXroute=[]
+            wholeYroute=[]
+            xRoute=[]
+            yRoute=[]
+            xRoute.append(goalNode[0])
+            yRoute.append(goalNode[1])
+
+            dir=0
+            while walkingNode[0]!=startNode[0] or walkingNode[1]!=startNode[1]:
+                numberOfsteps=numberOfsteps+1
+                prevX=int(fromXNode[walkingNode[0],walkingNode[1]])
+                prevY=int(fromYNode[walkingNode[0],walkingNode[1]])
+                wholeXroute.append(prevX)
+                wholeYroute.append(prevY)
+
+                if prevX==walkingNode[0]:
+                    if dir!=5:
+                        xRoute.append((walkingNode[0]))
+                        yRoute.append(walkingNode[1])
+                        dir=5
+                elif prevY==walkingNode[1]:
+                    if dir!=3:
+                        xRoute.append((walkingNode[0]))
+                        yRoute.append(walkingNode[1])
+                        dir=3
+                elif (prevY==walkingNode[1]+1 and prevY==walkingNode[1]+1) or (prevY==walkingNode[1]-1 and prevY==walkingNode[1]-1):
+                    if dir!=2:
+                        xRoute.append((walkingNode[0]))
+                        yRoute.append(walkingNode[1])
+                        dir=2
+                else:
+                    if dir!=-2:
+                        xRoute.append((walkingNode[0]))
+                        yRoute.append(walkingNode[1])
+                        dir=-2
+
+                walkingNode=[prevX,prevY]
+                #wholeRoute = [wholeXroute, wholeYroute]
+            route=[xRoute, yRoute] ############################################################################################################################### before: route=[xRoute, xRoute]
+            routeS2G=np.fliplr(route)
+            wholeRoute = np.fliplr([wholeXroute, wholeYroute])
+
+            # save obstacleMap as an image, with each point on the A* path
+            # marked in red:
+            map_height, map_width = obstacleMap.shape
+            img = np.zeros((map_height, map_width, 3))
+            for row in range(map_height):
+                for col in range(map_width):
+                    point = obstacleMap[row][col]
+                    if point == -1:
+                        img[row][col] = [100, 100, 100]
+                    elif point == 0:
+                        img[row][col] = [255, 255, 255]
+                    elif point == 100:
+                        img[row][col] = [0, 0, 0]
+            cols = yRoute
+            rows = xRoute
+            for (row, col) in zip(rows, cols):
+                img[row, col] = [0, 0, 255]
+            img[goalNode[0]][goalNode[1]] = [0, 255, 0]
+            cv2.imwrite("test_astar_route.png", img)
+
+            print "Astar found a route!"
+            print "end of Astar!"
+            return routeS2G, wholeRoute
+
+    print "Astar didn't find a route in time!"
+    print "end of Astar!"
+    return None
 
 class Mapping:
     def __init__(self):
@@ -665,6 +495,29 @@ class Mapping:
                         if map_matrix[row][col] != 100:
                             map_matrix_expand[row][col] = 100
 
+        # set all nodes outside of the 8x8 square to 100 (= obstacle):
+        x_min = -4
+        x_max = 4
+        y_min = -4
+        y_max = 4
+        #
+        map_msg = msg_obj
+        temp = pos_2_map_index(map_msg, [x_min, y_min])
+        x_min_ind = temp[0]
+        y_min_ind = temp[1]
+        temp = pos_2_map_index(map_msg, [x_max, y_max])
+        x_max_ind = temp[0]
+        y_max_ind = temp[1]
+        #
+        if x_max_ind < map_matrix_cols:
+            map_matrix_expand[:, x_max_ind:] = 100
+        if x_min_ind > 0:
+            map_matrix_expand[:, 0:x_min_ind] = 100
+        if y_max_ind < map_matrix_rows:
+            map_matrix_expand[y_max_ind:, :] = 100
+        if y_min_ind > 0:
+            map_matrix_expand[0:y_min_ind, :] = 100
+
         self.map_matrix_expand = map_matrix_expand
         print "map_callback"
 
@@ -695,7 +548,6 @@ class Mapping:
                 print "path is None!"
 
         print "end of coordinator_callback"
-
 
     def check_path(self):
         rate = rospy.Rate(1) # (1 Hz)
@@ -764,12 +616,46 @@ class Mapping:
                     msg_string = "stop"
                     self.warning_pub.publish(msg_string)
 
-                    if 0 in map_matrix[max(pos_index[1]-1, 0):min(pos_index[1]+2, rows), max(pos_index[0]-1, 0):min(pos_index[0]+2, cols)].flatten().tolist() or -1 in map_matrix[max(pos_index[1]-1, 0):min(pos_index[1]+2, rows), max(pos_index[0]-1, 0):min(pos_index[0]+2, cols)].flatten().tolist():
+                    if map_matrix[pos_index[1], pos_index[0]] != 100:
                         print "route not allowed: do astar!"
                         raw_path = astar_func([goal_pos_index[1], goal_pos_index[0]],
                                     [pos_index[1], pos_index[0]], np.copy(map_matrix))
-                        self.path = raw_path[1]
-                        path = raw_path_2_path(raw_path[0], map_msg)
+
+                        if raw_path is not None:
+                            self.path = raw_path[1]
+                            path = raw_path_2_path(raw_path[0], map_msg)
+                        else:
+                            print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                            print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                            print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                            print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                            print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                            print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                            print "route not allowed: Astar returned None, go to safe node!"
+                            print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                            print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                            print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                            print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                            print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                            print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                            temp1 = map_matrix == 0
+                            temp2 = map_matrix == -1
+                            temp3 = np.nonzero(temp1 + temp2)
+                            x = temp3[1]
+                            y = temp3[0]
+                            distances = (x-pos_index[0])**2 + (y-pos_index[1])**2
+                            goalNode = np.argmin(distances[np.where(distances > 6)])
+                            goal_pos_index = [x[goalNode], y[goalNode]]
+
+                            goal_pos = map_index_2_pos(map_msg, goal_pos_index)
+                            path = [goal_pos[0], goal_pos[1]]
+
+                            self.path = np.array([[goal_pos_index[1]],[goal_pos_index[0]]])
+
+                            print "goal_pos_index:"
+                            print goal_pos_index
+                            print "goal_pos:"
+                            print goal_pos
                     else:
                         print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
                         print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
@@ -777,7 +663,7 @@ class Mapping:
                         print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
                         print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
                         print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                        print "route not allowed: go to safe node!"
+                        print "route not allowed: stuck in (probably virtual) obstacles, go to safe node!"
                         print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
                         print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
                         print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
@@ -789,7 +675,8 @@ class Mapping:
                         temp3 = np.nonzero(temp1 + temp2)
                         x = temp3[1]
                         y = temp3[0]
-                        goalNode = np.argmin((x-pos_index[0])**2 + (y-pos_index[1])**2)
+                        distances = (x-pos_index[0])**2 + (y-pos_index[1])**2
+                        goalNode = np.argmin(distances[np.where(distances > 6)])
                         goal_pos_index = [x[goalNode], y[goalNode]]
 
                         goal_pos = map_index_2_pos(map_msg, goal_pos_index)
@@ -837,7 +724,7 @@ class Mapping:
             print "************************************"
             #print map_index_2_pos(map_msg, pos_index)
 
-            if 0 in map_matrix[max(pos_index[1]-1, 0):min(pos_index[1]+2, rows), max(pos_index[0]-1, 0):min(pos_index[0]+2, cols)].flatten().tolist() or -1 in map_matrix[max(pos_index[1]-1, 0):min(pos_index[1]+2, rows), max(pos_index[0]-1, 0):min(pos_index[0]+2, cols)].flatten().tolist():
+            if map_matrix[pos_index[1], pos_index[0]] != 100:
                 goal_pos_index = frontier_func(np.copy(map_matrix), pos_index, map_msg)
                 self.goal_pos_index = goal_pos_index
                 print "goal index:"
@@ -849,16 +736,50 @@ class Mapping:
 
                 raw_path = astar_func([goal_pos_index[1], goal_pos_index[0]],
                             [pos_index[1], pos_index[0]], np.copy(map_matrix))
-                self.path = raw_path[1]
 
-                print "raw_path[0]:" ########################################### raw_path[0] var fel! Fixat nu!
-                print raw_path[0]
-                print "raw_path[1]:"
-                print raw_path[1]
+                if raw_path is not None:
+                    self.path = raw_path[1]
 
-                path = raw_path_2_path(raw_path[0], map_msg)
-                print "computed path in get_path:"
-                print path
+                    print "raw_path[0]:" ########################################### raw_path[0] var fel! Fixat nu!
+                    print raw_path[0]
+                    print "raw_path[1]:"
+                    print raw_path[1]
+
+                    path = raw_path_2_path(raw_path[0], map_msg)
+                    print "computed path in get_path:"
+                    print path
+                else:
+                    print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                    print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                    print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                    print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                    print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                    print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                    print "Astar returned None, go to safe node!"
+                    print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                    print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                    print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                    print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                    print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                    print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                    temp1 = map_matrix == 0
+                    temp2 = map_matrix == -1
+                    temp3 = np.nonzero(temp1 + temp2)
+                    x = temp3[1]
+                    y = temp3[0]
+                    distances = (x-pos_index[0])**2 + (y-pos_index[1])**2
+                    goalNode = np.argmin(distances[np.where(distances > 6)])
+                    goal_pos_index = [x[goalNode], y[goalNode]]
+
+                    goal_pos = map_index_2_pos(map_msg, goal_pos_index)
+                    path = [goal_pos[0], goal_pos[1]]
+
+                    self.path = np.array([[goal_pos_index[1]],[goal_pos_index[0]]])
+
+                    print "goal_pos_index:"
+                    print goal_pos_index
+                    print "goal_pos:"
+                    print goal_pos
             else:
                 print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
                 print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
@@ -866,7 +787,7 @@ class Mapping:
                 print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
                 print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
                 print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                print "go to safe node!"
+                print "stuck in (probably virtual) obstacles, go to safe node!"
                 print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
                 print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
                 print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
@@ -878,7 +799,8 @@ class Mapping:
                 temp3 = np.nonzero(temp1 + temp2)
                 x = temp3[1]
                 y = temp3[0]
-                goalNode = np.argmin((x-pos_index[0])**2 + (y-pos_index[1])**2)
+                distances = (x-pos_index[0])**2 + (y-pos_index[1])**2
+                goalNode = np.argmin(distances[np.where(distances > 6)])
                 goal_pos_index = [x[goalNode], y[goalNode]]
 
                 goal_pos = map_index_2_pos(map_msg, goal_pos_index)
