@@ -708,13 +708,17 @@ class Mapping:
                 x = self.x
                 y = self.y
 
+                rows, cols = map_matrix.shape
+
                 print "pos:"
                 pos = [x, y]
+                print pos
                 map_matrix = self.map_matrix_expand
                 print "pos_index:"
                 pos_index = pos_2_map_index(map_msg, pos)
+                print pos_index
                 print "************************************"
-                print map_matrix[max(pos_index[1]-2, 0):min(pos_index[1]+2, rows), max(pos_index[0]-2, 0):min(pos_index[0]+2, cols)]
+                print map_matrix[max(pos_index[1]-1, 0):min(pos_index[1]+2, rows), max(pos_index[0]-1, 0):min(pos_index[0]+2, cols)]
                 print "************************************"
                 #tempPath = [raw_path[1], raw_path[0]] # (x,y)
                 #tempPath = list(tempPath)
@@ -759,35 +763,44 @@ class Mapping:
                     print "###############################################################################"
                     msg_string = "stop"
                     self.warning_pub.publish(msg_string)
-                    self.path = raw_path[1]
 
-                    if 0 in map_matrix[max(pos_index[1]-2, 0):min(pos_index[1]+2, rows), max(pos_index[0]-2, 0):min(pos_index[0]+2, cols)].flatten().tolist() or -1 in map_matrix[max(pos_index[1]-2, 0):min(pos_index[1]+2, rows), max(pos_index[0]-2, 0):min(pos_index[0]+2, cols)].flatten().tolist():
+                    if 0 in map_matrix[max(pos_index[1]-1, 0):min(pos_index[1]+2, rows), max(pos_index[0]-1, 0):min(pos_index[0]+2, cols)].flatten().tolist() or -1 in map_matrix[max(pos_index[1]-1, 0):min(pos_index[1]+2, rows), max(pos_index[0]-1, 0):min(pos_index[0]+2, cols)].flatten().tolist():
+                        print "route not allowed: do astar!"
                         raw_path = astar_func([goal_pos_index[1], goal_pos_index[0]],
                                     [pos_index[1], pos_index[0]], np.copy(map_matrix))
+                        self.path = raw_path[1]
                         path = raw_path_2_path(raw_path[0], map_msg)
                     else:
-                        print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
-                        print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
-                        print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
-                        print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
-                        print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
-                        print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
-                        print "go to safe node!"
-                        print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
-                        print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
-                        print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
-                        print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
-                        print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
-                        print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                        print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                        print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                        print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                        print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                        print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                        print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                        print "route not allowed: go to safe node!"
+                        print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                        print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                        print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                        print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                        print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                        print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
                         temp1 = map_matrix == 0
                         temp2 = map_matrix == -1
                         temp3 = np.nonzero(temp1 + temp2)
                         x = temp3[1]
                         y = temp3[0]
                         goalNode = np.argmin((x-pos_index[0])**2 + (y-pos_index[1])**2)
+                        goal_pos_index = [x[goalNode], y[goalNode]]
 
-                        goal_pos = [x[goalNode], y[goalNode]]
-                        path = [goal_pos]
+                        goal_pos = map_index_2_pos(map_msg, goal_pos_index)
+                        path = [goal_pos[0], goal_pos[1]]
+
+                        self.path = np.array([[goal_pos_index[1]],[goal_pos_index[0]]])
+
+                        print "goal_pos_index:"
+                        print goal_pos_index
+                        print "goal_pos:"
+                        print goal_pos
 
                     if path is not None:
                         print path
@@ -820,11 +833,11 @@ class Mapping:
             print "pos index:"
             print pos_index
             print "************************************"
-            print map_matrix[max(pos_index[1]-2, 0):min(pos_index[1]+2, rows), max(pos_index[0]-2, 0):min(pos_index[0]+2, cols)]
+            print map_matrix[max(pos_index[1]-1, 0):min(pos_index[1]+2, rows), max(pos_index[0]-1, 0):min(pos_index[0]+2, cols)]
             print "************************************"
             #print map_index_2_pos(map_msg, pos_index)
 
-            if 0 in map_matrix[max(pos_index[1]-2, 0):min(pos_index[1]+2, rows), max(pos_index[0]-2, 0):min(pos_index[0]+2, cols)].flatten().tolist() or -1 in map_matrix[max(pos_index[1]-2, 0):min(pos_index[1]+2, rows), max(pos_index[0]-2, 0):min(pos_index[0]+2, cols)].flatten().tolist():
+            if 0 in map_matrix[max(pos_index[1]-1, 0):min(pos_index[1]+2, rows), max(pos_index[0]-1, 0):min(pos_index[0]+2, cols)].flatten().tolist() or -1 in map_matrix[max(pos_index[1]-1, 0):min(pos_index[1]+2, rows), max(pos_index[0]-1, 0):min(pos_index[0]+2, cols)].flatten().tolist():
                 goal_pos_index = frontier_func(np.copy(map_matrix), pos_index, map_msg)
                 self.goal_pos_index = goal_pos_index
                 print "goal index:"
@@ -847,28 +860,36 @@ class Mapping:
                 print "computed path in get_path:"
                 print path
             else:
-                print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
-                print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
-                print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
-                print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
-                print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
-                print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
                 print "go to safe node!"
-                print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
-                print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
-                print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
-                print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
-                print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
-                print "££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££"
+                print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+                print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
                 temp1 = map_matrix == 0
                 temp2 = map_matrix == -1
                 temp3 = np.nonzero(temp1 + temp2)
                 x = temp3[1]
                 y = temp3[0]
                 goalNode = np.argmin((x-pos_index[0])**2 + (y-pos_index[1])**2)
+                goal_pos_index = [x[goalNode], y[goalNode]]
 
-                goal_pos = [x[goalNode], y[goalNode]]
-                path = [goal_pos]
+                goal_pos = map_index_2_pos(map_msg, goal_pos_index)
+                path = [goal_pos[0], goal_pos[1]]
+
+                self.path = np.array([[goal_pos_index[1]],[goal_pos_index[0]]])
+
+                print "goal_pos_index:"
+                print goal_pos_index
+                print "goal_pos:"
+                print goal_pos
 
             return path
         else:
