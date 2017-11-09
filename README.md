@@ -664,3 +664,14 @@ find_package(catkin REQUIRED COMPONENTS
 - $ rosrun balrog_sim controller_route.py
 - $ rosrun balrog_sim coordinator_route.py
 - $ rosrun balrog_sim map_explored.py
+
+# Camera:
+
+- [in RPI terminal] $ raspivid -t 0 -w 640 -h 360 -hf -fps 20 -o - | nc -l -p 8080
+- $ mplayer -fps 200 -demuxer h264es ffmpeg://tcp://10.0.0.10:8080 (to just display the camera stream)
+- $ rosrun balrog stream_to_ROS.py (to publish the stream to the topic /balrog_camera/image_raw)
+
+- To make the camera stream start automatically on launch:
+- - $ sudo nano /etc/rc.local
+- - $ Add the line "raspivid -t 0 -w 640 -h 360 -hf -fps 20 -o - | nc -l -p 8080" to the bottom of the file (right above the "exit 0")
+
