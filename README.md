@@ -612,6 +612,11 @@ find_package(catkin REQUIRED COMPONENTS
 - - $ catkin_make
 - - Now one can run it by "rosrun balrog slam_pose"
 
+- In order to use std::mutex in slam_visited.cpp (C++11 feature), I had to uncomment the following line in balrog/CMakeLists.txt:
+```
+# add_compile_options(-std=c++11)
+```
+
 # Manual control of Balrog using WASD:
 - $ roscore
 - $ rosrun keyboard keyboard
