@@ -18,6 +18,8 @@ class Controller:
 
         rospy.Subscriber("/goal_pos", Float64MultiArray, self.goal_pos_callback)
 
+        rospy.Subscriber("/node_status", String, self.node_callback)
+
         #self.control_pub = rospy.Publisher("cmd_vel_mux/input/navi", Twist, queue_size=10) # (simulation)
         self.control_pub = rospy.Publisher("/control_signals", Float64MultiArray, queue_size=10) # (physical robot)
 
@@ -39,6 +41,11 @@ class Controller:
         self.target_position_not_published = True
         self.initial_angle_adjustment = True
 
+        self.warning_flag = False
+
+    def node_callback(self, msg_obj):
+        self.warning_flag = True
+
     def goal_pos_callback(self, msg_obj):
         print "###################"
         print "goal_pos_callback"
@@ -54,6 +61,8 @@ class Controller:
 
         self.initial_angle_adjustment = True
         self.target_position_not_published = True
+
+        self.warning_flag = False
 
     def est_pose_callback(self, msg_obj):
         pose = msg_obj.data
@@ -213,9 +222,23 @@ class Controller:
         rate = rospy.Rate(10) # (10 Hz)
 
         while not rospy.is_shutdown():
-            print "publishing control signal!"
-            ctrl_output_msg = self.get_ctrl_output()
-            self.control_pub.publish(ctrl_output_msg)
+            if not self.warning_flag:
+                print "publishing control signal!"
+                ctrl_output_msg = self.get_ctrl_output()
+                self.control_pub.publish(ctrl_output_msg)
+            else:
+                print "[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]"
+                print "[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]"
+                print "[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]"
+                print "[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]"
+                print "stopped Balrog"
+                print "[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]"
+                print "[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]"
+                print "[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]"
+                print "[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]"
+                ctrl_output_msg = Float64MultiArray()
+                ctrl_output_msg.data = [0.0, 0.0]
+                self.control_pub.publish(ctrl_output_msg)
 
             rate.sleep() # (to get it to loop with 10 Hz)
 

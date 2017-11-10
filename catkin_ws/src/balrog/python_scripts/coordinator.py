@@ -22,6 +22,7 @@ class Coordinator:
         self.goal_pos_pub = rospy.Publisher("/goal_pos", Float64MultiArray, queue_size=10)
 
         self.path = [[0,0], [1,0], [1,1], [0,1], [0,0]]
+        #self.path = [[0,0]]
         self.next_index = 0 # (list index of the next goal position to be published)
         self.final_index = len(self.path) - 1 # (index of the last path list element)
 
