@@ -28,7 +28,7 @@ int main(int argc, char **argv)
          try
          {
             tf::StampedTransform transform;
-            listener.lookupTransform("/map", "/base_footprint", ros::Time(0), transform);
+            listener.lookupTransform("map", "base_footprint", ros::Time(0), transform);
 
             double x = transform.getOrigin().x();
             double y = transform.getOrigin().y();
@@ -51,7 +51,7 @@ int main(int argc, char **argv)
 
         catch (tf::TransformException ex)
         {
-            std::cout << "Could not look up transform /map -> /base_footprint!" << std::endl;
+            std::cout << "Could not look up transform map -> base_footprint!" << std::endl;
         }
 
         ros::spinOnce();

@@ -52,8 +52,8 @@ void SlamOdom::odom_callback_(const std_msgs::Float64MultiArray &msg)
     double odoRight = encoder_data[0];
     double odoLeft = encoder_data[1];
 
-    std::cout << "odoRight: " << odoRight << std::endl;
-    std::cout << "odoLeft: " << odoLeft << std::endl;
+    //std::cout << "odoRight: " << odoRight << std::endl;
+    //std::cout << "odoLeft: " << odoLeft << std::endl;
 
     double delta_theta_l = odoLeft;
     double delta_theta_r = odoRight;
@@ -86,7 +86,7 @@ void SlamOdom::odom_callback_(const std_msgs::Float64MultiArray &msg)
     quaternion.setRPY(0.0, 0.0, theta_);
     transform.setRotation(quaternion);
     broadcaster_.sendTransform(tf::StampedTransform(transform, ros::Time::now(),
-          "base_footprint", "odom"));
+          "odom", "base_footprint"));
 }
 
 double SlamOdom::wrap_to_pi_(double angle)
