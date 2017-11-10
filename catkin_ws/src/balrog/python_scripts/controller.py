@@ -29,7 +29,7 @@ class Controller:
         self.y = 0.0
         self.theta = 0.0
 
-        self.x_goal = 1
+        self.x_goal = 0
         self.y_goal = 0
 
         self.previous_linear_velocity = 0
