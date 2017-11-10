@@ -28,8 +28,8 @@ private:
     double y_;
     double theta_;
 
-    static const double r_ = 0.09;
-    static const double b_ = 0.6138;
+    static constexpr double r_ = 0.09;
+    static constexpr double b_ = 0.6138;
 }; // Class SlamOdom
 
 SlamOdom::SlamOdom()
@@ -109,6 +109,8 @@ double SlamOdom::wrap_to_pi_(double angle)
 
 int main(int argc, char **argv)
 {
+    std::cout << "slam_odom.cpp" << std::endl;
+
     // initialize this code as a ROS node named slam_odom_cpp_node:
     ros::init(argc, argv, "slam_odom_cpp_node");
 

@@ -9,6 +9,8 @@
 
 int main(int argc, char **argv)
 {
+    std::cout << "slam_pose.cpp" << std::endl;
+
     // initialize this code as a ROS node named slam_pose_cpp_node:
     ros::init(argc, argv, "slam_pose_cpp_node");
 

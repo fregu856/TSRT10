@@ -9,6 +9,8 @@
 #include <Eigen/Dense>
 #include <algorithm>
 
+#include <mutex>
+
 #include <time.h>
 
 typedef Eigen::Matrix<int8_t, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> MapMatrix;
@@ -33,12 +35,14 @@ private:
     MapMatrix map_matrix_;
     std::vector<double> map_origin_;
     double map_resolution_;
+
+    std::mutex mutex_;
 }; // Class SlamVisited
 
 SlamVisited::SlamVisited()
 {
-    map_origin_.push_back(-1000);
-    map_origin_.push_back(-1000);
+    map_origin_.push_back(-10000);
+    map_origin_.push_back(-10000);
 
     map_visited_pub_ =
           nh_.advertise<nav_msgs::OccupancyGrid>("/map_visited", 10);
@@ -52,15 +56,15 @@ SlamVisited::SlamVisited()
 void SlamVisited::marker_callback_(const visualization_msgs::Marker &msg_obj)
 {
     //const clock_t begin_time = clock();
-
-    if (map_origin_[0] != -1000)
+    if (map_origin_[0] != -10000)
     {
         std::cout << "marker_callback_" << std::endl;
 
-        // TODO! protect with mutex
+        mutex_.lock();
         MapMatrix map_visited_matrix = map_matrix_;
         std::vector<double> map_origin = map_origin_;
         double map_resolution = map_resolution_;
+        mutex_.unlock();
 
         int cols = map_visited_matrix.cols();
         int rows = map_visited_matrix.rows();
@@ -110,27 +114,21 @@ void SlamVisited::marker_callback_(const visualization_msgs::Marker &msg_obj)
         map_visited_msg.info.origin.position.y = map_origin[1];
         map_visited_pub_.publish(map_visited_msg);
     }
-
     //std::cout << float(clock() - begin_time)/CLOCKS_PER_SEC;
 }
 
 void SlamVisited::map_callback_(const nav_msgs::OccupancyGrid &msg_obj)
 {
-    // TODO! protect with mutex
+    int map_height = msg_obj.info.height;
+    int map_width = msg_obj.info.width;
+    std::vector<int8_t> map_data(msg_obj.data);
+
+    mutex_.lock();
     map_origin_[0] = msg_obj.info.origin.position.x;
     map_origin_[1] = msg_obj.info.origin.position.y;
     map_resolution_ = msg_obj.info.resolution;
-
-    int map_height = msg_obj.info.height;
-    int map_width = msg_obj.info.width;
-
-    // std::cout << map_height << std::endl;
-    // std::cout << map_width << std::endl;
-    // std::cout << map_resolution_ << std::endl;
-
-    std::vector<int8_t> map_data(msg_obj.data);
-    // TODO! protect with mutex
     map_matrix_ = Eigen::Map<MapMatrix>(&map_data[0], map_height, map_width);
+    mutex_.unlock();
 
     // std::cout << "rows: " << map_matrix_.rows() << std::endl;
     // std::cout << "cols: " << map_matrix_.cols() << std::endl;
@@ -138,6 +136,8 @@ void SlamVisited::map_callback_(const nav_msgs::OccupancyGrid &msg_obj)
 
 int main(int argc, char **argv)
 {
+    std::cout << "slam_visited.cpp" << std::endl;
+
     // initialize this code as a ROS node named slam_visited_cpp_node:
     ros::init(argc, argv, "slam_visited_cpp_node");
 
