@@ -39,9 +39,7 @@ class Communicator:
         data4 = np.double(20)
         data5 = np.double(30)
         checksum = np.double(data1 + data2 + data3 + data4 + data5)
-        print "socket_lock.acquire()"
         self.socket_lock.acquire()
-        print "socket_lock acquired!"
         self.client_socket.sendall(np.int32(48)) # (6 doubles = 6*8 bytes = 48 bytes)
         self.client_socket.sendall(data1)
         self.client_socket.sendall(data2)
