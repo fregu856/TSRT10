@@ -577,6 +577,8 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 - Modified toolbox/createLogStruct.m so that it only takes stuff that we actually use as input and create a struct only out of that data
 - Modified toolbox/sensor_read.m so that it doesn't read from the Lidar
 - Modified toolbox/sendSensorsToGui.m so that it doesn't transmits Lidar data (then also had to modify read_encoder.py!)
+- LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+- I modified C_Code/Communicator/Communicator_threaded.cpp so that the ping messages are 32 bytes long. This way the RPI only ever sends messages of 32 bytes, which will help us avoid chrashes of the communicator node on the laptop/pc
 
 # C++:
 
