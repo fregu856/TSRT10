@@ -67,9 +67,9 @@ class Communicator:
         data5 = np.double(30)
         checksum = np.double(data1 + data2 + data3 + data4 + data5)
 
-        print "socket_lock.acquire() in control_callback()"
+        #print "socket_lock.acquire() in control_callback()"
         self.socket_lock.acquire()
-        print "socket_lock acquired in control_callback()!"
+        #print "socket_lock acquired in control_callback()!"
         self.client_socket.sendall(np.int32(48)) # (6 doubles = 6*8 bytes = 48 bytes)
 
         self.client_socket.sendall(data1)
@@ -79,126 +79,83 @@ class Communicator:
         self.client_socket.sendall(data5)
         self.client_socket.sendall(checksum)
         self.socket_lock.release()
-        print "socket_lock released in control_callback()!"
+        #print "socket_lock released in control_callback()!"
 
     def run(self):
         while not rospy.is_shutdown():
-            print "####################"
-            print "socket_lock.acquire() in run()"
+            no_of_read_bytes_size = 0
+            no_of_read_bytes_data = 0
+            #print "socket_lock.acquire() in run()"
             self.socket_lock.acquire()
-            print "socket_lock acquired in run()!"
-            data = self.client_socket.recv(4)
-            print len(data)
-            print data
-            no_of_bytes_to_read = struct.unpack("<L", data)[0]
-            print "number of bytes to read: %d" % no_of_bytes_to_read
-
-            no_of_read_bytes = 0
-            while no_of_read_bytes < 8:
-                data = self.client_socket.recv(8-no_of_read_bytes)
-                no_of_read_bytes += len(data)
-                #print data
-                #print "***"
-            print "no_of_read_bytes after reading of message_type: %d" % no_of_read_bytes
-            print data
-            print "len(data) after reading of message_type: %d" % len(data)
-            if len(data) == 8:
-                message_type = struct.unpack("<d", data)[0]
-                print "message type: %f" % message_type
-                #print "^^^^^^"
-            else:
-                message_type = -1 # (error)
-                print "message_type = -1 (error)"
-
-            no_of_read_bytes = 0
-            if no_of_bytes_to_read - 8 > 0:
-                while no_of_read_bytes < no_of_bytes_to_read - 8:
-                    data = self.client_socket.recv(no_of_bytes_to_read - 8 - no_of_read_bytes)
-                    #print len(data)
-                    no_of_read_bytes += len(data)
-                    print "no_of_read_bytes in reading of data: %d" % no_of_read_bytes
-                    #print data
-                    #print "&&&&&&&&&&&&&&&"
+            #print "socket_lock acquired in run()!"
+            while no_of_read_bytes_size < 4: # (4 first bytes: no of bytes of data, which always should equal 32)
+                size_data = self.client_socket.recv(4 - no_of_read_bytes_size)
+                no_of_read_bytes_size += len(size_data)
+            while no_of_read_bytes_data < 32: # (32 bytes of data, 4 doubles)
+                data = self.client_socket.recv(32 - no_of_read_bytes_data)
+                no_of_read_bytes_data += len(data)
             self.socket_lock.release()
-            print "socket_lock released in run()!"
+            #print "socket_lock released in run()!"
 
-            print "no_of_read_bytes after reading of data: %d" % no_of_read_bytes
-            print data
-            print "len(data) after reading of data: %d" % len(data)
+            if len(size_data) == 4 and len(data) == 32:
+                no_of_data_bytes = struct.unpack("<L", size_data)[0]
 
-            if message_type == 1:
-                print "THE SENSOR DATA HAS ARRIVED!"
-                if len(data) == 128:
-                    print "ALL THE SENSOR DATA HAS ARRIVED!"
-                    us_1 = data[0:8]
-                    us_1 = struct.unpack("<d", us_1)[0]
-                    #print "us 1: %f" % us_1
+                if no_of_data_bytes == 32:
+                    message_type = struct.unpack("<d", data[0:8])[0]
+                    print "message_type: %f" % message_type
 
-                    us_2 = data[8:16]
-                    us_2 = struct.unpack("<d", us_2)[0]
-                    #print "us 2: %f" % us_2
+                    if message_type == 1: # (sensor data)
+                        odoRight = struct.unpack("<d", data[8:16])[0]
 
-                    us_3 = data[16:24]
-                    us_3 = struct.unpack("<d", us_3)[0]
-                    #print "us 3: %f" % us_3
+                        odoLeft = struct.unpack("<d", data[16:24])[0]
 
-                    us_4 = data[24:32]
-                    us_4 = struct.unpack("<d", us_4)[0]
-                    #print "us 4: %f" % us_4
+                        checksum = struct.unpack("<d", data[24:32])[0]
 
-                    gyro_1 = data[32:40]
-                    gyro_1 = struct.unpack("<d", gyro_1)[0]
-                    #print "gyro 1: %f" % gyro_1
+                        computed_checksum = odoLeft + odoRight
 
-                    gyro_2 = data[40:48]
-                    gyro_2 = struct.unpack("<d", gyro_2)[0]
-                    #print "gyro 2: %f" % gyro_2
+                        if computed_checksum == checksum:
+                            msg = Float64MultiArray()
+                            data = [odoRight, odoLeft]
+                            msg.data = data
+                            self.encoder_pub.publish(msg)
+                        else:
+                            print "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+                            print "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+                            print "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+                            print "checksums don't match!"
+                            print "########################################################"
+                            print "########################################################"
+                            print "########################################################"
 
-                    gyro_3 = data[48:56]
-                    gyro_3 = struct.unpack("<d", gyro_3)[0]
-                    #print "gyro 3: %f" % gyro_3
+                    elif message_type == 0:
+                        print "ping received!"
 
-                    acc_1 = data[56:64]
-                    acc_1 = struct.unpack("<d", acc_1)[0]
-                    #print "acc 1: %f" % acc_1
+                    else: # (this should never happen)
+                        print "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+                        print "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+                        print "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+                        print "unknown message type!"
+                        print "########################################################"
+                        print "########################################################"
+                        print "########################################################"
 
-                    acc_2 = data[64:72]
-                    acc_2 = struct.unpack("<d", acc_2)[0]
-                    #print "acc 2: %f" % acc_2
+                else: # (if no_of_data_bytes != 32:)
+                    print "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+                    print "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+                    print "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+                    print "no_of_data_bytes != 32, there must be an error in transmission!"
+                    print "########################################################"
+                    print "########################################################"
+                    print "########################################################"
 
-                    acc_3 = data[72:80]
-                    acc_3 = struct.unpack("<d", acc_3)[0]
-                    #print "acc 3: %f" % acc_3
-
-                    magn_1 = data[80:88]
-                    magn_1 = struct.unpack("<d", magn_1)[0]
-                    #print "magn 1: %f" % magn_1
-
-                    magn_2 = data[88:96]
-                    magn_2 = struct.unpack("<d", magn_2)[0]
-                    #print "magn 2: %f" % magn_2
-
-                    magn_3 = data[96:104]
-                    magn_3 = struct.unpack("<d", magn_3)[0]
-                    #print "magn 3: %f" % magn_3
-
-                    odoRight = data[104:112]
-                    odoRight = struct.unpack("<d", odoRight)[0]
-                    #print "odoRight: %f" % odoRight
-
-                    odoLeft = data[112:120]
-                    odoLeft = struct.unpack("<d", odoLeft)[0]
-                    #print "odoLeft: %f" % odoLeft
-
-                    time = data[120:128]
-                    time = struct.unpack("<d", time)[0]
-                    #print "time: %f" % time
-
-                    msg = Float64MultiArray()
-                    data = [odoRight, odoLeft]
-                    #print data
-                    msg.data = data
-                    self.encoder_pub.publish(msg)
+            else: # (if not (len(size_data) == 4 and len(data) == 32))
+                print "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+                print "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+                print "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+                print "didn't receive all data in one reading!"
+                print "########################################################"
+                print "########################################################"
+                print "########################################################"
 
 if __name__ == "__main__":
     # create a Communicator object (this will run its __init__ function):

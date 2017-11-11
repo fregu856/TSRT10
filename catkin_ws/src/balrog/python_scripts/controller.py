@@ -81,7 +81,7 @@ class Controller:
 
         # CONTROLLER PARAMS:
         TOLERANCE = 0.07 # (how close to the target position the robot should stop [m])
-        K_SPEED = 0.1 * 8
+        K_SPEED = 0.2 * 8
         K_ANGLE = 0.5 * 4 #0.573*5 (0.05 / deg2rad(5))
         # More aggresive angular adjustment when driving
         K_ANGLE_DURING_DRIVE = K_ANGLE * 2.5
