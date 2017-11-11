@@ -211,3 +211,6 @@ target_link_libraries(slam_odom ${catkin_LIBRARIES})
 
 add_executable(slam_visited src/slam_visited.cpp)
 target_link_libraries(slam_visited ${catkin_LIBRARIES})
+
+add_executable(communicator src/communicator.cpp)
+target_link_libraries(communicator ${catkin_LIBRARIES})

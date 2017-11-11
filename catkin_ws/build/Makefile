@@ -1336,6 +1336,19 @@ slam_visited/fast:
 .PHONY : slam_visited/fast
 
 #=============================================================================
+# Target rules for targets named communicator
+
+# Build rule for target.
+communicator: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 communicator
+.PHONY : communicator
+
+# fast build rule for target.
+communicator/fast:
+	$(MAKE) -f balrog/CMakeFiles/communicator.dir/build.make balrog/CMakeFiles/communicator.dir/build
+.PHONY : communicator/fast
+
+#=============================================================================
 # Target rules for targets named geotiff_writer
 
 # Build rule for target.
@@ -3778,6 +3791,7 @@ help:
 	@echo "... actionlib_generate_messages_eus"
 	@echo "... tf_generate_messages_cpp"
 	@echo "... slam_visited"
+	@echo "... communicator"
 	@echo "... geotiff_writer"
 	@echo "... geotiff_node"
 	@echo "... geotiff_saver"

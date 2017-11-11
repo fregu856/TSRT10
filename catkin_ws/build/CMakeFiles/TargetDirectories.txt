@@ -169,6 +169,7 @@
 /home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/actionlib_generate_messages_eus.dir
 /home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/tf_generate_messages_cpp.dir
 /home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/slam_visited.dir
+/home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/communicator.dir
 /home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/install/strip.dir
 /home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/install/local.dir
 /home/fregu856/TSRT10/catkin_ws/build/balrog/CMakeFiles/test.dir

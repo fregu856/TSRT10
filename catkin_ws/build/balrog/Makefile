@@ -435,6 +435,48 @@ slam_visited/fast:
 	cd /home/fregu856/TSRT10/catkin_ws/build && $(MAKE) -f balrog/CMakeFiles/slam_visited.dir/build.make balrog/CMakeFiles/slam_visited.dir/build
 .PHONY : slam_visited/fast
 
+# Convenience name for target.
+balrog/CMakeFiles/communicator.dir/rule:
+	cd /home/fregu856/TSRT10/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 balrog/CMakeFiles/communicator.dir/rule
+.PHONY : balrog/CMakeFiles/communicator.dir/rule
+
+# Convenience name for target.
+communicator: balrog/CMakeFiles/communicator.dir/rule
+
+.PHONY : communicator
+
+# fast build rule for target.
+communicator/fast:
+	cd /home/fregu856/TSRT10/catkin_ws/build && $(MAKE) -f balrog/CMakeFiles/communicator.dir/build.make balrog/CMakeFiles/communicator.dir/build
+.PHONY : communicator/fast
+
+src/communicator.o: src/communicator.cpp.o
+
+.PHONY : src/communicator.o
+
+# target to build an object file
+src/communicator.cpp.o:
+	cd /home/fregu856/TSRT10/catkin_ws/build && $(MAKE) -f balrog/CMakeFiles/communicator.dir/build.make balrog/CMakeFiles/communicator.dir/src/communicator.cpp.o
+.PHONY : src/communicator.cpp.o
+
+src/communicator.i: src/communicator.cpp.i
+
+.PHONY : src/communicator.i
+
+# target to preprocess a source file
+src/communicator.cpp.i:
+	cd /home/fregu856/TSRT10/catkin_ws/build && $(MAKE) -f balrog/CMakeFiles/communicator.dir/build.make balrog/CMakeFiles/communicator.dir/src/communicator.cpp.i
+.PHONY : src/communicator.cpp.i
+
+src/communicator.s: src/communicator.cpp.s
+
+.PHONY : src/communicator.s
+
+# target to generate assembly for a file
+src/communicator.cpp.s:
+	cd /home/fregu856/TSRT10/catkin_ws/build && $(MAKE) -f balrog/CMakeFiles/communicator.dir/build.make balrog/CMakeFiles/communicator.dir/src/communicator.cpp.s
+.PHONY : src/communicator.cpp.s
+
 src/slam_odom.o: src/slam_odom.cpp.o
 
 .PHONY : src/slam_odom.o
@@ -544,9 +586,13 @@ help:
 	@echo "... actionlib_generate_messages_eus"
 	@echo "... tf_generate_messages_cpp"
 	@echo "... slam_visited"
+	@echo "... communicator"
 	@echo "... install/strip"
 	@echo "... install/local"
 	@echo "... test"
+	@echo "... src/communicator.o"
+	@echo "... src/communicator.i"
+	@echo "... src/communicator.s"
 	@echo "... src/slam_odom.o"
 	@echo "... src/slam_odom.i"
 	@echo "... src/slam_odom.s"
