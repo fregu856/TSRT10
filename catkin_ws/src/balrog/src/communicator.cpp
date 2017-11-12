@@ -207,7 +207,6 @@ void Communicator::control_callback_(const std_msgs::Float64MultiArray &msg_obj)
 
     mutex_.lock();
     send(tcp_socket_, msg_size_bytes, 4, 0);
-
     send(tcp_socket_, data_bytes, 48, 0);
     mutex_.unlock();
 }
