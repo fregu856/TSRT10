@@ -682,3 +682,8 @@ find_package(catkin REQUIRED COMPONENTS
 - - $ sudo nano /etc/rc.local
 - - $ Add the line "raspivid -t 0 -w 640 -h 360 -hf -fps 20 -o - | nc -l -p 8080" to the bottom of the file (right above the "exit 0")
 
+### SLAM and communicaton on Balrog:
+- Connect to the RPI network
+- Connect the LIDAR to the computer and wait a few seconds for the LIDAR to obtain full rotation speed
+- $ roslaunch balrog balrog.launch
+
