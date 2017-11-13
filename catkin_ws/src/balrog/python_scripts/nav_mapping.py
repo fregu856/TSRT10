@@ -51,6 +51,25 @@ def map_index_2_pos_small(map_msg, pos_index): #mappa from index in map to real 
 
     return pos
 
+def map_index_2_pos_mattias(map_msg, pos_index): #mappa from index in map to real pos
+    map_origin_obj = map_msg.info.origin
+    map_origin = [map_origin_obj.position.x, map_origin_obj.position.y]
+
+    map_resolution = 0.20
+
+    x_map_ind = pos_index[0]
+    y_map_ind = pos_index[1]
+
+    x_map = x_map_ind*map_resolution
+    y_map = y_map_ind*map_resolution
+
+    x = x_map + map_origin[0]
+    y = y_map + map_origin[1]
+
+    pos = [x, y]
+
+    return pos
+
 def pos_2_map_index(map_msg, pos): # real pos to map index
     map_origin_obj = map_msg.info.origin
     map_origin = [map_origin_obj.position.x, map_origin_obj.position.y]
@@ -477,7 +496,7 @@ def clObMap(obstacleMap):
 
 def clGoMa(obstacleMap, goalNode):
     size=obstacleMap.shape
-    closeGoal=np.full(size,-1 )
+    closeGoal=np.full(size,-1)
     closeGoal[goalNode[0],goalNode[1]]=0
 
     [obstRow,obstColumn]=np.where(obstacleMap==-900)
@@ -502,10 +521,10 @@ def clGoMa(obstacleMap, goalNode):
                             else:
                                 closeGoal[obstRow[i]+e,obstColumn[i]+f]=cost+2**(0.5)
 
-
-            if np.count_nonzero(closeGoal == -1)>0:#(closeGoal==-1).sum>0:
-                A=[~np.isnan(closeGoal)]
-                minValue=np.nanmin(closeGoal[np.where(closeGoal >minValue)])
+            if closeGoal[np.where(closeGoal > minValue)].shape[0] > 0:#(closeGoal==-1).sum>0:
+                #A=[~np.isnan(closeGoal)]
+                minValue=np.nanmin(closeGoal[np.where(closeGoal > minValue)])
+                #print minValue
             else:
                 run=0
 
@@ -516,35 +535,30 @@ def clGoMa(obstacleMap, goalNode):
     return closeGoal
 
 
-def coverageMap(astarMap, obstacleMap, alpha, startNode, goalNode, map_msg):
+def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_msg):
     #return obstacleMap
-    origMap=np.copy(astarMap)
-    #obstacleMap[obstacleMap==-2]=-900
-    if np.count_nonzero(obstacleMap==0)==0:
+    print coveringMap
+    if np.count_nonzero(np.nonzero(coveringMap==0))==0:
         print "Map already visited"
         return [-200, -200]
     else:
+        coveringMap[coveringMap==70]=-900
+        coveringMap[coveringMap==100]=-900
 
-        obstacleMap[origMap==70]=-900
-        obstacleMap[origMap==100]=-900
+        closeObst=clObMap(coveringMap)
+        closeGoal=clGoMa(coveringMap, goalNode)
 
-        closeObst=clObMap(obstacleMap)
-        closeGoal=clGoMa(obstacleMap, goalNode)
-
-        costMap1=np.add( closeGoal, np.multiply(alpha,closeObst))
-        costMap1[origMap==-2]=float('NaN')
+        costMap1=np.add( closeGoal, np.multiply(alpha,closeObst))##print for kostnadskarta
+        costMap1[coveringMap==-2]=float('NaN')
         pathX=[]
         pathY=[]
 
         walkingNode=startNode
         s=0
-        size=obstacleMap.shape
-        visitedMap = np.full(size,1)
-        pathMap = np.full(size,0)
-        while np.count_nonzero(origMap == 0) != (np.count_nonzero(visitedMap == 0)+1):
-            # print np.count_nonzero(origMap == 0)
-            # print np.count_nonzero(visitedMap == 0)
-            # print np.count_nonzero(origMap == 0) != (np.count_nonzero(visitedMap == 0)+1)
+        map_size=coveringMap.shape
+        visitedMap = np.full(map_size,1)
+        pathMap = np.full(map_size,0)
+        while np.count_nonzero(coveringMap == 0) != (np.count_nonzero(visitedMap == 0)+1):
             #print walkingNode
             #print (walkingNode[1]==goalNode[1] and walkingNode[0]==goalNode[0]==0)
             costMap=np.copy(costMap1)
@@ -563,16 +577,15 @@ def coverageMap(astarMap, obstacleMap, alpha, startNode, goalNode, map_msg):
                 b=-1
 
 
-            if walkingNode[0]==size[0]:
+            if walkingNode[0]==map_size[0]:
                 c=0
             else:
                 c=1
 
-            if walkingNode[1]==size[1]:
+            if walkingNode[1]==map_size[1]:
                 d=0
             else:
                 d=1
-
 
             partMap=costMap[walkingNode[0]+a:walkingNode[0]+c+1,walkingNode[1]+b:walkingNode[1]+d+1]
             partMap[-a,-b]=0
@@ -584,7 +597,7 @@ def coverageMap(astarMap, obstacleMap, alpha, startNode, goalNode, map_msg):
                 newRow=new[0]
                 newCol=new[1]
                 walkingNode=[walkingNode[0]+newRow[0]+a,walkingNode[1]+newCol[0]+b] #anpassa beroe p storlek a,b,c,d
-                walkingNode_pos = map_index_2_pos(map_msg, [walkingNode[1], walkingNode[0]])
+                walkingNode_pos = map_index_2_pos_mattias(map_msg, [walkingNode[1], walkingNode[0]])
                 walkingNode_small = pos_2_map_index_small(map_msg, walkingNode_pos)
                 pathX.append(walkingNode[1])
                 pathY.append(walkingNode[0])
@@ -600,24 +613,29 @@ def coverageMap(astarMap, obstacleMap, alpha, startNode, goalNode, map_msg):
 
                 #In with A* here to fing path to node
 
-                newNode_pos = map_index_2_pos(map_msg, [newNode[1], newNode[0]])
+                newNode_pos = map_index_2_pos_mattias(map_msg, [newNode[1], newNode[0]])
                 newNode_small = pos_2_map_index_small(map_msg, newNode_pos)
-                walkingNode_pos = map_index_2_pos(map_msg, [walkingNode[1], walkingNode[0]])
+                walkingNode_pos = map_index_2_pos_mattias(map_msg, [walkingNode[1], walkingNode[0]])
                 walkingNode_small = pos_2_map_index_small(map_msg, walkingNode_pos)
-                starPath = astar_func([newNode_small[1], newNode_small[0]], [walkingNode_small[1], walkingNode_small[0]], origMap)
+                starPath = astar_func([newNode_small[1], newNode_small[0]], [walkingNode_small[1], walkingNode_small[0]], np.copy(astarMap))
                 if starPath is None:
                     visitedMap[newNode[0], newNode[1]]=0
                 else:
                     starPath = starPath[0]
+                    print starPath
                     size = starPath[0].shape
-                    for p in range(0, size[1]):
+                    print size
+                    for p in range(0, size[0]):
                         pathX.append(starPath[0][p])
                         pathY.append(starPath[1][p])
 
                     walkingNode=newNode
                     pathMap[walkingNode[0],walkingNode[1]]=s
 
-                path = raw_path_2_path_small([np.array(pathX), np.array(pathY)], map_msg)
+            print pathX
+            print pathY
+
+        path = raw_path_2_path_small([np.array(pathX), np.array(pathY)], map_msg) ######################## [X, Y]????????
 
         return path
 
@@ -1022,8 +1040,9 @@ class Mapping:
                 obstacleMap2 = self.map_covering
 
 
-                goalNodeCov = find_goal( obstacleMap2, [pos_index_small[1], pos_index_small[0]])
-                coverPath = coverageMap(np.copy(map_matrix_small),obstacleMap2  alpha, [pos_index_small[1], pos_index_small[0]], goalNodeCov, map_msg)
+                #goalNodeCov = find_goal(obstacleMap2, [pos_index_small[1], pos_index_small[0]])
+                goalNodeCov = [0, 0]
+                coverPath = coverageMap(np.copy(map_matrix_small), obstacleMap2, alpha, [pos_index_small[1], pos_index_small[0]], goalNodeCov, map_msg)
                 print "COVERING MODE finishED"
                 return coverPath
 
