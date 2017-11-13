@@ -19,7 +19,24 @@ def map_index_2_pos(map_msg, pos_index): #mappa from index in map to real pos
 
     map_resolution = map_msg.info.resolution
 
-    map_height = map_msg.info.height
+    x_map_ind = pos_index[0]
+    y_map_ind = pos_index[1]
+
+    x_map = x_map_ind*map_resolution
+    y_map = y_map_ind*map_resolution
+
+    x = x_map + map_origin[0]
+    y = y_map + map_origin[1]
+
+    pos = [x, y]
+
+    return pos
+
+def map_index_2_pos_small(map_msg, pos_index): #mappa from index in map to real pos
+    map_origin_obj = map_msg.info.origin
+    map_origin = [map_origin_obj.position.x, map_origin_obj.position.y]
+
+    map_resolution = 0.25
 
     x_map_ind = pos_index[0]
     y_map_ind = pos_index[1]
@@ -34,13 +51,30 @@ def map_index_2_pos(map_msg, pos_index): #mappa from index in map to real pos
 
     return pos
 
-def pos_2_map_index(map_msg, pos): # real pos to mapp index
+def pos_2_map_index(map_msg, pos): # real pos to map index
     map_origin_obj = map_msg.info.origin
     map_origin = [map_origin_obj.position.x, map_origin_obj.position.y]
 
     map_resolution = map_msg.info.resolution
 
-    map_height = map_msg.info.height
+    x = pos[0]
+    y = pos[1]
+
+    x_map = x - map_origin[0]
+    y_map = y - map_origin[1]
+
+    x_map_ind = int(x_map/map_resolution) # (col)
+    y_map_ind = int(y_map/map_resolution) # (row)
+
+    pos_index = [x_map_ind, y_map_ind]
+
+    return pos_index
+
+def pos_2_map_index_small(map_msg, pos): # real pos to map index
+    map_origin_obj = map_msg.info.origin
+    map_origin = [map_origin_obj.position.x, map_origin_obj.position.y]
+
+    map_resolution = 0.25
 
     x = pos[0]
     y = pos[1]
@@ -76,6 +110,19 @@ def raw_path_2_path(raw_path, map_msg):
     for (row, col) in zip(rows, cols):
         pos_index = [col, row]
         pos = map_index_2_pos(map_msg, pos_index)
+        path += [pos[0]]
+        path += [pos[1]]
+
+    return path
+
+def raw_path_2_path_small(raw_path, map_msg):
+    rows = raw_path[0].tolist() ######################################################################## before: rows = raw_path[1].tolist()
+    cols = raw_path[1].tolist() ######################################################################## before: cols = raw_path[0].tolist()
+    path = []
+
+    for (row, col) in zip(rows, cols):
+        pos_index = [col, row]
+        pos = map_index_2_pos_small(map_msg, pos_index)
         path += [pos[0]]
         path += [pos[1]]
 
@@ -423,11 +470,12 @@ class Mapping:
         self.path = None
         self.map_matrix = None
         self.map_matrix_expand = None
+        self.map_small = None
 
         # get things moving (seems like we need to wait a short moment for the
         # message to actually be published):a
         msg = Float64MultiArray()
-        msg.data = [1.0, 0]
+        msg.data = [0, 1.0]
         time.sleep(0.5)
         self.path_pub.publish(msg)
 
@@ -512,10 +560,10 @@ class Mapping:
         cv2.imwrite("map_matrix_expand3.png", img)
 
         # set all nodes outside of the 8x8 square to 100 (= obstacle):
-        x_min = -2
-        x_max = 2
-        y_min = -2
-        y_max = 2
+        x_min = -4
+        x_max = 4
+        y_min = -4
+        y_max = 4
         #
         map_msg = msg_obj
         temp = pos_2_map_index(map_msg, [x_min, y_min])
@@ -549,6 +597,50 @@ class Mapping:
                 elif point == 100:
                     img[row][col] = [0, 0, 0]
         cv2.imwrite("map_matrix_expand4.png", img)
+
+        map_height = map_matrix_rows
+        map_width = map_matrix_cols
+        # Number of cells to make box of. Size of box = NR_OF_CELLS^2
+        NR_OF_CELLS = 5
+        MIN_NR_OF_OBSTACLES = 15
+        map_small_height = int(map_height / NR_OF_CELLS)
+        map_small_width = int(map_width / NR_OF_CELLS)
+        print "Visited map height: %f width: %f" % (map_height, map_width)
+        print "Covering map height: %f width: %f" % (map_small_height, map_small_width)
+        map_small = np.zeros((map_small_height, map_small_width))
+        #loop in every box
+        for box_row in range(0, map_small_height):
+            for box_col in range(0 , map_small_width):
+                #loop for every cell to be part of box
+                firstrow = box_row * NR_OF_CELLS
+                firstcol = box_col * NR_OF_CELLS
+                current_cell = 0
+                nr_of_obstacles = 0
+                for row in range(firstrow, firstrow + NR_OF_CELLS):
+                    for col in range(firstcol , firstcol + NR_OF_CELLS):
+                        point = map_matrix_expand[row][col]
+                        # Obstacle in current_cell, mark obstacle always
+                        if point == 100:
+                            # Filter to check for more than MIN_NR_OF_OBSTACLES nodes with obstacle
+                            if nr_of_obstacles <= MIN_NR_OF_OBSTACLES:
+                                nr_of_obstacles += 1
+                            else:
+                                current_cell = 100
+                # Write to covered_tiles_map
+                map_small[box_row][box_col] = current_cell
+        self.map_small = map_small
+        map_height, map_width = map_small.shape
+        img = np.zeros((map_height, map_width, 3))
+        for row in range(map_height):
+            for col in range(map_width):
+                point = map_small[row][col]
+                if point == -1:
+                    img[row][col] = [100, 100, 100]
+                elif point == 0:
+                    img[row][col] = [255, 255, 255]
+                elif point == 100:
+                    img[row][col] = [0, 0, 0]
+        cv2.imwrite("map_small.png", img)
 
         print "map_callback"
 
@@ -584,7 +676,7 @@ class Mapping:
         rate = rospy.Rate(1) # (1 Hz)
         while not rospy.is_shutdown():
             if self.path is not None and self.goal_pos_index is not None and self.map_msg is not None:
-                map_matrix = self.map_matrix_expand
+                map_matrix = self.map_small
                 raw_path = self.path
                 map_msg = self.map_msg
                 goal_pos_index = self.goal_pos_index
@@ -593,12 +685,16 @@ class Mapping:
 
                 rows, cols = map_matrix.shape
 
+                goal_pos = map_index_2_pos(map_msg, goal_pos_index)
+                goal_pos_index = pos_2_map_index_small(map_msg, goal_pos)
+
                 print "pos:"
                 pos = [x, y]
                 print pos
                 map_matrix = self.map_matrix_expand
                 print "pos_index:"
                 pos_index = pos_2_map_index(map_msg, pos)
+                pos_index_small = pos_2_map_index_small(map_msg, pos)
                 print pos_index
                 print "************************************"
                 print map_matrix[max(pos_index[1]-1, 0):min(pos_index[1]+2, rows), max(pos_index[0]-1, 0):min(pos_index[0]+2, cols)]
@@ -649,12 +745,12 @@ class Mapping:
 
                     if map_matrix[pos_index[1], pos_index[0]] != 100:
                         print "route not allowed: do astar!"
-                        raw_path = astar_func([goal_pos_index[1], goal_pos_index[0]],
-                                    [pos_index[1], pos_index[0]], np.copy(map_matrix))
+                        raw_path = astar_func([goal_pos_index_small[1], goal_pos_index_small[0]],
+                                    [pos_index_small[1], pos_index_small[0]], np.copy(map_matrix_small))
 
                         if raw_path is not None:
                             self.path = raw_path[1]
-                            path = raw_path_2_path(raw_path[0], map_msg)
+                            path = raw_path_2_path_small(raw_path[0], map_msg)
                         else:
                             print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
                             print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
@@ -675,10 +771,10 @@ class Mapping:
                             x = temp3[1]
                             y = temp3[0]
                             distances = (x-pos_index[0])**2 + (y-pos_index[1])**2
-                            goalNode = np.argmin(distances[np.where(distances > 6)])
+                            goalNode = np.argmin(distances[np.where(distances > 2)])
                             goal_pos_index = [x[goalNode], y[goalNode]]
 
-                            goal_pos = map_index_2_pos(map_msg, goal_pos_index)
+                            goal_pos = map_index_2_pos_small(map_msg, goal_pos_index)
                             path = [goal_pos[0], goal_pos[1]]
 
                             self.path = np.array([[goal_pos_index[1]],[goal_pos_index[0]]])
@@ -707,10 +803,10 @@ class Mapping:
                         x = temp3[1]
                         y = temp3[0]
                         distances = (x-pos_index[0])**2 + (y-pos_index[1])**2
-                        goalNode = np.argmin(distances[np.where(distances > 6)])
+                        goalNode = np.argmin(distances[np.where(distances > 2)])
                         goal_pos_index = [x[goalNode], y[goalNode]]
 
-                        goal_pos = map_index_2_pos(map_msg, goal_pos_index)
+                        goal_pos = map_index_2_pos_small(map_msg, goal_pos_index)
                         path = [goal_pos[0], goal_pos[1]]
 
                         self.path = np.array([[goal_pos_index[1]],[goal_pos_index[0]]])
@@ -742,7 +838,9 @@ class Mapping:
             y = self.y
             pos = [x, y]
             map_matrix = self.map_matrix_expand
+            map_matrix_small = self.map_small
             pos_index = pos_2_map_index(map_msg, pos)
+            pos_index_small = pos_2_map_index_small(map_msg, pos)
 
             rows, cols = map_matrix.shape
 
@@ -758,15 +856,18 @@ class Mapping:
             if map_matrix[pos_index[1], pos_index[0]] != 100:
                 goal_pos_index = frontier_func(np.copy(map_matrix), pos_index, map_msg)
                 self.goal_pos_index = goal_pos_index
+                goal_pos = map_index_2_pos(map_msg, goal_pos_index)
                 print "goal index:"
                 print goal_pos_index
                 print "goal pos:"
-                print map_index_2_pos(map_msg, goal_pos_index)
+                print goal_pos
                 print "value of goal node:"
                 print map_matrix[goal_pos_index[1], goal_pos_index[0]]
 
-                raw_path = astar_func([goal_pos_index[1], goal_pos_index[0]],
-                            [pos_index[1], pos_index[0]], np.copy(map_matrix))
+                goal_pos_index_small = pos_2_map_index_small(map_msg, goal_pos)
+
+                raw_path = astar_func([goal_pos_index_small[1], goal_pos_index_small[0]],
+                            [pos_index_small[1], pos_index_small[0]], np.copy(map_matrix_small))
 
                 if raw_path is not None:
                     self.path = raw_path[1]
@@ -776,7 +877,8 @@ class Mapping:
                     print "raw_path[1]:"
                     print raw_path[1]
 
-                    path = raw_path_2_path(raw_path[0], map_msg)
+                    #path = raw_path_2_path(raw_path[0], map_msg)
+                    path = raw_path_2_path_small(raw_path[0], map_msg)
                     print "computed path in get_path:"
                     print path
                 else:
