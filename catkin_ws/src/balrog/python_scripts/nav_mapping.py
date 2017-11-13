@@ -505,7 +505,7 @@ class Mapping:
         cv2.imwrite("map_matrix_expand1.png", img)
 
         # # filter lone obstacle points:
-        n_threshold = 3
+        n_threshold = 1
         slamMap_binary = np.zeros((map_matrix_rows, map_matrix_cols))
         slamMap_binary[map_matrix == 100] = 1
         labeled_array, num_features = label(slamMap_binary)
@@ -602,7 +602,7 @@ class Mapping:
         map_width = map_matrix_cols
         # Number of cells to make box of. Size of box = NR_OF_CELLS^2
         NR_OF_CELLS = 5
-        MIN_NR_OF_OBSTACLES = 15
+        MIN_NR_OF_OBSTACLES = 8
         map_small_height = int(map_height / NR_OF_CELLS)
         map_small_width = int(map_width / NR_OF_CELLS)
         print "Visited map height: %f width: %f" % (map_height, map_width)
@@ -672,165 +672,6 @@ class Mapping:
 
         print "end of coordinator_callback"
 
-    def check_path(self):
-        rate = rospy.Rate(1) # (1 Hz)
-        while not rospy.is_shutdown():
-            if self.path is not None and self.goal_pos_index is not None and self.map_msg is not None:
-                map_matrix = self.map_small
-                raw_path = self.path
-                map_msg = self.map_msg
-                goal_pos_index = self.goal_pos_index
-                x = self.x
-                y = self.y
-
-                rows, cols = map_matrix.shape
-
-                goal_pos = map_index_2_pos(map_msg, goal_pos_index)
-                goal_pos_index = pos_2_map_index_small(map_msg, goal_pos)
-
-                print "pos:"
-                pos = [x, y]
-                print pos
-                map_matrix = self.map_matrix_expand
-                print "pos_index:"
-                pos_index = pos_2_map_index(map_msg, pos)
-                pos_index_small = pos_2_map_index_small(map_msg, pos)
-                print pos_index
-                print "************************************"
-                print map_matrix[max(pos_index[1]-1, 0):min(pos_index[1]+2, rows), max(pos_index[0]-1, 0):min(pos_index[0]+2, cols)]
-                print "************************************"
-                #tempPath = [raw_path[1], raw_path[0]] # (x,y)
-                #tempPath = list(tempPath)
-                #map_path = map_matrix[tempPath[1], tempPath[0]] ################################################################### before: map_path = map_matrix[tempPath[0], tempPath[1]] (tror det ar ratt nu, men inte 100 saker)
-                raw_path = list(raw_path)
-                map_path = map_matrix[raw_path[0], raw_path[1]]
-
-                print "map_path in check_path:"
-                print map_path
-
-                if map_matrix[goal_pos_index[1],goal_pos_index[0]] == 100: # if goal_pos is not allowed
-                    print "###############################################################################"
-                    print "###############################################################################"
-                    print "###############################################################################"
-                    print "###############################################################################"
-                    print('goal_pos Not allowed')
-                    print "###############################################################################"
-                    print "###############################################################################"
-                    print "###############################################################################"
-                    print "###############################################################################"
-                    msg_string = "stop"
-                    self.warning_pub.publish(msg_string)
-                    path = self.get_path()
-                    if path is not None:
-                        print path
-                        # publish the path:
-                        msg = Float64MultiArray()
-                        msg.data = path
-                        self.path_pub.publish(msg)
-                    else:
-                        print "path is None!"
-
-                elif 100 in map_path:
-                    print "###############################################################################"
-                    print "###############################################################################"
-                    print "###############################################################################"
-                    print "###############################################################################"
-                    print('Route Not allowed')
-                    print "###############################################################################"
-                    print "###############################################################################"
-                    print "###############################################################################"
-                    print "###############################################################################"
-                    msg_string = "stop"
-                    self.warning_pub.publish(msg_string)
-
-                    if map_matrix[pos_index[1], pos_index[0]] != 100:
-                        print "route not allowed: do astar!"
-                        raw_path = astar_func([goal_pos_index_small[1], goal_pos_index_small[0]],
-                                    [pos_index_small[1], pos_index_small[0]], np.copy(map_matrix_small))
-
-                        if raw_path is not None:
-                            self.path = raw_path[1]
-                            path = raw_path_2_path_small(raw_path[0], map_msg)
-                        else:
-                            print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                            print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                            print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                            print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                            print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                            print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                            print "route not allowed: Astar returned None, go to safe node!"
-                            print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                            print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                            print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                            print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                            print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                            print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                            temp1 = map_matrix == 0
-                            temp2 = map_matrix == -1
-                            temp3 = np.nonzero(temp1 + temp2)
-                            x = temp3[1]
-                            y = temp3[0]
-                            distances = (x-pos_index[0])**2 + (y-pos_index[1])**2
-                            goalNode = np.argmin(distances[np.where(distances > 2)])
-                            goal_pos_index = [x[goalNode], y[goalNode]]
-
-                            goal_pos = map_index_2_pos_small(map_msg, goal_pos_index)
-                            path = [goal_pos[0], goal_pos[1]]
-
-                            self.path = np.array([[goal_pos_index[1]],[goal_pos_index[0]]])
-
-                            print "goal_pos_index:"
-                            print goal_pos_index
-                            print "goal_pos:"
-                            print goal_pos
-                    else:
-                        print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                        print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                        print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                        print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                        print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                        print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                        print "route not allowed: stuck in (probably virtual) obstacles, go to safe node!"
-                        print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                        print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                        print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                        print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                        print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                        print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                        temp1 = map_matrix == 0
-                        temp2 = map_matrix == -1
-                        temp3 = np.nonzero(temp1 + temp2)
-                        x = temp3[1]
-                        y = temp3[0]
-                        distances = (x-pos_index[0])**2 + (y-pos_index[1])**2
-                        goalNode = np.argmin(distances[np.where(distances > 2)])
-                        goal_pos_index = [x[goalNode], y[goalNode]]
-
-                        goal_pos = map_index_2_pos_small(map_msg, goal_pos_index)
-                        path = [goal_pos[0], goal_pos[1]]
-
-                        self.path = np.array([[goal_pos_index[1]],[goal_pos_index[0]]])
-
-                        print "goal_pos_index:"
-                        print goal_pos_index
-                        print "goal_pos:"
-                        print goal_pos
-
-                    if path is not None:
-                        print path
-                        # publish the path:
-                        msg = Float64MultiArray()
-                        msg.data = path
-                        self.path_pub.publish(msg)
-                    else:
-                        print "path is None!"
-                else:
-                    print "######################################"
-                    print "current path is OK!"
-                    print "######################################"
-
-            rate.sleep() # (to get it to loop with 1 Hz)
-
     def get_path(self):
         if self.map_msg is not None and self.x is not None and self.y is not None:
             map_msg = self.map_msg
@@ -842,77 +683,71 @@ class Mapping:
             pos_index = pos_2_map_index(map_msg, pos)
             pos_index_small = pos_2_map_index_small(map_msg, pos)
 
-            rows, cols = map_matrix.shape
-
             print "pos:"
             print pos
             print "pos index:"
             print pos_index
-            print "************************************"
-            print map_matrix[max(pos_index[1]-1, 0):min(pos_index[1]+2, rows), max(pos_index[0]-1, 0):min(pos_index[0]+2, cols)]
-            print "************************************"
-            #print map_index_2_pos(map_msg, pos_index)
 
-            if map_matrix[pos_index[1], pos_index[0]] != 100:
-                goal_pos_index = frontier_func(np.copy(map_matrix), pos_index, map_msg)
-                self.goal_pos_index = goal_pos_index
-                goal_pos = map_index_2_pos(map_msg, goal_pos_index)
-                print "goal index:"
-                print goal_pos_index
-                print "goal pos:"
-                print goal_pos
-                print "value of goal node:"
-                print map_matrix[goal_pos_index[1], goal_pos_index[0]]
+            goal_pos_index = frontier_func(np.copy(map_matrix), pos_index, map_msg)
+            self.goal_pos_index = goal_pos_index
+            goal_pos = map_index_2_pos(map_msg, goal_pos_index)
+            print "goal index:"
+            print goal_pos_index
+            print "goal pos:"
+            print goal_pos
+            print "value of goal node:"
+            print map_matrix[goal_pos_index[1], goal_pos_index[0]]
 
-                goal_pos_index_small = pos_2_map_index_small(map_msg, goal_pos)
+            goal_pos_index_small = pos_2_map_index_small(map_msg, goal_pos)
+            print goal_pos_index_small
+            print map_index_2_pos_small(map_msg, goal_pos_index_small)
+            print map_matrix_small[goal_pos_index_small[1], goal_pos_index_small[0]]
 
-                raw_path = astar_func([goal_pos_index_small[1], goal_pos_index_small[0]],
-                            [pos_index_small[1], pos_index_small[0]], np.copy(map_matrix_small))
+            if map_matrix_small[goal_pos_index_small[1], goal_pos_index_small[0]] == 100:
+                print "########################################################"
+                print "get_path(): GOAL node is not free, get the closest free node!"
+                print "########################################################"
+                temp = np.nonzero(map_matrix_small == 0)
+                x = temp[1]
+                y = temp[0]
+                distances = (x-goal_pos_index_small[0])**2 + (y-goal_pos_index_small[1])**2
+                goalNode = np.argmin(distances)
+                goal_pos_index_small = [x[goalNode], y[goalNode]]
 
-                if raw_path is not None:
-                    self.path = raw_path[1]
+                print goal_pos_index_small
+                print map_index_2_pos_small(map_msg, goal_pos_index_small)
+                print map_matrix_small[goal_pos_index_small[1], goal_pos_index_small[0]]
 
-                    print "raw_path[0]:" ########################################### raw_path[0] var fel! Fixat nu!
-                    print raw_path[0]
-                    print "raw_path[1]:"
-                    print raw_path[1]
+            if map_matrix_small[pos_index_small[1], pos_index_small[0]] == 100:
+                print "########################################################"
+                print "get_path(): START node is not free, get the closest free node!"
+                print "########################################################"
+                temp = np.nonzero(map_matrix_small == 0)
+                x = temp[1]
+                y = temp[0]
+                distances = (x-pos_index_small[0])**2 + (y-pos_index_small[1])**2
+                startNode = np.argmin(distances)
+                pos_index_small = [x[startNode], y[startNode]]
 
-                    #path = raw_path_2_path(raw_path[0], map_msg)
-                    path = raw_path_2_path_small(raw_path[0], map_msg)
-                    print "computed path in get_path:"
-                    print path
-                else:
-                    print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                    print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                    print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                    print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                    print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                    print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                    print "Astar returned None, go to safe node!"
-                    print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                    print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                    print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                    print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                    print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                    print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                    temp1 = map_matrix == 0
-                    temp2 = map_matrix == -1
-                    temp3 = np.nonzero(temp1 + temp2)
-                    x = temp3[1]
-                    y = temp3[0]
-                    distances = (x-pos_index[0])**2 + (y-pos_index[1])**2
-                    goalNode = np.argmin(distances[np.where(distances > 6)])
-                    goal_pos_index = [x[goalNode], y[goalNode]]
+                print pos_index_small
+                print map_index_2_pos_small(map_msg, pos_index_small)
+                print map_matrix_small[pos_index_small[1], pos_index_small[0]]
 
-                    goal_pos = map_index_2_pos(map_msg, goal_pos_index)
-                    path = [goal_pos[0], goal_pos[1]]
+            raw_path = astar_func([goal_pos_index_small[1], goal_pos_index_small[0]],
+                        [pos_index_small[1], pos_index_small[0]], np.copy(map_matrix_small))
 
-                    self.path = np.array([[goal_pos_index[1]],[goal_pos_index[0]]])
+            if raw_path is not None:
+                self.path = raw_path[1]
 
-                    print "goal_pos_index:"
-                    print goal_pos_index
-                    print "goal_pos:"
-                    print goal_pos
+                print "raw_path[0]:" ########################################### raw_path[0] var fel! Fixat nu!
+                print raw_path[0]
+                print "raw_path[1]:"
+                print raw_path[1]
+
+                #path = raw_path_2_path(raw_path[0], map_msg)
+                path = raw_path_2_path_small(raw_path[1], map_msg)
+                print "computed path in get_path:"
+                print path
             else:
                 print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
                 print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
@@ -920,7 +755,7 @@ class Mapping:
                 print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
                 print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
                 print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                print "stuck in (probably virtual) obstacles, go to safe node!"
+                print "Astar returned None, go to safe node!"
                 print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
                 print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
                 print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
@@ -949,6 +784,48 @@ class Mapping:
             return path
         else:
             return None
+
+    def check_path(self):
+        rate = rospy.Rate(1) # (1 Hz)
+        while not rospy.is_shutdown():
+            if self.path is not None and self.map_small is not None:
+                map_matrix = self.map_small
+                raw_path = self.path
+
+                raw_path = list(raw_path)
+                map_path = map_matrix[raw_path[0], raw_path[1]]
+
+                if 100 in map_path:
+                    print "###############################################################################"
+                    print "###############################################################################"
+                    print "###############################################################################"
+                    print "###############################################################################"
+                    print "current path is NOT OK!"
+                    print "###############################################################################"
+                    print "###############################################################################"
+                    print "###############################################################################"
+                    print "###############################################################################"
+                    msg_string = "stop"
+                    self.warning_pub.publish(msg_string)
+
+                    print "map_path in check_path:"
+                    print map_path
+
+                    path = self.get_path()
+                    if path is not None:
+                        print path
+                        # publish the path:
+                        msg = Float64MultiArray()
+                        msg.data = path
+                        self.path_pub.publish(msg)
+                    else:
+                        print "path is None!"
+                else:
+                    # print "######################################"
+                    # print "current path is OK!"
+                    # print "######################################"
+
+            rate.sleep() # (to get it to loop with 1 Hz)
 
 if __name__ == "__main__":
     # create an Mapping object (this will run its __init__ function):
