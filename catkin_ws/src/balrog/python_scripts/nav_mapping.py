@@ -475,7 +475,7 @@ class Mapping:
         # get things moving (seems like we need to wait a short moment for the
         # message to actually be published):a
         msg = Float64MultiArray()
-        msg.data = [0, 1.0]
+        msg.data = [1.0, 0]
         time.sleep(0.5)
         self.path_pub.publish(msg)
 
@@ -531,7 +531,7 @@ class Mapping:
 
         # Obstacle EXPAND:
         temp = np.copy(map_matrix_expand)
-        OBSTACLE_EXPAND_SIZE = 6
+        OBSTACLE_EXPAND_SIZE = 8
         obst_inds = np.nonzero(map_matrix_expand == 100)
         obst_inds_row = obst_inds[0].tolist()
         obst_inds_col = obst_inds[1].tolist()
@@ -560,10 +560,10 @@ class Mapping:
         cv2.imwrite("map_matrix_expand3.png", img)
 
         # set all nodes outside of the 8x8 square to 100 (= obstacle):
-        x_min = -4
-        x_max = 4
-        y_min = -4
-        y_max = 4
+        x_min = -0.5
+        x_max = 15
+        y_min = -1.5
+        y_max = 1.5
         #
         map_msg = msg_obj
         temp = pos_2_map_index(map_msg, [x_min, y_min])
@@ -651,7 +651,7 @@ class Mapping:
         grays = np.count_nonzero(np.nonzero(map_matrix_expand == -1))
         percentage = float(whites)/float(whites + grays)
         print percentage
-        if percentage > 0.92:
+        if percentage > 0.98:
             while True:
                 print "HALLA ELLLER!"
 
