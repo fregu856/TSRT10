@@ -236,8 +236,8 @@ def frontier_func(slamMap, currentPosition, map_msg):
     cv2.imwrite("frontierMap4.png", img)
 
     # remove nodes that are too close to the current node:
-    for row in range(currentPosition[1]-6, currentPosition[1]+7):
-        for col in range(currentPosition[0]-6, currentPosition[0]+7):
+    for row in range(currentPosition[1]-30, currentPosition[1]+31):
+        for col in range(currentPosition[0]-30, currentPosition[0]+31):
             if row < rows and col < cols:
                 frontierMap[row][col] = 0
 
@@ -605,8 +605,8 @@ class Mapping:
         MIN_NR_OF_OBSTACLES = 8
         map_small_height = int(map_height / NR_OF_CELLS)
         map_small_width = int(map_width / NR_OF_CELLS)
-        print "Visited map height: %f width: %f" % (map_height, map_width)
-        print "Covering map height: %f width: %f" % (map_small_height, map_small_width)
+        #print "Visited map height: %f width: %f" % (map_height, map_width)
+        #print "Covering map height: %f width: %f" % (map_small_height, map_small_width)
         map_small = np.zeros((map_small_height, map_small_width))
         #loop in every box
         for box_row in range(0, map_small_height):
@@ -642,6 +642,24 @@ class Mapping:
                     img[row][col] = [0, 0, 0]
         cv2.imwrite("map_small.png", img)
 
+
+
+
+
+
+        whites = np.count_nonzero(np.nonzero(map_matrix_expand == 0))
+        grays = np.count_nonzero(np.nonzero(map_matrix_expand == -1))
+        percentage = float(whites)/float(whites + grays)
+        print percentage
+        if percentage > 0.92:
+            while True:
+                print "HALLA ELLLER!"
+
+
+
+
+
+
         print "map_callback"
 
     # define the callback function for the /estimated_pose subscriber:
@@ -662,7 +680,6 @@ class Mapping:
         if msg_string == "reached end of path":
             path = self.get_path()
             if path is not None:
-                print path
                 # publish the path:
                 msg = Float64MultiArray()
                 msg.data = path
@@ -674,6 +691,8 @@ class Mapping:
 
     def get_path(self):
         if self.map_msg is not None and self.x is not None and self.y is not None:
+            print "****************************************************"
+            print "start of get_path()"
             map_msg = self.map_msg
             x = self.x
             y = self.y
@@ -683,25 +702,20 @@ class Mapping:
             pos_index = pos_2_map_index(map_msg, pos)
             pos_index_small = pos_2_map_index_small(map_msg, pos)
 
-            print "pos:"
-            print pos
-            print "pos index:"
-            print pos_index
+            print "pos:", pos
+            print "pos index:", pos_index
 
             goal_pos_index = frontier_func(np.copy(map_matrix), pos_index, map_msg)
             self.goal_pos_index = goal_pos_index
             goal_pos = map_index_2_pos(map_msg, goal_pos_index)
-            print "goal index:"
-            print goal_pos_index
-            print "goal pos:"
-            print goal_pos
-            print "value of goal node:"
-            print map_matrix[goal_pos_index[1], goal_pos_index[0]]
+            print "goal index in FRONTIER map:", goal_pos_index
+            print "goal pos:", goal_pos
+            print "value of goal node in FRONTIER map:", map_matrix[goal_pos_index[1], goal_pos_index[0]]
 
             goal_pos_index_small = pos_2_map_index_small(map_msg, goal_pos)
-            print goal_pos_index_small
-            print map_index_2_pos_small(map_msg, goal_pos_index_small)
-            print map_matrix_small[goal_pos_index_small[1], goal_pos_index_small[0]]
+            print "goal index in ASTAR map:", goal_pos_index_small
+            print "goal pos corresponding to goal index in ASTAR map:", map_index_2_pos_small(map_msg, goal_pos_index_small)
+            print "value of goal node in ASTAR map:", map_matrix_small[goal_pos_index_small[1], goal_pos_index_small[0]]
 
             if map_matrix_small[goal_pos_index_small[1], goal_pos_index_small[0]] == 100:
                 print "########################################################"
@@ -714,9 +728,9 @@ class Mapping:
                 goalNode = np.argmin(distances)
                 goal_pos_index_small = [x[goalNode], y[goalNode]]
 
-                print goal_pos_index_small
-                print map_index_2_pos_small(map_msg, goal_pos_index_small)
-                print map_matrix_small[goal_pos_index_small[1], goal_pos_index_small[0]]
+                print "goal index in ASTAR map:", goal_pos_index_small
+                print "goal pos corresponding to goal index in ASTAR map:", map_index_2_pos_small(map_msg, goal_pos_index_small)
+                print "value of goal node in ASTAR map:", map_matrix_small[goal_pos_index_small[1], goal_pos_index_small[0]]
 
             if map_matrix_small[pos_index_small[1], pos_index_small[0]] == 100:
                 print "########################################################"
@@ -729,9 +743,9 @@ class Mapping:
                 startNode = np.argmin(distances)
                 pos_index_small = [x[startNode], y[startNode]]
 
-                print pos_index_small
-                print map_index_2_pos_small(map_msg, pos_index_small)
-                print map_matrix_small[pos_index_small[1], pos_index_small[0]]
+                print "start index in ASTAR map:", pos_index_small
+                print "pos corresponding to start index in ASTAR map:", map_index_2_pos_small(map_msg, pos_index_small)
+                print "value of start node in ASTAR map:", map_matrix_small[pos_index_small[1], pos_index_small[0]]
 
             raw_path = astar_func([goal_pos_index_small[1], goal_pos_index_small[0]],
                         [pos_index_small[1], pos_index_small[0]], np.copy(map_matrix_small))
@@ -739,15 +753,14 @@ class Mapping:
             if raw_path is not None:
                 self.path = raw_path[1]
 
-                print "raw_path[0]:" ########################################### raw_path[0] var fel! Fixat nu!
+                print "raw_path[0]:"
                 print raw_path[0]
                 print "raw_path[1]:"
                 print raw_path[1]
 
                 #path = raw_path_2_path(raw_path[0], map_msg)
-                path = raw_path_2_path_small(raw_path[1], map_msg)
-                print "computed path in get_path:"
-                print path
+                path = raw_path_2_path_small(raw_path[0], map_msg)
+                print "computed path in get_path:", path
             else:
                 print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
                 print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
@@ -762,24 +775,24 @@ class Mapping:
                 print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
                 print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
                 print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-                temp1 = map_matrix == 0
-                temp2 = map_matrix == -1
-                temp3 = np.nonzero(temp1 + temp2)
-                x = temp3[1]
-                y = temp3[0]
-                distances = (x-pos_index[0])**2 + (y-pos_index[1])**2
-                goalNode = np.argmin(distances[np.where(distances > 6)])
-                goal_pos_index = [x[goalNode], y[goalNode]]
+                pos_index_small = pos_2_map_index_small(map_msg, pos)
+                temp = np.nonzero(map_matrix_small == 0)
+                x = temp[1]
+                y = temp[0]
+                distances = (x-pos_index_small[0])**2 + (y-pos_index_small[1])**2
+                goalNode = np.argmin(distances[np.where(distances > 0)])
+                goal_pos_index_small = [x[goalNode], y[goalNode]]
 
-                goal_pos = map_index_2_pos(map_msg, goal_pos_index)
+                goal_pos = map_index_2_pos_small(map_msg, goal_pos_index_small)
                 path = [goal_pos[0], goal_pos[1]]
 
-                self.path = np.array([[goal_pos_index[1]],[goal_pos_index[0]]])
+                self.path = np.array([[goal_pos_index_small[1]],[goal_pos_index_small[0]]])
 
-                print "goal_pos_index:"
-                print goal_pos_index
-                print "goal_pos:"
-                print goal_pos
+                print "goal_pos_index_small:", goal_pos_index_small
+                print "goal_pos:", goal_pos
+
+            print "end of get_path()"
+            print "****************************************************"
 
             return path
         else:
@@ -808,8 +821,7 @@ class Mapping:
                     msg_string = "stop"
                     self.warning_pub.publish(msg_string)
 
-                    print "map_path in check_path:"
-                    print map_path
+                    print "map_path in check_path:", map_path
 
                     path = self.get_path()
                     if path is not None:
@@ -821,6 +833,7 @@ class Mapping:
                     else:
                         print "path is None!"
                 else:
+                    test = 1
                     # print "######################################"
                     # print "current path is OK!"
                     # print "######################################"
