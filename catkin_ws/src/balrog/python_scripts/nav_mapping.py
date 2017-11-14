@@ -692,7 +692,7 @@ class Mapping:
         # get things moving (seems like we need to wait a short moment for the
         # message to actually be published):a
         msg = Float64MultiArray()
-        msg.data = [-0.1, 0]
+        msg.data = [-0.1, 0, 0.1, 0]
         time.sleep(0.5)
         self.path_pub.publish(msg)
 
@@ -748,7 +748,7 @@ class Mapping:
 
         # Obstacle EXPAND:
         temp = np.copy(map_matrix_expand)
-        OBSTACLE_EXPAND_SIZE = 10
+        OBSTACLE_EXPAND_SIZE = 11
         obst_inds = np.nonzero(map_matrix_expand == 100)
         obst_inds_row = obst_inds[0].tolist()
         obst_inds_col = obst_inds[1].tolist()
@@ -778,9 +778,9 @@ class Mapping:
 
         # set all nodes outside of the 8x8 square to 100 (= obstacle):
         x_min = -0.2
-        x_max = 6
+        x_max = 7.5
         y_min = -0.2
-        y_max = 6
+        y_max = 7.5
         #
         map_msg = msg_obj
         temp = pos_2_map_index(map_msg, [x_min, y_min])
@@ -819,7 +819,7 @@ class Mapping:
         map_width = map_matrix_cols
         # Number of cells to make box of. Size of box = NR_OF_CELLS^2
         NR_OF_CELLS = 5
-        MIN_NR_OF_OBSTACLES = 10
+        MIN_NR_OF_OBSTACLES = 11
         map_small_height = int(map_height / NR_OF_CELLS)
         map_small_width = int(map_width / NR_OF_CELLS)
         #print "Visited map height: %f width: %f" % (map_height, map_width)
