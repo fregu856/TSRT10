@@ -686,7 +686,7 @@ class Mapping:
         self.map_matrix = None
         self.map_matrix_expand = None
         self.map_small = None
-        self.mode = None
+        self.mode = 1
         self.map_covering = None
 
         # get things moving (seems like we need to wait a short moment for the
@@ -931,8 +931,6 @@ class Mapping:
             map_matrix_small = self.map_small
             pos_index = pos_2_map_index(map_msg, pos)
             pos_index_small = pos_2_map_index_small(map_msg, pos)
-
-            self.mode=2
 
             print "pos:", pos
             print "pos index:", pos_index
