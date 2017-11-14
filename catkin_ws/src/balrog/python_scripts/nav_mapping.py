@@ -233,15 +233,15 @@ def frontier_func(slamMap, currentPosition, map_msg):
                 img[row][col] = [255, 255, 255]
     cv2.imwrite("frontierMap3.png", img)
 
-    # filter lone frontier nodes:
-    n_threshold = 3
-    labeled_array, num_features = label(frontierMap)
-    binc = np.bincount(labeled_array.ravel())
-    noise_idx = np.where(binc <= n_threshold)
-    shp = frontierMap.shape
-    mask = np.in1d(labeled_array, noise_idx).reshape(shp)
-    frontierMap[mask] = 0
-    #print frontierMap
+    # # filter lone frontier nodes:
+    # n_threshold = 1
+    # labeled_array, num_features = label(frontierMap)
+    # binc = np.bincount(labeled_array.ravel())
+    # noise_idx = np.where(binc <= n_threshold)
+    # shp = frontierMap.shape
+    # mask = np.in1d(labeled_array, noise_idx).reshape(shp)
+    # frontierMap[mask] = 0
+    # #print frontierMap
 
     map_height, map_width = frontierMap.shape
     img = np.zeros((map_height, map_width, 3))
@@ -692,7 +692,7 @@ class Mapping:
         # get things moving (seems like we need to wait a short moment for the
         # message to actually be published):a
         msg = Float64MultiArray()
-        msg.data = [0, 1.0]
+        msg.data = [-0.1, 0]
         time.sleep(0.5)
         self.path_pub.publish(msg)
 
@@ -722,7 +722,7 @@ class Mapping:
         cv2.imwrite("map_matrix_expand1.png", img)
 
         # # filter lone obstacle points:
-        n_threshold = 1
+        n_threshold = 2
         slamMap_binary = np.zeros((map_matrix_rows, map_matrix_cols))
         slamMap_binary[map_matrix == 100] = 1
         labeled_array, num_features = label(slamMap_binary)
@@ -748,7 +748,7 @@ class Mapping:
 
         # Obstacle EXPAND:
         temp = np.copy(map_matrix_expand)
-        OBSTACLE_EXPAND_SIZE = 6
+        OBSTACLE_EXPAND_SIZE = 10
         obst_inds = np.nonzero(map_matrix_expand == 100)
         obst_inds_row = obst_inds[0].tolist()
         obst_inds_col = obst_inds[1].tolist()
@@ -777,10 +777,10 @@ class Mapping:
         cv2.imwrite("map_matrix_expand3.png", img)
 
         # set all nodes outside of the 8x8 square to 100 (= obstacle):
-        x_min = -4
-        x_max = 4
-        y_min = -4
-        y_max = 4
+        x_min = -0.2
+        x_max = 6
+        y_min = -0.2
+        y_max = 6
         #
         map_msg = msg_obj
         temp = pos_2_map_index(map_msg, [x_min, y_min])
@@ -819,7 +819,7 @@ class Mapping:
         map_width = map_matrix_cols
         # Number of cells to make box of. Size of box = NR_OF_CELLS^2
         NR_OF_CELLS = 5
-        MIN_NR_OF_OBSTACLES = 8
+        MIN_NR_OF_OBSTACLES = 10
         map_small_height = int(map_height / NR_OF_CELLS)
         map_small_width = int(map_width / NR_OF_CELLS)
         #print "Visited map height: %f width: %f" % (map_height, map_width)
@@ -1015,7 +1015,7 @@ class Mapping:
                         x = temp[1]
                         y = temp[0]
                         distances = (x-pos_index_small[0])**2 + (y-pos_index_small[1])**2
-                        goalNode = np.argmin(distances[np.where(distances > 0)])
+                        goalNode = np.argmin(distances[np.where(distances > 1)])
                         goal_pos_index_small = [x[goalNode], y[goalNode]]
 
                         goal_pos = map_index_2_pos_small(map_msg, goal_pos_index_small)
@@ -1034,6 +1034,8 @@ class Mapping:
 
             elif self.mode==2:
                 print "COVERING MODE ENTERED"
+                while True:
+                    print "frontier done!"
                 alpha=0.9
                 obstacleMap2 = self.map_covering
 
