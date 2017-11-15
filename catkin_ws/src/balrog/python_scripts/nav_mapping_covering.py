@@ -599,6 +599,7 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_msg):
                 img[row][col] = [30, 30, 30]
             elif point == -2:
                 img[row][col] = [0, 255, 0]
+    img[goalNode[0], goalNode[1]] = [255, 0, 0]
     cv2.imwrite("coverageMap1.png", img)
 
 
@@ -741,7 +742,7 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_msg):
                 print "not astar: before: astarMap[walkingNode_small[1], walkingNode_small[0]]:", astarMap[walkingNode_small[1], walkingNode_small[0]]
 
 
-                if astarMap[walkingNode_small[1], walkingNode_small[0] == 100:
+                if astarMap[walkingNode_small[1], walkingNode_small[0]] == 100:
                     print "########################################################"
                     print "GOAL node is not free, get the closest free node!"
                     print "########################################################"
@@ -752,9 +753,9 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_msg):
                     goalNode = np.argmin(distances)
                     walkingNode_small = [x[goalNode], y[goalNode]]
 
-                print "not astar: after:  walkingNode_small:", walkingNode_small
-                print "not astar: after: walkingNode_pos after conversion:", map_index_2_pos_small(map_msg, walkingNode_small)
-                print "not astar: after: astarMap[walkingNode_small[1], walkingNode_small[0]]:", astarMap[walkingNode_small[1], walkingNode_small[0]]
+                    print "not astar: after:  walkingNode_small:", walkingNode_small
+                    print "not astar: after: walkingNode_pos after conversion:", map_index_2_pos_small(map_msg, walkingNode_small)
+                    print "not astar: after: astarMap[walkingNode_small[1], walkingNode_small[0]]:", astarMap[walkingNode_small[1], walkingNode_small[0]]
 
 
 
@@ -785,6 +786,43 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_msg):
                 walkingNode_small = pos_2_map_index_small(map_msg, walkingNode_pos)
                 print "astarMap[walkingNode_small[1], walkingNode_small[0]]:", astarMap[walkingNode_small[1], walkingNode_small[0]]
                 print "astarMap[newNode_small[1], newNode_small[0]]:", astarMap[newNode_small[1], newNode_small[0]]
+
+
+
+                if astarMap[walkingNode_small[1], walkingNode_small[0]] == 100:
+                    print "########################################################"
+                    print "START node is not free, get the closest free node!"
+                    print "########################################################"
+                    temp = np.nonzero(astarMap == 0)
+                    x = temp[1]
+                    y = temp[0]
+                    distances = (x-walkingNode_small[0])**2 + (y-walkingNode_small[1])**2
+                    goalNode = np.argmin(distances)
+                    walkingNode_small = [x[goalNode], y[goalNode]]
+
+                    print "after:  walkingNode_small:", walkingNode_small
+                    print "after: walkingNode_pos after conversion:", map_index_2_pos_small(map_msg, walkingNode_small)
+                    print "after: astarMap[walkingNode_small[1], walkingNode_small[0]]:", astarMap[walkingNode_small[1], walkingNode_small[0]]
+
+
+                if astarMap[newNode_small[1], newNode_small[0]] == 100:
+                    print "########################################################"
+                    print "GOAL node is not free, get the closest free node!"
+                    print "########################################################"
+                    temp = np.nonzero(astarMap == 0)
+                    x = temp[1]
+                    y = temp[0]
+                    distances = (x-newNode_small[0])**2 + (y-newNode_small[1])**2
+                    goalNode = np.argmin(distances)
+                    newNode_small = [x[goalNode], y[goalNode]]
+
+                    print "after: newNode_small:", newNode_small
+                    print "after: newNode_pos after conversion:", map_index_2_pos_small(map_msg, newNode_small)
+                    print "after: astarMap[newNode_small[1], newNode_small[0]]:", astarMap[newNode_small[1], newNode_small[0]]
+
+
+
+
                 starPath = astar_func([newNode_small[1], newNode_small[0]], [walkingNode_small[1], walkingNode_small[0]], np.copy(astarMap))
                 if starPath is None:
                     visitedMap[newNode[0], newNode[1]]=0
@@ -823,13 +861,13 @@ def find_goal(obstacleMapG, start):
     #goalNode = [goalNodeX,goalNodeY]
     #GoalNode as far away as possible
 
-    obstacleMapG[obstacleMapG == -900] = 1
-    obstacleMapG[obstacleMapG == -2] = 1
     unVisited = np.where(obstacleMapG == 0)
-    length = (unVisited[0][:]-start[0])**(2)+(unVisited[1][:]-start[1])**(2)
+    length = (unVisited[0]-start[0])**(2)+(unVisited[1]-start[1])**(2)
     maxlength = np.nanmax(length)
     index = np.where(maxlength == length)
-    goalNode = [int(unVisited[0][index]),int(unVisited[1][index])]
+    goalNode = [unVisited[0][index][0], unVisited[1][index][0]]
+
+    print goalNode[0]
 
     print "{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}"
     print "{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}"
@@ -868,7 +906,7 @@ class Mapping:
         self.map_matrix = None
         self.map_matrix_expand = None
         self.map_small = None
-        self.mode = 2
+        self.mode = 1
         self.map_covering = None
 
         # get things moving (seems like we need to wait a short moment for the
@@ -1122,6 +1160,7 @@ class Mapping:
                 goal_pos_index = frontier_func(np.copy(map_matrix), pos_index, map_msg)
                 if goal_pos_index==[-1000, -1000]:
                     self.mode=2
+                    self.get_path()
                 else:
                     self.goal_pos_index = goal_pos_index
                     goal_pos = map_index_2_pos(map_msg, goal_pos_index)
@@ -1223,11 +1262,10 @@ class Mapping:
 
                 pos_index_mattias = pos_2_map_index_mattias(map_msg, pos)
 
-                #goalNodeCov = find_goal(obstacleMap2, [pos_index_mattias[1], pos_index_mattias[0]])
+                goalNodeCov = find_goal(obstacleMap2, [pos_index_mattias[1], pos_index_mattias[0]])
                 #SCALING av startnider till ''
-                goalNodeCov = pos_2_map_index_mattias(map_msg, [0,0])
-                coverPath = coverageMap(np.copy(map_matrix_small), obstacleMap2, alpha, [pos_index_mattias[1], pos_index_mattias[0]], [goalNodeCov[1], goalNodeCov[0]], map_msg)
-                #coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_msg):
+                #goalNodeCov = pos_2_map_index_mattias(map_msg, [0,0])
+                coverPath = coverageMap(np.copy(map_matrix_small), obstacleMap2, alpha, [pos_index_mattias[1], pos_index_mattias[0]], goalNodeCov, map_msg)
                 print "COVERING MODE finishED"
                 #print coverPath
                 return coverPath
