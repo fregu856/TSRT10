@@ -14,6 +14,11 @@ import cv2
 
 import math
 
+X_MAX = 4
+X_MIN = -4
+Y_MAX = 4
+Y_MIN = -4
+
 # -1 okant
 # 0 inte hinder
 # 100 hinder
@@ -72,7 +77,7 @@ def callback_func(msg_obj):
 
             #img[y_map_ind][x_map_ind] = [0, 255, 0]
             # Width: 0.05 * COVERED_TILE_WIDTH [m]
-            COVERED_TILE_WIDTH = 8
+            COVERED_TILE_WIDTH = 10
             for row in range(y_map_ind-COVERED_TILE_WIDTH, y_map_ind+COVERED_TILE_WIDTH + 1):
                 for col in range(x_map_ind-COVERED_TILE_WIDTH, x_map_ind+COVERED_TILE_WIDTH + 1):
                     if row < map_height_local and col < map_width_local and row > 0 and col > 0:
@@ -108,15 +113,15 @@ def callback_func(msg_obj):
         map_width = map_width_local
         map_height = map_height_local
         map_matrix = map_local
-        
+
         # Number of cells to make box of. Side length = NR_OF_CELLS * 5cm
         # Size of box = NR_OF_CELLS^2
-        NR_OF_CELLS = 4
+        NR_OF_CELLS = 3
         SAVE_IMAGE = True
         # Filter by counting content and looking for content in centre
         USE_FILTER = True
-        MIN_NR_OF_OBSTACLES = 2
-        MIN_NR_OF_NONVISITED = 3
+        MIN_NR_OF_OBSTACLES = 1
+        MIN_NR_OF_NONVISITED = 2
 
         map_covering_height = int(math.floor(map_height / NR_OF_CELLS))
         map_covering_width = int(math.floor(map_width / NR_OF_CELLS))
@@ -445,9 +450,6 @@ def callback_func_map(msg_obj):
             elif point == 100:
                 img[row][col] = [0, 0, 0]
     cv2.imwrite("BP5_map_from_slam.png", img)
-
-
-
 
 if __name__ == "__main__":
     # initialize this code as a ROS node named slam_visited:

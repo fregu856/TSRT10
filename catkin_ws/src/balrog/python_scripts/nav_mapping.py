@@ -13,10 +13,10 @@ from scipy.ndimage.measurements import label
 
 import time
 
-X_MAX = 7.5
-X_MIN = -0.2
-Y_MAX = 7.5
-Y_MIN = -0.2
+X_MAX = 4
+X_MIN = -4
+Y_MAX = 4
+Y_MIN = -4
 
 def map_index_2_pos(map_msg, pos_index): #mappa from index in map to real pos
     map_origin_obj = map_msg.info.origin
@@ -27,8 +27,8 @@ def map_index_2_pos(map_msg, pos_index): #mappa from index in map to real pos
     x_map_ind = pos_index[0]
     y_map_ind = pos_index[1]
 
-    x_map = x_map_ind*map_resolution
-    y_map = y_map_ind*map_resolution
+    x_map = x_map_ind*map_resolution + map_resolution/2
+    y_map = y_map_ind*map_resolution + map_resolution/2
 
     x = x_map + map_origin[0]
     y = y_map + map_origin[1]
@@ -46,8 +46,8 @@ def map_index_2_pos_small(map_msg, pos_index): #mappa from index in map to real 
     x_map_ind = pos_index[0]
     y_map_ind = pos_index[1]
 
-    x_map = x_map_ind*map_resolution
-    y_map = y_map_ind*map_resolution
+    x_map = x_map_ind*map_resolution + map_resolution/2
+    y_map = y_map_ind*map_resolution + map_resolution/2
 
     x = x_map + map_origin[0]
     y = y_map + map_origin[1]
@@ -60,13 +60,13 @@ def map_index_2_pos_mattias(map_msg, pos_index): #mappa from index in map to rea
     map_origin_obj = map_msg.info.origin
     map_origin = [map_origin_obj.position.x, map_origin_obj.position.y]
 
-    map_resolution = 0.40
+    map_resolution = 0.30
 
     x_map_ind = pos_index[0]
     y_map_ind = pos_index[1]
 
-    x_map = x_map_ind*map_resolution
-    y_map = y_map_ind*map_resolution
+    x_map = x_map_ind*map_resolution + map_resolution/2
+    y_map = y_map_ind*map_resolution + map_resolution/2
 
     x = x_map + map_origin[0]
     y = y_map + map_origin[1]
@@ -117,7 +117,7 @@ def pos_2_map_index_mattias(map_msg, pos): # real pos to map index
     map_origin_obj = map_msg.info.origin
     map_origin = [map_origin_obj.position.x, map_origin_obj.position.y]
 
-    map_resolution = 0.40
+    map_resolution = 0.30
 
     x = pos[0]
     y = pos[1]
@@ -694,7 +694,18 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_msg):
             costMap=np.copy(costMap1)
             newRow=[]
             newCol=[]
+
+            ##### lagg in check sa att vi ej gar utanfor kartan!
+
             visitedMap[walkingNode[0], walkingNode[1]]=0
+            visitedMap[walkingNode[0]+1, walkingNode[1]]=0
+            visitedMap[walkingNode[0]-1, walkingNode[1]]=0
+            visitedMap[walkingNode[0], walkingNode[1]+1]=0
+            visitedMap[walkingNode[0]+1, walkingNode[1]+1]=0
+            visitedMap[walkingNode[0]-1, walkingNode[1]+1]=0
+            visitedMap[walkingNode[0], walkingNode[1]-1]=0
+            visitedMap[walkingNode[0]+1, walkingNode[1]]=0
+            visitedMap[walkingNode[0]-1, walkingNode[1]]=0
             s=s+1
             if walkingNode[0]==0:
                 a=0
@@ -847,9 +858,11 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_msg):
             #print pathY
 
         path = raw_path_2_path_small([np.array(pathX), np.array(pathY)], map_msg) ######################## [X, Y]????????
+        raw_path = [np.array(pathX), np.array(pathY)]
+
         print "coverageMap: path:"
         print path
-        return path
+        return path, raw_path
 
         #print costMap
         #return pathMap
@@ -1266,8 +1279,9 @@ class Mapping:
                 goalNodeCov = find_goal(obstacleMap2, [pos_index_mattias[1], pos_index_mattias[0]])
                 #SCALING av startnider till ''
                 #goalNodeCov = pos_2_map_index_mattias(map_msg, [0,0])
-                coverPath = coverageMap(np.copy(map_matrix_small), obstacleMap2, alpha, [pos_index_mattias[1], pos_index_mattias[0]], goalNodeCov, map_msg)
+                coverPath, raw_coverPath = coverageMap(np.copy(map_matrix_small), obstacleMap2, alpha, [pos_index_mattias[1], pos_index_mattias[0]], goalNodeCov, map_msg)
                 print "COVERING MODE finishED"
+                self.path = raw_coverPath
                 #print coverPath
                 return coverPath
 
