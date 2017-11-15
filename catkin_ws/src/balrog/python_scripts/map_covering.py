@@ -14,6 +14,11 @@ import cv2
 
 import math
 
+X_MAX = 4
+X_MIN = -4
+Y_MAX = 4
+Y_MIN = -4
+
 # -1 okant
 # 0 inte hinder
 # 100 hinder
@@ -72,7 +77,7 @@ def callback_func(msg_obj):
 
             #img[y_map_ind][x_map_ind] = [0, 255, 0]
             # Width: 0.05 * COVERED_TILE_WIDTH [m]
-            COVERED_TILE_WIDTH = 8
+            COVERED_TILE_WIDTH = 10
             for row in range(y_map_ind-COVERED_TILE_WIDTH, y_map_ind+COVERED_TILE_WIDTH + 1):
                 for col in range(x_map_ind-COVERED_TILE_WIDTH, x_map_ind+COVERED_TILE_WIDTH + 1):
                     if row < map_height_local and col < map_width_local and row > 0 and col > 0:
@@ -108,15 +113,15 @@ def callback_func(msg_obj):
         map_width = map_width_local
         map_height = map_height_local
         map_matrix = map_local
-        
+
         # Number of cells to make box of. Side length = NR_OF_CELLS * 5cm
         # Size of box = NR_OF_CELLS^2
-        NR_OF_CELLS = 4
+        NR_OF_CELLS = 3
         SAVE_IMAGE = True
         # Filter by counting content and looking for content in centre
         USE_FILTER = True
-        MIN_NR_OF_OBSTACLES = 2
-        MIN_NR_OF_NONVISITED = 3
+        MIN_NR_OF_OBSTACLES = 1
+        MIN_NR_OF_NONVISITED = 2
 
         map_covering_height = int(math.floor(map_height / NR_OF_CELLS))
         map_covering_width = int(math.floor(map_width / NR_OF_CELLS))
@@ -446,6 +451,112 @@ def callback_func_map(msg_obj):
                 img[row][col] = [0, 0, 0]
     cv2.imwrite("BP5_map_from_slam.png", img)
 
+# def callback_func2(msg_obj):
+#     map_data = msg_obj.data
+#     map_width = msg_obj.info.width
+#     map_height = msg_obj.info.height
+#     map_origin = msg_obj.info.origin.position
+#     map_origin = [map_origin.x, map_origin.y]
+#
+#     # convert the map data into a numpy array:
+#     map_matrix = np.array(map_data)
+#     # split the array into a list of map_height arrays (a list containing each row):
+#     map_matrix = np.split(map_matrix, map_height)
+#     # convert the list of array into a 2D array:
+#     map_matrix = np.array(map_matrix)
+#
+#     map_matrix_rows, map_matrix_cols = map_matrix.shape
+#
+#     # # filter lone obstacle points:
+#     n_threshold = 2
+#     slamMap_binary = np.zeros((map_matrix_rows, map_matrix_cols))
+#     slamMap_binary[map_matrix == 100] = 1
+#     labeled_array, num_features = label(slamMap_binary)
+#     binc = np.bincount(labeled_array.ravel())
+#     noise_idx = np.where(binc <= n_threshold)
+#     shp = map_matrix.shape
+#     mask = np.in1d(labeled_array, noise_idx).reshape(shp)
+#     map_matrix[mask] = 0
+#
+#     # Obstacle EXPAND:
+#     temp = np.copy(map_matrix)
+#     OBSTACLE_EXPAND_SIZE = 11
+#     obst_inds = np.nonzero(map_matrix == 100)
+#     obst_inds_row = obst_inds[0].tolist()
+#     obst_inds_col = obst_inds[1].tolist()
+#     obst_inds = zip(obst_inds_row, obst_inds_col)
+#     for obst_ind in obst_inds:
+#         obst_row = obst_ind[0]
+#         obst_col = obst_ind[1]
+#         for row in range(obst_row-OBSTACLE_EXPAND_SIZE, obst_row+OBSTACLE_EXPAND_SIZE+1):
+#             for col in range(obst_col-OBSTACLE_EXPAND_SIZE, obst_col+OBSTACLE_EXPAND_SIZE+1):
+#                 if row >= 0 and row < map_matrix_rows and col >= 0 and col < map_matrix_cols:
+#                     if temp[row][col] != 100:
+#                         map_matrix[row][col] = 100
+#
+#     # set all nodes outside of the 8x8 square to 100 (= obstacle):
+#     x_min = X_MIN
+#     x_max = X_MAX
+#     y_min = Y_MIN
+#     y_max = Y_MAX
+#     #
+#     map_msg = msg_obj
+#     temp = pos_2_map_index(map_msg, [x_min, y_min])
+#     x_min_ind = temp[0]
+#     y_min_ind = temp[1]
+#     temp = pos_2_map_index(map_msg, [x_max, y_max])
+#     x_max_ind = temp[0]
+#     y_max_ind = temp[1]
+#     #
+#     if x_max_ind < map_matrix_cols:
+#         map_matrix[:, x_max_ind:] = 100
+#     if x_min_ind > 0:
+#         map_matrix[:, 0:x_min_ind] = 100
+#     if y_max_ind < map_matrix_rows:
+#         map_matrix[y_max_ind:, :] = 100
+#     if y_min_ind > 0:
+#         map_matrix[0:y_min_ind, :] = 100
+#
+#     map_matrix[map_matrix==100]=-2
+#
+#     map_height = map_matrix_rows
+#     map_width = map_matrix_cols
+#     # Number of cells to make box of. Size of box = NR_OF_CELLS^2
+#     NR_OF_CELLS = 20
+#     MIN_NR_OF_OBSTACLES = 44
+#     map_small_height = int(map_height / NR_OF_CELLS)
+#     map_small_width = int(map_width / NR_OF_CELLS)
+#     #print "Visited map height: %f width: %f" % (map_height, map_width)
+#     #print "Covering map height: %f width: %f" % (map_small_height, map_small_width)
+#     map_small = np.zeros((map_small_height, map_small_width))
+#     #loop in every box
+#     for box_row in range(0, map_small_height):
+#         for box_col in range(0 , map_small_width):
+#             #loop for every cell to be part of box
+#             firstrow = box_row * NR_OF_CELLS
+#             firstcol = box_col * NR_OF_CELLS
+#             current_cell = 0
+#             nr_of_obstacles = 0
+#             for row in range(firstrow, firstrow + NR_OF_CELLS):
+#                 for col in range(firstcol , firstcol + NR_OF_CELLS):
+#                     point = map_matrix_expand[row][col]
+#                     # Obstacle in current_cell, mark obstacle always
+#                     if point == -2:
+#                         # Filter to check for more than MIN_NR_OF_OBSTACLES nodes with obstacle
+#                         if nr_of_obstacles <= MIN_NR_OF_OBSTACLES:
+#                             nr_of_obstacles += 1
+#                         else:
+#                             current_cell = -2
+#             # Write to covered_tiles_map
+#             map_small[box_row][box_col] = current_cell
+#
+#     map_msg = OccupancyGrid()
+#     map_msg.info.resolution = 0.05*NR_OF_CELLS
+#     map_msg.info.height = map_small_height
+#     map_msg.info.width = map_small_width
+#     temp_msg = map_small.flatten()
+#     map_msg.data = temp_msg.tolist()
+#     pub4.publish(map_msg)
 
 
 
@@ -457,6 +568,7 @@ if __name__ == "__main__":
     # Float64MultiArray) that is published on /encoder. We will do this by
     # calling the function callback_func every time a new message is published:
     rospy.Subscriber("/Mapper/vertices", Marker, callback_func)
+    #rospy.Subscriber("/map_visited", OccupancyGrid, callback_func2)
 
     rospy.Subscriber("/map", OccupancyGrid, callback_func_map)
 
