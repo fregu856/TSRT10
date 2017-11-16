@@ -51,11 +51,9 @@ class Main:
         self.y = None
         self.theta = None
 
-        self.goal_pos_index = None
-
         self.raw_path = None
 
-        self.map_msg = None
+        self.map_origin = None
         self.map_matrix_slam = None
         self.map_matrix_frontier = None
         self.map_matrix_astar = None
@@ -74,8 +72,9 @@ class Main:
     def map_callback(self, msg_obj):
         print "map_callback"
 
-        self.map_msg = msg_obj
-        self.map_matrix_slam = map_msg_2_matrix(self.map_msg)
+        self.map_origin = msg_obj.info.origin
+        map_origin = self.map_origin
+        self.map_matrix_slam = map_msg_2_matrix(msg_obj)
 
         map_matrix_slam = self.map_matrix_slam
         map_matrix_slam_rows, map_matrix_slam_cols = map_matrix_slam.shape
@@ -156,11 +155,10 @@ class Main:
         y_min = Y_MIN
         y_max = Y_MAX
         #
-        map_msg = msg_obj
-        temp = pos_2_map_index(map_msg, MAP_RES_SLAM, [x_min, y_min])
+        temp = pos_2_map_index(map_origin, MAP_RES_SLAM, [x_min, y_min])
         x_min_ind = temp[0]
         y_min_ind = temp[1]
-        temp = pos_2_map_index(map_msg, MAP_RES_SLAM, [x_max, y_max])
+        temp = pos_2_map_index(map_origin, MAP_RES_SLAM, [x_max, y_max])
         x_max_ind = temp[0]
         y_max_ind = temp[1]
         #
@@ -233,13 +231,13 @@ class Main:
     def map_covering_callback(self, msg_obj):
         print "map_covering_callback"
 
-        map_matrix_covering = map_msg_2_matrix(map_msg)
+        map_matrix_covering = map_msg_2_matrix(msg_obj)
 
         self.map_matrix_covering = map_matrix_covering
 
     # define the callback function for the /estimated_pose subscriber:
     def est_pose_callback(self, msg_obj):
-        print "est_pose_callback"
+        #print "est_pose_callback"
 
         pose = msg_obj.data
         self.x = pose[0]
@@ -268,83 +266,79 @@ class Main:
                     print "coordinator_callback: path is None!"
 
     def get_path(self):
-        if self.map_msg is not None and self.x is not None and self.y is not None:
-            print "****************************************************"
-            print "start of get_path()"
-            map_msg = self.map_msg
+        if self.map_origin is not None and self.x is not None and self.y is not None and self.map_matrix_frontier is not None and self.map_matrix_astar is not None:
+            map_origin = self.map_origin
             x = self.x
             y = self.y
             pos = [x, y]
             map_matrix_frontier = self.map_matrix_frontier
             map_matrix_astar = self.map_matrix_astar
-            pos_index = pos_2_map_index(map_msg, MAP_RES_SLAM, pos)
-            pos_index_astar = pos_2_map_index(map_msg, MAP_RES_ASTAR, pos)
 
-            print "pos:", pos
-            print "pos index:", pos_index
+            pos_index_frontier = pos_2_map_index(map_origin, MAP_RES_FRONTIER, pos)
+            pos_index_astar = pos_2_map_index(map_origin, MAP_RES_ASTAR, pos)
 
+            # print "get_path: pos:", pos
+            # print "get_path: pos_index_frontier:", pos_index_frontier
+            # print "get_path: pos_index_astar:", pos_index_astar
 
-            if self.mode==1:
-                goal_pos_index = frontier_func(np.copy(map_matrix_frontier), pos_index, map_msg)
-                if goal_pos_index==[-1000, -1000]:
-                    self.mode=2
+            if self.mode == "MAPPING":
+                goal_pos_index_frontier = frontier_func(np.copy(map_matrix_frontier), pos_index_frontier)
+
+                if goal_pos_index_frontier == [-1000, -1000]:
+                    print "MAPPING mode is finished, entering COVERING mode!"
+                    self.mode = "COVERING"
                     path = self.get_path()
                     return path
                 else:
-                    self.goal_pos_index = goal_pos_index
-                    goal_pos = map_index_2_pos(map_msg, MAP_RES_SLAM, goal_pos_index)
-                    print "goal index in FRONTIER map:", goal_pos_index
-                    print "goal pos:", goal_pos
-                    print "value of goal node in FRONTIER map:", map_matrix_frontier[goal_pos_index[1], goal_pos_index[0]]
+                    goal_pos = map_index_2_pos(map_origin, MAP_RES_FRONTIER, goal_pos_index_frontier)
+                    # print "goal index in FRONTIER map:", goal_pos_index_frontier
+                    # print "goal pos:", goal_pos
+                    # print "value of goal node in FRONTIER map:", map_matrix_frontier[goal_pos_index_frontier[1], goal_pos_index_frontier[0]]
 
-                    goal_pos_index_astar = pos_2_map_index(map_msg, MAP_RES_ASTAR, goal_pos)
-                    print "goal index in ASTAR map:", goal_pos_index_astar
-                    print "goal pos corresponding to goal index in ASTAR map:", map_index_2_pos(map_msg, MAP_RES_ASTAR, goal_pos_index_astar)
-                    print "value of goal node in ASTAR map:", map_matrix_astar[goal_pos_index_astar[1], goal_pos_index_astar[0]]
+                    goal_pos_index_astar = pos_2_map_index(map_origin, MAP_RES_ASTAR, goal_pos)
+                    # print "goal index in ASTAR map:", goal_pos_index_astar
+                    # print "goal pos corresponding to goal index in ASTAR map:", map_index_2_pos(map_origin, MAP_RES_ASTAR, goal_pos_index_astar)
+                    # print "value of goal node in ASTAR map:", map_matrix_astar[goal_pos_index_astar[1], goal_pos_index_astar[0]]
 
                     if map_matrix_astar[goal_pos_index_astar[1], goal_pos_index_astar[0]] == 100:
-                        print "########################################################"
-                        print "get_path(): GOAL node is not free, get the closest free node!"
-                        print "########################################################"
+                        # print "########################################################"
+                        # print "get_path(): GOAL node is not free, get the closest free node!"
+                        # print "########################################################"
                         temp = np.nonzero(map_matrix_astar == 0)
                         x = temp[1]
                         y = temp[0]
                         distances = (x-goal_pos_index_astar[0])**2 + (y-goal_pos_index_astar[1])**2
-                        goalNode = np.argmin(distances)
-                        goal_pos_index_astar = [x[goalNode], y[goalNode]]
-
-                        print "goal index in ASTAR map:", goal_pos_index_astar
-                        print "goal pos corresponding to goal index in ASTAR map:", map_index_2_pos(map_msg, MAP_RES_ASTAR, goal_pos_index_astar)
-                        print "value of goal node in ASTAR map:", map_matrix_astar[goal_pos_index_astar[1], goal_pos_index_astar[0]]
+                        goal_node = np.argmin(distances)
+                        goal_pos_index_astar = [x[goal_node], y[goal_node]]
+                        # print "goal index in ASTAR map:", goal_pos_index_astar
+                        # print "goal pos corresponding to goal index in ASTAR map:", map_index_2_pos(map_origin, MAP_RES_ASTAR, goal_pos_index_astar)
+                        # print "value of goal node in ASTAR map:", map_matrix_astar[goal_pos_index_astar[1], goal_pos_index_astar[0]]
 
                     if map_matrix_astar[pos_index_astar[1], pos_index_astar[0]] == 100:
-                        print "########################################################"
-                        print "get_path(): START node is not free, get the closest free node!"
-                        print "########################################################"
+                        # print "########################################################"
+                        # print "get_path(): START node is not free, get the closest free node!"
+                        # print "########################################################"
                         temp = np.nonzero(map_matrix_astar == 0)
                         x = temp[1]
                         y = temp[0]
                         distances = (x-pos_index_astar[0])**2 + (y-pos_index_astar[1])**2
-                        startNode = np.argmin(distances)
-                        pos_index_astar = [x[startNode], y[startNode]]
+                        start_node = np.argmin(distances)
+                        pos_index_astar = [x[start_node], y[start_node]]
+                        # print "start index in ASTAR map:", pos_index_astar
+                        # print "pos corresponding to start index in ASTAR map:", map_index_2_pos(map_origin, MAP_RES_ASTAR, pos_index_astar)
+                        # print "value of start node in ASTAR map:", map_matrix_astar[pos_index_astar[1], pos_index_astar[0]]
 
-                        print "start index in ASTAR map:", pos_index_astar
-                        print "pos corresponding to start index in ASTAR map:", map_index_2_pos(map_msg, MAP_RES_ASTAR, pos_index_astar)
-                        print "value of start node in ASTAR map:", map_matrix_astar[pos_index_astar[1], pos_index_astar[0]]
-
-                    raw_path = astar_func([goal_pos_index_astar[1], goal_pos_index_astar[0]],
+                    astar_paths = astar_func([goal_pos_index_astar[1], goal_pos_index_astar[0]],
                                 [pos_index_astar[1], pos_index_astar[0]], np.copy(map_matrix_astar))
 
-                    if raw_path is not None:
-                        self.raw_path = raw_path[1]
+                    if astar_paths is not None:
+                        self.raw_path = astar_paths[1]
+                        # print "astar_paths[0]:"
+                        # print astar_paths[0]
+                        # print "astar_paths[1]:"
+                        # print astar_paths[1]
 
-                        print "raw_path[0]:"
-                        print raw_path[0]
-                        print "raw_path[1]:"
-                        print raw_path[1]
-
-                        path = raw_path_2_path(raw_path[0], map_msg, MAP_RES_ASTAR)
-                        print "computed path in get_path:", path
+                        path = raw_path_2_path(astar_paths[0], map_origin, MAP_RES_ASTAR)
                     else:
                         print "################################################"
                         print "################################################"
@@ -352,49 +346,50 @@ class Main:
                         print "################################################"
                         print "################################################"
 
-                        pos_index_astar = pos_2_map_index(map_msg, MAP_RES_ASTAR, pos)
                         temp = np.nonzero(map_matrix_astar == 0)
                         x = temp[1]
                         y = temp[0]
                         distances = (x-pos_index_astar[0])**2 + (y-pos_index_astar[1])**2
-                        goalNode = np.argmin(distances[np.where(distances > 1)])
-                        goal_pos_index_astar = [x[goalNode], y[goalNode]]
+                        goal_node = np.argmin(distances[np.where(distances > 1)])
+                        goal_pos_index_astar = [x[goal_node], y[goal_node]]
 
-                        goal_pos = map_index_2_pos(map_msg, MAP_RES_ASTAR, goal_pos_index_astar)
+                        goal_pos = map_index_2_pos(map_origin, MAP_RES_ASTAR, goal_pos_index_astar)
                         path = [goal_pos[0], goal_pos[1]]
 
                         self.raw_path = np.array([[goal_pos_index_astar[1]],[goal_pos_index_astar[0]]])
 
-                        print "goal_pos_index_astar:", goal_pos_index_astar
-                        print "goal_pos:", goal_pos
-
-                    print "end of get_path()"
-                    print "****************************************************"
+                        # print "goal_pos_index_astar:", goal_pos_index_astar
+                        # print "goal_pos:", goal_pos
 
                     return path
 
-            elif self.mode==2:
-                print "COVERING MODE ENTERED"
-                # while True:
-                #     print "frontier done!"
+            elif self.mode == "COVERING":
+                map_matrix_covering = self.map_matrix_covering
+
                 alpha=1.5
-                obstacleMap2 = np.copy(self.map_matrix_covering)
 
-                pos_index_covering = pos_2_map_index(map_msg, MAP_RES_COVERING, pos)
+                pos_index_covering = pos_2_map_index(map_origin, MAP_RES_COVERING, pos)
 
-                goalNodeCov = find_goal(obstacleMap2, [pos_index_covering[1], pos_index_covering[0]])
-                #SCALING av startnider till ''
-                #goalNodeCov = pos_2_map_index(map_msg, MAP_RES_COVERING, [0,0])
-                coverPath, raw_coverPath = coverageMap(np.copy(map_matrix_astar), obstacleMap2, alpha, [pos_index_covering[1], pos_index_covering[0]], goalNodeCov, map_msg)
+                goalNodeCov = find_goal(np.copy(map_matrix_covering), [pos_index_covering[1], pos_index_covering[0]])
+                if goalNodeCov is not None:
+                    covering_paths = coverageMap(np.copy(map_matrix_astar), np.copy(map_matrix_covering), alpha, [pos_index_covering[1], pos_index_covering[0]], goalNodeCov, map_origin)
 
-                print "COVERING MODE finishED"
-                print "coverPath:"
-                print coverPath
-                print "raw_coverPath:"
-                print raw_coverPath
+                    if covering_paths is not None:
+                        # print "coverPath:", covering_paths[0]
+                        # print "raw_coverPath:", covering_paths[1]
 
-                path = raw_path_2_path(coverPath, map_msg, MAP_RES_ASTAR)
-                self.raw_path = raw_coverPath
+                        path = raw_path_2_path(covering_paths[0], map_origin, MAP_RES_ASTAR)
+                        self.raw_path = covering_paths[1]
+                    else:
+                        print "COVERING mode is finished, entering MISSION_FINISHED mode!"
+                        self.mode = "MISSION_FINISHED"
+                        path = None
+
+                else:
+                    print "COVERING mode is finished, entering MISSION_FINISHED mode!"
+                    self.mode = "MISSION_FINISHED"
+                    path = None
+
                 return path
 
         else:
@@ -437,8 +432,6 @@ class Main:
                             self.path_pub.publish(msg)
                         else:
                             print "check_path: path is None!"
-                    else:
-                        print "check_path: current path is ok!"
 
             rate.sleep() # (to get it to loop with 1 Hz)
 

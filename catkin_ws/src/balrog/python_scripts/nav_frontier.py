@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 from scipy.ndimage.measurements import label
 
-def frontier_func(slamMap, currentPosition, map_msg):
+def frontier_func(slamMap, currentPosition):
     rows, cols = slamMap.shape
     frontierMap = np.zeros(shape=(rows,cols))
     #print slamMap
