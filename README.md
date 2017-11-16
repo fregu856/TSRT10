@@ -706,6 +706,6 @@ find_package(catkin REQUIRED COMPONENTS
 
 # Tags:
 - $ cd ~/TSRT10/catkin_ws/src
-- $ git clone https://github.com/RIVeR−Lab/apriltagsros
+- $ git clone https://github.com/RIVeR-Lab/apriltags_ros.git
 - $ cd ~/TSRT10/catkin_ws
 - $ catkin_make
