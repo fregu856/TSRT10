@@ -692,4 +692,4 @@ find_package(catkin REQUIRED COMPONENTS
 - $ rosrun balrog_sim controller.py
 - $ rosrun balrog coordinator.py
 - $ rosrun balrog nav_covering_map.py
-- $ rosrun balrog nav_mapping.py
+- $ rosrun balrog main.py
