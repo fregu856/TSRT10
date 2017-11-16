@@ -691,5 +691,5 @@ find_package(catkin REQUIRED COMPONENTS
 - $ roslaunch balrog_sim OpenKarto_complete_control.launch
 - $ rosrun balrog_sim controller.py
 - $ rosrun balrog coordinator.py
-- $ rosrun balrog map_covering.py
+- $ rosrun balrog nav_covering_map.py
 - $ rosrun balrog nav_mapping.py
