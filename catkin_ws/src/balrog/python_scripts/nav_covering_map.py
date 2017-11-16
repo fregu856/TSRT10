@@ -1,11 +1,8 @@
 #!/usr/bin/env python
 
 import rospy
-from std_msgs.msg import Float64MultiArray
 from nav_msgs.msg import OccupancyGrid
-from visualization_msgs.msg import Marker
 
-import tf
 import numpy as np
 import cv2
 import math
@@ -17,8 +14,8 @@ import math
 
 class NavCoveringMap:
     def __init__(self):
-        # initialize this code as a ROS node named nav_covering_map:
-        rospy.init_node("nav_covering_map", anonymous=True)
+        # initialize this code as a ROS node named nav_covering_map_node:
+        rospy.init_node("nav_covering_map_node", anonymous=True)
 
         # subscribe to the map_visted topic:
         rospy.Subscriber("/map_visited", OccupancyGrid, self.callback_func)
@@ -165,7 +162,6 @@ class NavCoveringMap:
                     elif current_cell == 0:
                         map_covering2_img[box_row][box_col] = [255, 255, 255]
 
-
             #Add extra column
             if map_covering_width * NR_OF_CELLS < map_width:
                 map_covering2_width += 1
@@ -203,7 +199,6 @@ class NavCoveringMap:
                                 current_cell = -2
                             elif current_cell != 100 and current_cell != -2 and point == 0:
                                 current_cell = 0
-
 
                     #print "Extra box col current_cell: %f" % current_cell
                     # Write to covered_tiles_map
@@ -340,4 +335,4 @@ class NavCoveringMap:
 
 if __name__ == "__main__":
     # create a NavCoveringMap object (this will run its __init__ function):
-    nav_covering_map = NavCoveringMap
+    nav_covering_map = NavCoveringMap()
