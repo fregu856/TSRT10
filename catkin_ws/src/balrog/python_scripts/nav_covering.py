@@ -16,7 +16,8 @@ def clObMap(obstacleMap):
 #Making map, showing closeness to obstacles
     size=obstacleMap.shape
     closeObst=np.full(size,-1 )
-    closeObst[(obstacleMap==-900)]=0    #set obstacles to 0
+    closeObst[(obstacleMap==-900)]=0
+    closeObst[obstacleMap==-2]=0 #set obstacles to 0
 
     run=1
     cost=0
@@ -193,7 +194,7 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_msg):
                     img[row][col] = [0, 255, 0]
         cv2.imwrite("coverageMap3.png", img)
 
-        closeObst=clObMap(coveringMap)
+        closeObst=clObMap(np.copy(coveringMap))
         closeGoal=clGoMap(coveringMap, goalNode)
 
         costMap1=np.add( closeGoal, np.multiply(alpha,closeObst))##print for kostnadskarta
@@ -206,7 +207,7 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_msg):
         map_size=coveringMap.shape
         visitedMap = np.full(map_size,1)
         pathMap = np.full(map_size,0)
-        while np.count_nonzero(coveringMap == 0) != (np.count_nonzero(visitedMap == 0)+1):
+        while True:
             print "##########################################################"
             print "while loop in coverageMap"
             #print walkingNode
@@ -214,51 +215,46 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_msg):
             costMap=np.copy(costMap1)
             newRow=[]
             newCol=[]
+            extraNodes=2
 
-            if walkingNode[0] >= 0 and walkingNode[0] < map_height and walkingNode[1] >= 0 and walkingNode[1] < map_width:
-                visitedMap[walkingNode[0], walkingNode[1]]=0
-            if walkingNode[0]+1 >= 0 and walkingNode[0]+1 < map_height and walkingNode[1] >= 0 and walkingNode[1] < map_width:
-                visitedMap[walkingNode[0]+1, walkingNode[1]]=0
-            if walkingNode[0]-1 >= 0 and walkingNode[0]-1 < map_height and walkingNode[1] >= 0 and walkingNode[1] < map_width:
-                visitedMap[walkingNode[0]-1, walkingNode[1]]=0
-            if walkingNode[0] >= 0 and walkingNode[0] < map_height and walkingNode[1]+1 >= 0 and walkingNode[1]+1 < map_width:
-                visitedMap[walkingNode[0], walkingNode[1]+1]=0
-            if walkingNode[0]+1 >= 0 and walkingNode[0]+1 < map_height and walkingNode[1]+1 >= 0 and walkingNode[1]+1 < map_width:
-                visitedMap[walkingNode[0]+1, walkingNode[1]+1]=0
-            if walkingNode[0]-1 >= 0 and walkingNode[0]-1 < map_height and walkingNode[1]+1 >= 0 and walkingNode[1]+1 < map_width:
-                visitedMap[walkingNode[0]-1, walkingNode[1]+1]=0
-            if walkingNode[0] >= 0 and walkingNode[0] < map_height and walkingNode[1]-1 >= 0 and walkingNode[1]-1 < map_width:
-                visitedMap[walkingNode[0], walkingNode[1]-1]=0
-            if walkingNode[0]+1 >= 0 and walkingNode[0]+1 < map_height and walkingNode[1]-1 >= 0 and walkingNode[1]-1 < map_width:
-                visitedMap[walkingNode[0]+1, walkingNode[1]]=0
-            if walkingNode[0]-1 >= 0 and walkingNode[0]-1 < map_height and walkingNode[1]-1 >= 0 and walkingNode[1]-1 < map_width:
-                visitedMap[walkingNode[0]-1, walkingNode[1]]=0
+
             s=s+1
-
             if walkingNode[0]==0:
                 a=0
-            else:
+            elif walkingNode[0]==1:
                 a=-1
+            else:
+                a=-2
+
+
 
             if walkingNode[1]==0:
                 b=0
-            else:
+            elif walkingNode[0]==1:
                 b=-1
-
+            else:
+                b=-2
 
             if walkingNode[0]==map_size[0]:
                 c=0
-            else:
+            elif walkingNode[0]==map_size[0]-1:
                 c=1
+            else:
+                c=2
 
             if walkingNode[1]==map_size[1]:
                 d=0
-            else:
+            elif walkingNode[0]==map_size[0]-1:
                 d=1
+            else:
+                d=2
 
+            visitedMap[walkingNode[0]+a+1:walkingNode[0]+c,walkingNode[1]+b+1:walkingNode[1]+d]=0
             partMap=costMap[walkingNode[0]+a:walkingNode[0]+c+1,walkingNode[1]+b:walkingNode[1]+d+1]
+            #print visitedMap[walkingNode[0]+a+1:walkingNode[0]+c,walkingNode[1]+b+1:walkingNode[1]+d]
             partMap[-a,-b]=0
             partVisitedMap=np.multiply(visitedMap[walkingNode[0]+a:walkingNode[0]+c+1,walkingNode[1]+b:walkingNode[1]+d+1],partMap)
+            #print partVisitedMap
 
             unVisited=np.where(np.multiply(visitedMap,~np.isnan(costMap))!=0)
 
@@ -305,7 +301,7 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_msg):
 
             elif unVisited[0].shape[0] > 0:
                 #print "length:"
-                length=(unVisited[0][:]-walkingNode[0])**(2)+(unVisited[1][:]-walkingNode[1])**(2)
+                length=0.8*(unVisited[0][:]-walkingNode[0])**(2)+(unVisited[1][:]-walkingNode[1])**(2) + 0.2*costMap[unVisited[0][:],unVisited[1][:]]
                 #print length
                 minlength=np.nanmin(length)
                 index=np.where(minlength==length)
@@ -385,12 +381,79 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_msg):
             #print "pathY:"
             #print pathY
 
-        path = raw_path_2_path([np.array(pathX), np.array(pathY)], map_msg, MAP_RES_ASTAR)
+
         raw_path = [np.array(pathX), np.array(pathY)]
 
-        print "coverageMap: path:"
-        print path
-        return path, raw_path
+        pathX=np.fliplr([pathX])[0]
+        pathY=np.fliplr([pathY])[0]
+        xRoute=[]
+        yRoute=[]
+
+
+        dir=0
+        for pathCount in range(0,len(pathX)-1):
+
+            prevX=pathX[pathCount+1]
+            prevY=pathY[pathCount+1]
+
+
+            if prevX==pathX[pathCount]:
+                if pathY[pathCount]>prevY:
+                    if dir!=5:
+                        xRoute.append(pathX[pathCount])
+                        yRoute.append(pathY[pathCount])
+                        dir=5
+                else:
+                    if dir!=4:
+                        xRoute.append(pathX[pathCount])
+                        yRoute.append(pathY[pathCount])
+                        dir=4
+            elif prevY==pathY[pathCount]:
+                if pathX[pathCount]>prevX:
+                    if dir!=3:
+                        xRoute.append(pathX[pathCount])
+                        yRoute.append(pathY[pathCount])
+                        dir=3
+                else:
+                    if dir!=30:
+                        xRoute.append(pathX[pathCount])
+                        yRoute.append(pathY[pathCount])
+                        dir=30
+
+            elif (prevX==(pathX[pathCount]+1) or prevX==(pathX[pathCount]+2) ) and (prevY==(pathY[pathCount]+1) or prevY==(pathY[pathCount]+2)) or (prevX==(pathX[pathCount]-1) or prevX==(pathX[pathCount]-2)) and (prevY==(pathY[pathCount]-1) or prevY==(pathY[pathCount]-2)):
+                if ((pathX[pathCount]+1) or prevX==(pathX[pathCount]+2) ) and (prevY==(pathY[pathCount]+1) or prevY==(pathY[pathCount]+1)):
+                    if dir!=2:
+                        xRoute.append(pathX[pathCount])
+                        yRoute.append(pathY[pathCount])
+                        dir=2
+                else:
+                    if dir!=22:
+                        xRoute.append(pathX[pathCount])
+                        yRoute.append(pathY[pathCount])
+                        dir=22
+            elif (prevX==(pathX[pathCount]+1) or prevX==(pathX[pathCount]+2) ) and (prevY==(pathY[pathCount]-1) or prevY==(pathY[pathCount]-2)) or (prevX==(pathX[pathCount]-1) or prevX==(pathX[pathCount]-2)) and (prevY==(pathY[pathCount]+1) or prevY==(pathY[pathCount]+2)):
+                if ((pathX[pathCount]+1) or prevX==(pathX[pathCount]+2)) and (prevY==(pathY[pathCount]-1) or prevY==(pathY[pathCount]-2)):
+                    if dir!=-2:
+                        xRoute.append(pathX[pathCount])
+                        yRoute.append(pathY[pathCount])
+                        dir=-2
+                else:
+                    if dir!=-19:
+                        xRoute.append(pathX[pathCount])
+                        yRoute.append(pathY[pathCount])
+                        dir=-19
+            else:
+                if dir!=-44:
+                    xRoute.append(pathX[pathCount])
+                    yRoute.append(pathY[pathCount])
+                    dir=-44
+
+
+            #wholeRoute = [wholeXroute, wholeYroute]
+        route=[xRoute, yRoute] ############################################################################################################################### before: route=[xRoute, xRoute]
+        routeS2G=np.fliplr(route)
+
+        return routeS2G, raw_path
 
         #print costMap
         #return pathMap
