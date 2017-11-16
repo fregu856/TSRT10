@@ -9,6 +9,7 @@ import numpy as np
 import cv2
 from scipy.ndimage.measurements import label
 import time
+import threading
 
 from utilities import map_index_2_pos, pos_2_map_index, raw_path_2_path, map_msg_2_matrix
 from nav_frontier import frontier_func
@@ -29,6 +30,8 @@ MAP_RES_COVERING = 0.30 # (NOTE! if this value is modified one also needs to upd
 
 class Main:
     def __init__(self):
+        self.lock = threading.Lock()
+        
         # initialize this code as a ROS node named main_node:
         rospy.init_node("main_node", anonymous=True)
 
@@ -71,12 +74,9 @@ class Main:
     # define the callback function for the /map subscriber:
     def map_callback(self, msg_obj):
         print "map_callback"
+        map_origin = msg_obj.info.origin
+        map_matrix_slam = map_msg_2_matrix(msg_obj)
 
-        self.map_origin = msg_obj.info.origin
-        map_origin = self.map_origin
-        self.map_matrix_slam = map_msg_2_matrix(msg_obj)
-
-        map_matrix_slam = self.map_matrix_slam
         map_matrix_slam_rows, map_matrix_slam_cols = map_matrix_slam.shape
         map_matrix_frontier = np.copy(map_matrix_slam)
 
@@ -170,8 +170,6 @@ class Main:
             map_matrix_frontier[y_max_ind:, :] = 100
         if y_min_ind > 0:
             map_matrix_frontier[0:y_min_ind, :] = 100
-        #
-        self.map_matrix_frontier = map_matrix_frontier
 
         # # save map_matrix_frontier as an image:
         # map_height, map_width = map_matrix_frontier.shape
@@ -212,7 +210,6 @@ class Main:
                             else:
                                 current_cell = 100
                 map_matrix_astar[box_row][box_col] = current_cell
-        self.map_matrix_astar = map_matrix_astar
 
         # map_height, map_width = map_matrix_astar.shape
         # img = np.zeros((map_height, map_width, 3))
@@ -227,22 +224,36 @@ class Main:
         #             img[row][col] = [0, 0, 0]
         # cv2.imwrite("map_matrix_astar.png", img)
 
+        self.lock.acquire()
+        self.map_origin = map_origin
+        self.map_matrix_slam = map_matrix_slam
+        self.map_matrix_frontier = map_matrix_frontier
+        self.map_matrix_astar = map_matrix_astar
+        self.lock.release()
+
     # define the callback function for the /map_covering subscriber:
     def map_covering_callback(self, msg_obj):
         print "map_covering_callback"
 
+        map_origin = msg_obj.info.origin
         map_matrix_covering = map_msg_2_matrix(msg_obj)
 
+        self.lock.acquire()
+        self.map_origin = map_origin
         self.map_matrix_covering = map_matrix_covering
+        self.lock.release()
 
     # define the callback function for the /estimated_pose subscriber:
     def est_pose_callback(self, msg_obj):
         #print "est_pose_callback"
 
         pose = msg_obj.data
+
+        self.lock.acquire()
         self.x = pose[0]
         self.y = pose[1]
         self.theta = pose[2]
+        self.lock.release()
 
     # define the callback function for the /coordinator_status subscriber:
     def coordinator_callback(self, msg_obj):
@@ -267,12 +278,15 @@ class Main:
 
     def get_path(self):
         if self.map_origin is not None and self.x is not None and self.y is not None and self.map_matrix_frontier is not None and self.map_matrix_astar is not None:
+            self.lock.acquire()
             map_origin = self.map_origin
             x = self.x
             y = self.y
             pos = [x, y]
             map_matrix_frontier = self.map_matrix_frontier
             map_matrix_astar = self.map_matrix_astar
+            map_matrix_covering = self.map_matrix_covering
+            self.lock.release()
 
             pos_index_frontier = pos_2_map_index(map_origin, MAP_RES_FRONTIER, pos)
             pos_index_astar = pos_2_map_index(map_origin, MAP_RES_ASTAR, pos)
@@ -364,8 +378,6 @@ class Main:
                     return path
 
             elif self.mode == "COVERING":
-                map_matrix_covering = self.map_matrix_covering
-
                 alpha=1.5
 
                 pos_index_covering = pos_2_map_index(map_origin, MAP_RES_COVERING, pos)
@@ -381,11 +393,13 @@ class Main:
                         path = raw_path_2_path(covering_paths[0], map_origin, MAP_RES_ASTAR)
                         self.raw_path = covering_paths[1]
                     else:
+                        print "covering_paths is None"
                         print "COVERING mode is finished, entering MISSION_FINISHED mode!"
                         self.mode = "MISSION_FINISHED"
                         path = None
 
                 else:
+                    print "goalNodeCov is None"
                     print "COVERING mode is finished, entering MISSION_FINISHED mode!"
                     self.mode = "MISSION_FINISHED"
                     path = None
@@ -403,8 +417,10 @@ class Main:
 
             if self.mode != "MISSION_FINISHED":
                 if self.raw_path is not None and self.map_matrix_astar is not None:
+                    self.lock.acquire()
                     map_matrix_astar = self.map_matrix_astar
                     raw_path = self.raw_path
+                    self.lock.release()
 
                     raw_path = list(raw_path)
                     map_path = map_matrix_astar[raw_path[0], raw_path[1]]
