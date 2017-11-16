@@ -687,9 +687,18 @@ find_package(catkin REQUIRED COMPONENTS
 - Connect the LIDAR to the computer and wait a few seconds for the LIDAR to obtain full rotation speed
 - $ roslaunch balrog balrog.launch
 
-### Mapping & covering in SIMULATION:
+### Complete mission (mapping & covering) in SIMULATION:
 - $ roslaunch balrog_sim OpenKarto_complete_control.launch
 - $ rosrun balrog_sim controller.py
+- $ rosrun balrog coordinator.py
+- $ rosrun balrog nav_covering_map.py
+- $ rosrun balrog main.py
+
+### Complete mission (mapping & covering) on Balrog:
+- Connect to the RPI network
+- Connect the LIDAR to the computer and wait a few seconds for the LIDAR to obtain full rotation speed
+- $ roslaunch balrog balrog.launch
+- $ rosrun balrog controller.py
 - $ rosrun balrog coordinator.py
 - $ rosrun balrog nav_covering_map.py
 - $ rosrun balrog main.py
