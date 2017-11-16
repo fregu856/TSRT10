@@ -1,7 +1,6 @@
 import numpy as np
 
-def map_index_2_pos(map_msg, map_resolution, pos_index):
-    map_origin_obj = map_msg.info.origin
+def map_index_2_pos(map_origin_obj, map_resolution, pos_index):
     map_origin = [map_origin_obj.position.x, map_origin_obj.position.y]
 
     x_map_ind = pos_index[0]
@@ -17,8 +16,7 @@ def map_index_2_pos(map_msg, map_resolution, pos_index):
 
     return pos
 
-def pos_2_map_index(map_msg, map_resolution, pos):
-    map_origin_obj = map_msg.info.origin
+def pos_2_map_index(map_origin_obj, map_resolution, pos):
     map_origin = [map_origin_obj.position.x, map_origin_obj.position.y]
 
     x = pos[0]
@@ -34,14 +32,14 @@ def pos_2_map_index(map_msg, map_resolution, pos):
 
     return pos_index
 
-def raw_path_2_path(raw_path, map_msg, map_resolution):
+def raw_path_2_path(raw_path, map_origin_obj, map_resolution):
     rows = raw_path[0].tolist()
     cols = raw_path[1].tolist()
     path = []
 
     for (row, col) in zip(rows, cols):
         pos_index = [col, row]
-        pos = map_index_2_pos(map_msg, map_resolution, pos_index)
+        pos = map_index_2_pos(map_origin_obj, map_resolution, pos_index)
         path += [pos[0]]
         path += [pos[1]]
 
