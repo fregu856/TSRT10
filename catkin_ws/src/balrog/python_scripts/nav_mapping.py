@@ -412,9 +412,14 @@ class Mapping:
                 #goalNodeCov = pos_2_map_index(map_msg, MAP_RES_COVERING, [0,0])
                 coverPath, raw_coverPath = coverageMap(np.copy(map_matrix_small), obstacleMap2, alpha, [pos_index_mattias[1], pos_index_mattias[0]], goalNodeCov, map_msg)
                 print "COVERING MODE finishED"
+                print "coverPath:"
+                print coverPath
+                print "raw_coverPath:"
+                print raw_coverPath
+                path = raw_path_2_path(coverPath, map_msg, MAP_RES_ASTAR)
                 self.path = raw_coverPath
                 #print coverPath
-                return coverPath
+                return path
 
         else:
             return None

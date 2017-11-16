@@ -120,8 +120,8 @@ def astar_func(goalNode, startNode, obstacleMap):
             wholeYroute=[]
             xRoute=[]
             yRoute=[]
-            xRoute.append(goalNode[0])
-            yRoute.append(goalNode[1])
+            wholeXroute.append(goalNode[0])
+            wholeYroute.append(goalNode[1])
 
             dir=0
             while walkingNode[0]!=startNode[0] or walkingNode[1]!=startNode[1]:
