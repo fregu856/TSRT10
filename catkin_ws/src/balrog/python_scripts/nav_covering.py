@@ -287,7 +287,7 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_origin):
 
             elif unVisited[0].shape[0] > 0:
                 #print "length:"
-                length=0.8*(unVisited[0][:]-walkingNode[0])**(2)+(unVisited[1][:]-walkingNode[1])**(2) + 0.2*costMap[unVisited[0][:],unVisited[1][:]]
+                length=1*(unVisited[0][:]-walkingNode[0])**(2)+(unVisited[1][:]-walkingNode[1])**(2) + 0*costMap[unVisited[0][:],unVisited[1][:]]
                 #print length
                 minlength=np.nanmin(length)
                 index=np.where(minlength==length)
@@ -307,8 +307,6 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_origin):
                 walkingNode_small = pos_2_map_index(map_origin, MAP_RES_ASTAR, walkingNode_pos)
                 # print "astarMap[walkingNode_small[1], walkingNode_small[0]]:", astarMap[walkingNode_small[1], walkingNode_small[0]]
                 # print "astarMap[newNode_small[1], newNode_small[0]]:", astarMap[newNode_small[1], newNode_small[0]]
-
-
 
                 if astarMap[walkingNode_small[1], walkingNode_small[0]] == 100:
                     # print "########################################################"
@@ -363,7 +361,7 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_origin):
             #print "pathY:"
             #print pathY
 
-        if xRoute == []:
+        if pathX == []:
             return None
 
         raw_path = [np.array(pathX), np.array(pathY)]
