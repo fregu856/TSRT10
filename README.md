@@ -702,3 +702,10 @@ find_package(catkin REQUIRED COMPONENTS
 - $ rosrun balrog coordinator.py
 - $ rosrun balrog nav_covering_map.py
 - $ rosrun balrog main.py
+
+
+# Tags:
+- $ cd ~/TSRT10/catkin_ws/src
+- $ git clone https://github.com/RIVeR−Lab/apriltagsros
+- $ cd ~/TSRT10/catkin_ws
+- $ catkin_make
