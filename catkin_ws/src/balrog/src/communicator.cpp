@@ -229,7 +229,7 @@ int main(int argc, char **argv)
     memset(&server_address, '0', sizeof(server_address));
     server_address.sin_family = AF_INET;
     server_address.sin_port = htons(2100); // (2100 is the port that is open on the RPI)
-    inet_pton(AF_INET, "192.168.137.3", &server_address.sin_addr); // (192.168.137.3 is the RPI IP address)
+    inet_pton(AF_INET, "10.0.0.10", &server_address.sin_addr); // (10.0.0.10 is the RPI IP address)
     int connect_status = connect(tcp_socket, (struct sockaddr *)&server_address, sizeof(server_address));
     if (connect_status < 0)
     {

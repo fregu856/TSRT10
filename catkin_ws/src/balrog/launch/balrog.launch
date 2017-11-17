@@ -17,6 +17,6 @@
     <!-- run slam_pose in balrog/src: -->
     <node pkg="balrog" type="slam_pose" name="slam_pose_node" output="screen"></node>
 
-    <!-- run stream_to_ROS.py in balrog/python_scripts: -->
-    <!--<node pkg="balrog" type="stream_to_ROS.py" name="stream_to_ROS_node" output="screen"></node>-->
+    <!-- launch the videostream: -->
+    <!--<include file="$(find balrog)/launch/videostream.launch"></include>-->
 </launch>

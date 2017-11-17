@@ -27,7 +27,7 @@ class Communicator:
         self.socket_lock = threading.Lock()
 
         # connect to the RPI server:
-        self.host = "192.168.137.3" # (RPI IP address)
+        self.host = "10.0.0.10" # (RPI IP address)
         self.port = 2100
         self.client_socket.connect((self.host, self.port))
 

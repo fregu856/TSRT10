@@ -1,0 +1,7 @@
+<launch>
+    <!-- run stream_to_ROS.py in balrog/python_scripts: -->
+    <node pkg="balrog" type="stream_to_ROS.py" name="stream_to_ROS_node" output="screen"></node>
+
+    <!-- republish the videostream as compressed images: -->
+    <node name="republish" type="republish" pkg="image_transport" output="screen" args="raw in:=/balrog_camera/image_raw compressed out:=/balrog_camera/image_compressed" />
+</launch>
