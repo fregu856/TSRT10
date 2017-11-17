@@ -5,10 +5,10 @@ from utilities import map_index_2_pos, pos_2_map_index, raw_path_2_path
 from nav_astar import astar_func
 
 # size of considered area:
-X_MAX = 7.5 # (NOTE! if this value is modified one also needs to update it in main.py)
-X_MIN = -0.2 # (NOTE! if this value is modified one also needs to update it in main.py)
-Y_MAX = 7.5 # (NOTE! if this value is modified one also needs to update it in main.py)
-Y_MIN = -0.2 # (NOTE! if this value is modified one also needs to update it in main.py)
+X_MAX = 4 # (NOTE! if this value is modified one also needs to update it in main.py)
+X_MIN = -4 # (NOTE! if this value is modified one also needs to update it in main.py)
+Y_MAX = 4 # (NOTE! if this value is modified one also needs to update it in main.py)
+Y_MIN = -4 # (NOTE! if this value is modified one also needs to update it in main.py)
 
 # map resolutions:
 MAP_RES_ASTAR = 0.25 # (NOTE! if this value is modified one also needs to update it in main.py)
@@ -19,7 +19,7 @@ def clObMap(obstacleMap):
     size=obstacleMap.shape
     closeObst=np.full(size,-1 )
     closeObst[(obstacleMap==-900)]=0
-    #closeObst[obstacleMap==-2]=0 #set obstacles to 0
+    closeObst[obstacleMap==-2]=0 #set obstacles to 0
 
     run=1
     cost=0
@@ -166,7 +166,7 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_origin):
     #             img[row][col] = [0, 255, 0]
     # cv2.imwrite("coverageMap2.png", img)
 
-    if np.count_nonzero(np.nonzero(coveringMap==0))==0:
+    if np.count_nonzero(np.nonzero(coveringMap==0))<6:
         print "Map already visited"
         return None
     else:
@@ -287,7 +287,7 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_origin):
 
             elif unVisited[0].shape[0] > 0:
                 #print "length:"
-                length=1*(unVisited[0][:]-walkingNode[0])**(2)+(unVisited[1][:]-walkingNode[1])**(2) + 0*costMap[unVisited[0][:],unVisited[1][:]]
+                length=0.8*(unVisited[0][:]-walkingNode[0])**(2)+(unVisited[1][:]-walkingNode[1])**(2) + 0.2*costMap[unVisited[0][:],unVisited[1][:]]
                 #print length
                 minlength=np.nanmin(length)
                 index=np.where(minlength==length)
@@ -427,6 +427,9 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_origin):
                     xRoute.append(pathX[pathCount])
                     yRoute.append(pathY[pathCount])
                     dir=-44
+
+        if xRoute == []:
+            return None
 
         route=[xRoute, yRoute]
         routeS2G=np.fliplr(route)
