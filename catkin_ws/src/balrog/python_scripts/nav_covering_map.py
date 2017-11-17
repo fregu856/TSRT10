@@ -126,8 +126,8 @@ class NavCoveringMap:
             if map_covering_height * NR_OF_CELLS < map_height:
                 map_covering2_height += 1
 
-                map_covering2 = np.zeros((map_covering2_height, map_covering2_width))
-                map_covering2_img = np.zeros((map_covering2_height, map_covering2_width, 3))
+                map_covering2 = -1*np.ones((map_covering2_height, map_covering2_width))
+                map_covering2_img = -1*np.ones((map_covering2_height, map_covering2_width, 3))
 
                 map_covering2[0:-1,:] = map_covering
                 map_covering2_img[0:-1,:,:] = map_covering_img
@@ -168,18 +168,18 @@ class NavCoveringMap:
 
                 if map_covering_height * NR_OF_CELLS < map_height:
                     # If extra row added, cannot copy directly to itself?
-                    map_covering_temp_img = np.zeros((map_covering2_height, map_covering2_width, 3))
-                    map_covering_temp = np.zeros((map_covering2_height, map_covering2_width))
+                    map_covering_temp_img = -1*np.ones((map_covering2_height, map_covering2_width, 3))
+                    map_covering_temp = -1*np.ones((map_covering2_height, map_covering2_width))
                     map_covering_temp[:,0:-1] = map_covering2
                     map_covering_temp_img[:,0:-1,:] = map_covering2_img
 
-                    map_covering2_img = np.zeros((map_covering2_height, map_covering2_width, 3))
-                    map_covering2 = np.zeros((map_covering2_height, map_covering2_width))
+                    map_covering2_img = -1*np.ones((map_covering2_height, map_covering2_width, 3))
+                    map_covering2 = -1*np.ones((map_covering2_height, map_covering2_width))
                     map_covering2 = map_covering_temp
                     map_covering2_img = map_covering_temp_img
                 else:
-                    map_covering2_img = np.zeros((map_covering2_height, map_covering2_width, 3))
-                    map_covering2 = np.zeros((map_covering2_height, map_covering2_width))
+                    map_covering2_img = -1*np.ones((map_covering2_height, map_covering2_width, 3))
+                    map_covering2 = -1*np.ones((map_covering2_height, map_covering2_width))
                     map_covering2[:,0:-1] = map_covering
                     map_covering2_img[:,0:-1,:] = map_covering_img
 
@@ -287,34 +287,34 @@ class NavCoveringMap:
                 print "Extra column and row added"
                 map_final_covering_width += 1
                 map_final_covering_height += 1
-                map_final_covering2 = np.zeros((map_final_covering_height, map_final_covering_width))
+                map_final_covering2 = -1*np.ones((map_final_covering_height, map_final_covering_width))
                 map_final_covering2[0:-1,0:-1] = np.copy(map_final_covering)
 
-                for row in range(0, map_final_covering_height -2):
+                for row in range(0, map_final_covering_height):
                     point = map_covering2[row*2][map_covering2_width-1]
                     map_final_covering2[row][map_final_covering_width-1] = point
 
-                for col in range(0, map_final_covering_width -2):
+                for col in range(0, map_final_covering_width):
                     point = map_covering2[map_covering2_height-1][col*2]
                     map_final_covering2[map_final_covering_height-1][col] = point
 
             elif map_covering2_width%2 == 1:
                 print "Extra column added"
                 map_final_covering_width += 1
-                map_final_covering2 = np.zeros((map_final_covering_height, map_final_covering_width))
+                map_final_covering2 = -1*np.ones((map_final_covering_height, map_final_covering_width))
                 map_final_covering2[:,0:-1] = np.copy(map_final_covering)
 
-                for row in range(0, map_final_covering_height -2 ):
+                for row in range(0, map_final_covering_height ):
                     point = map_covering2[row*2][map_covering2_width-1]
                     map_final_covering2[row][map_final_covering_width-1] = point
 
             elif map_covering2_height%2 == 1:
                 print "Extra row added"
                 map_final_covering_height += 1
-                map_final_covering2 = np.zeros((map_final_covering_height, map_final_covering_width))
+                map_final_covering2 = -1*np.ones((map_final_covering_height, map_final_covering_width))
                 map_final_covering2[0:-1,:] = np.copy(map_final_covering)
 
-                for col in range(0, map_final_covering_width -2):
+                for col in range(0, map_final_covering_width):
                     point = map_covering2[map_covering2_height-1][col*2]
                     map_final_covering2[map_final_covering_height-1][col] = point
 
