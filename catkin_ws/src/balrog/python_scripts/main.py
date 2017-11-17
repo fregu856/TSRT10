@@ -5,6 +5,9 @@ from std_msgs.msg import Float64MultiArray
 from std_msgs.msg import String
 from nav_msgs.msg import OccupancyGrid
 
+from geometry_msgs.msg import PoseStamped
+import tf
+
 import numpy as np
 import cv2
 from scipy.ndimage.measurements import label
@@ -17,10 +20,10 @@ from nav_astar import astar_func
 from nav_covering import coverageMap, find_goal
 
 # size of considered area:
-X_MAX = 4 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
-X_MIN = -4 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
-Y_MAX = 4 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
-Y_MIN = -4 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
+X_MAX = 7.5 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
+X_MIN = -0.2 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
+Y_MAX = 7.5 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
+Y_MIN = -0.2 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
 
 # map resolutions:
 MAP_RES_SLAM = 0.05
@@ -31,7 +34,7 @@ MAP_RES_COVERING = 0.30 # (NOTE! if this value is modified one also needs to upd
 class Main:
     def __init__(self):
         self.lock = threading.Lock()
-        
+
         # initialize this code as a ROS node named main_node:
         rospy.init_node("main_node", anonymous=True)
 
@@ -64,12 +67,35 @@ class Main:
 
         self.mode = "MAPPING" # (MAPPING, COVERING or MISSION_FINISHED)
 
+        self.trans_listener = tf.TransformListener()
+
+        self.mine_locations = {} # dictionary that caches the most updated locations of each detected mine
+        self.mine_offset = PoseStamped()
+        self.mine_offset.pose.position.z = 0.7 # mines are located 70 cm in front of the AprilTag
+        quat = tf.transformations.quaternion_from_euler(0., np.pi/2, np.pi/2)
+        self.mine_offset.pose.orientation.x = quat[0]
+        self.mine_offset.pose.orientation.y = quat[1]
+        self.mine_offset.pose.orientation.z = quat[2]
+        self.mine_offset.pose.orientation.w = quat[3]
+
+        self.mines_disarmed = False
+
         # get things moving (seems like we need to wait a short moment for the
         # message to actually be published):
         msg = Float64MultiArray()
         msg.data = [-0.1, 0, 0.1, 0]
         time.sleep(0.5)
         self.path_pub.publish(msg)
+
+    def update_mines(self):
+        # update the position for all visable mines (tags with offset):
+        for tag_number in range(9): # (0, 1, .., 8)
+            try:
+                self.mine_offset.header.frame_id = "/tag_{0}".format(tag_number)
+                self.mine_locations[tag_number] = self.trans_listener.transformPose("/map", self.mine_offset)
+            except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
+                pass
+        print self.mine_locations
 
     # define the callback function for the /map subscriber:
     def map_callback(self, msg_obj):
@@ -188,7 +214,7 @@ class Main:
         map_height = map_matrix_slam_rows
         map_width = map_matrix_slam_cols
         NR_OF_CELLS = 5 # (no of cells to make box of, size of box = NR_OF_CELLS^2)
-        MIN_NR_OF_OBSTACLES = 11
+        MIN_NR_OF_OBSTACLES = 12
         map_astar_height = int(map_height / NR_OF_CELLS)
         map_astar_width = int(map_width / NR_OF_CELLS)
         map_matrix_astar = np.zeros((map_astar_height, map_astar_width))
@@ -295,6 +321,7 @@ class Main:
             # print "get_path: pos_index_frontier:", pos_index_frontier
             # print "get_path: pos_index_astar:", pos_index_astar
 
+            ##
             if self.mode == "MAPPING":
                 goal_pos_index_frontier = frontier_func(np.copy(map_matrix_frontier), pos_index_frontier)
 
@@ -377,6 +404,7 @@ class Main:
 
                     return path
 
+            ##
             elif self.mode == "COVERING":
                 alpha=1.5
 
@@ -406,48 +434,119 @@ class Main:
 
                 return path
 
+            ##
+            elif self.mode == "DISARMING":
+                if not self.mines_disarmed:
+                    path = []
+
+                    start_pos = pos
+                    start_index_astar = pos_2_map_index(map_origin, MAP_RES_ASTAR, start_pos)
+                    if map_matrix_astar[start_index_astar[1], start_index_astar[0]] == 100:
+                        temp = np.nonzero(map_matrix_astar == 0)
+                        x = temp[1]
+                        y = temp[0]
+                        distances = (x-start_index_astar[0])**2 + (y-start_index_astar[1])**2
+                        start_node = np.argmin(distances)
+                        start_index_astar = [x[start_node], y[start_node]]
+
+                    goal_pos = [0, 0] # (start by going back to the start pos to get disarming gear)
+                    goal_index_astar = pos_2_map_index(map_origin, MAP_RES_ASTAR, goal_pos)
+                    if map_matrix_astar[goal_index_astar[1], goal_index_astar[0]] == 100:
+                        temp = np.nonzero(map_matrix_astar == 0)
+                        x = temp[1]
+                        y = temp[0]
+                        distances = (x-goal_index_astar[0])**2 + (y-goal_index_astar[1])**2
+                        goal_node = np.argmin(distances)
+                        goal_index_astar = [x[goal_node], y[goal_node]]
+
+                    astar_paths = astar_func([goal_index_astar[1], goal_index_astar[0]],
+                                [start_index_astar[1], start_index_astar[0]], np.copy(map_matrix_astar))
+                    if astar_paths is not None:
+                        path += raw_path_2_path(astar_paths[0], map_origin, MAP_RES_ASTAR)
+                    else:
+                        print "astar_paths is None!"
+
+                    prev_goal_index_astar = goal_index_astar
+
+                    for mine_id in self.mine_locations:
+                        mine_obj = mine_locations[mine_id]
+                        mine_pos = [mine_obj.pose.position.x, mine_obj.pose.position.y]
+
+                        start_index_astar = prev_goal_index_astar
+
+                        goal_pos = mine_pos
+                        goal_index_astar = pos_2_map_index(map_origin, MAP_RES_ASTAR, goal_pos)
+                        if map_matrix_astar[goal_index_astar[1], goal_index_astar[0]] == 100:
+                            temp = np.nonzero(map_matrix_astar == 0)
+                            x = temp[1]
+                            y = temp[0]
+                            distances = (x-goal_index_astar[0])**2 + (y-goal_index_astar[1])**2
+                            goal_node = np.argmin(distances)
+                            goal_index_astar = [x[goal_node], y[goal_node]]
+
+                        astar_paths = astar_func([goal_index_astar[1], goal_index_astar[0]],
+                                    [start_index_astar[1], start_index_astar[0]], np.copy(map_matrix_astar))
+                        if astar_paths is not None:
+                            path += raw_path_2_path(astar_paths[0], map_origin, MAP_RES_ASTAR)
+                        else:
+                            print "astar_paths is None!"
+
+                        prev_goal_index_astar = goal_index_astar
+
+                        print path
+
+                    return path
+                else: # (if self.mines_disarmed:)
+                    print "DISARMING mode is finished, entering MISSION_FINISHED mode!"
+                    self.mode = "MISSION_FINISHED"
+                    return None
+
         else:
             return None
 
     def check_path(self):
+        print "current mode: %s" % self.mode
+
+        if self.mode == "MAPPING":
+            if self.raw_path is not None and self.map_matrix_astar is not None:
+                self.lock.acquire()
+                map_matrix_astar = self.map_matrix_astar
+                raw_path = self.raw_path
+                self.lock.release()
+
+                raw_path = list(raw_path)
+                map_path = map_matrix_astar[raw_path[0], raw_path[1]]
+
+                if 100 in map_path:
+                    msg_string = "stop"
+                    self.warning_pub.publish(msg_string)
+
+                    print "####################################################"
+                    print "####################################################"
+                    print "check_path: current path is NOT ok!"
+                    print "####################################################"
+                    print "####################################################"
+
+                    print "check_path: map_path:", map_path
+
+                    path = self.get_path()
+
+                    if path is not None:
+                        print "check_path: path to publish:", path
+
+                        # publish the path:
+                        msg = Float64MultiArray()
+                        msg.data = path
+                        self.path_pub.publish(msg)
+                    else:
+                        print "check_path: path is None!"
+
+    def run(self):
         rate = rospy.Rate(1) # (1 Hz)
 
         while not rospy.is_shutdown():
-            print "current mode: %s" % self.mode
-
-            if self.mode != "MISSION_FINISHED":
-                if self.raw_path is not None and self.map_matrix_astar is not None:
-                    self.lock.acquire()
-                    map_matrix_astar = self.map_matrix_astar
-                    raw_path = self.raw_path
-                    self.lock.release()
-
-                    raw_path = list(raw_path)
-                    map_path = map_matrix_astar[raw_path[0], raw_path[1]]
-
-                    if 100 in map_path:
-                        msg_string = "stop"
-                        self.warning_pub.publish(msg_string)
-
-                        print "####################################################"
-                        print "####################################################"
-                        print "check_path: current path is NOT ok!"
-                        print "####################################################"
-                        print "####################################################"
-
-                        print "check_path: map_path:", map_path
-
-                        path = self.get_path()
-
-                        if path is not None:
-                            print "check_path: path to publish:", path
-
-                            # publish the path:
-                            msg = Float64MultiArray()
-                            msg.data = path
-                            self.path_pub.publish(msg)
-                        else:
-                            print "check_path: path is None!"
+            self.check_path()
+            self.update_mines()
 
             rate.sleep() # (to get it to loop with 1 Hz)
 
@@ -455,5 +554,5 @@ if __name__ == "__main__":
     # create a Main object (this will run its __init__ function):
     main = Main()
 
-    # run the member function check_path:
-    main.check_path()
+    # run the member function run:
+    main.run()

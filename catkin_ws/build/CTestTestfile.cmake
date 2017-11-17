@@ -5,6 +5,7 @@
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.
 subdirs(gtest)
+subdirs(apriltags_ros/apriltags)
 subdirs(hector_slam/hector_slam)
 subdirs(hector_slam/hector_slam_launch)
 subdirs(navigation_2d/nav2d)
@@ -23,6 +24,7 @@ subdirs(ros-keyboard)
 subdirs(hector_slam/hector_compressed_map_transport)
 subdirs(sweep-ros)
 subdirs(test_package)
+subdirs(apriltags_ros/apriltags_ros)
 subdirs(slam_gmapping/gmapping)
 subdirs(hector_slam/hector_imu_attitude_to_tf)
 subdirs(hector_slam/hector_imu_tools)

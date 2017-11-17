@@ -88,4 +88,4 @@ class Coordinator:
 
 if __name__ == "__main__":
     # create a Coordinator object (this will run its __init__ function):
-    ctrl = Coordinator()
+    coordinator = Coordinator()
