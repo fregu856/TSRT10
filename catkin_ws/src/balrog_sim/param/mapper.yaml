@@ -12,7 +12,7 @@ min_map_size: 20
 # corresponding default values, see OpenKarto/OpenMapper.h
 
 MinimumTravelDistance: 0.5
-MinimumTravelHeading: 1.6
+MinimumTravelHeading: 0.6
 LoopMatchMinimumChainSize: 10
 LoopMatchMinimumResponseCoarse: 0.7
 LoopMatchMinimumResponseFine: 0.7
