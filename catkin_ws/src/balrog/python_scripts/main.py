@@ -20,10 +20,10 @@ from nav_astar import astar_func
 from nav_covering import coverageMap, find_goal
 
 # size of considered area:
-X_MAX = 7.5 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
-X_MIN = -0.2 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
-Y_MAX = 7.5 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
-Y_MIN = -0.2 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
+X_MAX = 4 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
+X_MIN = -4 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
+Y_MAX = 4 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
+Y_MIN = -4 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
 
 # map resolutions:
 MAP_RES_SLAM = 0.05
@@ -95,7 +95,8 @@ class Main:
                 self.mine_locations[tag_number] = self.trans_listener.transformPose("/map", self.mine_offset)
             except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
                 pass
-        print self.mine_locations
+        print "detected tags:", self.mine_locations.keys()
+        print "no of detected tags: %d/%d" % (len(self.mine_locations), 4)
 
     # define the callback function for the /map subscriber:
     def map_callback(self, msg_obj):
@@ -406,31 +407,27 @@ class Main:
 
             ##
             elif self.mode == "COVERING":
-                alpha=1.5
+                alpha=0.9
 
                 pos_index_covering = pos_2_map_index(map_origin, MAP_RES_COVERING, pos)
 
-                goalNodeCov = find_goal(np.copy(map_matrix_covering), [pos_index_covering[1], pos_index_covering[0]])
-                if goalNodeCov is not None:
-                    covering_paths = coverageMap(np.copy(map_matrix_astar), np.copy(map_matrix_covering), alpha, [pos_index_covering[1], pos_index_covering[0]], goalNodeCov, map_origin)
+                goal_pos = [0, 0]
+                goal_index_covering = pos_2_map_index(map_origin, MAP_RES_COVERING, goal_pos)
 
-                    if covering_paths is not None:
-                        # print "coverPath:", covering_paths[0]
-                        # print "raw_coverPath:", covering_paths[1]
+                covering_paths = coverageMap(np.copy(map_matrix_astar), np.copy(map_matrix_covering), alpha, [pos_index_covering[1], pos_index_covering[0]], [goal_index_covering[1], goal_index_covering[0]], map_origin)
 
-                        path = raw_path_2_path(covering_paths[0], map_origin, MAP_RES_ASTAR)
-                        self.raw_path = covering_paths[1]
-                    else:
-                        print "covering_paths is None"
-                        print "COVERING mode is finished, entering MISSION_FINISHED mode!"
-                        self.mode = "MISSION_FINISHED"
-                        path = None
+                if covering_paths is not None:
+                    # print "coverPath:", covering_paths[0]
+                    # print "raw_coverPath:", covering_paths[1]
 
+                    path = raw_path_2_path(covering_paths[0], map_origin, MAP_RES_ASTAR)
+                    self.raw_path = covering_paths[1]
                 else:
-                    print "goalNodeCov is None"
-                    print "COVERING mode is finished, entering MISSION_FINISHED mode!"
-                    self.mode = "MISSION_FINISHED"
-                    path = None
+                    print "covering_paths is None"
+                    print "COVERING mode is finished, entering DISARMING mode!"
+                    self.mode = "DISARMING"
+                    path = self.get_path()
+                    return path
 
                 return path
 
@@ -469,7 +466,7 @@ class Main:
                     prev_goal_index_astar = goal_index_astar
 
                     for mine_id in self.mine_locations:
-                        mine_obj = mine_locations[mine_id]
+                        mine_obj = self.mine_locations[mine_id]
                         mine_pos = [mine_obj.pose.position.x, mine_obj.pose.position.y]
 
                         start_index_astar = prev_goal_index_astar
@@ -493,8 +490,26 @@ class Main:
 
                         prev_goal_index_astar = goal_index_astar
 
-                        print path
+                    start_index_astar = prev_goal_index_astar
 
+                    goal_pos = [0, 0] # (return to the starting point)
+                    goal_index_astar = pos_2_map_index(map_origin, MAP_RES_ASTAR, goal_pos)
+                    if map_matrix_astar[goal_index_astar[1], goal_index_astar[0]] == 100:
+                        temp = np.nonzero(map_matrix_astar == 0)
+                        x = temp[1]
+                        y = temp[0]
+                        distances = (x-goal_index_astar[0])**2 + (y-goal_index_astar[1])**2
+                        goal_node = np.argmin(distances)
+                        goal_index_astar = [x[goal_node], y[goal_node]]
+
+                    astar_paths = astar_func([goal_index_astar[1], goal_index_astar[0]],
+                                [start_index_astar[1], start_index_astar[0]], np.copy(map_matrix_astar))
+                    if astar_paths is not None:
+                        path += raw_path_2_path(astar_paths[0], map_origin, MAP_RES_ASTAR)
+                    else:
+                        print "astar_paths is None!"
+
+                    self.mines_disarmed = True
                     return path
                 else: # (if self.mines_disarmed:)
                     print "DISARMING mode is finished, entering MISSION_FINISHED mode!"
@@ -546,7 +561,7 @@ class Main:
 
         while not rospy.is_shutdown():
             self.check_path()
-            self.update_mines()
+            #self.update_mines()
 
             rate.sleep() # (to get it to loop with 1 Hz)
 
