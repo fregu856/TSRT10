@@ -20,10 +20,10 @@ from nav_astar import astar_func
 from nav_covering import coverageMap, find_goal
 
 # size of considered area:
-X_MAX = 7.5 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
-X_MIN = -0.2 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
-Y_MAX = 7.5 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
-Y_MIN = -0.2 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
+X_MAX = 4 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
+X_MIN = -4 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
+Y_MAX = 4 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
+Y_MIN = -4 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
 
 # map resolutions:
 MAP_RES_SLAM = 0.05
@@ -53,7 +53,7 @@ class Main:
 
         self.warning_pub = rospy.Publisher("/node_status", String, queue_size=1)
 
-        self.mode_pub = rospy.Publisher("/balrog_mode", String, queue_size=1)
+        self.info_pub = rospy.Publisher("/balrog_info", String, queue_size=1)
 
         self.x = None
         self.y = None
@@ -91,14 +91,15 @@ class Main:
 
     def update_mines(self):
         # update the position for all visable mines (tags with offset):
-        for tag_number in range(9): # (0, 1, .., 8)
+        for tag_number in range(5): # (0, 1, 2, 3, 4)
             try:
-                self.mine_offset.header.frame_id = "/tag_{0}".format(tag_number)
+                self.mine_offset.header.frame_id = "/tag_%d" % tag_number
                 self.mine_locations[tag_number] = self.trans_listener.transformPose("/map", self.mine_offset)
             except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
                 pass
+        print self.mine_locations
         print "detected tags:", self.mine_locations.keys()
-        print "no of detected tags: %d/%d" % (len(self.mine_locations), 4)
+        print "no of detected tags: %d/%d" % (len(self.mine_locations), 5)
 
     # define the callback function for the /map subscriber:
     def map_callback(self, msg_obj):
@@ -564,7 +565,9 @@ class Main:
             self.update_mines()
 
             print "current mode: %s" % self.mode
-            self.mode_pub.publish(self.mode)
+
+            self.info_pub.publish("current mode: %s" % self.mode)
+            self.info_pub.publish("no of detected tags: %d/%d" % (len(self.mine_locations), 5))
 
             rate.sleep() # (to get it to loop with 2 Hz)
 
