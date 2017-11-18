@@ -7,6 +7,4 @@
 		<node name="Mapper" pkg="nav2d_karto" type="mapper" output="screen" launch-prefix="gdb -ex run --args">
 			<rosparam file="$(find balrog)/param/mapper.yaml"/>
 		</node>
-
-	  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find balrog)/rviz/OpenKarto.rviz"/>
 </launch>

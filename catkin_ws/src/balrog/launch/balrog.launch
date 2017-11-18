@@ -31,4 +31,7 @@
 
     <!-- launch the apriltag detection: -->
     <include file="$(find balrog)/launch/tag_detection.launch"></include>
+
+    <!-- start rviz: -->
+	  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find balrog)/rviz/balrog.rviz"/>
 </launch>
