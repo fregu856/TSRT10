@@ -715,12 +715,12 @@ find_package(catkin REQUIRED COMPONENTS
 - Connect the LIDAR to the computer and wait a few seconds for the LIDAR to obtain full rotation speed
 - $ roslaunch balrog balrog.launch
 - $ rosrun balrog main.py
-(- $ rostopic echo /balrog_info)
+- ($ rostopic echo /balrog_info)
 
 # Complete mission (MAPPING, COVERING, DISARMING) in SIMULATION:
 - $ roslaunch balrog_sim balrog_auto.launch
 - $ rosrun balrog main.py
-(- $ rostopic echo /balrog_info)
+- ($ rostopic echo /balrog_info)
 
 # Manual control in full test area in SIMULATION:
 - $ roslaunch balrog_sim balrog_manual.launch
