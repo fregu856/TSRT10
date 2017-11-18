@@ -713,3 +713,7 @@ find_package(catkin REQUIRED COMPONENTS
 # Complete mission (MAPPING, COVERING, DISARMING) in SIMULATION:
 - $ roslaunch balrog_sim balrog_auto.launch
 - $ rosrun balrog main.py
+
+# Manual control in full test area in SIMULATION:
+- $ roslaunch balrog_sim balrog_manual.launch
+- Click on the small "ROS keyboard input" and control the robot using WASD or the arrows
