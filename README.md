@@ -709,3 +709,7 @@ find_package(catkin REQUIRED COMPONENTS
 - $ git clone https://github.com/RIVeR-Lab/apriltags_ros.git
 - $ cd ~/TSRT10/catkin_ws
 - $ catkin_make
+
+# Complete mission (MAPPING, COVERING, DISARMING) in SIMULATION:
+- $ roslaunch balrog_sim balrog_auto.launch
+- $ rosrun balrog main.py
