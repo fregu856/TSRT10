@@ -7,7 +7,7 @@ from nav_astar import astar_func
 # size of considered area:
 X_MAX = 7.5 # (NOTE! if this value is modified one also needs to update it in main.py)
 X_MIN = -0.2 # (NOTE! if this value is modified one also needs to update it in main.py)
-Y_MAX = 7.5 # (NOTE! if this value is modified one also needs to update it in main.py)
+Y_MAX = 4 # (NOTE! if this value is modified one also needs to update it in main.py)
 Y_MIN = -0.2 # (NOTE! if this value is modified one also needs to update it in main.py)
 
 # map resolutions:
@@ -282,7 +282,7 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_origin):
                     # print "not astar: after: astarMap[walkingNode_small[1], walkingNode_small[0]]:", astarMap[walkingNode_small[1], walkingNode_small[0]]
 
                 pathX.append(walkingNode_small[1])
-                pathY.append(walkingNode_small[0]) 
+                pathY.append(walkingNode_small[0])
                 pathMap[walkingNode[0],walkingNode[1]]=s
 
             elif unVisited[0].shape[0] > 0:

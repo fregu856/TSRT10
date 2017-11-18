@@ -561,7 +561,7 @@ class Main:
 
         while not rospy.is_shutdown():
             self.check_path()
-            #self.update_mines()
+            self.update_mines()
 
             print "current mode: %s" % self.mode
             self.mode_pub.publish(self.mode)

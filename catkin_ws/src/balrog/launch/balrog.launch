@@ -28,4 +28,7 @@
 
     <!-- launch the videostream: -->
     <include file="$(find balrog)/launch/videostream.launch"></include>
+
+    <!-- launch the apriltag detection: -->
+    <include file="$(find balrog)/launch/tag_detection.launch"></include>
 </launch>
