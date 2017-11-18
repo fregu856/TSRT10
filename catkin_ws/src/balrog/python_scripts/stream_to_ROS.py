@@ -53,7 +53,7 @@ class Streamer:
             self.latest_frame = frame
 
     def run(self):
-        rate = rospy.Rate(10) # (10 Hz)
+        rate = rospy.Rate(20) # (20 Hz)
         while not rospy.is_shutdown():
             if self.latest_frame is not None:
                 header = Header()
@@ -72,7 +72,7 @@ class Streamer:
                 # publish the camera info:
                 self.camera_info_pub.publish(self.camera_info_msg)
 
-                rate.sleep() # (to get it to loop with 10 Hz)
+                rate.sleep() # (to get it to loop with 20 Hz)
 
 if __name__ == '__main__':
     streamer = Streamer()
