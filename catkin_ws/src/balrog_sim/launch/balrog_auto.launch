@@ -1,0 +1,32 @@
+<launch>
+		<rosparam file="$(find balrog_sim)/param/ros.yaml"/>
+
+    <!-- launch the simulator: -->
+    <include file="$(find balrog_sim)/launch/simulator.launch"></include>
+
+    <!-- run OpenKarto: -->
+		<node name="Mapper" pkg="nav2d_karto" type="mapper" output="screen" launch-prefix="gdb -ex run --args">
+			<rosparam file="$(find balrog_sim)/param/mapper.yaml"/>
+		</node>
+
+    <!-- run slam_visited.py in balrog/python_scripts: -->
+    <node pkg="balrog" type="slam_visited.py" name="slam_visited_node"></node>
+
+    <!-- run slam_pose.py in balrog/python_scripts: -->
+    <node pkg="balrog" type="slam_pose.py" name="slam_pose_node"></node>
+
+    <!-- run controller.py in balrog_sim/python_scripts: -->
+    <node pkg="balrog_sim" type="controller.py" name="controller_node" output="screen"></node>
+
+    <!-- run coordinator.py in balrog/python_scripts: -->
+    <node pkg="balrog" type="coordinator.py" name="coordinator_node" output="screen"></node>
+
+    <!-- run nav_covering_map.py in balrog/python_scripts: -->
+    <node pkg="balrog" type="nav_covering_map.py" name="nav_covering_map_node" output="screen"></node>
+
+    <!-- launch the apriltag detection: -->
+    <include file="$(find balrog_sim)/launch/tag_detection.launch"></include>
+
+    <!-- start rviz: -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find balrog_sim)/rviz/balrog.rviz"/>
+</launch>
