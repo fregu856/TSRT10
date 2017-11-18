@@ -19,7 +19,7 @@ def clObMap(obstacleMap):
     size=obstacleMap.shape
     closeObst=np.full(size,-1 )
     closeObst[(obstacleMap==-900)]=0
-    closeObst[obstacleMap==-2]=0 #set obstacles to 0
+    #closeObst[obstacleMap==-2]=0 #set obstacles to 0
 
     run=1
     cost=0
@@ -149,24 +149,24 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_origin):
     if y_min_ind > 0:
         coveringMap[0:y_min_ind, :] = 100
 
-    map_height, map_width = coveringMap.shape
-    img = np.zeros((map_height, map_width, 3))
-    for row in range(map_height):
-        for col in range(map_width):
-            point = coveringMap[row][col]
-            if point == -1:
-                img[row][col] = [100, 100, 100]
-            elif point == 0:
-                img[row][col] = [255, 255, 255]
-            elif point == 100:
-                img[row][col] = [0, 0, 0]
-            elif point == 70:
-                img[row][col] = [30, 30, 30]
-            elif point == -2:
-                img[row][col] = [0, 255, 0]
-    cv2.imwrite("coverageMap2.png", img)
+    # map_height, map_width = coveringMap.shape
+    # img = np.zeros((map_height, map_width, 3))
+    # for row in range(map_height):
+    #     for col in range(map_width):
+    #         point = coveringMap[row][col]
+    #         if point == -1:
+    #             img[row][col] = [100, 100, 100]
+    #         elif point == 0:
+    #             img[row][col] = [255, 255, 255]
+    #         elif point == 100:
+    #             img[row][col] = [0, 0, 0]
+    #         elif point == 70:
+    #             img[row][col] = [30, 30, 30]
+    #         elif point == -2:
+    #             img[row][col] = [0, 255, 0]
+    # cv2.imwrite("coverageMap2.png", img)
 
-    if np.count_nonzero(np.nonzero(coveringMap==0))<6:
+    if np.count_nonzero(np.nonzero(coveringMap==0))<5:
         print "Map already visited"
         return None
     else:
@@ -281,13 +281,13 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_origin):
                     # print "not astar: after: walkingNode_pos after conversion:", map_index_2_pos(map_origin, MAP_RES_ASTAR, walkingNode_small)
                     # print "not astar: after: astarMap[walkingNode_small[1], walkingNode_small[0]]:", astarMap[walkingNode_small[1], walkingNode_small[0]]
 
-                pathX.append(walkingNode_small[1]) ######################### BORDE VAL VARA walkingNode_small?!!?!?!
-                pathY.append(walkingNode_small[0]) ######################### BORDE VAL VARA walkingNode_small?!!?!?!
+                pathX.append(walkingNode_small[1])
+                pathY.append(walkingNode_small[0]) 
                 pathMap[walkingNode[0],walkingNode[1]]=s
 
             elif unVisited[0].shape[0] > 0:
                 #print "length:"
-                length=0.8*(unVisited[0][:]-walkingNode[0])**(2)+(unVisited[1][:]-walkingNode[1])**(2) + 0.2*costMap[unVisited[0][:],unVisited[1][:]]
+                length=(unVisited[0][:]-walkingNode[0])**(2)+(unVisited[1][:]-walkingNode[1])**(2) #+ 0.2*costMap[unVisited[0][:],unVisited[1][:]]
                 #print length
                 minlength=np.nanmin(length)
                 index=np.where(minlength==length)
