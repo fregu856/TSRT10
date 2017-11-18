@@ -57,6 +57,7 @@
         </visual>
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
+        <gravity>1</gravity>
       </link>
     </model>
     <gravity>0 0 -9.8</gravity>
@@ -80,10 +81,10 @@
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
     <state world_name='default'>
-      <sim_time>1419 327000000</sim_time>
-      <real_time>323 317584857</real_time>
-      <wall_time>1510860660 133639099</wall_time>
-      <iterations>170708</iterations>
+      <sim_time>1859 774000000</sim_time>
+      <real_time>152 584590484</real_time>
+      <wall_time>1511018794 687064254</wall_time>
+      <iterations>142657</iterations>
       <model name='Tag0'>
         <pose frame=''>-2.53845 0.979829 0.25307 0 -0 0</pose>
         <scale>1 1 1</scale>
@@ -94,11 +95,41 @@
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
-      <model name='Tag0_clone'>
-        <pose frame=''>0.139582 3.99833 0.249821 0 -0 0</pose>
+      <model name='Tag1'>
+        <pose frame=''>2.92517 3.99794 0.318235 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>0.139582 3.99833 0.249821 0 -0 0</pose>
+          <pose frame=''>2.92517 3.99794 0.318235 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Tag2'>
+        <pose frame=''>1.59058 -0.996852 0.378102 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>1.59058 -0.996852 0.378102 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Tag3_0'>
+        <pose frame=''>0.460032 -3.99587 0.367167 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>0.460032 -3.99587 0.367167 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Tag4'>
+        <pose frame=''>-3.27587 -3.99955 0.28984 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-3.27587 -3.99955 0.28984 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -115,25 +146,25 @@
         </link>
       </model>
       <model name='mobile_base'>
-        <pose frame=''>0.000297 4e-05 -0.00025 0.000796 -0.014388 0.003811</pose>
+        <pose frame=''>0.001087 9.4e-05 -0.00025 0.000796 -0.014399 0.013656</pose>
         <scale>1 1 1</scale>
         <link name='base_footprint'>
-          <pose frame=''>0.000297 4e-05 -0.00025 0.000796 -0.014388 0.003811</pose>
-          <velocity>0.00039 -3e-05 0.000324 -0.000401 -0.002326 0.000149</velocity>
-          <acceleration>-0.027147 0.008808 0.079581 0.084487 -0.925417 0.009537</acceleration>
-          <wrench>-0.133597 0.043349 0.391642 0 -0 0</wrench>
+          <pose frame=''>0.001087 9.4e-05 -0.00025 0.000796 -0.014399 0.013656</pose>
+          <velocity>-6.5e-05 -0.000159 -0.000226 -0.001235 -0.000174 0.00027</velocity>
+          <acceleration>-0.005014 0.045215 -0.402638 1.97102 0.650116 -0.409143</acceleration>
+          <wrench>-0.024677 0.222516 -1.9815 0 -0 0</wrench>
         </link>
         <link name='wheel_left_link'>
-          <pose frame=''>-0.000651 0.115009 0.03519 -1.57001 -0.020757 0.003806</pose>
-          <velocity>0.000291 -1.6e-05 0.000276 -0.000401 -0.002326 0.000149</velocity>
-          <acceleration>-0.195589 0.048109 0.87451 -3.07973 0.913333 -3.12399</acceleration>
-          <wrench>-0.001956 0.000481 0.008745 0 -0 0</wrench>
+          <pose frame=''>-0.000993 0.115049 0.035183 -1.57001 -0.036513 0.013639</pose>
+          <velocity>-0.000103 -0.000116 -0.000369 -0.001235 -0.000174 0.00027</velocity>
+          <acceleration>0.050021 0.398091 1.20636 2.07589 0.079934 -0.385766</acceleration>
+          <wrench>0.0005 0.003981 0.012064 0 -0 0</wrench>
         </link>
         <link name='wheel_right_link'>
-          <pose frame=''>0.000228 -0.11499 0.034992 -1.57001 0.004247 0.003826</pose>
-          <velocity>0.000325 -1.6e-05 0.00037 -0.000401 -0.002326 0.000149</velocity>
-          <acceleration>-0.214997 0.048408 0.652265 -3.09086 0.543093 -3.1247</acceleration>
-          <wrench>-0.00215 0.000484 0.006523 0 -0 0</wrench>
+          <pose frame=''>0.00215 -0.11493 0.034979 -1.57001 0.052653 0.01371</pose>
+          <velocity>-4.1e-05 -0.000115 -8.4e-05 -0.001235 -0.000174 0.00027</velocity>
+          <acceleration>-0.07349 0.425594 -13.2751 1.19005 0.727139 -0.432071</acceleration>
+          <wrench>-0.000735 0.004256 -0.132751 0 -0 0</wrench>
         </link>
       </model>
       <model name='unit_box_clone_0_clone'>
@@ -157,13 +188,13 @@
         </link>
       </model>
       <model name='unit_box_clone_0_clone_0_clone'>
-        <pose frame=''>-1.46812 -2.49371 0.310355 -1e-06 -8e-06 -0.005231</pose>
+        <pose frame=''>-1.46812 -2.49371 0.310359 0 0 -0.005231</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>-1.46812 -2.49371 0.310355 -1e-06 -8e-06 -0.005231</pose>
+          <pose frame=''>-1.46812 -2.49371 0.310359 0 0 -0.005231</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>-0.232589 0.235027 -9.40415 -0.756078 -0.748192 -2.7e-05</acceleration>
-          <wrench>-0.232589 0.235027 -9.40415 0 -0 0</wrench>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='unit_box_clone_0_clone_clone'>
@@ -217,10 +248,10 @@
         </link>
       </model>
       <model name='wall_0_clone_clone_0'>
-        <pose frame=''>0 4 0 0 0 -3.14159</pose>
+        <pose frame=''>0.005302 3.99989 0 0 0 -3.14159</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>0 4 0 0 0 -3.14159</pose>
+          <pose frame=''>0.005302 3.99989 0 0 0 -3.14159</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -242,7 +273,7 @@
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>0.234287 -3.94394 4.7622 0 0.917536 1.64756</pose>
+        <pose frame=''>-0.163506 -7.10452 7.93383 0 0.737534 1.56117</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
@@ -285,6 +316,7 @@
         </visual>
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
+        <gravity>1</gravity>
       </link>
       <pose frame=''>1 -5 0 0 0 -3.14159</pose>
     </model>
@@ -326,6 +358,7 @@
         </visual>
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
+        <gravity>1</gravity>
       </link>
       <pose frame=''>0.322244 -2.19464 0 0 0 -3.14159</pose>
     </model>
@@ -367,6 +400,7 @@
         </visual>
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
+        <gravity>1</gravity>
       </link>
       <pose frame=''>3 -1 0 0 -0 1.5708</pose>
     </model>
@@ -408,6 +442,7 @@
         </visual>
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
+        <gravity>1</gravity>
       </link>
       <pose frame=''>1 3 0 0 0 -3.14159</pose>
     </model>
@@ -460,6 +495,7 @@
         </visual>
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
+        <gravity>1</gravity>
       </link>
     </model>
     <model name='unit_box_clone_0_clone'>
@@ -511,6 +547,7 @@
         </visual>
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
+        <gravity>1</gravity>
       </link>
     </model>
     <model name='mobile_base'>
@@ -1737,6 +1774,7 @@
         </visual>
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
+        <gravity>1</gravity>
       </link>
       <pose frame=''>2.8165 -0.860004 0 0 -0 0</pose>
     </model>
@@ -1789,6 +1827,7 @@
         </visual>
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
+        <gravity>1</gravity>
       </link>
     </model>
     <model name='unit_box_clone_0_clone_0_clone'>
@@ -1840,6 +1879,7 @@
         </visual>
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
+        <gravity>1</gravity>
       </link>
     </model>
     <model name='unit_box_clone_2_clone'>
@@ -1891,6 +1931,7 @@
         </visual>
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
+        <gravity>1</gravity>
       </link>
     </model>
     <model name='unit_box_clone_0_clone_clone'>
@@ -1942,9 +1983,10 @@
         </visual>
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
+        <gravity>1</gravity>
       </link>
     </model>
-    <model name='Tag0_clone'>
+    <model name='Tag1'>
       <static>1</static>
       <link name='link'>
         <pose frame=''>0 0 0 0 -0 0</pose>
@@ -1977,16 +2019,152 @@
           </geometry>
           <material>
             <script>
-              <uri>model://Tag0/materials/scripts</uri>
-              <uri>model://Tag0/materials/textures</uri>
-              <name>vrc/Tag0</name>
+              <uri>model://Tag1/materials/scripts</uri>
+              <uri>model://Tag1/materials/textures</uri>
+              <name>vrc/Tag1</name>
             </script>
           </material>
         </visual>
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
+        <gravity>1</gravity>
       </link>
-      <pose frame=''>0.159378 3.96141 0.25307 0 -0 0</pose>
+      <pose frame=''>-0.271957 3.78407 0 0 -0 0</pose>
+    </model>
+    <model name='Tag2'>
+      <static>1</static>
+      <link name='link'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.1615 0.001 0.1615</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>0.1615 0.001 0.1615</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://Tag2/materials/scripts</uri>
+              <uri>model://Tag2/materials/textures</uri>
+              <name>vrc/Tag2</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-1.229 0.332499 0 0 -0 0</pose>
+    </model>
+    <model name='Tag3_0'>
+      <static>1</static>
+      <link name='link'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.1615 0.001 0.1615</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>0.1615 0.001 0.1615</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://Tag3/materials/scripts</uri>
+              <uri>model://Tag3/materials/textures</uri>
+              <name>vrc/Tag3</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>0.460032 -1.68457 0 0 -0 0</pose>
+    </model>
+    <model name='Tag4'>
+      <static>1</static>
+      <link name='link'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.1615 0.001 0.1615</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>0.1615 0.001 0.1615</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://Tag4/materials/scripts</uri>
+              <uri>model://Tag4/materials/textures</uri>
+              <name>vrc/Tag4</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-3.27587 -3.33942 0 0 -0 0</pose>
     </model>
   </world>
 </sdf>
