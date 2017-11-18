@@ -703,12 +703,18 @@ find_package(catkin REQUIRED COMPONENTS
 - $ rosrun balrog nav_covering_map.py
 - $ rosrun balrog main.py
 
-
 # Tags:
 - $ cd ~/TSRT10/catkin_ws/src
 - $ git clone https://github.com/RIVeR-Lab/apriltags_ros.git
 - $ cd ~/TSRT10/catkin_ws
 - $ catkin_make
+
+# Complete mission (MAPPING, COVERING, DISARMING):
+- Connect to the BALROG_ROUTER wifi
+- Connect the computer to the RPI via ethernet
+- Connect the LIDAR to the computer and wait a few seconds for the LIDAR to obtain full rotation speed
+- $ roslaunch balrog balrog.launch
+- $ rosrun balrog main.py
 
 # Complete mission (MAPPING, COVERING, DISARMING) in SIMULATION:
 - $ roslaunch balrog_sim balrog_auto.launch
