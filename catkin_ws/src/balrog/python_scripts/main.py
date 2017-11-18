@@ -53,6 +53,8 @@ class Main:
 
         self.warning_pub = rospy.Publisher("/node_status", String, queue_size=1)
 
+        self.mode_pub = rospy.Publisher("/balrog_mode", String, queue_size=1)
+
         self.x = None
         self.y = None
         self.theta = None
@@ -520,8 +522,6 @@ class Main:
             return None
 
     def check_path(self):
-        print "current mode: %s" % self.mode
-
         if self.mode == "MAPPING":
             if self.raw_path is not None and self.map_matrix_astar is not None:
                 self.lock.acquire()
@@ -557,13 +557,16 @@ class Main:
                         print "check_path: path is None!"
 
     def run(self):
-        rate = rospy.Rate(1) # (1 Hz)
+        rate = rospy.Rate(2) # (2 Hz)
 
         while not rospy.is_shutdown():
             self.check_path()
             #self.update_mines()
 
-            rate.sleep() # (to get it to loop with 1 Hz)
+            print "current mode: %s" % self.mode
+            self.mode_pub.publish(self.mode)
+
+            rate.sleep() # (to get it to loop with 2 Hz)
 
 if __name__ == "__main__":
     # create a Main object (this will run its __init__ function):
