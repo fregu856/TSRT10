@@ -40,11 +40,11 @@ class Streamer:
 
     def run(self):
         rate = rospy.Rate(10) # (10 Hz)
-        counter = 0
+        #counter = 0
         while not rospy.is_shutdown():
             if self.latest_frame is not None:
-                print counter
-                counter += 1
+                #print counter
+                #counter += 1
 
                 # convert the video frame from openCV format to ROS format:
                 img_ROS_msg = self.cv_bridge.cv2_to_imgmsg(self.latest_frame, "bgr8")

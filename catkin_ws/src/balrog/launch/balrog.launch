@@ -11,12 +11,21 @@
     <!-- launch OpenKarto: -->
     <include file="$(find balrog)/launch/OpenKarto.launch"></include>
 
-    <!-- run slam_visited in balrog/src: -->
+    <!-- run slam_visited.cpp in balrog/src: -->
     <node pkg="balrog" type="slam_visited" name="slam_visited_node" output="screen"></node>
 
-    <!-- run slam_pose in balrog/src: -->
+    <!-- run slam_pose.cpp in balrog/src: -->
     <node pkg="balrog" type="slam_pose" name="slam_pose_node" output="screen"></node>
 
+    <!-- run controller.py in balrog/python_scripts: -->
+    <node pkg="balrog" type="controller.py" name="controller_node" output="screen"></node>
+
+    <!-- run coordinator.py in balrog/python_scripts: -->
+    <node pkg="balrog" type="coordinator.py" name="coordinator_node" output="screen"></node>
+
+    <!-- run nav_covering_map.py in balrog/python_scripts: -->
+    <node pkg="balrog" type="nav_covering_map.py" name="nav_covering_map_node" output="screen"></node>
+
     <!-- launch the videostream: -->
-    <!--<include file="$(find balrog)/launch/videostream.launch"></include>-->
+    <include file="$(find balrog)/launch/videostream.launch"></include>
 </launch>

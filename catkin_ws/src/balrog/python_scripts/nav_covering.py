@@ -5,10 +5,10 @@ from utilities import map_index_2_pos, pos_2_map_index, raw_path_2_path
 from nav_astar import astar_func
 
 # size of considered area:
-X_MAX = 4 # (NOTE! if this value is modified one also needs to update it in main.py)
-X_MIN = -4 # (NOTE! if this value is modified one also needs to update it in main.py)
-Y_MAX = 4 # (NOTE! if this value is modified one also needs to update it in main.py)
-Y_MIN = -4 # (NOTE! if this value is modified one also needs to update it in main.py)
+X_MAX = 7.5 # (NOTE! if this value is modified one also needs to update it in main.py)
+X_MIN = -0.2 # (NOTE! if this value is modified one also needs to update it in main.py)
+Y_MAX = 7.5 # (NOTE! if this value is modified one also needs to update it in main.py)
+Y_MIN = -0.2 # (NOTE! if this value is modified one also needs to update it in main.py)
 
 # map resolutions:
 MAP_RES_ASTAR = 0.25 # (NOTE! if this value is modified one also needs to update it in main.py)
@@ -149,22 +149,22 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_origin):
     if y_min_ind > 0:
         coveringMap[0:y_min_ind, :] = 100
 
-    # map_height, map_width = coveringMap.shape
-    # img = np.zeros((map_height, map_width, 3))
-    # for row in range(map_height):
-    #     for col in range(map_width):
-    #         point = coveringMap[row][col]
-    #         if point == -1:
-    #             img[row][col] = [100, 100, 100]
-    #         elif point == 0:
-    #             img[row][col] = [255, 255, 255]
-    #         elif point == 100:
-    #             img[row][col] = [0, 0, 0]
-    #         elif point == 70:
-    #             img[row][col] = [30, 30, 30]
-    #         elif point == -2:
-    #             img[row][col] = [0, 255, 0]
-    # cv2.imwrite("coverageMap2.png", img)
+    map_height, map_width = coveringMap.shape
+    img = np.zeros((map_height, map_width, 3))
+    for row in range(map_height):
+        for col in range(map_width):
+            point = coveringMap[row][col]
+            if point == -1:
+                img[row][col] = [100, 100, 100]
+            elif point == 0:
+                img[row][col] = [255, 255, 255]
+            elif point == 100:
+                img[row][col] = [0, 0, 0]
+            elif point == 70:
+                img[row][col] = [30, 30, 30]
+            elif point == -2:
+                img[row][col] = [0, 255, 0]
+    cv2.imwrite("coverageMap2.png", img)
 
     if np.count_nonzero(np.nonzero(coveringMap==0))<6:
         print "Map already visited"

@@ -20,10 +20,10 @@ from nav_astar import astar_func
 from nav_covering import coverageMap, find_goal
 
 # size of considered area:
-X_MAX = 4 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
-X_MIN = -4 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
-Y_MAX = 4 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
-Y_MIN = -4 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
+X_MAX = 7.5 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
+X_MIN = -0.2 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
+Y_MAX = 7.5 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
+Y_MIN = -0.2 # (NOTE! if this value is modified one also needs to update it in nav_covering.py)
 
 # map resolutions:
 MAP_RES_SLAM = 0.05
