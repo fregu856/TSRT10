@@ -6,9 +6,9 @@ from nav_astar import astar_func
 
 # size of considered area:
 X_MAX = 4 # (NOTE! if this value is modified one also needs to update it in main.py)
-X_MIN = -4 # (NOTE! if this value is modified one also needs to update it in main.py)
+X_MIN = -0.2 # (NOTE! if this value is modified one also needs to update it in main.py)
 Y_MAX = 4 # (NOTE! if this value is modified one also needs to update it in main.py)
-Y_MIN = -4 # (NOTE! if this value is modified one also needs to update it in main.py)
+Y_MIN = -0.2 # (NOTE! if this value is modified one also needs to update it in main.py)
 
 # map resolutions:
 MAP_RES_ASTAR = 0.25 # (NOTE! if this value is modified one also needs to update it in main.py)
@@ -400,8 +400,8 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_origin):
                         yRoute.append(pathY[pathCount])
                         dir=30
 
-            elif (prevX==(pathX[pathCount]+1) or prevX==(pathX[pathCount]+2) ) and (prevY==(pathY[pathCount]+1) or prevY==(pathY[pathCount]+2)) or (prevX==(pathX[pathCount]-1) or prevX==(pathX[pathCount]-2)) and (prevY==(pathY[pathCount]-1) or prevY==(pathY[pathCount]-2)):
-                if ((pathX[pathCount]+1) or prevX==(pathX[pathCount]+2) ) and (prevY==(pathY[pathCount]+1) or prevY==(pathY[pathCount]+1)):
+            elif (prevX==(pathX[pathCount]+1) and prevY==(pathY[pathCount]+1) ) or (prevX==(pathX[pathCount]+2) and prevY==(pathY[pathCount]+2)) or (prevX==(pathX[pathCount]-1) and prevY==(pathY[pathCount]-1)) or (prevX==(pathX[pathCount]-2) and prevY==(pathY[pathCount]-2)):
+                if (prevX==(pathX[pathCount]+1) and prevY==(pathY[pathCount]+1) ) or (prevX==(pathX[pathCount]+2) and prevY==(pathY[pathCount]+2)):
                     if dir!=2:
                         xRoute.append(pathX[pathCount])
                         yRoute.append(pathY[pathCount])
@@ -411,8 +411,8 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_origin):
                         xRoute.append(pathX[pathCount])
                         yRoute.append(pathY[pathCount])
                         dir=22
-            elif (prevX==(pathX[pathCount]+1) or prevX==(pathX[pathCount]+2) ) and (prevY==(pathY[pathCount]-1) or prevY==(pathY[pathCount]-2)) or (prevX==(pathX[pathCount]-1) or prevX==(pathX[pathCount]-2)) and (prevY==(pathY[pathCount]+1) or prevY==(pathY[pathCount]+2)):
-                if ((pathX[pathCount]+1) or prevX==(pathX[pathCount]+2)) and (prevY==(pathY[pathCount]-1) or prevY==(pathY[pathCount]-2)):
+            elif (prevX==(pathX[pathCount]+1) and prevY==(pathY[pathCount]-1) ) or (prevX==(pathX[pathCount]+2) and prevY==(pathY[pathCount]-2)) or (prevX==(pathX[pathCount]-1) and prevY==(pathY[pathCount]+1)) or (prevX==(pathX[pathCount]-2) and prevY==(pathY[pathCount]+2)):
+                if (prevX==(pathX[pathCount]+1) and prevY==(pathY[pathCount]-1) ) or (prevX==(pathX[pathCount]+2) and prevY==(pathY[pathCount]-2)):
                     if dir!=-2:
                         xRoute.append(pathX[pathCount])
                         yRoute.append(pathY[pathCount])
@@ -423,10 +423,10 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_origin):
                         yRoute.append(pathY[pathCount])
                         dir=-19
             else:
-                if dir!=-44:
-                    xRoute.append(pathX[pathCount])
-                    yRoute.append(pathY[pathCount])
-                    dir=-44
+
+                xRoute.append(pathX[pathCount])
+                yRoute.append(pathY[pathCount])
+                dir=-44
 
         if xRoute == []:
             return None
