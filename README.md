@@ -753,13 +753,15 @@ find_package(catkin REQUIRED COMPONENTS
 - $ cd ~/TSRT10/catkin_ws
 - $ catkin_make
 
-# Complete mission (MAPPING, COVERING, DISARMING):
-- Connect to the BALROG_ROUTER wifi
-- Connect the computer to the RPI via ethernet
-- Connect the LIDAR to the computer and wait a few seconds for the LIDAR to obtain full rotation speed
-- $ roslaunch balrog balrog.launch
-- $ rosrun balrog main.py
-- ($ rostopic echo /balrog_info)
+# Complete mission (MAPPING, COVERING, DISARMING) with LAPTOP:
+- Connect the LAPTOP and BASESTATION to the BALROG_ROUTER wifi
+- Connect the LAPTOP to the RPI via ethernet
+- Connect the LAPTOP to the LIDAR and wait a few seconds for the LIDAR to obtain full rotation speed
+- [LAPTOP] $ roslaunch balrog balrog.launch
+- [BASESTATION] $ rosrun balrog main.py
+- [BASESTATION] $ rqt --perspective-file ~/TSRT10/catkin_ws/src/balrog/gui/balrog.perspective
+- [BASESTATION] Mark "start_topic" in the Message Publisher in the GUI to start the mission (the RC controller also has to be turned on and put in AUTO mode)
+- ([BASESTATION] $ rostopic echo /balrog_info)
 
 # Complete mission (MAPPING, COVERING, DISARMING) in SIMULATION:
 - $ roslaunch balrog_sim balrog_auto.launch
@@ -771,5 +773,6 @@ find_package(catkin REQUIRED COMPONENTS
 - Click on the small "ROS keyboard input" and control the robot using WASD
 
 # GUI:
+- Take balrog/rviz/balrog.rviz and save this file as "default.rviz" in ~/.rviz ($ cd ~/.rviz, $ nano default.rviz, paste everything from balrog.rviz)
 - $ rqt --perspective-file ~/TSRT10/catkin_ws/src/balrog/gui/balrog.perspective 
 
