@@ -771,5 +771,6 @@ find_package(catkin REQUIRED COMPONENTS
 - Click on the small "ROS keyboard input" and control the robot using WASD
 
 # GUI:
+- Take balrog/rviz/balrog.rviz and save this file as "default.rviz" in ~/.rviz
 - $ rqt --perspective-file ~/TSRT10/catkin_ws/src/balrog/gui/balrog.perspective 
 
