@@ -556,6 +556,8 @@ Tags:
 
 sudo apt-get install python-scipy
 
+sudo apt-get install ros-kinetic-image-transport-plugins
+
 Filer i balrog/rviz:
 balrog.rviz
 
