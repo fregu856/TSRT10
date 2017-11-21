@@ -769,3 +769,7 @@ find_package(catkin REQUIRED COMPONENTS
 # Manual control in full test area in SIMULATION:
 - $ roslaunch balrog_sim balrog_manual.launch
 - Click on the small "ROS keyboard input" and control the robot using WASD
+
+# GUI:
+- $ rqt --perspective-file ~/TSRT10/catkin_ws/src/balrog/gui/balrog.perspective 
+
