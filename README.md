@@ -538,6 +538,50 @@ If main doesnt start automatically, try to transmit the file and then SSH into t
 
 - Folow the "OpenKarto on Balrog" steps above to start SLAMing using OpenKarto
 
+- G
+- G
+- G
+
+Mplayer:
+
+sudo add-apt-repository ppa:djcj/hybrid
+sudo apt-get update
+sudo apt-get install mplayer -y
+
+Tags:
+    $ cd ~/TSRT10/catkin_ws/src
+    $ git clone https://github.com/RIVeR-Lab/apriltags_ros.git
+    $ cd ~/TSRT10/catkin_ws
+    $ catkin_make
+
+sudo apt-get install python-scipy
+
+Filer i balrog/rviz:
+balrog.rviz
+
+Filer i balrog/launch:
+balrog.launch         
+videostream.launch
+OpenKarto.launch
+lidar.launch          
+tag_detection.launch
+
+Filer som MÅSTE finnas i balrog/python_scripts:
+nav_covering_map.py  utilities.py
+controller.py    nav_covering.py      nav_astar.py
+coordinator.py   nav_frontier.py     
+main.py          nav_mapping.py       stream_to_ROS.py
+
+Filer som MÅSTE finns i både balrog/src
+communicator.cpp  slam_odom.cpp  slam_pose.cpp  slam_visited.cpp
+
+Alla filer finns i python:
+communicator.py  nav_covering_map.py  utilities.py
+controller.py    nav_covering.py      slam_odom.py	nav_astar.py
+coordinator.py   nav_frontier.py      slam_pose.py
+main.py          nav_mapping.py       stream_to_ROS.py
+
+
 # Drone:
 
 - Yellow = Orange = RX
@@ -725,3 +769,7 @@ find_package(catkin REQUIRED COMPONENTS
 # Manual control in full test area in SIMULATION:
 - $ roslaunch balrog_sim balrog_manual.launch
 - Click on the small "ROS keyboard input" and control the robot using WASD
+
+# GUI:
+- $ rqt --perspective-file ~/TSRT10/catkin_ws/src/balrog/gui/balrog.perspective 
+
