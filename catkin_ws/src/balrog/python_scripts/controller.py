@@ -20,6 +20,8 @@ class Controller:
 
         rospy.Subscriber("/node_status", String, self.node_callback)
 
+        rospy.Subscriber("/start_topic", String, self.start_callback)
+
         #self.control_pub = rospy.Publisher("cmd_vel_mux/input/navi", Twist, queue_size=10) # (simulation)
         self.control_pub = rospy.Publisher("/control_signals", Float64MultiArray, queue_size=10) # (physical robot)
 
@@ -29,8 +31,8 @@ class Controller:
         self.y = 0.0
         self.theta = 0.0
 
-        self.x_goal = 0
-        self.y_goal = 0
+        self.x_goal = 0.0
+        self.y_goal = 0.0
 
         self.previous_linear_velocity = 0
         self.previous_angular_velocity = 0
@@ -42,6 +44,14 @@ class Controller:
         self.initial_angle_adjustment = True
 
         self.warning_flag = False
+
+        self.start = False
+
+    def start_callback(self, msg_obj):
+        msg_string = msg_obj.data
+
+        if msg_string == "start":
+            self.start = True
 
     def node_callback(self, msg_obj):
         self.warning_flag = True
@@ -222,7 +232,7 @@ class Controller:
         rate = rospy.Rate(10) # (10 Hz)
 
         while not rospy.is_shutdown():
-            if not self.warning_flag:
+            if not self.warning_flag and self.start:
                 print "publishing control signal!"
                 ctrl_output_msg = self.get_ctrl_output()
                 self.control_pub.publish(ctrl_output_msg)
