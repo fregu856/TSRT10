@@ -5,7 +5,7 @@
       "keys": {
         "running-plugins": {
           "type": "repr", 
-          "repr": "{u'rqt_rviz/RViz': [1], u'rqt_plot/Plot': [1, 2], u'rqt_topic/TopicPlugin': [1], u'rqt_publisher/Publisher': [1]}"
+          "repr": "{u'rqt_rviz/RViz': [1], u'rqt_plot/Plot': [2, 1], u'rqt_topic/TopicPlugin': [1], u'rqt_publisher/Publisher': [1]}"
         }
       }, 
       "groups": {
@@ -109,7 +109,7 @@
                 }, 
                 "x_limits": {
                   "type": "repr", 
-                  "repr": "[258.3149859905243, 259.3149859905243]"
+                  "repr": "[83.00556683540344, 84.00556683540344]"
                 }
               }, 
               "groups": {}
@@ -156,7 +156,7 @@
                 }, 
                 "x_limits": {
                   "type": "repr", 
-                  "repr": "[256.97583198547363, 257.97583198547363]"
+                  "repr": "[81.71072483062744, 82.71072483062744]"
                 }
               }, 
               "groups": {}
@@ -234,7 +234,7 @@
               "keys": {
                 "publishers": {
                   "type": "repr", 
-                  "repr": "u'[{\\'topic_name\\': \\'/start_topic\\', \\'type_name\\': \\'std_msgs/String\\', \\'enabled\\': False, \\'rate\\': 1.0, \\'expressions\\': {u\\'/start_topic/data\\': \\'\"start\"\\'}, \\'publisher_id\\': 0, \\'counter\\': 253}]'"
+                  "repr": "u'[{\\'type_name\\': \\'std_msgs/String\\', \\'topic_name\\': \\'/start_topic\\', \\'enabled\\': False, \\'rate\\': 1.0, \\'expressions\\': {u\\'/start_topic/data\\': \\'\"start\"\\'}, \\'publisher_id\\': 0, \\'counter\\': 0}, {\\'type_name\\': \\'std_msgs/String\\', \\'topic_name\\': \\'/change_velocity\\', \\'enabled\\': False, \\'rate\\': 1.0, \\'expressions\\': {u\\'/change_velocity/data\\': \\'\"0.2\"\\'}, \\'publisher_id\\': 1, \\'counter\\': 0}]'"
                 }
               }, 
               "groups": {}
