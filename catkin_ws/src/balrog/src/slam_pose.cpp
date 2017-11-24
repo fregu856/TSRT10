@@ -20,7 +20,8 @@ int main(int argc, char **argv)
     // create a NodeHandle object:
     ros::NodeHandle nh;
 
-    // create a publisher for publishing the estimated robot pose [x, y, theta]:
+    // create a publisher for publishing the estimated robot pose [x, y, theta]
+    // on the /estimated_pose ROS topic:
     ros::Publisher pose_pub =
           nh.advertise<std_msgs::Float64MultiArray>("/estimated_pose", 10);
 
