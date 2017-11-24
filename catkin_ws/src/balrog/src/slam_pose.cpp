@@ -72,7 +72,7 @@ int main(int argc, char **argv)
             std::cout << "Could not look up transform map -> base_footprint!" << std::endl;
         }
 
-        // spin to enable automatic reading of new data published on the
+        // spin once to enable automatic reading of new data published on the
         // subscribed topics:
         ros::spinOnce();
 
