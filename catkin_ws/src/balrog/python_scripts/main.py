@@ -1,6 +1,20 @@
 #!/usr/bin/env python
 
-# TODO! general comment here!
+# This code implements the main autonomous behaviour of Balrog.
+#
+# It starts in MAPPING mode where frontier_func is used to compute goal positions
+# that will make Balog map the entire area. astar_func is used to compute
+# obstacle-free paths to these goal positions.
+#
+# When the entire area is mapped, the mode is changed to COVERING. In this mode,
+# coverageMap is used to compute a path what will make Balrog cover the entire
+# area.
+#
+# When the entire area is covered, the mode is changed to DISARMING. In this mode,
+# astar_func is used to compute a path that first goes to the start position
+# [0,0] ("to get disarming gear at the base"), then goes to the position of each
+# mine (aprilTag) that has been detected by the camera during MAPING and COVERING
+# ("to disarm each mine"), and finally goes back to [0,0] again ("returns to base").
 
 import rospy
 from std_msgs.msg import Float64MultiArray
@@ -367,7 +381,10 @@ class Main:
     # If coverageMap returns None, indicating that the entire area has been
     # covered, self.mode is set to "DISARMING".
     def get_path(self):
-        if self.map_origin is not None and self.x is not None and self.y is not None and self.map_matrix_frontier is not None and self.map_matrix_astar is not None:
+        if self.map_origin is not None and self.x is not None and /
+        self.y is not None and self.map_matrix_frontier is not None and /
+        self.map_matrix_astar is not None:
+            # read shared variables:
             self.lock.acquire()
             map_origin = self.map_origin
             x = self.x
@@ -381,30 +398,33 @@ class Main:
             pos_index_frontier = pos_2_map_index(map_origin, MAP_RES_FRONTIER, pos)
             pos_index_astar = pos_2_map_index(map_origin, MAP_RES_ASTAR, pos)
 
-            # print "get_path: pos:", pos
-            # print "get_path: pos_index_frontier:", pos_index_frontier
-            # print "get_path: pos_index_astar:", pos_index_astar
-
-            ##
             if self.mode == "MAPPING":
-                goal_pos_index_frontier = frontier_func(np.copy(map_matrix_frontier), pos_index_frontier)
+                # get a new goal position (chosen by frontier_func to map the
+                # entire area):
+                goal_pos_index_frontier = frontier_func(np.copy(map_matrix_frontier),
+                            pos_index_frontier)
 
                 if goal_pos_index_frontier == [-1000, -1000]:
                     print "MAPPING mode is finished, entering COVERING mode!"
                     self.mode = "COVERING"
+
                     path = self.get_path()
                     return path
                 else:
-                    goal_pos = map_index_2_pos(map_origin, MAP_RES_FRONTIER, goal_pos_index_frontier)
+                    goal_pos = map_index_2_pos(map_origin, MAP_RES_FRONTIER,
+                                goal_pos_index_frontier)
                     # print "goal index in FRONTIER map:", goal_pos_index_frontier
                     # print "goal pos:", goal_pos
                     # print "value of goal node in FRONTIER map:", map_matrix_frontier[goal_pos_index_frontier[1], goal_pos_index_frontier[0]]
 
-                    goal_pos_index_astar = pos_2_map_index(map_origin, MAP_RES_ASTAR, goal_pos)
+                    goal_pos_index_astar = pos_2_map_index(map_origin,
+                                MAP_RES_ASTAR, goal_pos)
                     # print "goal index in ASTAR map:", goal_pos_index_astar
                     # print "goal pos corresponding to goal index in ASTAR map:", map_index_2_pos(map_origin, MAP_RES_ASTAR, goal_pos_index_astar)
                     # print "value of goal node in ASTAR map:", map_matrix_astar[goal_pos_index_astar[1], goal_pos_index_astar[0]]
 
+                    # if the goal node lies inside an obstacle, choose the
+                    # closest free node instead:
                     if map_matrix_astar[goal_pos_index_astar[1], goal_pos_index_astar[0]] == 100:
                         # print "########################################################"
                         # print "get_path(): GOAL node is not free, get the closest free node!"
@@ -412,13 +432,16 @@ class Main:
                         temp = np.nonzero(map_matrix_astar == 0)
                         x = temp[1]
                         y = temp[0]
-                        distances = (x-goal_pos_index_astar[0])**2 + (y-goal_pos_index_astar[1])**2
+                        distances = ((x-goal_pos_index_astar[0])**2 +
+                                    (y-goal_pos_index_astar[1])**2)
                         goal_node = np.argmin(distances)
                         goal_pos_index_astar = [x[goal_node], y[goal_node]]
                         # print "goal index in ASTAR map:", goal_pos_index_astar
                         # print "goal pos corresponding to goal index in ASTAR map:", map_index_2_pos(map_origin, MAP_RES_ASTAR, goal_pos_index_astar)
                         # print "value of goal node in ASTAR map:", map_matrix_astar[goal_pos_index_astar[1], goal_pos_index_astar[0]]
 
+                    # if the start node lies inside an obstacle, choose the
+                    # closest free node instead:
                     if map_matrix_astar[pos_index_astar[1], pos_index_astar[0]] == 100:
                         # print "########################################################"
                         # print "get_path(): START node is not free, get the closest free node!"
@@ -426,24 +449,32 @@ class Main:
                         temp = np.nonzero(map_matrix_astar == 0)
                         x = temp[1]
                         y = temp[0]
-                        distances = (x-pos_index_astar[0])**2 + (y-pos_index_astar[1])**2
+                        distances = ((x-pos_index_astar[0])**2 +
+                                    (y-pos_index_astar[1])**2)
                         start_node = np.argmin(distances)
                         pos_index_astar = [x[start_node], y[start_node]]
                         # print "start index in ASTAR map:", pos_index_astar
                         # print "pos corresponding to start index in ASTAR map:", map_index_2_pos(map_origin, MAP_RES_ASTAR, pos_index_astar)
                         # print "value of start node in ASTAR map:", map_matrix_astar[pos_index_astar[1], pos_index_astar[0]]
 
+                    # get a path from start to goal by using astar:
                     astar_paths = astar_func([goal_pos_index_astar[1], goal_pos_index_astar[0]],
-                                [pos_index_astar[1], pos_index_astar[0]], np.copy(map_matrix_astar))
+                                [pos_index_astar[1], pos_index_astar[0]],
+                                np.copy(map_matrix_astar))
 
                     if astar_paths is not None:
                         self.raw_path = astar_paths[1]
+
                         # print "astar_paths[0]:"
                         # print astar_paths[0]
                         # print "astar_paths[1]:"
                         # print astar_paths[1]
 
-                        path = raw_path_2_path(astar_paths[0], map_origin, MAP_RES_ASTAR)
+                        path = raw_path_2_path(astar_paths[0], map_origin,
+                                    MAP_RES_ASTAR)
+
+                    # go to the closest free node that lies at least one node
+                    # away from the current position:
                     else:
                         print "################################################"
                         print "################################################"
@@ -454,11 +485,13 @@ class Main:
                         temp = np.nonzero(map_matrix_astar == 0)
                         x = temp[1]
                         y = temp[0]
-                        distances = (x-pos_index_astar[0])**2 + (y-pos_index_astar[1])**2
+                        distances = ((x-pos_index_astar[0])**2 +
+                                    (y-pos_index_astar[1])**2)
                         goal_node = np.argmin(distances[np.where(distances > 1)])
                         goal_pos_index_astar = [x[goal_node], y[goal_node]]
 
-                        goal_pos = map_index_2_pos(map_origin, MAP_RES_ASTAR, goal_pos_index_astar)
+                        goal_pos = map_index_2_pos(map_origin, MAP_RES_ASTAR,
+                                    goal_pos_index_astar)
                         path = [goal_pos[0], goal_pos[1]]
 
                         self.raw_path = np.array([[goal_pos_index_astar[1]],[goal_pos_index_astar[0]]])
@@ -468,66 +501,85 @@ class Main:
 
                     return path
 
-            ##
             elif self.mode == "COVERING":
                 alpha=0.9
 
-                pos_index_covering = pos_2_map_index(map_origin, MAP_RES_COVERING, pos)
+                pos_index_covering = pos_2_map_index(map_origin,
+                            MAP_RES_COVERING, pos)
 
                 goal_pos = [0, 0]
-                goal_index_covering = pos_2_map_index(map_origin, MAP_RES_COVERING, goal_pos)
+                goal_index_covering = pos_2_map_index(map_origin,
+                            MAP_RES_COVERING, goal_pos)
 
-                covering_paths = coverageMap(np.copy(map_matrix_astar), np.copy(map_matrix_covering), alpha, [pos_index_covering[1], pos_index_covering[0]], [goal_index_covering[1], goal_index_covering[0]], map_origin)
+                # get a path making sure that Balrog covers the entire area:
+                covering_paths = coverageMap(np.copy(map_matrix_astar),
+                            np.copy(map_matrix_covering), alpha,
+                            [pos_index_covering[1], pos_index_covering[0]],
+                            [goal_index_covering[1], goal_index_covering[0]],
+                            map_origin)
 
                 if covering_paths is not None:
                     # print "coverPath:", covering_paths[0]
                     # print "raw_coverPath:", covering_paths[1]
 
-                    path = raw_path_2_path(covering_paths[0], map_origin, MAP_RES_ASTAR)
+                    path = raw_path_2_path(covering_paths[0], map_origin,
+                                MAP_RES_ASTAR)
                     self.raw_path = covering_paths[1]
                 else:
                     print "covering_paths is None"
                     print "COVERING mode is finished, entering DISARMING mode!"
                     self.mode = "DISARMING"
+
                     path = self.get_path()
                     return path
 
                 return path
 
-            ##
             elif self.mode == "DISARMING":
                 if not self.mines_disarmed:
                     path = []
 
                     start_pos = pos
-                    start_index_astar = pos_2_map_index(map_origin, MAP_RES_ASTAR, start_pos)
+                    start_index_astar = pos_2_map_index(map_origin,
+                                MAP_RES_ASTAR, start_pos)
+                    # # if the start node lies inside an obstacle, choose the
+                    # # closest free node instead:
                     if map_matrix_astar[start_index_astar[1], start_index_astar[0]] == 100:
                         temp = np.nonzero(map_matrix_astar == 0)
                         x = temp[1]
                         y = temp[0]
-                        distances = (x-start_index_astar[0])**2 + (y-start_index_astar[1])**2
+                        distances = ((x-start_index_astar[0])**2 +
+                                    (y-start_index_astar[1])**2)
                         start_node = np.argmin(distances)
                         start_index_astar = [x[start_node], y[start_node]]
 
-                    goal_pos = [0, 0] # (start by going back to the start pos to get disarming gear)
-                    goal_index_astar = pos_2_map_index(map_origin, MAP_RES_ASTAR, goal_pos)
+                    # start by going back to the start position [0,0] ("to get
+                    # disarming gear at the base"):
+                    goal_pos = [0, 0]
+                    goal_index_astar = pos_2_map_index(map_origin,
+                                MAP_RES_ASTAR, goal_pos)
+                    # # if the goal node lies inside an obstacle, choose the
+                    # # closest free node instead:
                     if map_matrix_astar[goal_index_astar[1], goal_index_astar[0]] == 100:
                         temp = np.nonzero(map_matrix_astar == 0)
                         x = temp[1]
                         y = temp[0]
-                        distances = (x-goal_index_astar[0])**2 + (y-goal_index_astar[1])**2
+                        distances = ((x-goal_index_astar[0])**2 +
+                                    (y-goal_index_astar[1])**2)
                         goal_node = np.argmin(distances)
                         goal_index_astar = [x[goal_node], y[goal_node]]
-
+                    # # get a path to the goal node using astar:
                     astar_paths = astar_func([goal_index_astar[1], goal_index_astar[0]],
-                                [start_index_astar[1], start_index_astar[0]], np.copy(map_matrix_astar))
+                                [start_index_astar[1], start_index_astar[0]],
+                                np.copy(map_matrix_astar))
                     if astar_paths is not None:
-                        path += raw_path_2_path(astar_paths[0], map_origin, MAP_RES_ASTAR)
+                        path += raw_path_2_path(astar_paths[0], map_origin,
+                                    MAP_RES_ASTAR)
                     else:
                         print "astar_paths is None!"
-
                     prev_goal_index_astar = goal_index_astar
 
+                    # go to the position of each detected mine ("to disarm each mine"):
                     for mine_id in self.mine_locations:
                         mine_obj = self.mine_locations[mine_id]
                         mine_pos = [mine_obj.pose.position.x, mine_obj.pose.position.y]
@@ -535,44 +587,57 @@ class Main:
                         start_index_astar = prev_goal_index_astar
 
                         goal_pos = mine_pos
-                        goal_index_astar = pos_2_map_index(map_origin, MAP_RES_ASTAR, goal_pos)
+                        goal_index_astar = pos_2_map_index(map_origin,
+                                    MAP_RES_ASTAR, goal_pos)
+                        # # if the goal node lies inside an obstacle, choose the
+                        # # closest free node instead:
                         if map_matrix_astar[goal_index_astar[1], goal_index_astar[0]] == 100:
                             temp = np.nonzero(map_matrix_astar == 0)
                             x = temp[1]
                             y = temp[0]
-                            distances = (x-goal_index_astar[0])**2 + (y-goal_index_astar[1])**2
+                            distances = ((x-goal_index_astar[0])**2 +
+                                        (y-goal_index_astar[1])**2)
                             goal_node = np.argmin(distances)
                             goal_index_astar = [x[goal_node], y[goal_node]]
-
+                        # # get a path to the goal node using astar:
                         astar_paths = astar_func([goal_index_astar[1], goal_index_astar[0]],
-                                    [start_index_astar[1], start_index_astar[0]], np.copy(map_matrix_astar))
+                                    [start_index_astar[1], start_index_astar[0]],
+                                    np.copy(map_matrix_astar))
                         if astar_paths is not None:
-                            path += raw_path_2_path(astar_paths[0], map_origin, MAP_RES_ASTAR)
+                            path += raw_path_2_path(astar_paths[0], map_origin,
+                                        MAP_RES_ASTAR)
                         else:
                             print "astar_paths is None!"
-
                         prev_goal_index_astar = goal_index_astar
 
                     start_index_astar = prev_goal_index_astar
 
-                    goal_pos = [0, 0] # (return to the starting point)
-                    goal_index_astar = pos_2_map_index(map_origin, MAP_RES_ASTAR, goal_pos)
+                    # return to the starting point [0, 0] ("return to base"):
+                    goal_pos = [0, 0]
+                    goal_index_astar = pos_2_map_index(map_origin,
+                                MAP_RES_ASTAR, goal_pos)
+                    # # if the goal node lies inside an obstacle, choose the
+                    # # closest free node instead:
                     if map_matrix_astar[goal_index_astar[1], goal_index_astar[0]] == 100:
                         temp = np.nonzero(map_matrix_astar == 0)
                         x = temp[1]
                         y = temp[0]
-                        distances = (x-goal_index_astar[0])**2 + (y-goal_index_astar[1])**2
+                        distances = ((x-goal_index_astar[0])**2 +
+                                    (y-goal_index_astar[1])**2)
                         goal_node = np.argmin(distances)
                         goal_index_astar = [x[goal_node], y[goal_node]]
-
+                    # # get a path to the goal node using astar:
                     astar_paths = astar_func([goal_index_astar[1], goal_index_astar[0]],
-                                [start_index_astar[1], start_index_astar[0]], np.copy(map_matrix_astar))
+                                [start_index_astar[1], start_index_astar[0]],
+                                np.copy(map_matrix_astar))
                     if astar_paths is not None:
-                        path += raw_path_2_path(astar_paths[0], map_origin, MAP_RES_ASTAR)
+                        path += raw_path_2_path(astar_paths[0], map_origin,
+                                    MAP_RES_ASTAR)
                     else:
                         print "astar_paths is None!"
 
                     self.mines_disarmed = True
+
                     return path
                 else: # (if self.mines_disarmed:)
                     print "DISARMING mode is finished, entering MISSION_FINISHED mode!"
@@ -582,9 +647,12 @@ class Main:
         else:
             return None
 
+    # function for checking if the current path is free from obstacles. If not,
+    # self.get_path() is called to get a new path which is then published on /path:
     def check_path(self):
         if self.mode == "MAPPING":
             if self.raw_path is not None and self.map_matrix_astar is not None:
+                # read shared variables:
                 self.lock.acquire()
                 map_matrix_astar = self.map_matrix_astar
                 raw_path = self.raw_path
@@ -593,7 +661,10 @@ class Main:
                 raw_path = list(raw_path)
                 map_path = map_matrix_astar[raw_path[0], raw_path[1]]
 
-                if 100 in map_path:
+                if 100 in map_path: # (if obstacle in the current path:)
+                    # publish on the /node_status topic to tell the controller
+                    # to stop Balrog (to stop Balrog from running in to any
+                    # obstacle while a new path is computed):
                     msg_string = "stop"
                     self.warning_pub.publish(msg_string)
 
@@ -618,18 +689,19 @@ class Main:
                         print "check_path: path is None!"
 
     def run(self):
-        rate = rospy.Rate(2) # (2 Hz)
+        # set the loop frequency to 2 Hz:
+        rate = rospy.Rate(2)
 
         while not rospy.is_shutdown():
             self.check_path()
             self.update_mines()
 
             print "current mode: %s" % self.mode
-
             self.info_pub.publish("current mode: %s" % self.mode)
             self.info_pub.publish("no of detected tags: %d/%d" % (len(self.mine_locations), 5))
 
-            rate.sleep() # (to get it to loop with 2 Hz)
+            # sleep to get the loop to run at 2 Hz:
+            rate.sleep()
 
 if __name__ == "__main__":
     # create a Main object (this will run its __init__ function):
