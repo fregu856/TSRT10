@@ -22,7 +22,7 @@ public:
 private:
     // callback function for the /encoder_data ROS topic:
     void odom_callback_(const std_msgs::Float64MultiArray &msg);
-    
+
     // helper function to wrap angles to lie in the range [-pi, pi]:
     double wrap_to_pi_(double angle);
 
