@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 
+# TODO! general comment here!
+
 import rospy
 from std_msgs.msg import Float64MultiArray
 from std_msgs.msg import String
 from nav_msgs.msg import OccupancyGrid
-
 from geometry_msgs.msg import PoseStamped
 import tf
 
@@ -33,47 +34,74 @@ MAP_RES_COVERING = 0.30 # (NOTE! if this value is modified one also needs to upd
 
 class Main:
     def __init__(self):
+        # create mutex for protecting shared variables:
         self.lock = threading.Lock()
 
         # initialize this code as a ROS node named main_node:
         rospy.init_node("main_node", anonymous=True)
 
+        # create a subscriber for the /map topic (everytime a new message is
+        # published on the topic, self.map_callback will be called):
         rospy.Subscriber("/map", OccupancyGrid, self.map_callback)
 
+        # create a subscriber for the /estimated_pose topic (everytime a new
+        # message is published on the topic, self.est_pose_callback will be called):
         rospy.Subscriber("/estimated_pose", Float64MultiArray, self.est_pose_callback)
 
-        # subscribe to the topic onto which the coordinator publishes data once
-        # it has reached the end of a path:
+        # create a subscriber for the /coordinator_status topic (everytime a new
+        # message is published on the topic, self.coordinator_callback will be called):
         rospy.Subscriber("/coordinator_status", String, self.coordinator_callback)
 
+        # create a subscriber for the /map_covering topic (everytime a new
+        # message is published on the topic, self.map_covering_callback will be called):
         rospy.Subscriber("/map_covering", OccupancyGrid, self.map_covering_callback)
 
         # create a publisher for publishing paths to the coordinator:
         self.path_pub = rospy.Publisher("/path", Float64MultiArray, queue_size=10)
 
+        # create a publisher for publishing warnings (= Balrog should be stopped)
+        # to the controller:
         self.warning_pub = rospy.Publisher("/node_status", String, queue_size=1)
 
+        # create a publisher for publishing essential info (current mode etc.):
         self.info_pub = rospy.Publisher("/balrog_info", String, queue_size=1)
 
+        # initialize variables:
+        # # robot pose:
         self.x = None
         self.y = None
         self.theta = None
-
+        # # current path (format: np array of row indices, np array of col indices):
         self.raw_path = None
-
+        # # map data:
         self.map_origin = None
+        # # # original map, as outputted by SLAM:
         self.map_matrix_slam = None
+        # # # map used by frontier (small obstacles filtered, obstacles expanded
+        # # # to create safety margin, all cells outside of the considered area
+        # # # are set to obstacles):
         self.map_matrix_frontier = None
+        # # # map used astar (a discretized version of map_matrix_frontier, with
+        # # # map resolution = MAP_RES_ASTAR):
         self.map_matrix_astar = None
+        # # # map used by nav_covering (created from /map_visited in
+        # # # nav_covering_map.py):
         self.map_matrix_covering = None
 
-        self.mode = "MAPPING" # (MAPPING, COVERING or MISSION_FINISHED)
+        self.mode = "MAPPING" # (MAPPING, COVERING, DISARMING or MISSION_FINISHED)
 
+        # create a transform listener, to be able to look up the transform from
+        # /map to each detected aprilTag:
         self.trans_listener = tf.TransformListener()
 
-        self.mine_locations = {} # dictionary that caches the most updated locations of each detected mine
+        # dictionary that caches the most updated location of each detected
+        # aprilTag/mine (future work: apply some kind of filter, the
+        # detection is more noisy at longer distances):
+        self.mine_locations = {}
+
+        # define mines to be located 0.7 m in front of the corresponding aprilTag:
         self.mine_offset = PoseStamped()
-        self.mine_offset.pose.position.z = 0.7 # mines are located 70 cm in front of the AprilTag
+        self.mine_offset.pose.position.z = 0.7
         quat = tf.transformations.quaternion_from_euler(0., np.pi/2, np.pi/2)
         self.mine_offset.pose.orientation.x = quat[0]
         self.mine_offset.pose.orientation.y = quat[1]
@@ -82,13 +110,19 @@ class Main:
 
         self.mines_disarmed = False
 
-        # get things moving (seems like we need to wait a short moment for the
+        # get things moving by publishing a path that will make Balrog rotate
+        # (pretty much) on the spot, this is needed to trigger map updates
+        # (seems like we need to wait a short moment, time.sleep(0.5), for the
         # message to actually be published):
         msg = Float64MultiArray()
         msg.data = [-0.1, 0, 0.1, 0]
         time.sleep(0.5)
         self.path_pub.publish(msg)
 
+    # function for attempting to update the position of all mines. This is done
+    # by looking up the transform from /map to /tag_%d with offset (the camera
+    # is set to only detect aprilTags with id in [0, 1, 2, 3, 4], but we don't
+    # know how many tags are placed in the test area):
     def update_mines(self):
         # update the position for all visable mines (tags with offset):
         for tag_number in range(5): # (0, 1, 2, 3, 4)
@@ -97,19 +131,21 @@ class Main:
                 self.mine_locations[tag_number] = self.trans_listener.transformPose("/map", self.mine_offset)
             except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
                 pass
-        #print self.mine_locations
         print "detected tags:", self.mine_locations.keys()
         print "no of detected tags: %d/%d" % (len(self.mine_locations), 5)
 
-    # define the callback function for the /map subscriber:
+    # callback function for the /map subscriber. It updates the map_origin,
+    # map_matrix_slam, map_matrix_frontier and map_matrix_astar variables:
     def map_callback(self, msg_obj):
         print "map_callback"
         map_origin = msg_obj.info.origin
         map_matrix_slam = map_msg_2_matrix(msg_obj)
 
         map_matrix_slam_rows, map_matrix_slam_cols = map_matrix_slam.shape
+
         map_matrix_frontier = np.copy(map_matrix_slam)
 
+        # debug:
         # # save map_matrix_frontier as an image:
         # map_height, map_width = map_matrix_frontier.shape
         # img = np.zeros((map_height, map_width, 3))
@@ -135,6 +171,7 @@ class Main:
         mask = np.in1d(labeled_array, noise_idx).reshape(shp)
         map_matrix_frontier[mask] = 0
 
+        # debug:
         # # save map_matrix_frontier as an image:
         # map_height, map_width = map_matrix_frontier.shape
         # img = np.zeros((map_height, map_width, 3))
@@ -149,7 +186,7 @@ class Main:
         #             img[row][col] = [0, 0, 0]
         # cv2.imwrite("map_matrix_frontier2.png", img)
 
-        # expand all obstacles:
+        # expand all obstacles to create safety margin:
         temp = np.copy(map_matrix_frontier)
         OBSTACLE_EXPAND_SIZE = 11
         obst_inds = np.nonzero(map_matrix_frontier == 100)
@@ -165,6 +202,7 @@ class Main:
                         if temp[row][col] != 100:
                             map_matrix_frontier[row][col] = 100
 
+        # debug:
         # # save map_matrix_frontier as an image:
         # map_height, map_width = map_matrix_frontier.shape
         # img = np.zeros((map_height, map_width, 3))
@@ -201,6 +239,7 @@ class Main:
         if y_min_ind > 0:
             map_matrix_frontier[0:y_min_ind, :] = 100
 
+        # debug:
         # # save map_matrix_frontier as an image:
         # map_height, map_width = map_matrix_frontier.shape
         # img = np.zeros((map_height, map_width, 3))
@@ -215,6 +254,7 @@ class Main:
         #             img[row][col] = [0, 0, 0]
         # cv2.imwrite("map_matrix_frontier4.png", img)
 
+        # discretize map_matrix_frontier to instead have map resolution = MAP_RES_ASTAR:
         map_height = map_matrix_slam_rows
         map_width = map_matrix_slam_cols
         NR_OF_CELLS = 5 # (no of cells to make box of, size of box = NR_OF_CELLS^2)
@@ -241,6 +281,7 @@ class Main:
                                 current_cell = 100
                 map_matrix_astar[box_row][box_col] = current_cell
 
+        # debug:
         # map_height, map_width = map_matrix_astar.shape
         # img = np.zeros((map_height, map_width, 3))
         # for row in range(map_height):
@@ -254,6 +295,7 @@ class Main:
         #             img[row][col] = [0, 0, 0]
         # cv2.imwrite("map_matrix_astar.png", img)
 
+        # update shared variables:
         self.lock.acquire()
         self.map_origin = map_origin
         self.map_matrix_slam = map_matrix_slam
@@ -261,7 +303,7 @@ class Main:
         self.map_matrix_astar = map_matrix_astar
         self.lock.release()
 
-    # define the callback function for the /map_covering subscriber:
+    # callback function for the /map_covering subscriber:
     def map_covering_callback(self, msg_obj):
         print "map_covering_callback"
 
@@ -273,10 +315,8 @@ class Main:
         self.map_matrix_covering = map_matrix_covering
         self.lock.release()
 
-    # define the callback function for the /estimated_pose subscriber:
+    # callback function for the /estimated_pose subscriber:
     def est_pose_callback(self, msg_obj):
-        #print "est_pose_callback"
-
         pose = msg_obj.data
 
         self.lock.acquire()
@@ -285,7 +325,9 @@ class Main:
         self.theta = pose[2]
         self.lock.release()
 
-    # define the callback function for the /coordinator_status subscriber:
+    # callback function for the /coordinator_status subscriber. If the coordinator
+    # has reached the end of a path, this function gets a new path and publishes
+    # this on the /path topic:
     def coordinator_callback(self, msg_obj):
         if self.mode != "MISSION_FINISHED":
             print "coordinator_callback"
@@ -306,6 +348,24 @@ class Main:
                 else:
                     print "coordinator_callback: path is None!"
 
+    # function for computing a new path and updating self.mode.
+    #
+    # If self.mode == "MAPPING", frontier_func is used to compute a new goal
+    # position (chosen to map the entire area) which astar_func computes a path to.
+    #
+    # If self.mode == "COVERING", coverageMap is used to compute a path that will
+    # make Balrog cover the entire area.
+    #
+    # If self.mode == "DISARMING", astar_func is used to compute a path that first
+    # goes to the start position [0,0] ("to get disarming gear at the base"),
+    # then goes to the position of each detected mine ("to disarm each mine"),
+    # and finally goes back to [0,0] again ("returns to base").
+    #
+    # If frontier_func returns [-1000, -1000], indicating that the entire area
+    # has been mapped, self.mode is set to "COVERING".
+    #
+    # If coverageMap returns None, indicating that the entire area has been
+    # covered, self.mode is set to "DISARMING".
     def get_path(self):
         if self.map_origin is not None and self.x is not None and self.y is not None and self.map_matrix_frontier is not None and self.map_matrix_astar is not None:
             self.lock.acquire()
@@ -575,5 +635,5 @@ if __name__ == "__main__":
     # create a Main object (this will run its __init__ function):
     main = Main()
 
-    # run the member function run:
+    # run the member function run():
     main.run()

@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# TODO! insert general comment on what the code does here
+
 import rospy
 from nav_msgs.msg import OccupancyGrid
 
@@ -29,11 +31,12 @@ class NavCoveringMap:
         # keep python from exiting until this ROS node is stopped:
         rospy.spin()
 
+    # callback function for the /map_visited topic:
     def callback_func(self, msg_obj):
             print ""
             print "####### New map_covering ########"
 
-            # Receive map_visited as and OccupancyGrid object
+            # Receive map_visited as an OccupancyGrid object
             map_data = msg_obj.data
             map_width = msg_obj.info.width
             map_height = msg_obj.info.height

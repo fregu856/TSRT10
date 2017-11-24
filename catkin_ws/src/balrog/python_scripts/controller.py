@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 
+# This code runs at 10 Hz and computes the control signals (angular velocities
+# for the left and right wheels) which are published on the topic /control_signals.
+# The controller takes as input the current robot pose estimate (outputted by
+# the SLAM node) and a goal position [x,y] (usually outputted by the coordinator).
+
 import rospy
 
 from geometry_msgs.msg import Twist
@@ -12,6 +17,7 @@ import math
 
 class Controller:
     def __init__(self):
+        # Initialize this code as a ROS node named "controller_node"
         rospy.init_node("controller_node", anonymous=True)
 
         # Get latest pose of the robot
@@ -20,8 +26,8 @@ class Controller:
         # Get new goal position
         rospy.Subscriber("/goal_pos", Float64MultiArray, self.goal_pos_callback)
 
-        # Get status from coordinator
-        rospy.Subscriber("/node_status", String, self.node_callback)
+        # Get published warnings (when a warning is published: stop Balrog)
+        rospy.Subscriber("/node_status", String, self.warning_callback)
 
         # To start Balrog, "start" has to be written on this topic
         rospy.Subscriber("/start_topic", String, self.start_callback)
@@ -64,12 +70,14 @@ class Controller:
         # Max velocity can be updated with the /change_velocity topic
         self.updated_max_velocity = 0
 
+    # Callback function for the /start_topic topic
     def start_callback(self, msg_obj):
         msg_string = msg_obj.data
 
         if msg_string == "start":
             self.start = True
 
+    # Callback function for the /goal_pos topic
     def goal_pos_callback(self, msg_obj):
         goal_pos = msg_obj.data
 
@@ -86,6 +94,7 @@ class Controller:
 
         self.warning_flag = False
 
+    # Callback function for the /estimated_pose topic
     def est_pose_callback(self, msg_obj):
         pose = msg_obj.data
 
@@ -93,13 +102,16 @@ class Controller:
         self.y = pose[1]
         self.theta = pose[2]
 
-    def node_callback(self, msg_obj):
+    # Callback function for the /node_status topic
+    def warning_callback(self, msg_obj):
         self.warning_flag = True
 
+    # Callback function for the /change_velocity topic
     def velocitychange_callback(self, msg_obj):
         self.updated_max_velocity = float(msg_obj.data)
-        print "New velocity: %f" %self.ocity
+        print "New velocity: %f" %self.updated_max_velocity
 
+    # Function that computes he control signals
     def get_ctrl_output(self):
         x_g = self.x_goal
         y_g = self.y_goal
@@ -268,14 +280,17 @@ class Controller:
         ctrl_output_msg = Float64MultiArray()
         ctrl_output_msg.data = [control_signal_left, control_signal_right]
 
-        # ctrl_output_msg = Twist() # (simulation)
+        # (simulation:)
+        # ctrl_output_msg = Twist()
         # ctrl_output_msg.linear.x = linear_velocity
         # ctrl_output_msg.angular.z = angular_velocity
 
         return ctrl_output_msg
 
+    # Function that runs at 10 Hz, getting and publishing control signals:
     def run(self):
-        rate = rospy.Rate(10) # (10 Hz)
+        # Specify the loop frequency:
+        rate = rospy.Rate(10)
 
         while not rospy.is_shutdown():
             if not self.warning_flag and self.start:
@@ -296,8 +311,11 @@ class Controller:
                 ctrl_output_msg.data = [0.0, 0.0]
                 self.control_pub.publish(ctrl_output_msg)
 
-            rate.sleep() # (to get it to loop with 10 Hz)
+            # Sleep to get the loop to run at 10 Hz:
+            rate.sleep()
 
 if __name__ == '__main__':
+    # Create a Controller object (this will run its __init__ function):
     ctrl = Controller()
+
     ctrl.run()
