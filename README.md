@@ -841,7 +841,7 @@ find_package(catkin REQUIRED COMPONENTS
 - - $ sudo apt-get install ros-kinetic-turtlebot-simulator
 
 - - Reset the ROS IP addresses (to be able to run the simulator locally, without having to connect to any specific network):
-- - - Make sure that the lines with ROS_MASTER_URI and ROS_HOSTNAME in ~/.bashrc looks as below:
+- - - Make sure that the lines with ROS_MASTER_URI and ROS_HOSTNAME in ~/.bashrc looks like this:
 ```
 export ROS_MASTER_URI=http://localhost:11311
 export ROS_HOSTNAME=localhost
@@ -895,7 +895,11 @@ export ROS_HOSTNAME=localhost
 - - - $ cd ~/TSRT10/catkin_ws
 - - - $ catkin_make
 
-
+- Install the ros-keyboard package:
+- - $ cd ~/TSRT10/catkin_ws/src
+- - $ git clone https://github.com/lrse/ros-keyboard.git
+- - $ cd ~/TSRT10/catkin_ws/
+- - $ catkin_make
 
 - Install the aprilTags package (if you haven't already done this on the computer):
 - - $ cd ~/TSRT10/catkin_ws/src
