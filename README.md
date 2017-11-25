@@ -793,4 +793,5 @@ find_package(catkin REQUIRED COMPONENTS
 - $ git clone https://gitlab.ida.liu.se/tsrt10_2017/minesweeper.git (or download minesweeper/balrog in some other way)
 - Follow the "Basic setup" steps above
 - Follow the "Setup of LIDAR" steps above
+- Follow the "Install OpenKarto" steps above
 - Follow the "Setup the balrog package" steps above
