@@ -48,9 +48,9 @@ def astar_func(goalNode, startNode, obstacleMap):
     hDiffXMap = np.zeros(obstacleMap.shape)
     hDiffYMap = np.zeros(obstacleMap.shape)
     for xCounter in range(0,xmax):
-        hDiffXMap[xcounter, :] = abs(xCounter - goalNode[0])
+        hDiffXMap[xCounter, :] = abs(xCounter - goalNode[0])
     for yCounter in range(0,ymax):
-        hDiffYMap[:,ycounter] = abs(yCounter - goalNode[1])
+        hDiffYMap[:,yCounter] = abs(yCounter - goalNode[1])
 
     #euclidean distance to goal node
     hCostMap = 2 ** (0.5) * np.minimum(hDiffXMap, hDiffYMap) + np.maximum(hDiffXMap, hDiffYMap) - np.minimum(hDiffXMap, hDiffYMap)
