@@ -175,8 +175,7 @@ def astar_func(goalNode, startNode, obstacleMap):
                         xRoute.append((walkingNode[0]))
                         yRoute.append(walkingNode[1])
                         dir = 3
-                elif (prevX == (walkingNode[0] + 1)) and (prevY == (walkingNode[1] + 1))
-                    or (prevX == (walkingNode[0] - 1)) and (prevY == (walkingNode[1] - 1)): # upp-left diagonal movement
+                elif (prevX == (walkingNode[0] + 1)) and (prevY == (walkingNode[1] + 1)) or (prevX == (walkingNode[0] - 1)) and (prevY == (walkingNode[1] - 1)): # upp-left diagonal movement
                     if dir != 2:
                         xRoute.append((walkingNode[0]))
                         yRoute.append(walkingNode[1])

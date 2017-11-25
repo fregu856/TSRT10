@@ -20,7 +20,7 @@ MAP_RES_ASTAR = 0.25 # (NOTE! if this value is modified one also needs to update
 MAP_RES_COVERING = 0.30 # (NOTE! if this value is modified one also needs to update it in main.py)
 
 def clObMap(obstacleMap):
-#Making map, showing closeness to obstacles (used in covering_tiles), takes in obstacle map
+    #Making map, showing closeness to obstacles (used in covering_tiles), takes in obstacle map
     size=obstacleMap.shape
     closeObst=np.full(size,-1 )
     closeObst[(obstacleMap==-900)]=0 #set obstacles to 0
@@ -51,7 +51,7 @@ def clObMap(obstacleMap):
     return np.nanmax(closeObst)-closeObst
 
 def clGoMap(obstacleMap, goalNode):
-#Making map, showing closeness to goal node (used in covering_tiles), using goalnode as [row,col] and obstacleMap
+    #Making map, showing closeness to goal node (used in covering_tiles), using goalnode as [row,col] and obstacleMap
     size=obstacleMap.shape
     closeGoal=np.full(size,-1)
     closeGoal[goalNode[0],goalNode[1]]=0 #cost based on goal node
@@ -99,11 +99,11 @@ def clGoMap(obstacleMap, goalNode):
     return closeGoal
 
 def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_origin):
-'''sends out a path for covering a whole (a big or many small) surfaces.
-takes in the map for using a* (np matrix), another map vhere the visited tiles are set to -2 (np matrix), the tuning parameter alpha,
-the start and goal node according to coveringMap (input as [Int indexRow, Int indexCol]), and the parameters making it possible to change index from the different maps
-Output is indices of a filtered path for the a* map along with the full path  [[[Int rowIndicesFiltered] [Int colIndicesFiltered]][[Int rowIndicesFull] [Int colIndicesFull]]] .
-'''
+    '''sends out a path for covering a whole (a big or many small) surfaces.
+    takes in the map for using a* (np matrix), another map vhere the visited tiles are set to -2 (np matrix), the tuning parameter alpha,
+    the start and goal node according to coveringMap (input as [Int indexRow, Int indexCol]), and the parameters making it possible to change index from the different maps
+    Output is indices of a filtered path for the a* map along with the full path  [[[Int rowIndicesFiltered] [Int colIndicesFiltered]][[Int rowIndicesFull] [Int colIndicesFull]]] .
+    '''
     #return obstacleMap
     #print "coveringMap:"
     #print coveringMap
@@ -419,7 +419,7 @@ Output is indices of a filtered path for the a* map along with the full path  [[
             #diagonal (uppwards-left)
             elif ((prevX==(pathX[pathCount]+1) and prevY==(pathY[pathCount]+1) ) or (prevX==(pathX[pathCount]+2) and prevY==(pathY[pathCount]+2))
                 or (prevX==(pathX[pathCount]-1) and prevY==(pathY[pathCount]-1)) or (prevX==(pathX[pathCount]-2) and prevY==(pathY[pathCount]-2))):
-                if prevX==(pathX[pathCount]+1) and prevY==(pathY[pathCount]+1) ) or (prevX==(pathX[pathCount]+2) and prevY==(pathY[pathCount]+2)):
+                if (prevX==(pathX[pathCount]+1) and prevY==(pathY[pathCount]+1) ) or (prevX==(pathX[pathCount]+2) and prevY==(pathY[pathCount]+2)):
                     if dir!=2:
                         xRoute.append(pathX[pathCount])
                         yRoute.append(pathY[pathCount])
@@ -432,7 +432,7 @@ Output is indices of a filtered path for the a* map along with the full path  [[
             #diagonal (uppwards-right)
             elif ((prevX==(pathX[pathCount]+1) and prevY==(pathY[pathCount]-1) ) or (prevX==(pathX[pathCount]+2) and prevY==(pathY[pathCount]-2))
                  or (prevX==(pathX[pathCount]-1) and prevY==(pathY[pathCount]+1)) or (prevX==(pathX[pathCount]-2) and prevY==(pathY[pathCount]+2))):
-                if prevX==(pathX[pathCount]+1) and prevY==(pathY[pathCount]-1) ) or (prevX==(pathX[pathCount]+2) and prevY==(pathY[pathCount]-2)):
+                if (prevX==(pathX[pathCount]+1) and prevY==(pathY[pathCount]-1) ) or (prevX==(pathX[pathCount]+2) and prevY==(pathY[pathCount]-2)):
                     if dir!=-2:
                         xRoute.append(pathX[pathCount])
                         yRoute.append(pathY[pathCount])

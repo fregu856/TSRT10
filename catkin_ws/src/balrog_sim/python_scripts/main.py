@@ -383,9 +383,7 @@ class Main:
     # If coverageMap returns None, indicating that the entire area has been
     # covered, self.mode is set to "DISARMING".
     def get_path(self):
-        if self.map_origin is not None and self.x is not None and /
-        self.y is not None and self.map_matrix_frontier is not None and /
-        self.map_matrix_astar is not None:
+        if self.map_origin is not None and self.x is not None and self.y is not None and self.map_matrix_frontier is not None and self.map_matrix_astar is not None:
             # read shared variables:
             self.lock.acquire()
             map_origin = self.map_origin
