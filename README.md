@@ -788,7 +788,6 @@ find_package(catkin REQUIRED COMPONENTS
 # Final instructions:
 
 ## To be able to run everything IRL on a Ubuntu computer:
-### Installation:
 - $ sudo apt install git
 - $ sudo apt-get install python-scipy
 - $ sudo apt-get install ros-kinetic-image-transport-plugins
@@ -807,7 +806,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 - Setup IP addresses properly TODOTODOTODOTODOTODOTODOTODOTODOTODO!!!!
 
-### Running:
+## Running complete mission (MAPPING, COVERING, DISARMING):
 - Connect the computer and BaseStation to the XXXXXXXXXXXXXXX wifi
 - Make sure the IP addresses are configured properly on both the computer and BaseStation
 - Connect the computer to the RPI via ethernet cable
@@ -816,3 +815,9 @@ find_package(catkin REQUIRED COMPONENTS
 - [computer/BaseStation] $ rosrun balrog main.py
 - [BaseStation] $ rqt --perspective-file ~/TSRT10/catkin_ws/src/balrog/gui/balrog.perspective
 - [BaseStation] Mark "start_topic" in the Message Publisher in the GUI to start the mission (the RC controller also has to be turned on and put in AUTO mode)
+
+## Running SLAM and manually control balrog:
+- Test
+
+## Manually contol Balrog:
+- Test
