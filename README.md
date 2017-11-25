@@ -804,6 +804,8 @@ find_package(catkin REQUIRED COMPONENTS
 - - $ cd ~/TSRT10/catkin_ws
 - - $ catkin_make
 
+- ETHERNET NETWORK TO CONNECT TO RPI
+
 - Setup IP addresses properly TODOTODOTODOTODOTODOTODOTODOTODOTODO!!!!
 
 ## Running complete mission (MAPPING, COVERING, DISARMING) with Balrog:
@@ -821,3 +823,15 @@ find_package(catkin REQUIRED COMPONENTS
 
 ## Manually contol Balrog:
 - Test
+
+## To be able to run everything in SIMULATION on a Ubuntu computer:
+- TODO!
+
+## Running complete mission (MAPPING, COVERING, DISARMING) in SIMULATION:
+- $ roslaunch balrog_sim balrog_auto.launch
+- $ rosrun balrog_sim main.py
+
+## Running SLAM and manually control Balrog in SIMULATION:
+- $ roslaunch balrog_sim balrog_manual.launch
+- Click on the small "ROS keyboard input" and control the robot using WASD
+
