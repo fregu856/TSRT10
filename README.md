@@ -260,17 +260,24 @@ if __name__ == "__main__":
 - - $ cd ~/TSRT10/catkin_ws
 - - $ catkin_make
 
-- Create a launch directory in ~/TSRT10/catkin_ws/src/balrog
-- Place the file lidar.launch in ~/TSRT10/catkin_ws/src/balrog/launch
-- Place the file lidar_and_viz.launch in ~/TSRT10/catkin_ws/src/balrog/launch
-- Create an rviz directory in ~/TSRT10/catkin_ws/src/balrog
-- Place the file lidar.rviz in ~/TSRT10/catkin_ws/src/balrog/rviz
+- Place all files in minesweeper/balrog/python_scripts in ~/TSRT10/catkin_ws/src/balrog/python_scripts
+- Make them all executable:
+- - $ cd ~/TSRT10/catkin_ws/src/balrog/python_scripts
+- - $ chmod a+x *
 
-- To run the LIDAR without any visualization:
-- - $ roslaunch balrog lidar.launch
+- Copy the directory minesweeper/balrog/launch and place it in ~/TSRT10/catkin_ws/src/balrog
 
-- To run the LIDAR together with a visualization:
-- - $ roslaunch balrog lidar_and_viz.launch
+- Copy the directory minesweeper/balrog/param and place it in ~/TSRT10/catkin_ws/src/balrog
+
+- Copy the directory minesweeper/balrog/src and place it in ~/TSRT10/catkin_ws/src/balrog
+
+- Copy the directory minesweeper/balrog/rviz and place it in ~/TSRT10/catkin_ws/src/balrog
+
+- Replace the file ~/TSRT10/catkin_ws/src/balrog/CMakeLists.txt with minesweeper/balrog/CMakeLists.txt
+
+- Build the package:
+- - $ cd ~/TSRT10/catkin_ws
+- - $ catkin_make
 
 
 
