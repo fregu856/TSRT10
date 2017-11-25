@@ -778,3 +778,12 @@ find_package(catkin REQUIRED COMPONENTS
 - Take balrog/rviz/balrog.rviz and save this file as "default.rviz" in ~/.rviz ($ cd ~/.rviz, $ nano default.rviz, paste everything from balrog.rviz)
 - $ rqt --perspective-file ~/TSRT10/catkin_ws/src/balrog/gui/balrog.perspective 
 
+# Final instructions:
+
+## To be able to run everything IRL on a Ubuntu computer:
+- $ sudo apt install git
+- $ cd --
+- $ git clone https://gitlab.ida.liu.se/tsrt10_2017/minesweeper.git (or download minesweeper/balrog in some other way)
+- Follow the "Basic setup" steps above
+- Follow the "Setup of LIDAR" steps above
+- Follow the "Setup the balrog package" steps above
