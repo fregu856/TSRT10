@@ -787,7 +787,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 # Final instructions:
 
-## To be able to run everything IRL on a Ubuntu computer:
+## To be able to run everything IRL on an Ubuntu computer:
 - $ sudo apt install git
 - $ sudo apt-get install python-scipy
 - $ sudo apt-get install ros-kinetic-image-transport-plugins
@@ -824,7 +824,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Manually contol Balrog:
 - Test
 
-## To be able to run everything in SIMULATION on a Ubuntu computer:
+## To be able to run everything in SIMULATION on an Ubuntu computer:
 - $ sudo apt install git
 - $ sudo apt-get install python-scipy
 - $ sudo apt-get install ros-kinetic-image-transport-plugins
