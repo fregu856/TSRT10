@@ -805,4 +805,14 @@ find_package(catkin REQUIRED COMPONENTS
 - - $ cd ~/TSRT10/catkin_ws
 - - $ catkin_make
 
+- Setup IP addresses properly TODOTODOTODOTODOTODOTODOTODOTODOTODO!!!!
+
 ### Running:
+- Connect the computer and BaseStation to the XXXXXXXXXXXXXXX wifi
+- Make sure the IP addresses are configured properly on both the computer and BaseStation
+- Connect the computer to the RPI via ethernet cable
+- Connect the computer to the LIDAR and wait a few seconds for the LIDAR to obtain full rotation speed
+- [computer] $ roslaunch balrog balrog.launch
+- [computer/BaseStation] $ rosrun balrog main.py
+- [BaseStation] $ rqt --perspective-file ~/TSRT10/catkin_ws/src/balrog/gui/balrog.perspective
+- [BaseStation] Mark "start_topic" in the Message Publisher in the GUI to start the mission (the RC controller also has to be turned on and put in AUTO mode)
