@@ -260,17 +260,24 @@ if __name__ == "__main__":
 - - $ cd ~/TSRT10/catkin_ws
 - - $ catkin_make
 
-- Create a launch directory in ~/TSRT10/catkin_ws/src/balrog
-- Place the file lidar.launch in ~/TSRT10/catkin_ws/src/balrog/launch
-- Place the file lidar_and_viz.launch in ~/TSRT10/catkin_ws/src/balrog/launch
-- Create an rviz directory in ~/TSRT10/catkin_ws/src/balrog
-- Place the file lidar.rviz in ~/TSRT10/catkin_ws/src/balrog/rviz
+- Place all files in minesweeper/balrog/python_scripts in ~/TSRT10/catkin_ws/src/balrog/python_scripts
+- Make them all executable:
+- - $ cd ~/TSRT10/catkin_ws/src/balrog/python_scripts
+- - $ chmod a+x *
 
-- To run the LIDAR without any visualization:
-- - $ roslaunch balrog lidar.launch
+- Copy the directory minesweeper/balrog/launch and place it in ~/TSRT10/catkin_ws/src/balrog
 
-- To run the LIDAR together with a visualization:
-- - $ roslaunch balrog lidar_and_viz.launch
+- Copy the directory minesweeper/balrog/param and place it in ~/TSRT10/catkin_ws/src/balrog
+
+- Copy the directory minesweeper/balrog/src and place it in ~/TSRT10/catkin_ws/src/balrog
+
+- Copy the directory minesweeper/balrog/rviz and place it in ~/TSRT10/catkin_ws/src/balrog
+
+- Replace the file ~/TSRT10/catkin_ws/src/balrog/CMakeLists.txt with minesweeper/balrog/CMakeLists.txt
+
+- Build the package:
+- - $ cd ~/TSRT10/catkin_ws
+- - $ catkin_make
 
 
 
@@ -778,3 +785,39 @@ find_package(catkin REQUIRED COMPONENTS
 - Take balrog/rviz/balrog.rviz and save this file as "default.rviz" in ~/.rviz ($ cd ~/.rviz, $ nano default.rviz, paste everything from balrog.rviz)
 - $ rqt --perspective-file ~/TSRT10/catkin_ws/src/balrog/gui/balrog.perspective 
 
+# Final instructions:
+
+## To be able to run everything IRL on a Ubuntu computer:
+- $ sudo apt install git
+- $ sudo apt-get install python-scipy
+- $ sudo apt-get install ros-kinetic-image-transport-plugins
+
+- $ cd --
+- $ git clone https://gitlab.ida.liu.se/tsrt10_2017/minesweeper.git (or download minesweeper/balrog in some other way)
+- Follow the "Basic setup" steps above
+- Follow the "Setup of LIDAR" steps above
+- Follow the "Install OpenKarto" steps above
+- Follow the "Setup the balrog package" steps above
+- Install the aprilTags package:
+- - $ cd ~/TSRT10/catkin_ws/src
+- - $ git clone https://github.com/RIVeR-Lab/apriltags_ros.git
+- - $ cd ~/TSRT10/catkin_ws
+- - $ catkin_make
+
+- Setup IP addresses properly TODOTODOTODOTODOTODOTODOTODOTODOTODO!!!!
+
+## Running complete mission (MAPPING, COVERING, DISARMING) with Balrog:
+- Connect the computer and BaseStation to the XXXXXXXXXXXXXXX wifi
+- Make sure the IP addresses are configured properly on both the computer and BaseStation
+- Connect the computer to the RPI via ethernet cable
+- Connect the computer to the LIDAR and wait a few seconds for the LIDAR to obtain full rotation speed
+- [computer] $ roslaunch balrog balrog.launch
+- [computer/BaseStation] $ rosrun balrog main.py
+- [BaseStation] $ rqt --perspective-file ~/TSRT10/catkin_ws/src/balrog/gui/balrog.perspective
+- [BaseStation] Mark "start_topic" in the Message Publisher in the GUI to start the mission (the RC controller also has to be turned on and put in AUTO mode)
+
+## Running SLAM and manually control Balrog:
+- Test
+
+## Manually contol Balrog:
+- Test
