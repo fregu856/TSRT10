@@ -4,7 +4,7 @@
         <remap from="image_rect" to="/balrog_camera/image_raw" />
         <remap from="camera_info" to="/balrog_camera/camera_info" />
 
-        <!-- Optional: Subscribe to the compressed stream-->
+        <!-- Subscribe to the compressed stream-->
         <param name="image_transport" type="str" value="compressed" />
 
         <!-- Select the tag family: 16h5, 25h7, 25h9, 36h9, or 36h11(default) -->

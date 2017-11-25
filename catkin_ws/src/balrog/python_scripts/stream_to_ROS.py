@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 
-# in this file we read frames from the RPI camera, convert them to
-# sensor_msgs/Image and publish them on the topic /balrog_camera/image_raw.
+# This code reads frames from the RPI camera, converts them to
+# sensor_msgs/Image and publishes them on the topic /balrog_camera/image_raw. It
+# also publishes camera info (calibration parameters) on the topic
+# /balrog_camera/camera_info, which is needed to detect aprilTags.
 
 import rospy
 import cv2
@@ -14,7 +16,7 @@ from threading import Thread
 
 class Streamer:
     def __init__(self):
-        # initialize the ROS node:
+        # initialize this code as a ROS node named stream_to_ROS_node:
         rospy.init_node("stream_to_ROS_node", anonymous=True)
 
         # create publisher to publish frames from the video stream:
@@ -26,12 +28,14 @@ class Streamer:
         # initialize cv_bridge for conversion between openCV and ROS images:
         self.cv_bridge = CvBridge()
 
+        # the most recently read camera frame:
         self.latest_frame =  None
 
         # start a thread constantly reading frames from the RPI video stream:
         self.thread_video = Thread(target = self.video_thread)
         self.thread_video.start()
 
+        # camera info and calibration parameters:
         camera_info_msg = CameraInfo()
         camera_info_msg.height = 360
         camera_info_msg.width = 640
@@ -42,10 +46,8 @@ class Streamer:
         self.camera_info_msg = camera_info_msg
 
     def video_thread(self):
-        print "connecting:"
         # connect to the RPI video stream:
         cap = cv2.VideoCapture("tcp://10.0.0.10:8080")
-        print "connected!"
 
         while True:
             # capture frame-by-frame:
@@ -53,14 +55,16 @@ class Streamer:
             self.latest_frame = frame
 
     def run(self):
-        rate = rospy.Rate(20) # (20 Hz)
+        # set the loop frequency to 20 Hz:
+        rate = rospy.Rate(20)
+
         while not rospy.is_shutdown():
             if self.latest_frame is not None:
                 header = Header()
                 header.stamp = rospy.Time.now()
                 header.frame_id = "balrog_camera"
 
-                # convert the frame from openCV format to ROS format:
+                # convert the latest frame from openCV format to ROS format:
                 img_ROS_msg = self.cv_bridge.cv2_to_imgmsg(self.latest_frame, "bgr8")
 
                 img_ROS_msg.header = header
@@ -72,7 +76,8 @@ class Streamer:
                 # publish the camera info:
                 self.camera_info_pub.publish(self.camera_info_msg)
 
-                rate.sleep() # (to get it to loop with 20 Hz)
+                # sleep to get the loop to run at 20 Hz:
+                rate.sleep()
 
 if __name__ == '__main__':
     streamer = Streamer()
