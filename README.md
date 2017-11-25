@@ -788,6 +788,7 @@ find_package(catkin REQUIRED COMPONENTS
 # Final instructions:
 
 ## To be able to run everything IRL on a Ubuntu computer:
+### Installation:
 - $ sudo apt install git
 - $ sudo apt-get install python-scipy
 - $ sudo apt-get install ros-kinetic-image-transport-plugins
@@ -803,3 +804,5 @@ find_package(catkin REQUIRED COMPONENTS
 - - $ git clone https://github.com/RIVeR-Lab/apriltags_ros.git
 - - $ cd ~/TSRT10/catkin_ws
 - - $ catkin_make
+
+### Running:
