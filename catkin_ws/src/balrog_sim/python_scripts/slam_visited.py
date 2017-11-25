@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+# NOTE! This is just a copy of balrog/python_scripts/slam_visited.py (the python
+# version is used in the simulator only because it's slightly more convenient).
+
 # NOTE! This code is a python version of balrog/src/slam_visited.cpp and is not
 # used. It is however saved for future reference.
 

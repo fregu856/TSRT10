@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# this code reads steering commands from the topic /steering_cmds, translates
+# This code reads steering commands from the topic /steering_cmds, translates
 # those commands into control signals in the form of a (linear) velocity and an
 # angular velocity, and finally publishes these control signals on the topic
 # cmd_vel_mux/input/navi (which is just a black box that translates these signals

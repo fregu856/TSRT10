@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
-# this code reads from the topics /keyboard/keydown and /keyboard/keyup. On
+# This code reads from the topics /keyboard/keydown and /keyboard/keyup. On
 # these topics, the ros-keyboard node publishes info about all keys that are
 # either pressed (keydown) or released (keyup) when the small window that
 # appears when you run "rosrun keyboard keyboard" is in focus.
 
-# this code publishes steering commands ("Forward", "Backward", "No_throttle",
+# This code publishes steering commands ("Forward", "Backward", "No_throttle",
 # "Right", "Left", "No_steering") on the topic /steering_cmds.
 
 import rospy

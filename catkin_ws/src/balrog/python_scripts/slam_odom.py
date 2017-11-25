@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+# NOTE! This code is a python version of balrog/src/slam_odom.cpp and is not
+# used. It is however saved for future reference.
+
 import rospy
 from std_msgs.msg import Float64MultiArray
 

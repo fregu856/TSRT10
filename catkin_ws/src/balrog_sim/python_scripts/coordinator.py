@@ -1,5 +1,13 @@
 #!/usr/bin/env python
 
+# NOTE! This is just a copy of balrog/python_scripts/coordinator.py
+
+# aStar creates a path to the goal node (set by frontier). This path is an
+# array of incremental steps on the way to the goal node. These nodes in the path
+# are fed to the controller one by one by the coordinator. Once a node in the
+# path has been reached by the controller, the coordinator sends the next node
+# to the controller.
+
 import rospy
 from std_msgs.msg import Float64MultiArray
 from std_msgs.msg import String
@@ -21,9 +29,13 @@ class Coordinator:
         # create a publisher for publishing goal positions to the controller:
         self.goal_pos_pub = rospy.Publisher("/goal_pos", Float64MultiArray, queue_size=10)
 
+        # create a publisher for publishing when the end of a path has been reached:
         self.status_pub = rospy.Publisher("/coordinator_status", String, queue_size=10)
 
-        #self.path = [[0,0], [0,1], [-1,1], [-2,2], [-2,3], [-1.5, 3.5], [1, 3.5], [1, 2], [0,1], [0,0]]
+        # predefined path for testing:
+        # self.path = [[0,0], [0.5,0], [0.5,0.5], [0,0.5], [0,0], [0.5,0], [0.5,0.5], [0,0.5], [0,0], [0.5,0], [0.5,0.5], [0,0.5], [0,0]]
+
+        # initialization:
         self.path = [[0,0]]
         self.next_index = 0 # (list index of the next goal position to be published)
         self.final_index = len(self.path) - 1 # (index of the last path list element)
@@ -38,6 +50,7 @@ class Coordinator:
         # get the published path:
         path_list = msg_obj.data
 
+        # convert the path to format [[x1, y1], [x2, y2], ..., [xn, yn]]:
         path = []
         for i in range(len(path_list)):
             if i % 2 == 0:
@@ -57,7 +70,7 @@ class Coordinator:
 
         self.next_index += 1
 
-        print "published new goal position, x: %f, y: %f" % (goal_pos[0], goal_pos[1])
+        print "path_callback published new goal position, x: %f, y: %f" % (goal_pos[0], goal_pos[1])
 
     # define the callback function for the /controller_status subscriber:
     def controller_callback(self, msg_obj):
@@ -73,7 +86,7 @@ class Coordinator:
                 msg.data = goal_pos
                 self.goal_pos_pub.publish(msg)
 
-                self.next_index += 1
+                self.next_index += 1 # moving down the path list in next iteration
 
                 print "published new goal position, x: %f, y: %f" % (goal_pos[0], goal_pos[1])
             else:
@@ -83,7 +96,7 @@ class Coordinator:
                     self.status_pub.publish(msg)
                 else:
                     print "waiting for new path"
-                    
+
                 self.next_index += 1
 
 if __name__ == "__main__":
