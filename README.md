@@ -789,9 +789,17 @@ find_package(catkin REQUIRED COMPONENTS
 
 ## To be able to run everything IRL on a Ubuntu computer:
 - $ sudo apt install git
+- $ sudo apt-get install python-scipy
+- $ sudo apt-get install ros-kinetic-image-transport-plugins
+
 - $ cd --
 - $ git clone https://gitlab.ida.liu.se/tsrt10_2017/minesweeper.git (or download minesweeper/balrog in some other way)
 - Follow the "Basic setup" steps above
 - Follow the "Setup of LIDAR" steps above
 - Follow the "Install OpenKarto" steps above
 - Follow the "Setup the balrog package" steps above
+- Install the aprilTags package:
+- - $ cd ~/TSRT10/catkin_ws/src
+- - $ git clone https://github.com/RIVeR-Lab/apriltags_ros.git
+- - $ cd ~/TSRT10/catkin_ws
+- - $ catkin_make
