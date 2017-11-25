@@ -818,15 +818,15 @@ find_package(catkin REQUIRED COMPONENTS
 - Connect the computer to the RPI via ethernet cable
 - Connect the computer to the LIDAR and wait a few seconds for the LIDAR to obtain full rotation speed
 - [computer] $ roslaunch balrog balrog.launch
-- [computer/BaseStation] $ rosrun balrog main.py
+- [computer] $ rosrun balrog main.py
 - [BaseStation] $ rqt --perspective-file ~/minesweeper/balrog/gui/balrog.perspective
 - [BaseStation] Mark "start_topic" in the Message Publisher in the GUI to start the mission (the RC controller also has to be turned on and put in AUTO mode)
 
 ## Running SLAM and manually control Balrog:
-- Test
+- TODOTODOTODOTODOTODOTODOTODOTODOTODO!!!!
 
 ## Manually contol Balrog:
-- Test
+- TODOTODOTODOTODOTODOTODOTODOTODOTODO!!!!
 
 ## To be able to run everything in SIMULATION on an Ubuntu computer:
 - $ sudo apt install git
