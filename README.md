@@ -887,8 +887,8 @@ export ROS_HOSTNAME=localhost
 
 - - Copy the directory minesweeper/balrog_sim/launch and place it in ~/TSRT10/catkin_ws/src/balrog_sim
 - - Copy the directory minesweeper/balrog_sim/param and place it in ~/TSRT10/catkin_ws/src/balrog_sim
-- - Copy the directory minesweeper/balrog_sim/src and place it in ~/TSRT10/catkin_ws/src/balrog_sim
-
+- - Copy the directory minesweeper/balrog_sim/world and place it in ~/TSRT10/catkin_ws/src/balrog_sim
+- - Copy the directory minesweeper/balrog_sim/robots and place it in ~/TSRT10/catkin_ws/src/balrog_sim
 - - Copy the directory minesweeper/balrog_sim/rviz and place it in ~/TSRT10/catkin_ws/src/balrog_sim
 
 - - Build the package:
