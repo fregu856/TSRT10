@@ -11,9 +11,9 @@ from nav_astar import astar_func
 
 # size of considered area:
 X_MAX = 4 # (NOTE! if this value is modified one also needs to update it in main.py)
-X_MIN = -0.2 # (NOTE! if this value is modified one also needs to update it in main.py)
+X_MIN = -4 # (NOTE! if this value is modified one also needs to update it in main.py)
 Y_MAX = 4 # (NOTE! if this value is modified one also needs to update it in main.py)
-Y_MIN = -0.2 # (NOTE! if this value is modified one also needs to update it in main.py)
+Y_MIN = -4 # (NOTE! if this value is modified one also needs to update it in main.py)
 
 # map resolutions:
 MAP_RES_ASTAR = 0.25 # (NOTE! if this value is modified one also needs to update it in main.py)
