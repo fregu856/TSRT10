@@ -20,7 +20,7 @@ MAP_RES_COVERING = 0.30 # (NOTE! if this value is modified one also needs to upd
 def clObMap(obstacleMap):
     #Making map, showing closeness to obstacles (used in covering_tiles), takes in obstacle map
     size=obstacleMap.shape
-    closeObst=np.full(size,-1 )
+    closeObst=np.full(size,-1.0)
     closeObst[(obstacleMap==-900)]=0 #set obstacles to 0
     #closeObst[obstacleMap==-2]=0 #possibility to also see visited nodes as obstacles
 
@@ -51,7 +51,7 @@ def clObMap(obstacleMap):
 def clGoMap(obstacleMap, goalNode):
     #Making map, showing closeness to goal node (used in covering_tiles), using goalnode as [row,col] and obstacleMap
     size=obstacleMap.shape
-    closeGoal=np.full(size,-1)
+    closeGoal=np.full(size,-1.0)
     closeGoal[goalNode[0],goalNode[1]]=0 #cost based on goal node
 
     #set the nodes where there is obstacle to -900  (closeGoal[(obstacleMap==-900)]=-900 should also work)
@@ -205,8 +205,8 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_origin):
         walkingNode=startNode
         noLoops=0
         map_size=coveringMap.shape
-        visitedMap = np.full(map_size,1) #where it has been, in covering mode, 0 if true
-        pathMap = np.full(map_size,0) #pathMap shows in which order it goes to the nodes, good for debugging
+        visitedMap = np.full(map_size, 1.0) #where it has been, in covering mode, 0 if true
+        pathMap = np.full(map_size, 0.0) #pathMap shows in which order it goes to the nodes, good for debugging
         while True:
             print "##########################################################"
             print "while loop in coverageMap"
