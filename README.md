@@ -787,6 +787,10 @@ find_package(catkin REQUIRED COMPONENTS
 
 # Final instructions:
 
+## GUI on BaseStation:
+- Take ~/minesweeper/balrog/rviz/balrog.rviz and save this file as "default.rviz" in ~/.rviz ($ cd ~/.rviz, $ nano default.rviz, paste everything from balrog.rviz)
+- $ rqt --perspective-file ~/minesweeper/balrog/gui/balrog.perspective 
+
 ## To be able to run everything IRL on an Ubuntu computer:
 - $ sudo apt install git
 - $ sudo apt-get install python-scipy
@@ -815,7 +819,7 @@ find_package(catkin REQUIRED COMPONENTS
 - Connect the computer to the LIDAR and wait a few seconds for the LIDAR to obtain full rotation speed
 - [computer] $ roslaunch balrog balrog.launch
 - [computer/BaseStation] $ rosrun balrog main.py
-- [BaseStation] $ rqt --perspective-file ~/TSRT10/catkin_ws/src/balrog/gui/balrog.perspective
+- [BaseStation] $ rqt --perspective-file ~/minesweeper/balrog/gui/balrog.perspective
 - [BaseStation] Mark "start_topic" in the Message Publisher in the GUI to start the mission (the RC controller also has to be turned on and put in AUTO mode)
 
 ## Running SLAM and manually control Balrog:
