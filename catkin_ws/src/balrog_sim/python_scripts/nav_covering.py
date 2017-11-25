@@ -230,7 +230,7 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_origin):
 
             if walkingNode[1]==0:
                 left=0
-            elif walkingNode[0]==1:
+            elif walkingNode[1]==1:
                 left=-1
             else:
                 left=-2
@@ -244,7 +244,7 @@ def coverageMap(astarMap, coveringMap, alpha, startNode, goalNode, map_origin):
 
             if walkingNode[1]==map_size[1]:
                 right=0
-            elif walkingNode[0]==map_size[0]-1:
+            elif walkingNode[1]==map_size[0]-1:
                 right=1
             else:
                 right=2
