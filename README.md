@@ -787,7 +787,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 # Final instructions:
 
-## To be able to run everything IRL on a Ubuntu computer:
+## To be able to run everything IRL on an Ubuntu computer:
 - $ sudo apt install git
 - $ sudo apt-get install python-scipy
 - $ sudo apt-get install ros-kinetic-image-transport-plugins
@@ -803,6 +803,8 @@ find_package(catkin REQUIRED COMPONENTS
 - - $ git clone https://github.com/RIVeR-Lab/apriltags_ros.git
 - - $ cd ~/TSRT10/catkin_ws
 - - $ catkin_make
+
+- ETHERNET NETWORK TO CONNECT TO RPI TODOTODOTODOTODOTODOTODOTODOTODOTODO!!!!
 
 - Setup IP addresses properly TODOTODOTODOTODOTODOTODOTODOTODOTODO!!!!
 
@@ -821,3 +823,95 @@ find_package(catkin REQUIRED COMPONENTS
 
 ## Manually contol Balrog:
 - Test
+
+## To be able to run everything in SIMULATION on an Ubuntu computer:
+- $ sudo apt install git
+- $ sudo apt-get install python-scipy
+- $ sudo apt-get install ros-kinetic-image-transport-plugins
+- $ cd --
+- $ git clone https://gitlab.ida.liu.se/tsrt10_2017/minesweeper.git (or download minesweeper/balrog_sim in some other way)
+- Follow the "Basic setup" steps above (if you haven't already done this on the computer)
+- Follow the "Install OpenKarto" steps above (if you haven't already done this on the computer)
+
+
+- Install the simulator:
+- - $ sudo apt-get install ros-kinetic-turtlebot
+- - $ sudo apt-get install ros-kinetic-turtlebot-apps
+- - $ sudo apt-get install ros-kinetic-turtlebot-interactions
+- - $ sudo apt-get install ros-kinetic-turtlebot-simulator
+
+- - Reset the ROS IP addresses (to be able to run the simulator locally, without having to connect to any specific network):
+- - - Make sure that the lines with ROS_MASTER_URI and ROS_HOSTNAME in ~/.bashrc looks like this:
+```
+export ROS_MASTER_URI=http://localhost:11311
+export ROS_HOSTNAME=localhost
+```
+- - - $ source ~/.bashrc
+
+- - Clone and install the repo needed to simulate turtlebot in Gazebo:
+- - - $ cd ~/TSRT10/catkin_ws/src  
+- - - $ git clone https://github.com/StanfordASL/asl_turtlebot.git  
+- - - $ cd ~/TSRT10/catkin_ws    
+- - - $ catkin_make  
+- - - Add "export GAZEBO_MODEL_PATH=~/TSRT10/catkin_ws/src/asl_turtlebot/models" to the bottom of ~/.bashrc ($ sudo nano ~/.bashrc to edit)
+- - - $ source ~/.bashrc
+
+- - Test the simulator:
+- - - $ roslaunch asl_turtlebot turtlebot_sim.launch  
+- - - If everything works as expected, Gazebo should launch and you should see this:
+![alt text](https://lh3.googleusercontent.com/QOwaV2rTqrQWygOWAjcyfVmfAgBeBoOIuDD2pVh_V-oSXmR4psYg7j9c65WXFMbY1sENTiC1QcvwNVarQ1PMG_wOWtXRDyU_tHX5OggibJSWAhiZBtfspHJDHhqyiDEAIhG8BqOO77lZ0aUBStz96QbcENAdTfnC-Uas2-U_yRkigpAPd3JlByerDjuLwzrsBipIuq3wqzHhBhAGRaBTI_drODZvH-Q1rMUmWfV2ei854h17PMvKH1J6Nb4Gr3-WqMw8EbZvAwg4AhrjP-m_qmnvKrAKktPdIkGzPpQ2KtZuTMETaI2X66kX06Xc5nORQHrR252jz0nTSArxF9doQnwBaWFcRALz7cd5f3dWy3-b89c-1irwyEYBfxqab-C0QgSY9CBBJcT8kHbIkeqtelWHs5SwY3BuKd2zaGnWpmFT_XADFgEdNM6fNTo9L_i9z-mtoJPMJaANdni7TriLSH-0Vm7mzplYFRTZhfGxZykfQyJ1-6jHOuI1lTCnSVypnPc-M3xn52Y2RP6gPiyp5yLSVGVai1iEtbgpefooobPvExa73ZhJRiK2Em3_5N4PrvMG0v0q-hic4dJl6icOIlku7skioTTk3VUFL3e2iwtnOJVYr8fQ4z2dFQo0ijgcharzBlrFibKv2evsjwu6nYiK8O2IffRfUIA=w700-h393-no)
+- - - If this doesn't work, open another terminal and do this FIRST:
+- - - - $ rosrun gazebo_ros gzclient
+
+
+- Setup the balrog_sim package:
+- - Create a package called balrog_sim in the workspace:
+- - - $ cd ~/TSRT10/catkin_ws/src  
+- - - $ catkin_create_pkg balrog_sim std_msgs roscpp rospy  
+- - - $ cd ~/TSRT10/catkin_ws  
+- - - $ catkin_make   
+
+- - Create a python_scripts directory in the package:
+- - - $ cd ~/TSRT10/catkin_ws/src/balrog_sim  
+- - - $ mkdir python_scripts  
+- - Every python script that you write and place in python_scripts (e.g. test.py) must be made executable:
+- - - $ chmod a+x test.py    
+- - You should also always build the package:
+- - - $ cd ~/TSRT10/catkin_ws  
+- - - $ catkin_make  
+
+- - Place all files in minesweeper/balrog_sim/python_scripts in ~/TSRT10/catkin_ws/src/balrog_sim/python_scripts
+- - Make them all executable:
+- - - $ cd ~/TSRT10/catkin_ws/src/balrog_sim/python_scripts
+- - - $ chmod a+x *
+
+- - Copy the directory minesweeper/balrog_sim/launch and place it in ~/TSRT10/catkin_ws/src/balrog_sim
+- - Copy the directory minesweeper/balrog_sim/param and place it in ~/TSRT10/catkin_ws/src/balrog_sim
+- - Copy the directory minesweeper/balrog_sim/world and place it in ~/TSRT10/catkin_ws/src/balrog_sim
+- - Copy the directory minesweeper/balrog_sim/robots and place it in ~/TSRT10/catkin_ws/src/balrog_sim
+- - Copy the directory minesweeper/balrog_sim/rviz and place it in ~/TSRT10/catkin_ws/src/balrog_sim
+
+- - Build the package:
+- - - $ cd ~/TSRT10/catkin_ws
+- - - $ catkin_make
+
+- Install the ros-keyboard package:
+- - $ cd ~/TSRT10/catkin_ws/src
+- - $ git clone https://github.com/lrse/ros-keyboard.git
+- - $ cd ~/TSRT10/catkin_ws/
+- - $ catkin_make
+
+- Install the aprilTags package (if you haven't already done this on the computer):
+- - $ cd ~/TSRT10/catkin_ws/src
+- - $ git clone https://github.com/RIVeR-Lab/apriltags_ros.git
+- - $ cd ~/TSRT10/catkin_ws
+- - $ catkin_make
+
+## Running complete mission (MAPPING, COVERING, DISARMING) in SIMULATION:
+- $ roslaunch balrog_sim balrog_auto.launch
+- $ rosrun balrog_sim main.py
+
+## Running SLAM and manually control Balrog in SIMULATION:
+- $ roslaunch balrog_sim balrog_manual.launch
+- Click on the small "ROS keyboard input" and control the robot using WASD
+
