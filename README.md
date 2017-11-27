@@ -813,7 +813,8 @@ find_package(catkin REQUIRED COMPONENTS
 - Setup IP addresses properly TODOTODOTODOTODOTODOTODOTODOTODOTODO!!!!
 
 ## Running complete mission (MAPPING, COVERING, DISARMING) with Balrog:
-- Connect the computer and BaseStation to the XXXXXXXXXXXXXXX wifi
+- Connect the computer to the MINESWEEPER wifi
+- Connect BaseStation to the MINESWEEPER router via ethernet cable
 - Make sure the IP addresses are configured properly on both the computer and BaseStation
 - Connect the computer to the RPI via ethernet cable
 - Connect the computer to the LIDAR and wait a few seconds for the LIDAR to obtain full rotation speed
