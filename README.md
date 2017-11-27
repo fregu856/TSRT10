@@ -260,20 +260,20 @@ if __name__ == "__main__":
 - - $ cd ~/TSRT10/catkin_ws
 - - $ catkin_make
 
-- Place all files in minesweeper/balrog/python_scripts in ~/TSRT10/catkin_ws/src/balrog/python_scripts
+- Place all files in ~/minesweeper/balrog/python_scripts in ~/TSRT10/catkin_ws/src/balrog/python_scripts
 - Make them all executable:
 - - $ cd ~/TSRT10/catkin_ws/src/balrog/python_scripts
 - - $ chmod a+x *
 
-- Copy the directory minesweeper/balrog/launch and place it in ~/TSRT10/catkin_ws/src/balrog
+- Copy the directory ~/minesweeper/balrog/launch and place it in ~/TSRT10/catkin_ws/src/balrog
 
-- Copy the directory minesweeper/balrog/param and place it in ~/TSRT10/catkin_ws/src/balrog
+- Copy the directory ~/minesweeper/balrog/param and place it in ~/TSRT10/catkin_ws/src/balrog
 
-- Copy the directory minesweeper/balrog/src and place it in ~/TSRT10/catkin_ws/src/balrog
+- Copy the directory ~/minesweeper/balrog/src and place it in ~/TSRT10/catkin_ws/src/balrog
 
-- Copy the directory minesweeper/balrog/rviz and place it in ~/TSRT10/catkin_ws/src/balrog
+- Copy the directory ~/minesweeper/balrog/rviz and place it in ~/TSRT10/catkin_ws/src/balrog
 
-- Replace the file ~/TSRT10/catkin_ws/src/balrog/CMakeLists.txt with minesweeper/balrog/CMakeLists.txt
+- Replace the file ~/TSRT10/catkin_ws/src/balrog/CMakeLists.txt with ~/minesweeper/balrog/CMakeLists.txt
 
 - Build the package:
 - - $ cd ~/TSRT10/catkin_ws
@@ -817,6 +817,7 @@ find_package(catkin REQUIRED COMPONENTS
 - Make sure the IP addresses are configured properly on both the computer and BaseStation
 - Connect the computer to the RPI via ethernet cable
 - Connect the computer to the LIDAR and wait a few seconds for the LIDAR to obtain full rotation speed
+- [BaseStation] $ roscore
 - [computer] $ roslaunch balrog balrog.launch
 - [computer] $ rosrun balrog main.py
 - [BaseStation] $ rqt --perspective-file ~/minesweeper/balrog/gui/balrog.perspective
