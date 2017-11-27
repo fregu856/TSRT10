@@ -824,7 +824,14 @@ find_package(catkin REQUIRED COMPONENTS
 - - Check if you can ping the RPI:
 - - - $ ping 10.0.0.10
 
-- Setup IP addresses properly TODOTODOTODOTODOTODOTODOTODOTODOTODO!!!!
+- Setup the ROS IP addresses (BaseStation is Master and connected to the MINESWEEPER router via cable, the computer is a slave and connected to the MINESWEEPER wifi (2.4 GHz)):
+- - Connect to the MINESWEEPER wifi
+- - Find the computer's IP address by running ifconfig and looking for "inet addr", we call this XXX.XXX.X.XX
+- - $ sudo nano ~/.bashrc
+- - Add the following two lines to the bottom of the file:
+- - - export ROS_MASTER_URI=http://192.168.1.59:11311 # (BaseStation)
+- - - export ROS_HOSTNAME=XXX.XXX.X.XX
+- - $ source ~/.bashrc
 
 ## Running complete mission (MAPPING, COVERING, DISARMING) with Balrog:
 - Connect the computer to the MINESWEEPER wifi
