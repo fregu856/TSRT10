@@ -907,16 +907,16 @@ export ROS_HOSTNAME=localhost
 - - - $ cd ~/TSRT10/catkin_ws  
 - - - $ catkin_make  
 
-- - Place all files in minesweeper/balrog_sim/python_scripts in ~/TSRT10/catkin_ws/src/balrog_sim/python_scripts
+- - Place all files in ~/minesweeper/balrog_sim/python_scripts in ~/TSRT10/catkin_ws/src/balrog_sim/python_scripts
 - - Make them all executable:
 - - - $ cd ~/TSRT10/catkin_ws/src/balrog_sim/python_scripts
 - - - $ chmod a+x *
 
-- - Copy the directory minesweeper/balrog_sim/launch and place it in ~/TSRT10/catkin_ws/src/balrog_sim
-- - Copy the directory minesweeper/balrog_sim/param and place it in ~/TSRT10/catkin_ws/src/balrog_sim
-- - Copy the directory minesweeper/balrog_sim/world and place it in ~/TSRT10/catkin_ws/src/balrog_sim
-- - Copy the directory minesweeper/balrog_sim/robots and place it in ~/TSRT10/catkin_ws/src/balrog_sim
-- - Copy the directory minesweeper/balrog_sim/rviz and place it in ~/TSRT10/catkin_ws/src/balrog_sim
+- - Copy the directory ~/minesweeper/balrog_sim/launch and place it in ~/TSRT10/catkin_ws/src/balrog_sim
+- - Copy the directory ~/minesweeper/balrog_sim/param and place it in ~/TSRT10/catkin_ws/src/balrog_sim
+- - Copy the directory ~/minesweeper/balrog_sim/world and place it in ~/TSRT10/catkin_ws/src/balrog_sim
+- - Copy the directory ~/minesweeper/balrog_sim/robots and place it in ~/TSRT10/catkin_ws/src/balrog_sim
+- - Copy the directory ~/minesweeper/balrog_sim/rviz and place it in ~/TSRT10/catkin_ws/src/balrog_sim
 
 - - Build the package:
 - - - $ cd ~/TSRT10/catkin_ws
