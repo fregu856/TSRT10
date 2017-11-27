@@ -817,7 +817,9 @@ find_package(catkin REQUIRED COMPONENTS
 - - Enter the noted HWaddr in the "Cloned MAC address" field
 - - Click the "IPv4 Settings" tab, set Method to "Manual"
 - - Click "Add" to add an IP address, enter:
-- - - Address: 10.0.0.20, Netmask: 255.255.255.0. Gateway is left empty
+- - - Address: 10.0.0.20
+- - - Netmask: 255.255.255.0 
+- - - Gateway: leave empty
 - -  Click "Save" to save the connection and connect to it
 - - Check if you can ping the RPI:
 - - - $ ping 10.0.0.10
