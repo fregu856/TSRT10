@@ -109,7 +109,7 @@
                 }, 
                 "x_limits": {
                   "type": "repr", 
-                  "repr": "[83.00556683540344, 84.00556683540344]"
+                  "repr": "[133.0888750553131, 134.0888750553131]"
                 }
               }, 
               "groups": {}
@@ -156,7 +156,7 @@
                 }, 
                 "x_limits": {
                   "type": "repr", 
-                  "repr": "[81.71072483062744, 82.71072483062744]"
+                  "repr": "[132.72891521453857, 133.72891521453857]"
                 }
               }, 
               "groups": {}
@@ -234,7 +234,7 @@
               "keys": {
                 "publishers": {
                   "type": "repr", 
-                  "repr": "u'[{\\'type_name\\': \\'std_msgs/String\\', \\'topic_name\\': \\'/start_topic\\', \\'enabled\\': False, \\'rate\\': 1.0, \\'expressions\\': {u\\'/start_topic/data\\': \\'\"start\"\\'}, \\'publisher_id\\': 0, \\'counter\\': 0}, {\\'type_name\\': \\'std_msgs/String\\', \\'topic_name\\': \\'/change_velocity\\', \\'enabled\\': False, \\'rate\\': 1.0, \\'expressions\\': {u\\'/change_velocity/data\\': \\'\"0.2\"\\'}, \\'publisher_id\\': 1, \\'counter\\': 0}]'"
+                  "repr": "u'[{\\'topic_name\\': \\'/start_topic\\', \\'type_name\\': \\'std_msgs/String\\', \\'enabled\\': False, \\'rate\\': 1.0, \\'expressions\\': {u\\'/start_topic/data\\': \\'\"start\"\\'}, \\'publisher_id\\': 0, \\'counter\\': 50}, {\\'topic_name\\': \\'/change_velocity\\', \\'type_name\\': \\'std_msgs/String\\', \\'enabled\\': False, \\'rate\\': 1.0, \\'expressions\\': {u\\'/change_velocity/data\\': \\'\"0.2\"\\'}, \\'publisher_id\\': 1, \\'counter\\': 0}]'"
                 }
               }, 
               "groups": {}
@@ -248,8 +248,8 @@
               "keys": {
                 "tree_widget_header_state": {
                   "type": "repr(QByteArray.hex)", 
-                  "repr(QByteArray.hex)": "QtCore.QByteArray('000000ff000000000000000100000000000000000100000000000000000000000000000000000009fb0000000501010001000000000000000005000000afffffffff000000810000000300000005000003420000000100000003000002290000000100000003000000c60000000100000003000000690000000100000003000003610000000100000003000003e800')", 
-                  "pretty-print": "                                        B     )           i     a      "
+                  "repr(QByteArray.hex)": "QtCore.QByteArray('000000ff0000000000000001000000000000000001000000000000000000000000000000000000075a0000000501010001000000000000000005000000afffffffff000000810000000300000005000003420000000100000003000002290000000100000003000000c60000000100000003000000690000000100000003000000c00000000100000003000003e800')", 
+                  "pretty-print": "                                        B     )           i            "
                 }
               }, 
               "groups": {}

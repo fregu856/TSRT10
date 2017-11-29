@@ -261,7 +261,7 @@ class Controller:
             control_signal_right = self.CONTROL_SIGNAL_MIN
 
         # Too low control signal will not turn wheels:
-        MIN_CONTROL_SIGNAL = 0.14
+        MIN_CONTROL_SIGNAL = 0.16
         if control_signal_left > 0 and control_signal_left < MIN_CONTROL_SIGNAL:
             control_signal_left = MIN_CONTROL_SIGNAL
         if control_signal_left < 0 and control_signal_left > -MIN_CONTROL_SIGNAL:
