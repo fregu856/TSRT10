@@ -260,20 +260,20 @@ if __name__ == "__main__":
 - - $ cd ~/TSRT10/catkin_ws
 - - $ catkin_make
 
-- Place all files in minesweeper/balrog/python_scripts in ~/TSRT10/catkin_ws/src/balrog/python_scripts
+- Place all files in ~/minesweeper/balrog/python_scripts in ~/TSRT10/catkin_ws/src/balrog/python_scripts
 - Make them all executable:
 - - $ cd ~/TSRT10/catkin_ws/src/balrog/python_scripts
 - - $ chmod a+x *
 
-- Copy the directory minesweeper/balrog/launch and place it in ~/TSRT10/catkin_ws/src/balrog
+- Copy the directory ~/minesweeper/balrog/launch and place it in ~/TSRT10/catkin_ws/src/balrog
 
-- Copy the directory minesweeper/balrog/param and place it in ~/TSRT10/catkin_ws/src/balrog
+- Copy the directory ~/minesweeper/balrog/param and place it in ~/TSRT10/catkin_ws/src/balrog
 
-- Copy the directory minesweeper/balrog/src and place it in ~/TSRT10/catkin_ws/src/balrog
+- Copy the directory ~/minesweeper/balrog/src and place it in ~/TSRT10/catkin_ws/src/balrog
 
-- Copy the directory minesweeper/balrog/rviz and place it in ~/TSRT10/catkin_ws/src/balrog
+- Copy the directory ~/minesweeper/balrog/rviz and place it in ~/TSRT10/catkin_ws/src/balrog
 
-- Replace the file ~/TSRT10/catkin_ws/src/balrog/CMakeLists.txt with minesweeper/balrog/CMakeLists.txt
+- Replace the file ~/TSRT10/catkin_ws/src/balrog/CMakeLists.txt with ~/minesweeper/balrog/CMakeLists.txt
 
 - Build the package:
 - - $ cd ~/TSRT10/catkin_ws
@@ -808,15 +808,38 @@ find_package(catkin REQUIRED COMPONENTS
 - - $ cd ~/TSRT10/catkin_ws
 - - $ catkin_make
 
-- ETHERNET NETWORK TO CONNECT TO RPI TODOTODOTODOTODOTODOTODOTODOTODOTODO!!!!
+- Configure ethernet connection with the RPI:
+- - Connect the computer to the RPI via ethernet cable
+- - $ ifconfig
+- - Find the entry corresponding to the RPI (disconnect the cable and run ifconfig again, check which entry disappears) and note its HWaddr (e.g.: HWaddr 58:00:e3:66:a0:d3)
+- - Click on the Wifi symbol in the toolbar --> "Edit connections..."
+- - Click on "Add" --> choose "Ethernet" --> click "create..."
+- - Enter the noted HWaddr in the "Cloned MAC address" field
+- - Click the "IPv4 Settings" tab, set Method to "Manual"
+- - Click "Add" to add an IP address, enter:
+- - - Address: 10.0.0.20
+- - - Netmask: 255.255.255.0 
+- - - Gateway: leave empty
+- -  Click "Save" to save the connection and connect to it
+- - Check if you can ping the RPI:
+- - - $ ping 10.0.0.10
 
-- Setup IP addresses properly TODOTODOTODOTODOTODOTODOTODOTODOTODO!!!!
+- Setup the ROS IP addresses (BaseStation is Master and connected to the MINESWEEPER router via cable, the computer is a slave and connected to the MINESWEEPER wifi (2.4 GHz)):
+- - Connect to the MINESWEEPER wifi
+- - Find the computer's IP address by running ifconfig and looking for "inet addr", we call this XXX.XXX.X.XX
+- - $ sudo nano ~/.bashrc
+- - Add the following two lines to the bottom of the file:
+- - - export ROS_MASTER_URI=http://192.168.1.59:11311 # (BaseStation)
+- - - export ROS_HOSTNAME=XXX.XXX.X.XX
+- - $ source ~/.bashrc
 
 ## Running complete mission (MAPPING, COVERING, DISARMING) with Balrog:
-- Connect the computer and BaseStation to the XXXXXXXXXXXXXXX wifi
+- Connect the computer to the MINESWEEPER wifi
+- Connect BaseStation to the MINESWEEPER router via ethernet cable
 - Make sure the IP addresses are configured properly on both the computer and BaseStation
 - Connect the computer to the RPI via ethernet cable
 - Connect the computer to the LIDAR and wait a few seconds for the LIDAR to obtain full rotation speed
+- [BaseStation] $ roscore
 - [computer] $ roslaunch balrog balrog.launch
 - [computer] $ rosrun balrog main.py
 - [BaseStation] $ rqt --perspective-file ~/minesweeper/balrog/gui/balrog.perspective
@@ -884,16 +907,16 @@ export ROS_HOSTNAME=localhost
 - - - $ cd ~/TSRT10/catkin_ws  
 - - - $ catkin_make  
 
-- - Place all files in minesweeper/balrog_sim/python_scripts in ~/TSRT10/catkin_ws/src/balrog_sim/python_scripts
+- - Place all files in ~/minesweeper/balrog_sim/python_scripts in ~/TSRT10/catkin_ws/src/balrog_sim/python_scripts
 - - Make them all executable:
 - - - $ cd ~/TSRT10/catkin_ws/src/balrog_sim/python_scripts
 - - - $ chmod a+x *
 
-- - Copy the directory minesweeper/balrog_sim/launch and place it in ~/TSRT10/catkin_ws/src/balrog_sim
-- - Copy the directory minesweeper/balrog_sim/param and place it in ~/TSRT10/catkin_ws/src/balrog_sim
-- - Copy the directory minesweeper/balrog_sim/world and place it in ~/TSRT10/catkin_ws/src/balrog_sim
-- - Copy the directory minesweeper/balrog_sim/robots and place it in ~/TSRT10/catkin_ws/src/balrog_sim
-- - Copy the directory minesweeper/balrog_sim/rviz and place it in ~/TSRT10/catkin_ws/src/balrog_sim
+- - Copy the directory ~/minesweeper/balrog_sim/launch and place it in ~/TSRT10/catkin_ws/src/balrog_sim
+- - Copy the directory ~/minesweeper/balrog_sim/param and place it in ~/TSRT10/catkin_ws/src/balrog_sim
+- - Copy the directory ~/minesweeper/balrog_sim/world and place it in ~/TSRT10/catkin_ws/src/balrog_sim
+- - Copy the directory ~/minesweeper/balrog_sim/robots and place it in ~/TSRT10/catkin_ws/src/balrog_sim
+- - Copy the directory ~/minesweeper/balrog_sim/rviz and place it in ~/TSRT10/catkin_ws/src/balrog_sim
 
 - - Build the package:
 - - - $ cd ~/TSRT10/catkin_ws
