@@ -21,10 +21,10 @@ public:
 
 private:
     // callback function for the /encoder_data ROS topic:
-    void odom_callback_(const std_msgs::Float64MultiArray &msg);
+    void OdomCallback(const std_msgs::Float64MultiArray &msg);
 
     // helper function to wrap angles to lie in the range [-pi, pi]:
-    double wrap_to_pi_(double angle);
+    double WrapToPi(double angle);
 
     ros::NodeHandle nh_;
 
@@ -61,10 +61,10 @@ SlamOdom::SlamOdom()
           nh_.advertise<std_msgs::Float64MultiArray>("/odom_pose", 10);
 
     // initialize the subscriber for the /encoder_data ROS topic (everytime a
-    // new message is published on the topic, SlamOdom::odom_callback_ will
+    // new message is published on the topic, SlamOdom::OdomCallback will
     // be called):
     encoder_sub_ =
-          nh_.subscribe("/encoder_data", 10, &SlamOdom::odom_callback_, this);
+          nh_.subscribe("/encoder_data", 10, &SlamOdom::OdomCallback, this);
 }
 
 // callback function for the /encoder_data ROS topic. It transforms the received
@@ -72,16 +72,16 @@ SlamOdom::SlamOdom()
 // (dead reackoning), which is published on the ROS topic /odom_pose and
 // broadcasted as a transform from /odom to /base_footprint (this is taken as
 // input in the OpenKarto SLAM ROS node):
-void SlamOdom::odom_callback_(const std_msgs::Float64MultiArray &msg)
+void SlamOdom::OdomCallback(const std_msgs::Float64MultiArray &msg)
 {
     // read the received sensor data into a vector:
     std::vector<double> encoder_data(msg.data);
 
     // get the change in angle of the left and right wheels:
-    double odoRight = encoder_data[0];
-    double odoLeft = encoder_data[1];
-    double delta_theta_l = odoLeft;
-    double delta_theta_r = odoRight;
+    double odo_right = encoder_data[0];
+    double odo_left = encoder_data[1];
+    double delta_theta_l = odo_left;
+    double delta_theta_r = odo_right;
 
     // compute the traveled distance for the left and right wheels:
     double delta_s_l = delta_theta_l*r_;
@@ -97,7 +97,7 @@ void SlamOdom::odom_callback_(const std_msgs::Float64MultiArray &msg)
     theta_ = theta_ + delta_theta;
 
     // wrap theta_ to lie in the range [-pi, pi]:
-    theta_ = wrap_to_pi_(theta_);
+    theta_ = WrapToPi(theta_);
 
     // create a pose vector ([x_, y_, theta_]):
     std::vector<double> state;
@@ -121,7 +121,7 @@ void SlamOdom::odom_callback_(const std_msgs::Float64MultiArray &msg)
 }
 
 // helper function to wrap angles to lie in the range [-pi, pi]:
-double SlamOdom::wrap_to_pi_(double angle)
+double SlamOdom::WrapToPi(double angle)
 {
     const double pi = 3.1415926535897;
 

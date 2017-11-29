@@ -28,9 +28,9 @@ public:
 
 private:
     // callback function for the /Mapper/vertices ROS topic:
-    void marker_callback_(const visualization_msgs::Marker &msg_obj);
+    void MarkerCallback(const visualization_msgs::Marker &msg_obj);
     // callback function for the /map ROS topic:
-    void map_callback_(const nav_msgs::OccupancyGrid &msg_obj);
+    void MapCallback(const nav_msgs::OccupancyGrid &msg_obj);
 
     ros::NodeHandle nh_;
 
@@ -63,28 +63,28 @@ SlamVisited::SlamVisited()
           nh_.advertise<nav_msgs::OccupancyGrid>("/map_visited", 10);
 
     // initialize the subscriber for the /map ROS topic (everytime a
-    // new message is published on the topic, SlamVisited::map_callback_ will
+    // new message is published on the topic, SlamVisited::MapCallback will
     // be called):
-    map_sub_ = nh_.subscribe("/map", 10, &SlamVisited::map_callback_, this);
+    map_sub_ = nh_.subscribe("/map", 10, &SlamVisited::MapCallback, this);
 
     // initialize the subscriber for the /Mapper/vertices ROS topic (everytime a
-    // new message is published on the topic, SlamVisited::marker_callback_ will
+    // new message is published on the topic, SlamVisited::MarkerCallback will
     // be called):
     marker_sub_ = nh_.subscribe("/Mapper/vertices", 10,
-          &SlamVisited::marker_callback_, this);
+          &SlamVisited::MarkerCallback, this);
 }
 
 // callback function for the /Mapper/vertices topic (sampled points [x, y] along
 // the estimated path that the robot has traveled). Each grid cell that lies
 // within a 1x1 m square of any of these points are marked as "visited" in the
 // map_visited map, which is published on the /map_visited topic:
-void SlamVisited::marker_callback_(const visualization_msgs::Marker &msg_obj)
+void SlamVisited::MarkerCallback(const visualization_msgs::Marker &msg_obj)
 {
     //const clock_t begin_time = clock();
 
     if (map_origin_[0] != -10000) // (if at least one map has been received)
     {
-        std::cout << "marker_callback_" << std::endl;
+        std::cout << "MarkerCallback" << std::endl;
 
         // read the shared map variables:
         mutex_.lock();
@@ -161,7 +161,7 @@ void SlamVisited::marker_callback_(const visualization_msgs::Marker &msg_obj)
 
 // callback function for the /map topic. The map data is converted into a matrix
 // and is saved together with map metadata in shared variables:
-void SlamVisited::map_callback_(const nav_msgs::OccupancyGrid &msg_obj)
+void SlamVisited::MapCallback(const nav_msgs::OccupancyGrid &msg_obj)
 {
     // read the size of the received map:
     int map_height = msg_obj.info.height;

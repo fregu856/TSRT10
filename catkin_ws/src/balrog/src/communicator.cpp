@@ -24,11 +24,11 @@ public:
     Communicator(int tcp_socket);
 
     // function for continuously reading the data transmitted by the RPI:
-    void run();
+    void Run();
 
 private:
     // callback function for the /control_signals ROS topic:
-    void control_callback_(const std_msgs::Float64MultiArray &msg);
+    void ControlCallback(const std_msgs::Float64MultiArray &msg);
 
     ros::NodeHandle nh_;
 
@@ -55,10 +55,10 @@ Communicator::Communicator(int tcp_socket)
           nh_.advertise<std_msgs::Float64MultiArray>("/encoder_data", 10);
 
     // initialize the subscriber for the /control_signals ROS topic (everytime a
-    // new message is published on the topic, Communicator::control_callback_
+    // new message is published on the topic, Communicator::ControlCallback
     // will be called):
     control_sub_ = nh_.subscribe("/control_signals", 10,
-          &Communicator::control_callback_, this);
+          &Communicator::ControlCallback, this);
 
     // initialize the RPI communication by transmitting a [0, 0] control signal:
     double omega_l = 0;
@@ -83,7 +83,7 @@ Communicator::Communicator(int tcp_socket)
 
 // function for continuously reading the data transmitted by the RPI. It also
 // forwards the wheel encoder data by publishing this on the /encoder_data topic:
-void Communicator::run()
+void Communicator::Run()
 {
     while (ros::ok())
     {
@@ -227,7 +227,7 @@ void Communicator::run()
 
 // callback function for the /control_signals ROS topic. Forwards the data
 // published by the controller to the RPI:
-void Communicator::control_callback_(const std_msgs::Float64MultiArray &msg_obj)
+void Communicator::ControlCallback(const std_msgs::Float64MultiArray &msg_obj)
 {
     // read the received control signals into a vector:
     std::vector<double> ctrl_signals(msg_obj.data);
@@ -292,8 +292,8 @@ int main(int argc, char **argv)
     // create a Communicator object:
     Communicator communicator(tcp_socket);
 
-    // run the run() member function:
-    communicator.run();
+    // run the Run() member function:
+    communicator.Run();
 
     return 0;
 }
