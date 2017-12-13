@@ -8,10 +8,10 @@ from utilities import map_index_2_pos, pos_2_map_index, raw_path_2_path
 from nav_astar import astar_func
 
 # size of considered area:
-X_MAX = 2 # (NOTE! if this value is modified one also needs to update it in main.py)
-X_MIN = -2 # (NOTE! if this value is modified one also needs to update it in main.py)
-Y_MAX = 2 # (NOTE! if this value is modified one also needs to update it in main.py)
-Y_MIN = -2 # (NOTE! if this value is modified one also needs to update it in main.py)
+X_MAX = 6 # (NOTE! if this value is modified one also needs to update it in main.py)
+X_MIN = -0.2 # (NOTE! if this value is modified one also needs to update it in main.py)
+Y_MAX = 6 # (NOTE! if this value is modified one also needs to update it in main.py)
+Y_MIN = -0.2 # (NOTE! if this value is modified one also needs to update it in main.py)
 
 # map resolutions:
 MAP_RES_ASTAR = 0.25 # (NOTE! if this value is modified one also needs to update it in main.py)
